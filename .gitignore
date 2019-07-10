@@ -17,6 +17,8 @@ client/node_modules/
 .env.production.local
 .gitignore
 .vscode
+.bak
+bak*
 
 npm-debug.log*
 yarn-debug.log*
