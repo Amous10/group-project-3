@@ -1,73 +1,77 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+// components
+import Signup from './components/sign-up.js';
+import LoginForm from './components/login-form.js';
+import Navbar from './components/navbar.js';
+// import Home from './components/home.js';
+
+import Home from './components/pages/Home';
+import Books from './components/pages/Books';
+import NoMatch from './components/pages/NoMatch';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      books: []
+      loggedIn: false,
+      username: null
     };
+
+    this.getUser = this.getUser.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
-    axios
-      .get('/api/book')
-      .then(res => {
-        this.setState({ books: res.data });
-        console.log(this.state.books);
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          this.props.history.push('/login');
-        }
-      });
+    this.getUser();
   }
 
-  logout = () => {
-    localStorage.removeItem('jwtToken');
-    window.location.reload();
-  };
+  updateUser(userObject) {
+    this.setState(userObject);
+  }
+
+  getUser() {
+    axios.get('/user/').then(response => {
+      console.log('Get user response: ');
+      console.log(response.data);
+      if (response.data.user) {
+        console.log('Get User: There is a user saved in the server session: ');
+
+        this.setState({
+          loggedIn: true,
+          username: response.data.user.username
+        });
+      } else {
+        console.log('Get user: no user');
+        this.setState({
+          loggedIn: false,
+          username: null
+        });
+      }
+    });
+  }
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              RECIPES Y'ALL! &nbsp;
-              {localStorage.getItem('jwtToken') && (
-                <button class="btn btn-primary" onClick={this.logout}>
-                  Logout
-                </button>
-              )}
-            </h3>
+      <div className="App">
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        {/* greet user if logged in: */}
+        {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
+        {/* Routes to different components */}
+        <Route exact path="/" component={Home} />
+        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
+        <Route path="/signup" render={() => <Signup />} />
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/api/books" component={Books} />
+              <Route component={NoMatch} />
+            </Switch>
           </div>
-          <div class="panel-body">
-            <table class="table table-stripe">
-              <thead>
-                <tr>
-                  <th>Recipe</th>
-                  <th>Title</th>
-                  <th>Ingredients</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.books.map(book => (
-                  <tr>
-                    <td>
-                      <Link to={`/show/${book._id}`}>{book.isbn}</Link>
-                    </td>
-                    <td>{book.title}</td>
-                    <td>{book.author}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        </Router>
       </div>
     );
   }
