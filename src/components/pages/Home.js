@@ -25,6 +25,7 @@ class Home extends Component {
 
     // make a call to google books api
     API.callGoogle(query).then(books => {
+      // API.callFood2Fork(query).then(books => {
       // if the response is > 0
       if (books.data.length > 0) {
         // stop the UI spinner
