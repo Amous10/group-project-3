@@ -1,1 +1,0 @@
-# react-pantry-chef
