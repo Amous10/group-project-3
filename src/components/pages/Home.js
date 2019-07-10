@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
 import Image from '../Image';
-import Navbar from '../Nav';
+// import Navbar from '../Nav';
 import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
@@ -122,7 +122,7 @@ class Home extends Component {
     if (this.state.loading) {
       return (
         <div>
-          <Navbar />
+          {/* <Navbar /> */}
           <Image />
           <Jumbotron>
             <Searchbar />
@@ -150,7 +150,7 @@ class Home extends Component {
     // else
     return (
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Image />
         <Jumbotron>
           <Searchbar value={this.state.search} handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} />
@@ -158,7 +158,7 @@ class Home extends Component {
         <Container>
           <Row>
             <Col>
-              <CardWrapper count={this.state.result.length} title={'Results'} message={this.state.result == 0 ? 'Enter your ingredients to search for recipes' : null}>
+              <CardWrapper count={this.state.result.length} title={'Results'} message={this.state.result === 0 ? 'Enter your ingredients to search for recipes' : null}>
                 {this.state.result.map(result => (
                   <Card
                     key={result.id}

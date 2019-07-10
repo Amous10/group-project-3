@@ -5,7 +5,7 @@ import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
 import Jumbotron from '../Jumbotron';
-import Navbar from '../Nav';
+// import Navbar from '../Nav';
 import CardWrapper from '../CardWrapper';
 import Card from '../Card';
 
@@ -53,12 +53,12 @@ class Books extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Jumbotron />
         <Container>
           <Row>
             <Col>
-              <CardWrapper count={this.state.result.length} title={'Saved Books'} message={this.state.result == 0 ? 'No saved books!' : null}>
+              <CardWrapper count={this.state.result.length} title={'Saved Books'} message={this.state.result === 0 ? 'No saved books!' : null}>
                 {this.state.result.map(result => (
                   <Card
                     key={result._id}
