@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 const User = require('../../models/user');
 const LocalStrategy = require('passport-local').Strategy;
+=======
+const User = require('../../models/user')
+const LocalStrategy = require('passport-local').Strategy
+>>>>>>> e14f187197f2d9829053d6196c5101683fd21dd7
 
 const strategy = new LocalStrategy(
   {

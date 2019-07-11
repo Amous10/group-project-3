@@ -17,7 +17,10 @@ client/node_modules/
 .env.production.local
 .gitignore
 .vscode
+<<<<<<< HEAD
 .bak-*
+=======
+>>>>>>> e14f187197f2d9829053d6196c5101683fd21dd7
 .env
 
 npm-debug.log*
