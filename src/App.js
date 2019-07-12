@@ -16,7 +16,8 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      userid: null
     };
 
     this.getUser = this.getUser.bind(this);
@@ -38,16 +39,19 @@ class App extends Component {
       console.log(response.data);
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ');
+        console.log(response.data.user._id);
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          userid: response.data.user._id
         });
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          username: null,
+          userid: null
         });
       }
     });
@@ -60,18 +64,31 @@ class App extends Component {
         {/* greet user if logged in: */}
         {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
         {/* Routes to different components */}
+<<<<<<< HEAD
         <Route exact path="/" component={Home} />
         <Route
           path="/login"
           render={() => <LoginForm updateUser={this.updateUser} />}
         />
+=======
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
+        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
+>>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
         <Route path="/signup" render={() => <Signup />} />
 
         <Router>
           <div>
             <Switch>
               {/* <Route exact path="/" component={Home} /> */}
+<<<<<<< HEAD
               <Route exact path="/api/books" component={Books} />
+=======
+              {/* <Route exact path="/api/books" component={Books} /> */}
+              <Route exact path="/api/books" render={() => <Books userid={this.state.userid} />} />
+              {/* <Route path="/recipes" exact component={Recipes} />
+              <Route path="/recipes/:id" component={SingleRecipe} /> */}
+>>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
               {/* <Route component={NoMatch} /> */}
             </Switch>
           </div>
