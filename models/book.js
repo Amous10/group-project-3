@@ -1,19 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-<<<<<<< HEAD
- const bookSchema = new Schema({
-  authors: {
-    type: Array,
-    required: false
-  },
-
-  bookId: {
-    type: String,
-    required: false
-  },
-
-=======
 const BookSchema = new Schema({
   bookId: {
     type: String,
@@ -27,7 +14,6 @@ const BookSchema = new Schema({
     type: Array,
     required: false
   },
->>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
   description: {
     type: String,
     required: false

@@ -9,13 +9,8 @@ const userSchema = new Schema({
   password: { type: String, unique: false, required: false }
   /* book: {
     type: Schema.Types.ObjectId,
-<<<<<<< HEAD
-    ref: "Book"
-  } */
-=======
     ref: 'Book'
   }
->>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
 });
 
 // Define schema methods
