@@ -11,7 +11,7 @@ const A = styled.a`
 
 const Card = (props) => {
     return (
-        <div classNameName="col l12">
+        <div className="col l12">
             <div className="card horizontal">
                 <div className="card-image col l2">
                     <img src={props.url} alt={props.name} />
