@@ -98,7 +98,8 @@ class Home extends Component {
           link: book.volumeInfo.infoLink
         };
         // save book then remove from the result state
-        API.saveBook(newBook).then(() => {
+        API.saveBook(newBook, this.props.userid).then(() => {
+          // console.log('this.state.userid: ', this.props.userid);
           this.setState(state => {
             // find which book to remove from state by finding the book in the result array that matches the clicked book
             const bookToRemove = state.result.find(book => book.id === newBook.bookId);
