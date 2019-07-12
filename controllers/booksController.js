@@ -10,7 +10,7 @@ module.exports = {
 
   create: function(req, res) {
     // console.log('Hitting the create function in controller');
-    //console.log('req.body: ', JSON.stringify(req.body));
+    console.log('req.body: ', JSON.stringify(req.body));
 
     db.Book.create(req.body)
       .then(dbModel => res.json(dbModel))
