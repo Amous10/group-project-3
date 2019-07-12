@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 const BookSchema = new Schema({
   bookId: {
     type: String,
+    // required: true
     required: false
   },
   title: {
     type: String,
+    // required: true
     required: false
   },
   authors: {
@@ -24,6 +26,7 @@ const BookSchema = new Schema({
   },
   link: {
     type: String,
+    // required: true
     required: false
   }
 });

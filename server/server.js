@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 // Route requires
 const user = require('../routes/user');
+const apiRoutes = require('../routes');
 
 // MIDDLEWARE
 app.use(morgan('dev'));
@@ -36,7 +37,12 @@ app.use(passport.session()); // calls the deserializeUser
 // Routes
 app.use('/user', user);
 
-const apiRoutes = require('../routes');
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
+
 app.use(apiRoutes);
 
 // Starting Server
