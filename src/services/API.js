@@ -22,7 +22,7 @@ export default {
     // let jsonBD = JSON.stringify(bookData);
     // console.log('bookData', jsonBD);
 
-    // return axios.post('/api/books', jsonBD);
-    return axios.post('/api/books', bookData);
+    // return axios.post('http://localhost:3000/api/books/', jsonBD);
+    return axios.post('http://localhost:3000/api/books/', bookData);
   }
 };

@@ -37,6 +37,12 @@ app.use(passport.session()); // calls the deserializeUser
 // Routes
 app.use('/user', user);
 
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
+
 app.use(apiRoutes);
 
 // Starting Server
