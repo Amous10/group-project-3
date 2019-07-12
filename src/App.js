@@ -66,12 +66,13 @@ class App extends Component {
           render={() => <LoginForm updateUser={this.updateUser} />}
         />
         <Route path="/signup" render={() => <Signup />} />
+
         <Router>
           <div>
             <Switch>
-              <Route exact path="/" component={Home} />
+              {/* <Route exact path="/" component={Home} /> */}
               <Route exact path="/api/books" component={Books} />
-              <Route component={NoMatch} />
+              {/* <Route component={NoMatch} /> */}
             </Switch>
           </div>
         </Router>
