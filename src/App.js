@@ -39,6 +39,7 @@ class App extends Component {
       console.log(response.data);
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ');
+        console.log(response.data.user._id);
 
         this.setState({
           loggedIn: true,
@@ -49,7 +50,8 @@ class App extends Component {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          username: null,
+          userid: null
         });
       }
     });
@@ -62,14 +64,19 @@ class App extends Component {
         {/* greet user if logged in: */}
         {this.state.loggedIn && <p>Join the party, {this.state.username}! at {this.state.userid}</p>}
         {/* Routes to different components */}
-        <Route exact path="/" component={Home} />
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
         <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
         <Route path="/signup" render={() => <Signup />} />
+
         <Router>
           <div>
             <Switch>
               {/* <Route exact path="/" component={Home} /> */}
               {/* <Route exact path="/api/books" component={Books} /> */}
+              <Route exact path="/api/books" render={() => <Books userid={this.state.userid} />} />
+              {/* <Route path="/recipes" exact component={Recipes} />
+              <Route path="/recipes/:id" component={SingleRecipe} /> */}
               {/* <Route component={NoMatch} /> */}
             </Switch>
           </div>

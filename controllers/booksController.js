@@ -1,15 +1,15 @@
-const db = require("../models");
+const db = require('../models');
 
 // Defining methods for the booksController
 module.exports = {
   findAll: function(req, res) {
-    db.Book
-      .find(req.query)
+    db.Book.find(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
   create: function(req, res) {
+<<<<<<< HEAD
    
    let mybook =  {
     
@@ -28,13 +28,19 @@ module.exports = {
    
     db.Book
       .create(req.body)
+=======
+    //TODO Add userid to relate the tables.
+    console.log('Hitting the create function in controller');
+    console.log('req.body: ', JSON.stringify(req.body));
+    console.log('req.user._id: ', req.user._id);
+    db.Book.create(req.body)
+>>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
   remove: function(req, res) {
-    db.Book
-      .findById({ _id: req.params.id })
+    db.Book.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
