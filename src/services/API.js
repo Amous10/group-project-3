@@ -18,11 +18,9 @@ export default {
     return axios.delete('/api/books/' + id);
   },
   // Saves a book to the database
-  saveBook: function(bookData) {
-    // let jsonBD = JSON.stringify(bookData);
-    // console.log('bookData', jsonBD);
-
-    // return axios.post('http://localhost:3000/api/books/', jsonBD);
-    return axios.post('http://localhost:3000/api/books/', bookData);
+  saveBook: function(bookData, userid) {
+    console.log(userid);
+    // return axios.post('/api/books/', bookData, userid);
+    return axios.post('/api/books/', bookData);
   }
 };

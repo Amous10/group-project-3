@@ -9,9 +9,10 @@ module.exports = {
   },
 
   create: function(req, res) {
-    // console.log('Hitting the create function in controller');
+    //TODO Add userid to relate the tables.
+    console.log('Hitting the create function in controller');
     console.log('req.body: ', JSON.stringify(req.body));
-
+    console.log('req.user._id: ', req.user._id);
     db.Book.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
