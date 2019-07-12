@@ -61,14 +61,17 @@ class App extends Component {
         {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
         {/* Routes to different components */}
         <Route exact path="/" component={Home} />
-        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
+        <Route
+          path="/login"
+          render={() => <LoginForm updateUser={this.updateUser} />}
+        />
         <Route path="/signup" render={() => <Signup />} />
         <Router>
           <div>
             <Switch>
-              {/* <Route exact path="/" component={Home} /> */}
-              {/* <Route exact path="/api/books" component={Books} /> */}
-              {/* <Route component={NoMatch} /> */}
+              <Route exact path="/" component={Home} />
+              <Route exact path="/api/books" component={Books} />
+              <Route component={NoMatch} />
             </Switch>
           </div>
         </Router>
