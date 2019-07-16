@@ -64,34 +64,31 @@ class App extends Component {
         {/* greet user if logged in: */}
         {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
         {/* Routes to different components */}
-<<<<<<< HEAD
-        <Route exact path="/" component={Home} />
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route
+          exact
+          path="/"
+          render={() => <Home userid={this.state.userid} />}
+        />
         <Route
           path="/login"
           render={() => <LoginForm updateUser={this.updateUser} />}
         />
-=======
-        {/* <Route exact path="/" component={Home} /> */}
-        <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
-        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
->>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
         <Route path="/signup" render={() => <Signup />} />
 
         <Router>
-          <div>
-            <Switch>
-              {/* <Route exact path="/" component={Home} /> */}
-<<<<<<< HEAD
-              <Route exact path="/api/books" component={Books} />
-=======
-              {/* <Route exact path="/api/books" component={Books} /> */}
-              <Route exact path="/api/books" render={() => <Books userid={this.state.userid} />} />
-              {/* <Route path="/recipes" exact component={Recipes} />
+          <Switch>
+            {/* <Route exact path="/" component={Home} /> */}
+            {/* <Route exact path="/api/books" component={Books} /> */}
+            <Route
+              exact
+              path="/api/books"
+              render={() => <Books userid={this.state.userid} />}
+            />
+            {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
->>>>>>> 6dac14d33bb5dc1dfd151f3603a538a407b7a573
-              {/* <Route component={NoMatch} /> */}
-            </Switch>
-          </div>
+            {/* <Route component={NoMatch} /> */}
+          </Switch>
         </Router>
       </div>
     );

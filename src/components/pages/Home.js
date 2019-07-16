@@ -11,6 +11,8 @@ import Card from '../Card';
 import CardWrapper from '../CardWrapper';
 import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
+// import ToDo from '../ToDo/ToDo';
+// import TodoList from '../TodoList/TodoList';
 
 class Home extends Component {
   state = {
@@ -168,6 +170,9 @@ class Home extends Component {
             handleFormSubmit={this.handleFormSubmit}
           />
         </Jumbotron>
+
+        {/* <TodoList /> */}
+
         <Container>
           <Row>
             <Col>

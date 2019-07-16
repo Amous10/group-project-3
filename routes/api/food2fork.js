@@ -6,7 +6,7 @@ const food2forkController = require('../../controllers/food2forkController');
 router
   .route('/')
   // call food2fork recipe api and get recipes
-  .get(food2forkController.searchFood2Forks);
+  .get(food2forkController.searchFood2Fork);
 console.log('--food2fork controller hit--');
 
 module.exports = router;
