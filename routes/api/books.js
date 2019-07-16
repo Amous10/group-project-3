@@ -10,7 +10,7 @@ router
   .post(booksController.create);
 
 // router
-//   .route('/api/books')
+//   .route('/api/books/:uid')
 //   //   post a book to the database
 //   .post(booksController.create);
 
