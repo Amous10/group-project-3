@@ -24,15 +24,15 @@ export default {
     return axios.post('/api/books/', bookData);
   },
   // Gets all foods
-  getFoods: function() {
+  getRecipes: function() {
     return axios.get('/api/foods');
   },
   //Deletes the book with the given id
-  deleteFood: function(id) {
+  deleteRecipe: function(id) {
     return axios.delete('/api/foods/' + id);
   },
   // Saves a book to the database
-  saveFood: function(foodData, userid) {
+  saveRecipe: function(foodData, userid) {
     console.log('userid: ', userid);
     return axios.post('/api/foods/', foodData);
   }
