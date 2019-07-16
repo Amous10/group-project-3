@@ -10,12 +10,15 @@ import Searchbar from '../Searchbar';
 import SearchFood from '../SearchFood';
 import Card from '../Card';
 import CardWrapper from '../CardWrapper';
+import RecipeCard from '../RecipeCard';
+import RecipeCardWrapper from '../RecipeCardWrapper';
 import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
 
 class Home extends Component {
   state = {
     result: [],
+    edamomresult: [],
     search: '',
     searchfood: '',
     loading: false
@@ -27,7 +30,6 @@ class Home extends Component {
 
     // make a call to google books api
     API.callGoogle(query).then(books => {
-      // API.callFood2Fork(query).then(books => {
       // if the response is > 0
       if (books.data.length > 0) {
         // stop the UI spinner
@@ -61,31 +63,31 @@ class Home extends Component {
     });
   };
 
-  searchFoods = query => {
+  searchRecipes = query => {
     // start UI spinner
-    this.setState({ loading: true, result: [] });
+    this.setState({ loading: true, edamomresult: [] });
 
     // make a call to food2fork api
-    API.callFood2Fork(query).then(foods => {
-      if (foods.data.length > 0) {
+    API.callFood2Fork(query).then(recipes => {
+      if (recipes.data.length > 0) {
         // stop the UI spinner
         this.setState({ loading: false });
-        console.log(foods.data);
+        console.log('recipes data: ', recipes.data);
 
-        // make a call to database and retrieve all books stored
-        API.getFoods({}).then(dbFoods => {
-          // empty array to hold all of the books
+        // make a call to database and retrieve all recipes stored
+        API.getRecipes({}).then(dbFoods => {
+          // empty array to hold all of the recipes
           const dbFoodsIds = [];
-          // iterate over stored books and push book ids to empty array
-          dbFoods.data.forEach(food => {
-            dbFoodsIds.push(food.foodId);
+          // iterate over stored recipes and push recipe ids to empty array
+          dbFoods.data.forEach(recipe => {
+            dbFoodsIds.push(recipe.recipeId);
           });
-          // filter all of the stored foods and return foods where stored food id doesn't match id coming from food2fork api call
-          const filteredFoods = foods.data.filter(food => !dbFoodsIds.includes(food.id));
-
+          // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
+          const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.id));
+          // console.log('filteredFoods: ', filteredFoods);
           //  set new state for result
           this.setState({
-            result: filteredFoods
+            edamomresult: filteredFoods
           });
         });
         // .catch(err => {
@@ -93,7 +95,7 @@ class Home extends Component {
         // })
       } else {
         this.setState({
-          foods: []
+          recipes: []
         });
       }
     });
@@ -116,7 +118,7 @@ class Home extends Component {
   handleFormSubmitFood = e => {
     e.preventDefault();
     // run google call with search parameter
-    this.searchFoods(this.state.searchfood);
+    this.searchRecipes(this.state.searchfood);
     console.log(this.state.search);
     this.setState({
       searchfood: ''
@@ -164,6 +166,47 @@ class Home extends Component {
             const indexofBookToRemove = state.result.indexOf(bookToRemove);
             // then delete that one item
             state.result.splice(indexofBookToRemove, 1);
+            // update the state
+            return {
+              result: state.result
+            };
+          });
+        });
+      });
+    // perform modal dialogue
+    {
+      window.$('#foo').modal('open');
+    }
+  };
+
+  saveRecipe = e => {
+    // get the id of the book when 'save' is clicked
+    const thisCardsId = e.target.getAttribute('data-id');
+    console.log('recipe card id: ', thisCardsId);
+
+    const newSavedRecipe = this.state.result;
+    // filter this.state.result to return recipes where the id is the same as the recipe clicked
+    newSavedRecipe
+      .filter(result => result.id === thisCardsId)
+      // then map over recipe and create a new object to send to the database
+      .map(recipe => {
+        const newRecipe = {
+          userid: this.props.userid,
+          recipeId: recipe.id,
+          label: recipe.recipe.label,
+          uri: recipe.recipe.uri
+        };
+        console.log('newRecipe: ', newRecipe);
+        // save recipe then remove from the result state
+        API.saveRecipe(newRecipe).then(() => {
+          console.log('this.props.userid: ', this.props.userid);
+          this.setState(state => {
+            // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
+            const recipeToRemove = state.result.find(recipe => recipe.id === newRecipe.recipeId);
+            // find the index of that recipe in the result array
+            const indexofRecipeToRemove = state.result.indexOf(recipeToRemove);
+            // then delete that one item
+            state.result.splice(indexofRecipeToRemove, 1);
             // update the state
             return {
               result: state.result
@@ -237,6 +280,34 @@ class Home extends Component {
                 ))}
               </CardWrapper>
               <Alert modalMessage={'Book added to saved page!'} />
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col>
+              <RecipeCardWrapper
+                count={this.state.edamomresult.length}
+                title={'Results'}
+                message={this.state.edamomresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+              >
+                {this.state.edamomresult.map(edamomresult => (
+                  <RecipeCard
+                    key={edamomresult.recipe.uri}
+                    imgurl={edamomresult.recipe.image ? edamomresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    label={edamomresult.recipe.label}
+                    uri={edamomresult.recipe.uri}
+                    shareurl={edamomresult.recipe.url}
+                    source={edamomresult.recipe.source}
+                    yield={edamomresult.recipe.yield}
+                    calories={edamomresult.recipe.calories}
+                    handleRecipeSave={this.saveRecipe}
+                    leftButton={'View'}
+                    rightButton={'Save'}
+                  />
+                ))}
+              </RecipeCardWrapper>
+              <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
           </Row>
         </Container>
