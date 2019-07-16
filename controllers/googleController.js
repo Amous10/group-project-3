@@ -4,7 +4,9 @@ const searchUrl = process.env.DB_GOOGLEBOOKSEARCHURL;
 
 module.exports = {
   searchGoogle: function(req, res) {
-    console.log(searchUrl, { params: req.query });
+    console.log(searchUrl, {
+      params: req.query
+    });
     axios
       .get(searchUrl, {
         params: req.query

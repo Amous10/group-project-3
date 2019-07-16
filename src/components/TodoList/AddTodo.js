@@ -40,7 +40,7 @@ export class AddTodo extends Component {
 }
 
 // PropTypes
-AddTodo.PropTypes = {
+AddTodo.propTypes = {
   addTodo: PropTypes.func.isRequired
 };
 

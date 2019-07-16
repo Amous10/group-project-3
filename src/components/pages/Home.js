@@ -13,7 +13,7 @@ import CardWrapper from '../CardWrapper';
 import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
 // import ToDo from '../ToDo/ToDo';
-// import TodoList from '../TodoList/TodoList';
+import TodoList from '../TodoList/TodoList';
 
 class Home extends Component {
   state = {
@@ -85,7 +85,9 @@ class Home extends Component {
             dbFoodsIds.push(food.foodId);
           });
           // filter all of the stored foods and return foods where stored food id doesn't match id coming from food2fork api call
-          const filteredFoods = foods.data.filter(food => !dbFoodsIds.includes(food.id));
+          const filteredFoods = foods.data.filter(
+            food => !dbFoodsIds.includes(food.id)
+          );
 
           //  set new state for result
           this.setState({
@@ -228,8 +230,14 @@ class Home extends Component {
           />
         </Jumbotron>
         <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+          <SearchFood
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
         </Jumbotron>
+        <TodoList />
+
         <Container>
           <Row>
             <Col>

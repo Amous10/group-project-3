@@ -18,22 +18,14 @@
     "react-dom": "^16.8.6",
     "react-materialize": "^3.3.3",
     "react-router-dom": "^4.2.2",
-<<<<<<< HEAD
-    "react-scripts": "1.1.0",
-    "spectre.css": "^0.5.0",
-    "styled-components": "^4.3.2",
-    "uniqid": "^5.0.3"
-=======
     "react-scripts": "^3.0.1",
     "spectre.css": "^0.5.8",
     "styled-components": "^4.3.2"
->>>>>>> 695da3fc3c4a6369dc9c724656233dac0267f345
   },
   "scripts": {
     "start": "react-scripts start",
     "seed": "node scripts/seedDB.js",
     "build": "react-scripts build",
-    "seed": "node scripts/seedDB.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "api": "nodemon ./server/server.js",
