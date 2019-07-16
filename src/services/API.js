@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   // call food2fork api
   callFood2Fork: function(query) {
-    return axios.get('/api/food2fork', { params: { q: 'title:' + query } });
+    return axios.get('/api/food2fork', { params: { q: query } });
   },
   // call google api
   callGoogle: function(query) {
@@ -19,8 +19,21 @@ export default {
   },
   // Saves a book to the database
   saveBook: function(bookData, userid) {
-    console.log(userid);
-    // return axios.post('/api/books/', bookData, userid);
+    console.log('userid: ', userid);
+    // return axios.post('/api/books/' + userid, bookData);
     return axios.post('/api/books/', bookData);
+  },
+  // Gets all foods
+  getFoods: function() {
+    return axios.get('/api/foods');
+  },
+  //Deletes the book with the given id
+  deleteFood: function(id) {
+    return axios.delete('/api/foods/' + id);
+  },
+  // Saves a book to the database
+  saveFood: function(foodData, userid) {
+    console.log('userid: ', userid);
+    return axios.post('/api/foods/', foodData);
   }
 };
