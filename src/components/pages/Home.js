@@ -90,6 +90,7 @@ class Home extends Component {
       // then map over book and create a new object to send to the database
       .map(book => {
         const newBook = {
+          _id:this.props.userid,
           bookId: book.id,
           title: book.volumeInfo.title,
           authors: book.volumeInfo.authors,
@@ -98,7 +99,7 @@ class Home extends Component {
           link: book.volumeInfo.infoLink
         };
         // save book then remove from the result state
-        API.saveBook(newBook, this.props.userid).then(() => {
+        API.saveBook(newBook).then(() => {
           // console.log('this.state.userid: ', this.props.userid);
           this.setState(state => {
             // find which book to remove from state by finding the book in the result array that matches the clicked book
