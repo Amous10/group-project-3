@@ -7,6 +7,7 @@ import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
+import SearchFood from '../SearchFood';
 import Card from '../Card';
 import CardWrapper from '../CardWrapper';
 import { Modal, Button } from 'react-materialize';
@@ -18,6 +19,7 @@ class Home extends Component {
   state = {
     result: [],
     search: '',
+    searchfood: '',
     loading: false
   };
 
@@ -63,6 +65,44 @@ class Home extends Component {
     });
   };
 
+  searchFoods = query => {
+    // start UI spinner
+    this.setState({ loading: true, result: [] });
+
+    // make a call to food2fork api
+    API.callFood2Fork(query).then(foods => {
+      if (foods.data.length > 0) {
+        // stop the UI spinner
+        this.setState({ loading: false });
+        console.log(foods.data);
+
+        // make a call to database and retrieve all books stored
+        API.getFoods({}).then(dbFoods => {
+          // empty array to hold all of the books
+          const dbFoodsIds = [];
+          // iterate over stored books and push book ids to empty array
+          dbFoods.data.forEach(food => {
+            dbFoodsIds.push(food.foodId);
+          });
+          // filter all of the stored foods and return foods where stored food id doesn't match id coming from food2fork api call
+          const filteredFoods = foods.data.filter(food => !dbFoodsIds.includes(food.id));
+
+          //  set new state for result
+          this.setState({
+            result: filteredFoods
+          });
+        });
+        // .catch(err => {
+        //     console.log(err)
+        // })
+      } else {
+        this.setState({
+          foods: []
+        });
+      }
+    });
+  };
+
   handleInputChange = e => {
     const value = e.target.value;
     // const name = e.target.name;
@@ -70,8 +110,24 @@ class Home extends Component {
       search: value
     });
   };
+  handleInputChangeFood = e => {
+    const value = e.target.value;
+    // const name = e.target.name;
+    this.setState({
+      searchfood: value
+    });
+  };
+  handleFormSubmitFood = e => {
+    e.preventDefault();
+    // run google call with search parameter
+    this.searchFoods(this.state.searchfood);
+    console.log(this.state.search);
+    this.setState({
+      searchfood: ''
+    });
+  };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the API for the value of `this.state.search`
   handleFormSubmit = e => {
     e.preventDefault();
     // run google call with search parameter
@@ -95,6 +151,7 @@ class Home extends Component {
       // then map over book and create a new object to send to the database
       .map(book => {
         const newBook = {
+          userid: this.props.userid,
           bookId: book.id,
           title: book.volumeInfo.title,
           authors: book.volumeInfo.authors,
@@ -105,8 +162,8 @@ class Home extends Component {
           link: book.volumeInfo.infoLink
         };
         // save book then remove from the result state
-        API.saveBook(newBook, this.props.userid).then(() => {
-          // console.log('this.state.userid: ', this.props.userid);
+        API.saveBook(newBook).then(() => {
+          console.log('this.props.userid: ', this.props.userid);
           this.setState(state => {
             // find which book to remove from state by finding the book in the result array that matches the clicked book
             const bookToRemove = state.result.find(
@@ -170,9 +227,9 @@ class Home extends Component {
             handleFormSubmit={this.handleFormSubmit}
           />
         </Jumbotron>
-
-        {/* <TodoList /> */}
-
+        <Jumbotron>
+          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+        </Jumbotron>
         <Container>
           <Row>
             <Col>
