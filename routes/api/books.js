@@ -9,11 +9,6 @@ router
   //   post a book to the database
   .post(booksController.create);
 
-// router
-//   .route('/api/books/:uid')
-//   //   post a book to the database
-//   .post(booksController.create);
-
 // Matches with "/api/books/:id"
 router
   .route('/:id')

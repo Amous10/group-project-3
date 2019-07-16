@@ -62,7 +62,11 @@ class App extends Component {
       <div className="App">
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
-        {this.state.loggedIn && <p>Join the party, {this.state.username}! at {this.state.userid}</p>}
+        {this.state.loggedIn && (
+          <p>
+            Join the party, {this.state.username}! at {this.state.userid}
+          </p>
+        )}
         {/* Routes to different components */}
         {/* <Route exact path="/" component={Home} /> */}
         <Route
@@ -77,6 +81,7 @@ class App extends Component {
         <Route path="/signup" render={() => <Signup />} />
 
         <Router>
+<<<<<<< HEAD
           <Switch>
             {/* <Route exact path="/" component={Home} /> */}
             {/* <Route exact path="/api/books" component={Books} /> */}
@@ -86,6 +91,14 @@ class App extends Component {
               render={() => <Books userid={this.state.userid} />}
             />
             {/* <Route path="/recipes" exact component={Recipes} />
+=======
+          <div>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              {/* <Route exact path="/api/books" component={Books} /> */}
+              <Route exact path="/api/books" render={() => <Books userid={this.state.userid} />} />
+              {/* <Route path="/recipes" exact component={Recipes} />
+>>>>>>> 1f64d430d7501f94fc212a69f795cabcbdb75aeb
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
             {/* <Route component={NoMatch} /> */}
           </Switch>

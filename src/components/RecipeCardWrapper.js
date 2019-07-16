@@ -1,10 +1,11 @@
 import React from 'react';
 
-const CardWrapper = props => {
+const RecipeCardWrapper = props => {
   return (
     <div className="row">
       <div className="col l12 m6">
         <div className="card">
+          RecipeCard Wrapper
           <div className="card-content black-text">
             <span className="card-title">
               {props.count} {props.title}
@@ -18,4 +19,4 @@ const CardWrapper = props => {
   );
 };
 
-export default CardWrapper;
+export default RecipeCardWrapper;
