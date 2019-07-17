@@ -5,7 +5,9 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    // display: 'flex',
+    // flexWrap: 'nowrap',
+    // flexGrow: 1,
     border: '3px solid green'
   },
   paper: {
@@ -17,13 +19,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+// const RecipeCardWrapper = props => {
 const RecipeCardWrapper = props => {
   const [spacing] = React.useState(2);
   const classes = useStyles();
 
   return (
     <Grid container className={classes.root} spacing={2}>
-      <Grid item xs={12}>
+      <Grid item xs={4}>
         <Grid container justify="center" spacing={spacing}>
           {[props.children].map(value => (
             <Grid key={value} item>

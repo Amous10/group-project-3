@@ -20,9 +20,6 @@ class Home extends Component {
   state = {
     result: [],
     edamamresult: [],
-
-    search: '',
-
     searchfood: '',
     loading: false
   };
@@ -41,6 +38,7 @@ class Home extends Component {
         // make a call to database and retrieve all recipes stored
         API.getRecipes({}).then(dbFoods => {
           // empty array to hold all of the recipes
+
           const dbFoodsIds = [];
           // iterate over stored recipes and push recipe ids to empty array
           dbFoods.data.forEach(recipe => {
@@ -54,12 +52,11 @@ class Home extends Component {
             edamamresult: filteredFoods
           });
         });
-        // .catch(err => {
-        //     console.log(err)
-        // })
       } else {
         this.setState({
           recipes: []
+        }).catch(err => {
+          console.log(err);
         });
       }
     });
@@ -95,16 +92,9 @@ class Home extends Component {
       .map(recipe => {
         const newRecipe = {
           userid: this.props.userid,
-          uri: recipe.recipe.uri,
+          recipeId: recipe.id,
           label: recipe.recipe.label,
-          source: recipe.recipe.source,
-          url: recipe.recipe.url,
-          yield: recipe.recipe.yield,
-          dietLabels: recipe.recipe.dietLabels,
-          healthLabels: recipe.recipe.healthLabels,
-          ingredientLines: recipe.recipe.ingredientLines,
-          calories: recipe.recipe.calories,
-          image: recipe.recipe.image
+          uri: recipe.recipe.uri
         };
         console.log('newRecipe: ', newRecipe);
         // save recipe then remove from the result state
@@ -173,7 +163,6 @@ class Home extends Component {
         <Container>
           <Row>
             <Col>
-              {/* <SpacingGrid /> */}
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}

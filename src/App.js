@@ -76,7 +76,7 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              {/* <Route exact path="/api/books" component={Books} /> */}
+              {/* <Route exact path="/api/recipes" component={Recipes} /> */}
               <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} />
               {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}

@@ -9,13 +9,13 @@ import Jumbotron from '../Jumbotron';
 import CardWrapper from '../CardWrapper';
 import Card from '../Card';
 
-class Books extends Component {
+class Recipes extends Component {
   state = {
     result: []
   };
 
   componentDidMount() {
-    API.getBooks()
+    API.getRecipes()
       .then(res => this.setState({ result: res.data }))
       .catch(err => console.log(err));
   }
@@ -24,21 +24,21 @@ class Books extends Component {
     console.log(this.state.result);
   }
 
-  deleteBook = e => {
+  deleteRecipe = e => {
     // get the id of the book when 'delete' is clicked
     const thisCardsId = e.target.getAttribute('data-id');
     console.log(thisCardsId);
 
     // delete book with the given id
-    API.deleteBook(thisCardsId).then(() => {
+    API.deleteRecipe(thisCardsId).then(() => {
       console.log('book deleted');
       this.setState(state => {
         // find which book to remove from state by finding the book in the result array that matches the clicked book's id
         const bookToRemove = state.result.find(book => book.id === thisCardsId);
         // find the index of that book in the result array
-        const indexofBookToRemove = state.result.indexOf(bookToRemove);
+        const indexofRecipeToRemove = state.result.indexOf(bookToRemove);
         // then delete that one item
-        state.result.splice(indexofBookToRemove, 1);
+        state.result.splice(indexofRecipeToRemove, 1);
         // update the state
         return {
           result: state.result
@@ -58,7 +58,7 @@ class Books extends Component {
         <Container>
           <Row>
             <Col>
-              <CardWrapper count={this.state.result.length} title={'Saved Books'} message={this.state.result === 0 ? 'No saved books!' : null}>
+              <CardWrapper count={this.state.result.length} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved books!' : null}>
                 {this.state.result.map(result => (
                   <Card
                     key={result._id}
@@ -68,13 +68,13 @@ class Books extends Component {
                     infoLink={result.link}
                     desc={result.description ? result.description : 'No description'}
                     id={result._id}
-                    handleBookDelete={this.deleteBook}
+                    handleRecipeDelete={this.deleteRecipe}
                     leftButton={'View'}
                     rightButton={'Delete'}
                   />
                 ))}
               </CardWrapper>
-              <Alert modalMessage={'Book deleted!'} />
+              <Alert modalMessage={'Recipe deleted!'} />
             </Col>
           </Row>
         </Container>
@@ -83,4 +83,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Recipes;
