@@ -31,11 +31,12 @@ module.exports = {
     //console.log('BUILDING: ', eAPIurl + eAPPid + eAPIkey, { params: req.query });
 
     axios
-      .get(eAPIurl + eAPPid + eAPIkey, { params: req.query })
-      // .get('https://api.edamam.com/search?q=chicken&app_id=fe86e086&app_key=088766c47703a5f9c1bdcb2069f19a79&from=0&to=3&calories=591-722&health=alcohol-free')
+      .get(eAPIurl + eAPPid + eAPIkey, {
+        params: req.query
+      }) // .get('https://api.edamam.com/search?q=chicken&app_id=fe86e086&app_key=088766c47703a5f9c1bdcb2069f19a79&from=0&to=3&calories=591-722&health=alcohol-free')
       // .get(
       //   //`https://api.edamam.com/search?r=http://www.edamam.com/ontologies/edamam.owl#recipe_2bdefb60f86458dfa15d9b3bc74a001f&app_id=fe86e086&app_key=088766c47703a5f9c1bdcb2069f19a79&from=0&to=3&calories=591-722&health=alcohol-free`
-      //   `https://api.edamam.com/search?r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_9b5945e03f05acbf9d69625138385408&app_id=fe86e086&app_key=088766c47703a5f9c1bdcb2069f19a79&from=0&to=3&calories=591-722&health=alcohol-free`
+      //`https://api.edamam.com/search?r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_9b5945e03f05acbf9d69625138385408&app_id=fe86e086&app_key=088766c47703a5f9c1bdcb2069f19a79&from=0&to=3&calories=591-722&health=alcohol-free`
       // )
       .then(results => {
         // console.log(results.data.hits);
