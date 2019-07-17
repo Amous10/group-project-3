@@ -20,6 +20,9 @@ class Home extends Component {
   state = {
     result: [],
     edamamresult: [],
+
+    search: '',
+
     searchfood: '',
     loading: false
   };
@@ -92,9 +95,16 @@ class Home extends Component {
       .map(recipe => {
         const newRecipe = {
           userid: this.props.userid,
-          recipeId: recipe.id,
+          uri: recipe.recipe.uri,
           label: recipe.recipe.label,
-          uri: recipe.recipe.uri
+          source: recipe.recipe.source,
+          url: recipe.recipe.url,
+          yield: recipe.recipe.yield,
+          dietLabels: recipe.recipe.dietLabels,
+          healthLabels: recipe.recipe.healthLabels,
+          ingredientLines: recipe.recipe.ingredientLines,
+          calories: recipe.recipe.calories,
+          image: recipe.recipe.image
         };
         console.log('newRecipe: ', newRecipe);
         // save recipe then remove from the result state
