@@ -20,7 +20,7 @@ import TodoList from '../TodoList/TodoList';
 class Home extends Component {
   state = {
     result: [],
-    edamomresult: [],
+    edamamresult: [],
     search: '',
     searchfood: '',
     loading: false
@@ -69,7 +69,7 @@ class Home extends Component {
 
   searchRecipes = query => {
     // start UI spinner
-    this.setState({ loading: true, edamomresult: [] });
+    this.setState({ loading: true, edamamresult: [] });
 
     // make a call to food2fork api
     API.callFood2Fork(query).then(recipes => {
@@ -93,7 +93,7 @@ class Home extends Component {
           // console.log('filteredFoods: ', filteredFoods);
           //  set new state for result
           this.setState({
-            edamomresult: filteredFoods
+            edamamresult: filteredFoods
           });
         });
         // .catch(err => {
@@ -125,7 +125,7 @@ class Home extends Component {
     e.preventDefault();
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
-    console.log(this.state.search);
+    console.log(this.state.searchfood);
     this.setState({
       searchfood: ''
     });
@@ -326,28 +326,28 @@ class Home extends Component {
           <Row>
             <Col>
               <RecipeCardWrapper
-                count={this.state.edamomresult.length}
+                count={this.state.edamamresult.length}
                 title={'Results'}
                 message={
-                  this.state.edamomresult === 0
+                  this.state.edamamresult === 0
                     ? 'Enter your ingredients to search for recipes'
                     : null
                 }
               >
-                {this.state.edamomresult.map(edamomresult => (
+                {this.state.edamamresult.map(edamamresult => (
                   <RecipeCard
-                    key={edamomresult.recipe.uri}
+                    key={edamamresult.recipe.uri}
                     imgurl={
-                      edamomresult.recipe.image
-                        ? edamomresult.recipe.image
+                      edamamresult.recipe.image
+                        ? edamamresult.recipe.image
                         : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
                     }
-                    label={edamomresult.recipe.label}
-                    uri={edamomresult.recipe.uri}
-                    shareurl={edamomresult.recipe.url}
-                    source={edamomresult.recipe.source}
-                    yield={edamomresult.recipe.yield}
-                    calories={edamomresult.recipe.calories}
+                    label={edamamresult.recipe.label}
+                    uri={edamamresult.recipe.uri}
+                    shareurl={edamamresult.recipe.url}
+                    source={edamamresult.recipe.source}
+                    yield={edamamresult.recipe.yield}
+                    calories={edamamresult.recipe.calories}
                     handleRecipeSave={this.saveRecipe}
                     leftButton={'View'}
                     rightButton={'Save'}
