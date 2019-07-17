@@ -12,7 +12,7 @@ router
 // router
 //   .route('/api/recipes/:uid')
 //   //   post a book to the database
-//   .post(recipesController.create);
+//   .post(recipeController.create);
 
 // Matches with "/api/recipes/:id"
 router
