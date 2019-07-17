@@ -14,6 +14,10 @@ import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
+// import ToDo from '../ToDo/ToDo';
+import TodoList from '../TodoList/TodoList';
+import Grid from '@material-ui/core/Grid';
+import SpacingGrid from '../Grid';
 
 class Home extends Component {
   state = {
@@ -45,7 +49,9 @@ class Home extends Component {
             dbBooksIds.push(book.bookId);
           });
           // filter all of the stored books and return books where stored book id doesn't match id coming from google api call
-          const filteredBooks = books.data.filter(book => !dbBooksIds.includes(book.id));
+          const filteredBooks = books.data.filter(
+            book => !dbBooksIds.includes(book.id)
+          );
 
           //  set new state for result
           this.setState({
@@ -83,7 +89,9 @@ class Home extends Component {
             dbFoodsIds.push(recipe.recipeId);
           });
           // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-          const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.id));
+          const filteredFoods = recipes.data.filter(
+            recipe => !dbFoodsIds.includes(recipe.id)
+          );
           // console.log('filteredFoods: ', filteredFoods);
           //  set new state for result
           this.setState({
@@ -139,6 +147,7 @@ class Home extends Component {
   saveBook = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.target.getAttribute('data-id');
+    console.log('bookdata', this.saveBook);
     console.log(thisCardsId);
 
     const newSavedBook = this.state.result;
@@ -153,7 +162,9 @@ class Home extends Component {
           title: book.volumeInfo.title,
           authors: book.volumeInfo.authors,
           description: book.volumeInfo.description,
-          image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : null,
+          image: book.volumeInfo.imageLinks
+            ? book.volumeInfo.imageLinks.smallThumbnail
+            : null,
           link: book.volumeInfo.infoLink
         };
         // save book then remove from the result state
@@ -161,7 +172,9 @@ class Home extends Component {
           console.log('this.props.userid: ', this.props.userid);
           this.setState(state => {
             // find which book to remove from state by finding the book in the result array that matches the clicked book
-            const bookToRemove = state.result.find(book => book.id === newBook.bookId);
+            const bookToRemove = state.result.find(
+              book => book.id === newBook.bookId
+            );
             // find the index of that book in the result array
             const indexofBookToRemove = state.result.indexOf(bookToRemove);
             // then delete that one item
@@ -202,7 +215,9 @@ class Home extends Component {
           console.log('this.props.userid: ', this.props.userid);
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.result.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.result.find(
+              recipe => recipe.id === newRecipe.recipeId
+            );
             // find the index of that recipe in the result array
             const indexofRecipeToRemove = state.result.indexOf(recipeToRemove);
             // then delete that one item
@@ -254,24 +269,50 @@ class Home extends Component {
       <div>
         {/* <Navbar /> */}
         <Image />
+        {/* <Jumbotron>
+          <Searchbar
+            value={this.state.search}
+            handleInputChange={this.handleInputChange}
+            handleFormSubmit={this.handleFormSubmit}
+          />
+        </Jumbotron> */}
         <Jumbotron>
-          <Searchbar value={this.state.search} handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} />
+          <SearchFood
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
         </Jumbotron>
-        <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
-        </Jumbotron>
-        <Container>
+        {/* <TodoList /> */}
+
+        {/* <Container>
           <Row>
             <Col>
-              <CardWrapper count={this.state.result.length} title={'Results'} message={this.state.result === 0 ? 'Enter your ingredients to search for recipes' : null}>
+              <CardWrapper
+                count={this.state.result.length}
+                title={'Results'}
+                message={
+                  this.state.result === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
+              >
                 {this.state.result.map(result => (
                   <Card
                     key={result.id}
-                    url={result.volumeInfo.imageLinks ? result.volumeInfo.imageLinks.smallThumbnail : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    url={
+                      result.volumeInfo.imageLinks
+                        ? result.volumeInfo.imageLinks.smallThumbnail
+                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                    }
                     name={result.volumeInfo.title}
                     author={result.volumeInfo.authors}
                     infoLink={result.volumeInfo.infoLink}
-                    desc={result.volumeInfo.description ? result.volumeInfo.description : 'No description'}
+                    desc={
+                      result.volumeInfo.description
+                        ? result.volumeInfo.description
+                        : 'No description'
+                    }
                     handleBookSave={this.saveBook}
                     id={result.id}
                     leftButton={'View'}
@@ -282,19 +323,28 @@ class Home extends Component {
               <Alert modalMessage={'Book added to saved page!'} />
             </Col>
           </Row>
-        </Container>
+        </Container> */}
         <Container>
           <Row>
             <Col>
+              <SpacingGrid />
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
-                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={
+                  this.state.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
               >
                 {this.state.edamamresult.map(edamamresult => (
                   <RecipeCard
                     key={edamamresult.recipe.uri}
-                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    imgurl={
+                      edamamresult.recipe.image
+                        ? edamamresult.recipe.image
+                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                    }
                     label={edamamresult.recipe.label}
                     uri={edamamresult.recipe.uri}
                     shareurl={edamamresult.recipe.url}

@@ -10,7 +10,7 @@ findAll: function(req, res) {
   },
 
   create: function(req, res) {
-    //TODO Add userid to relate the tables.
+    //TODo Add userid to relate the tables.
     console.log('Hitting the create Pantry in controller');
     console.log('req.body: ', JSON.stringify(req.body));
     console.log('req.user._id: ', req.user._id);
