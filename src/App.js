@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // components
-import Signup from './components/sign-up.js';
-import LoginForm from './components/login-form.js';
-import Navbar from './components/navbar.js';
-// import Home from './components/home.js';
+import Signup from './components/Signup.js';
+import LoginForm from './components/Login.js';
+import Navbar from './components/Navbar.js';
 
 import Home from './components/pages/Home';
 import Books from './components/pages/Books';
