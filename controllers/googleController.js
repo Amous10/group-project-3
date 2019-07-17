@@ -8,7 +8,9 @@ module.exports = {
       params: req.query
     });
     axios
-      .get(searchUrl, { params: req.query })
+      .get('https://www.googleapis.com/books/v1/volumes/', {
+        params: req.query
+      })
       .then(results => {
         // console.log(results);
         return results.data.items;
