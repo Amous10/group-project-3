@@ -17,7 +17,7 @@ module.exports = {
       { userId: req.body.userId, uri: req.body.uri },
       {
         $set: {
-          userID: req.body.userId,
+          userId: req.body.userId,
           uri: req.body.uri,
           label: req.body.label,
           source: req.body.source,
