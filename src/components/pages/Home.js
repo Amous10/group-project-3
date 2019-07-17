@@ -16,6 +16,8 @@ import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
 // import ToDo from '../ToDo/ToDo';
 import TodoList from '../TodoList/TodoList';
+import Grid from '@material-ui/core/Grid';
+import SpacingGrid from '../Grid';
 
 class Home extends Component {
   state = {
@@ -267,13 +269,13 @@ class Home extends Component {
       <div>
         {/* <Navbar /> */}
         <Image />
-        <Jumbotron>
+        {/* <Jumbotron>
           <Searchbar
             value={this.state.search}
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
           />
-        </Jumbotron>
+        </Jumbotron> */}
         <Jumbotron>
           <SearchFood
             value={this.state.searchfood}
@@ -281,9 +283,9 @@ class Home extends Component {
             handleFormSubmitFood={this.handleFormSubmitFood}
           />
         </Jumbotron>
-        <TodoList />
+        {/* <TodoList /> */}
 
-        <Container>
+        {/* <Container>
           <Row>
             <Col>
               <CardWrapper
@@ -321,10 +323,11 @@ class Home extends Component {
               <Alert modalMessage={'Book added to saved page!'} />
             </Col>
           </Row>
-        </Container>
+        </Container> */}
         <Container>
           <Row>
             <Col>
+              <SpacingGrid />
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
