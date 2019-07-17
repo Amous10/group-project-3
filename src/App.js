@@ -81,18 +81,20 @@ class App extends Component {
         <Route path="/signup" render={() => <Signup />} />
 
         <Router>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            {/* <Route exact path="/api/books" component={Books} /> */}
-            <Route
-              exact
-              path="/api/books"
-              render={() => <Books userid={this.state.userid} />}
-            />
-            {/* <Route path="/recipes" exact component={Recipes} />
+          <div>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              {/* <Route exact path="/api/books" component={Books} /> */}
+              <Route
+                exact
+                path="/api/books"
+                render={() => <Books userid={this.state.userid} />}
+              />
+              {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
-            {/* <Route component={NoMatch} /> */}
-          </Switch>
+              {/* <Route component={NoMatch} /> */}
+            </Switch>
+          </div>
         </Router>
       </div>
     );
