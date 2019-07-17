@@ -24,7 +24,6 @@ class Home extends Component {
     loading: false
   };
 
-
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
@@ -81,7 +80,6 @@ class Home extends Component {
       searchfood: ''
     });
   };
-
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -161,23 +159,6 @@ class Home extends Component {
         {/* <Navbar /> */}
         <Image />
 
-
-        <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
-        </Jumbotron>
-        {/* <TodoList /> */}
-
-        <Container>
-          <Row>
-            <Col>
-
-        {/* <Jumbotron>
-          <Searchbar
-            value={this.state.search}
-            handleInputChange={this.handleInputChange}
-            handleFormSubmit={this.handleFormSubmit}
-          />
-        </Jumbotron> */}
         <Jumbotron>
           <SearchFood
             value={this.state.searchfood}
@@ -187,49 +168,9 @@ class Home extends Component {
         </Jumbotron>
         {/* <TodoList /> */}
 
-        {/* <Container>
-          <Row>
-            <Col>
-              <CardWrapper
-                count={this.state.result.length}
-                title={'Results'}
-                message={
-                  this.state.result === 0
-                    ? 'Enter your ingredients to search for recipes'
-                    : null
-                }
-              >
-                {this.state.result.map(result => (
-                  <Card
-                    key={result.id}
-                    url={
-                      result.volumeInfo.imageLinks
-                        ? result.volumeInfo.imageLinks.smallThumbnail
-                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
-                    }
-                    name={result.volumeInfo.title}
-                    author={result.volumeInfo.authors}
-                    infoLink={result.volumeInfo.infoLink}
-                    desc={
-                      result.volumeInfo.description
-                        ? result.volumeInfo.description
-                        : 'No description'
-                    }
-                    handleBookSave={this.saveBook}
-                    id={result.id}
-                    leftButton={'View'}
-                    rightButton={'Save'}
-                  />
-                ))}
-              </CardWrapper>
-              <Alert modalMessage={'Book added to saved page!'} />
-            </Col>
-          </Row>
-        </Container> */}
         <Container>
           <Row>
             <Col>
-
               <SpacingGrid />
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
