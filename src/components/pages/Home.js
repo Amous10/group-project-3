@@ -86,17 +86,11 @@ class Home extends Component {
           dbFoods.data.forEach(recipe => {
             dbFoodsIds.push(recipe.recipeId);
           });
-<<<<<<< HEAD
-          // filter all of the stored foods and return foods where stored food id doesn't match id coming from food2fork api call
-          const filteredFoods = foods.data.filter(
-            food => !dbFoodsIds.includes(food.id)
-          );
-
-=======
           // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-          const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.id));
+          const filteredFoods = recipes.data.filter(
+            recipe => !dbFoodsIds.includes(recipe.id)
+          );
           // console.log('filteredFoods: ', filteredFoods);
->>>>>>> 1f64d430d7501f94fc212a69f795cabcbdb75aeb
           //  set new state for result
           this.setState({
             edamomresult: filteredFoods
@@ -219,7 +213,9 @@ class Home extends Component {
           console.log('this.props.userid: ', this.props.userid);
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.result.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.result.find(
+              recipe => recipe.id === newRecipe.recipeId
+            );
             // find the index of that recipe in the result array
             const indexofRecipeToRemove = state.result.indexOf(recipeToRemove);
             // then delete that one item
@@ -332,12 +328,20 @@ class Home extends Component {
               <RecipeCardWrapper
                 count={this.state.edamomresult.length}
                 title={'Results'}
-                message={this.state.edamomresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={
+                  this.state.edamomresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
               >
                 {this.state.edamomresult.map(edamomresult => (
                   <RecipeCard
                     key={edamomresult.recipe.uri}
-                    imgurl={edamomresult.recipe.image ? edamomresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    imgurl={
+                      edamomresult.recipe.image
+                        ? edamomresult.recipe.image
+                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                    }
                     label={edamomresult.recipe.label}
                     uri={edamomresult.recipe.uri}
                     shareurl={edamomresult.recipe.url}
