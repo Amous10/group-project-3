@@ -9,6 +9,7 @@ module.exports = {
   },
 
   create: function(req, res) {
+
     //TODO Add userid to relate the tables.
     console.log("Hitting the create Pantry in controller");
     console.log("req.body: ", JSON.stringify(req.body));
@@ -36,6 +37,7 @@ module.exports = {
       )
 
       .then(dbModel => res.json(dbModel))
+
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {

@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // components
-import Signup from './components/sign-up.js';
-import LoginForm from './components/login-form.js';
-import Navbar from './components/navbar.js';
-// import Home from './components/home.js';
+import Signup from './components/Signup.js';
+import LoginForm from './components/Login.js';
+import Navbar from './components/Navbar.js';
 
 import Home from './components/pages/Home';
 import Books from './components/pages/Books';
@@ -69,8 +68,15 @@ class App extends Component {
         )}
         {/* Routes to different components */}
         {/* <Route exact path="/" component={Home} /> */}
-        <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
-        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
+        <Route
+          exact
+          path="/"
+          render={() => <Home userid={this.state.userid} />}
+        />
+        <Route
+          path="/login"
+          render={() => <LoginForm updateUser={this.updateUser} />}
+        />
         <Route path="/signup" render={() => <Signup />} />
 
         <Router>
@@ -78,7 +84,11 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               {/* <Route exact path="/api/books" component={Books} /> */}
-              <Route exact path="/api/books" render={() => <Books userid={this.state.userid} />} />
+              <Route
+                exact
+                path="/api/books"
+                render={() => <Books userid={this.state.userid} />}
+              />
               {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
               {/* <Route component={NoMatch} /> */}
