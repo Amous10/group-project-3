@@ -24,6 +24,7 @@ class Home extends Component {
     loading: false
   };
 
+
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
@@ -44,7 +45,9 @@ class Home extends Component {
             dbFoodsIds.push(recipe.recipeId);
           });
           // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-          const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.id));
+          const filteredFoods = recipes.data.filter(
+            recipe => !dbFoodsIds.includes(recipe.id)
+          );
           // console.log('filteredFoods: ', filteredFoods);
           //  set new state for result
           this.setState({
@@ -79,6 +82,7 @@ class Home extends Component {
     });
   };
 
+
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.target.getAttribute('data-id');
@@ -102,7 +106,9 @@ class Home extends Component {
           console.log('this.props.userid: ', this.props.userid);
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.result.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.result.find(
+              recipe => recipe.id === newRecipe.recipeId
+            );
             // find the index of that recipe in the result array
             const indexofRecipeToRemove = state.result.indexOf(recipeToRemove);
             // then delete that one item
@@ -155,6 +161,7 @@ class Home extends Component {
         {/* <Navbar /> */}
         <Image />
 
+
         <Jumbotron>
           <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
         </Jumbotron>
@@ -163,16 +170,84 @@ class Home extends Component {
         <Container>
           <Row>
             <Col>
+
+        {/* <Jumbotron>
+          <Searchbar
+            value={this.state.search}
+            handleInputChange={this.handleInputChange}
+            handleFormSubmit={this.handleFormSubmit}
+          />
+        </Jumbotron> */}
+        <Jumbotron>
+          <SearchFood
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
+        </Jumbotron>
+        {/* <TodoList /> */}
+
+        {/* <Container>
+          <Row>
+            <Col>
+              <CardWrapper
+                count={this.state.result.length}
+                title={'Results'}
+                message={
+                  this.state.result === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
+              >
+                {this.state.result.map(result => (
+                  <Card
+                    key={result.id}
+                    url={
+                      result.volumeInfo.imageLinks
+                        ? result.volumeInfo.imageLinks.smallThumbnail
+                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                    }
+                    name={result.volumeInfo.title}
+                    author={result.volumeInfo.authors}
+                    infoLink={result.volumeInfo.infoLink}
+                    desc={
+                      result.volumeInfo.description
+                        ? result.volumeInfo.description
+                        : 'No description'
+                    }
+                    handleBookSave={this.saveBook}
+                    id={result.id}
+                    leftButton={'View'}
+                    rightButton={'Save'}
+                  />
+                ))}
+              </CardWrapper>
+              <Alert modalMessage={'Book added to saved page!'} />
+            </Col>
+          </Row>
+        </Container> */}
+        <Container>
+          <Row>
+            <Col>
+
               <SpacingGrid />
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
-                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={
+                  this.state.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
               >
                 {this.state.edamamresult.map(edamamresult => (
                   <RecipeCard
                     key={edamamresult.recipe.uri}
-                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    imgurl={
+                      edamamresult.recipe.image
+                        ? edamamresult.recipe.image
+                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                    }
                     label={edamamresult.recipe.label}
                     uri={edamamresult.recipe.uri}
                     shareurl={edamamresult.recipe.url}
