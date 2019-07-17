@@ -18,7 +18,7 @@ import Alert from '../Alert';
 class Home extends Component {
   state = {
     result: [],
-    edamomresult: [],
+    edamamresult: [],
     search: '',
     searchfood: '',
     loading: false
@@ -65,7 +65,7 @@ class Home extends Component {
 
   searchRecipes = query => {
     // start UI spinner
-    this.setState({ loading: true, edamomresult: [] });
+    this.setState({ loading: true, edamamresult: [] });
 
     // make a call to food2fork api
     API.callFood2Fork(query).then(recipes => {
@@ -87,7 +87,7 @@ class Home extends Component {
           // console.log('filteredFoods: ', filteredFoods);
           //  set new state for result
           this.setState({
-            edamomresult: filteredFoods
+            edamamresult: filteredFoods
           });
         });
         // .catch(err => {
@@ -192,9 +192,16 @@ class Home extends Component {
       .map(recipe => {
         const newRecipe = {
           userid: this.props.userid,
-          recipeId: recipe.id,
+          uri: recipe.recipe.uri,
           label: recipe.recipe.label,
-          uri: recipe.recipe.uri
+          source: recipe.recipe.source,
+          url: recipe.recipe.url,
+          yield: recipe.recipe.yield,
+          dietLabels: recipe.recipe.dietLabels,
+          healthLabels: recipe.recipe.healthLabels,
+          ingredientLines: recipe.recipe.ingredientLines,
+          calories: recipe.recipe.calories,
+          image: recipe.recipe.image
         };
         console.log('newRecipe: ', newRecipe);
         // save recipe then remove from the result state
@@ -287,20 +294,20 @@ class Home extends Component {
           <Row>
             <Col>
               <RecipeCardWrapper
-                count={this.state.edamomresult.length}
+                count={this.state.edamamresult.length}
                 title={'Results'}
-                message={this.state.edamomresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
               >
-                {this.state.edamomresult.map(edamomresult => (
+                {this.state.edamamresult.map(edamamresult => (
                   <RecipeCard
-                    key={edamomresult.recipe.uri}
-                    imgurl={edamomresult.recipe.image ? edamomresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
-                    label={edamomresult.recipe.label}
-                    uri={edamomresult.recipe.uri}
-                    shareurl={edamomresult.recipe.url}
-                    source={edamomresult.recipe.source}
-                    yield={edamomresult.recipe.yield}
-                    calories={edamomresult.recipe.calories}
+                    key={edamamresult.recipe.uri}
+                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    label={edamamresult.recipe.label}
+                    uri={edamamresult.recipe.uri}
+                    shareurl={edamamresult.recipe.url}
+                    source={edamamresult.recipe.source}
+                    yield={edamamresult.recipe.yield}
+                    calories={edamamresult.recipe.calories}
                     handleRecipeSave={this.saveRecipe}
                     leftButton={'View'}
                     rightButton={'Save'}
