@@ -45,7 +45,7 @@ export default function RecipeCardWrapper(props) {
     //           {props.count} {props.title}
     //         </span>
     //         <h5 className="center-align">{props.message}</h5>
-    //         <div className="row">{props.children}</div>
+    //         <div className="row"></div>
     //       </div>
     //     </div>
     //   </div>
