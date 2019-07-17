@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
 import Image from '../Image';
-// import Navbar from '../Nav';
 import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
 import SearchFood from '../SearchFood';
-import Card from '../Card';
-import CardWrapper from '../CardWrapper';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import { Modal, Button } from 'react-materialize';
@@ -23,58 +20,17 @@ class Home extends Component {
   state = {
     result: [],
     edamamresult: [],
-    search: '',
     searchfood: '',
     loading: false
   };
 
-  searchBooks = query => {
-    // start UI spinner
-    this.setState({ loading: true, result: [] });
-
-    // make a call to google books api
-    API.callGoogle(query).then(books => {
-      // if the response is > 0
-      if (books.data.length > 0) {
-        // stop the UI spinner
-        this.setState({ loading: false });
-        console.log(books.data);
-
-        // make a call to my database and retrieve all books stored
-        API.getBooks({}).then(dbBooks => {
-          // empty array to hold all of the books
-          const dbBooksIds = [];
-          // iterate over stored books and push book ids to empty array
-          dbBooks.data.forEach(book => {
-            dbBooksIds.push(book.bookId);
-          });
-          // filter all of the stored books and return books where stored book id doesn't match id coming from google api call
-          const filteredBooks = books.data.filter(
-            book => !dbBooksIds.includes(book.id)
-          );
-
-          //  set new state for result
-          this.setState({
-            result: filteredBooks
-          });
-        });
-        // .catch(err => {
-        //     console.log(err)
-        // })
-      } else {
-        this.setState({
-          books: []
-        });
-      }
-    });
-  };
 
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
 
-    // make a call to food2fork api
-    API.callFood2Fork(query).then(recipes => {
+    // make a call to edamam api
+    API.callEdamam(query).then(recipes => {
       if (recipes.data.length > 0) {
         // stop the UI spinner
         this.setState({ loading: false });
@@ -109,13 +65,6 @@ class Home extends Component {
     });
   };
 
-  handleInputChange = e => {
-    const value = e.target.value;
-    // const name = e.target.name;
-    this.setState({
-      search: value
-    });
-  };
   handleInputChangeFood = e => {
     const value = e.target.value;
     // const name = e.target.name;
@@ -133,64 +82,6 @@ class Home extends Component {
     });
   };
 
-  // When the form is submitted, search the API for the value of `this.state.search`
-  handleFormSubmit = e => {
-    e.preventDefault();
-    // run google call with search parameter
-    this.searchBooks(this.state.search);
-    console.log(this.state.search);
-    this.setState({
-      search: ''
-    });
-  };
-
-  saveBook = e => {
-    // get the id of the book when 'save' is clicked
-    const thisCardsId = e.target.getAttribute('data-id');
-    console.log('bookdata', this.saveBook);
-    console.log(thisCardsId);
-
-    const newSavedBook = this.state.result;
-    // filter this.state.result to return books where the id is the same as the book clicked
-    newSavedBook
-      .filter(result => result.id === thisCardsId)
-      // then map over book and create a new object to send to the database
-      .map(book => {
-        const newBook = {
-          userid: this.props.userid,
-          bookId: book.id,
-          title: book.volumeInfo.title,
-          authors: book.volumeInfo.authors,
-          description: book.volumeInfo.description,
-          image: book.volumeInfo.imageLinks
-            ? book.volumeInfo.imageLinks.smallThumbnail
-            : null,
-          link: book.volumeInfo.infoLink
-        };
-        // save book then remove from the result state
-        API.saveBook(newBook).then(() => {
-          console.log('this.props.userid: ', this.props.userid);
-          this.setState(state => {
-            // find which book to remove from state by finding the book in the result array that matches the clicked book
-            const bookToRemove = state.result.find(
-              book => book.id === newBook.bookId
-            );
-            // find the index of that book in the result array
-            const indexofBookToRemove = state.result.indexOf(bookToRemove);
-            // then delete that one item
-            state.result.splice(indexofBookToRemove, 1);
-            // update the state
-            return {
-              result: state.result
-            };
-          });
-        });
-      });
-    // perform modal dialogue
-    {
-      window.$('#foo').modal('open');
-    }
-  };
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -269,6 +160,17 @@ class Home extends Component {
       <div>
         {/* <Navbar /> */}
         <Image />
+
+
+        <Jumbotron>
+          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+        </Jumbotron>
+        {/* <TodoList /> */}
+
+        <Container>
+          <Row>
+            <Col>
+
         {/* <Jumbotron>
           <Searchbar
             value={this.state.search}
@@ -327,6 +229,7 @@ class Home extends Component {
         <Container>
           <Row>
             <Col>
+
               <SpacingGrid />
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}

@@ -9,24 +9,7 @@ const eAPPid = process.env.EDAMAM_APPID_1;
 const exampleUrl = process.env.EDAMAM_EXAMPLE;
 
 module.exports = {
-  // searchFood2Fork: function(req, res) {
-  //   // console.log('loggin', apiUrl + apiKey, { params: req.query });
-  //   // console.log('https://www.food2fork.com/api/search?key=64163ecfe7d2c2321832cea3563bf507&rId=35382');
-  //   // console.log('https://www.food2fork.com/api/search?key=64163ecfe7d2c2321832cea3563bf507&q=bacon%20chicken');
-  //   console.log(apiUrl + apiKey, { params: req.query });
-
-  //   axios
-  //     .get(apiUrl + apiKey, { params: req.query })
-  //     // .get('https://www.food2fork.com/api/search?key=0970e2f332d26a5a797712201d1382b8&q=bacon%20chicken')
-  //     .then(results => {
-  //       console.log(results.data.recipes);
-
-  //       return results.data.recipes;
-  //     })
-  //     .then(recipes => res.json(recipes))
-  //     .catch(err => res.status(422).json(err));
-  // }
-  searchFood2Fork: function(req, res) {
+  searchEdamam: function(req, res) {
     // console.log(exampleUrl);
     //console.log('BUILDING: ', eAPIurl + eAPPid + eAPIkey, { params: req.query });
 
