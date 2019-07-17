@@ -1,20 +1,20 @@
 const router = require('express').Router();
 const recipeController = require('../../controllers/recipeController');
 
-// Matches with "/api/foods/"
+// Matches with "/api/recipes/"
 router
   .route('/')
-  // find all saved foods in database
+  // find all saved recipes in database
   .get(recipeController.findAll)
   //   post a book to the database
   .post(recipeController.create);
 
 // router
-//   .route('/api/foods/:uid')
+//   .route('/api/recipes/:uid')
 //   //   post a book to the database
-//   .post(foodsController.create);
+//   .post(recipeController.create);
 
-// Matches with "/api/foods/:id"
+// Matches with "/api/recipes/:id"
 router
   .route('/:id')
   // delete book from database if saved

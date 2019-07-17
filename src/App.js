@@ -7,7 +7,7 @@ import LoginForm from './components/Login.js';
 import Navbar from './components/Navbar.js';
 
 import Home from './components/pages/Home';
-import Books from './components/pages/Books';
+import Recipes from './components/pages/Recipes';
 import NoMatch from './components/pages/NoMatch';
 
 class App extends Component {
@@ -68,27 +68,16 @@ class App extends Component {
         )}
         {/* Routes to different components */}
         {/* <Route exact path="/" component={Home} /> */}
-        <Route
-          exact
-          path="/"
-          render={() => <Home userid={this.state.userid} />}
-        />
-        <Route
-          path="/login"
-          render={() => <LoginForm updateUser={this.updateUser} />}
-        />
+        <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
+        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
         <Route path="/signup" render={() => <Signup />} />
 
         <Router>
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              {/* <Route exact path="/api/books" component={Books} /> */}
-              <Route
-                exact
-                path="/api/books"
-                render={() => <Books userid={this.state.userid} />}
-              />
+              {/* <Route exact path="/api/recipes" component={Recipes} /> */}
+              <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} />
               {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
               {/* <Route component={NoMatch} /> */}

@@ -47,7 +47,7 @@ class Navbar extends Component {
                 <Link to={'/'} className="btn btn-link text-secondary">
                   <span className="text-secondary">New Search</span>
                 </Link>
-                <Link to={'/api/books'} className="btn btn-link text-secondary">
+                <Link to={'/api/recipes'} className="btn btn-link text-secondary">
                   <span className="text-secondary">Saved Recipes</span>
                 </Link>
                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
