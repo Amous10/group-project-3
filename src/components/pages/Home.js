@@ -41,7 +41,7 @@ class Home extends Component {
           const dbFoodsIds = [];
           // iterate over stored recipes and push recipe ids to empty array
           dbFoods.data.forEach(recipe => {
-            dbFoodsIds.push(recipe.recipeId);
+            dbFoodsIds.push(recipe.uri);
           });
           // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
           const filteredFoods = recipes.data.filter(
@@ -93,6 +93,7 @@ class Home extends Component {
       // then map over recipe and create a new object to send to the database
       .map(recipe => {
         const newRecipe = {
+          key: recipe.id,
           userid: this.props.userid,
           uri: recipe.recipe.uri,
           label: recipe.recipe.label,

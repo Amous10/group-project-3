@@ -7,7 +7,7 @@ import LoginForm from './components/Login.js';
 import Navbar from './components/Navbar.js';
 
 import Home from './components/pages/Home';
-import Books from './components/pages/Books';
+import recipes from './components/pages/recipes';
 import NoMatch from './components/pages/NoMatch';
 
 class App extends Component {
@@ -86,8 +86,8 @@ class App extends Component {
               {/* <Route exact path="/api/books" component={Books} /> */}
               <Route
                 exact
-                path="/api/books"
-                render={() => <Books userid={this.state.userid} />}
+                path="/api/recipes"
+                render={() => <recipes userid={this.state.userid} />}
               />
               {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}

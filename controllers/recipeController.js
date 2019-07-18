@@ -2,8 +2,8 @@ const db = require("../models");
 
 module.exports = {
   findAll: function(req, res) {
-    db.recipe
-      .find({ userId: req.body.userID })
+    db.Recipe
+      .find({ userId: req.body.userId })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -14,12 +14,12 @@ module.exports = {
     console.log("req.body: ", JSON.stringify(req.body));
     console.log("req.user._id: ", req.user._id);
 
-    db.recipe
+    db.Recipe
       .findOneAndUpdate(
         { userId: req.body.userId, uri: req.body.uri },
         {
           $set: {
-            userID: req.body.userId,
+            userId: req.body.userId,
             uri: req.body.uri,
             label: req.body.label,
             source: req.body.source,
@@ -39,7 +39,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.recipe
+    db.Recipe
       .findOneAndRemove({ userId: req.params.id, uri: req.body.uri })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
