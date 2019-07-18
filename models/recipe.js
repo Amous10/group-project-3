@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema({
@@ -9,56 +9,40 @@ const RecipeSchema = new Schema({
   uri: {
     type: String,
     required: true
-  }
-,
-label: {
+  },
+  label: {
     type: String,
     required: false
-  }
-,
-source: {
+  },
+  source: {
     type: String,
     required: false
-  }
-,
-url: {
+  },
+  url: {
     type: String,
     required: false
-  }
-,
-
-yield: {
+  },
+  yield: {
     type: String,
     required: false
-  }
-,
-dietLabels: {
+  },
+  dietLabels: {
     type: Array,
     required: false
-  }
-,
-healthLabels: {
+  },
+  healthLabels: {
     type: Array,
     required: false
-  }
-,
-ingredientLines:{
+  },
+  ingredientLines: {
     type: Array,
     required: false
-  }
-,
-calories:{
+  },
+  calories: {
     type: String,
     required: false
-  }
-,
-
-image:{ type: String,
-         required: false
-
-}
-
-
+  },
+  image: { type: String, required: false }
 });
 
 const Recipe = mongoose.model('Recipe', RecipeSchema);
