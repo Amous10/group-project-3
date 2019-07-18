@@ -58,33 +58,33 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-        {/* greet user if logged in: */}
-        {this.state.loggedIn && (
-          <p>
-            Join the party, {this.state.username}! at {this.state.userid}
-          </p>
-        )}
-        {/* Routes to different components */}
-        {/* <Route exact path="/" component={Home} /> */}
-        <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
-        <Route path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
-        <Route path="/signup" render={() => <Signup />} />
+      <Router>
+        <div className="App">
+          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+          {/* greet user if logged in: */}
+          {this.state.loggedIn && (
+            <p>
+              Join the party, {this.state.username}! at {this.state.userid}
+            </p>
+          )}
+          {/* Routes to different components */}
+          {/* <Route exact path="/" component={Home} /> */}
+          {/* <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
+           */}
 
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              {/* <Route exact path="/api/recipes" component={Recipes} /> */}
-              <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} />
-              {/* <Route path="/recipes" exact component={Recipes} />
+          <Switch>
+            {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
+            <Route exact path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
+            <Route exact path="/signup" render={() => <Signup />} />
+            {/* <Route exact path="/api/recipes" component={Recipes} /> */}
+            {/* <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} /> */}
+            {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
-              {/* <Route component={NoMatch} /> */}
-            </Switch>
-          </div>
-        </Router>
-      </div>
+            {/* <Route component={NoMatch} /> */}
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
