@@ -5,9 +5,9 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // display: 'flex',
-    // flexWrap: 'nowrap',
-    // flexGrow: 1,
+    // display: 'flex !important',
+    // flexWrap: 'nowrap !important',
+    flexGrow: 1,
     border: '3px solid green'
   },
   paper: {
@@ -23,24 +23,28 @@ const useStyles = makeStyles(theme => ({
 const RecipeCardWrapper = props => {
   const [spacing] = React.useState(2);
   const classes = useStyles();
+  console.log('props.children', props.children);
 
   return (
     <Grid container className={classes.root} spacing={2}>
-      <Grid item xs={4}>
-        <Grid container justify="center" spacing={spacing}>
-          {[props.children].map(value => (
-            <Grid key={value} item>
-              {/* <Paper className={classes.paper}> */}
-              {/* <div className={classes.paper}>{props.children}</div> */}
-              {props.children}
-              {/* </Paper> */}
-            </Grid>
-          ))}
+      {/* <Grid item xs={12}> */}
+      {/* <Grid container justify="center" spacing={spacing}> */}
+      {/* {[props.children].map(value => ( */}
+      {props.children.map((value, i) => (
+        <Grid xs={4} key={value.key} item>
+          {console.log('value: ', value)}
+          {/* <Paper className={classes.paper}> */}
+          {/* <div className={classes.paper}>{props.children}</div> */}
+          {value}
+          {/* </Paper> */}
         </Grid>
-      </Grid>
+      ))}
+      {/* </Grid> */}
+      {/* </Grid> */}
     </Grid>
+
     // <div className={classes.root}>
-    //   <div className="col l12 m6">
+    //   <div className="col 3">
     //     <div className="card">
     //       <div className="card-content black-text">
     //         <span className="card-title">

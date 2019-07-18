@@ -18,7 +18,7 @@ import SpacingGrid from '../Grid';
 
 class Home extends Component {
   state = {
-    result: [],
+    error: '',
     edamamresult: [],
     searchfood: '',
     loading: false
@@ -29,37 +29,45 @@ class Home extends Component {
     this.setState({ loading: true, edamamresult: [] });
 
     // make a call to edamam api
-    API.callEdamam(query).then(recipes => {
-      if (recipes.data.length > 0) {
-        // stop the UI spinner
-        this.setState({ loading: false });
-        console.log('recipes data: ', recipes.data);
+    API.callEdamam(query)
+      .then(recipes => {
+        console.log('recipes: ', recipes);
+        if (recipes.data.length > 0) {
+          // stop the UI spinner
+          this.setState({ loading: false });
+          console.log('recipes data: ', recipes.data);
 
-        // make a call to database and retrieve all recipes stored
-        API.getRecipes({}).then(dbFoods => {
-          // empty array to hold all of the recipes
+          // make a call to database and retrieve all recipes stored
+          API.getRecipes({}).then(dbFoods => {
+            // empty array to hold all of the recipes
 
-          const dbFoodsIds = [];
-          // iterate over stored recipes and push recipe ids to empty array
-          dbFoods.data.forEach(recipe => {
-            dbFoodsIds.push(recipe.recipeId);
+            const dbFoodsIds = [];
+            // iterate over stored recipes and push recipe ids to empty array
+            dbFoods.data.forEach(recipe => {
+              dbFoodsIds.push(recipe.recipeId);
+            });
+            // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
+            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
+            console.log('filtderedFoods: ', filteredFoods);
+
+            //  set new state for result
+            this.setState({
+              edamamresult: filteredFoods
+            });
           });
-          // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-          const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.id));
-          // console.log('filteredFoods: ', filteredFoods);
-          //  set new state for result
+        } else {
           this.setState({
-            edamamresult: filteredFoods
+            edamamresult: []
           });
-        });
-      } else {
+        }
+      })
+      .catch(err => {
+        console.log('ERROR:', err.response.data.message);
         this.setState({
-          recipes: []
-        }).catch(err => {
-          console.log(err);
+          error: err.response.data.message,
+          loading: false
         });
-      }
-    });
+      });
   };
 
   handleInputChangeFood = e => {
@@ -73,7 +81,7 @@ class Home extends Component {
     e.preventDefault();
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
-    console.log(this.state.searchfood);
+    console.log('this.state.searchfood', this.state.searchfood);
     this.setState({
       searchfood: ''
     });
@@ -81,35 +89,44 @@ class Home extends Component {
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
-    const thisCardsId = e.target.getAttribute('data-id');
-    console.log('recipe card id: ', thisCardsId);
+    const thisCardsId = e.currentTarget.getAttribute('data-id');
 
-    const newSavedRecipe = this.state.result;
+    const newSavedRecipe = this.state.edamamresult;
+    // console.log('this.state.edamamresult: ', this.state.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
     newSavedRecipe
-      .filter(result => result.id === thisCardsId)
+      .filter(result => result.recipe.uri === thisCardsId)
       // then map over recipe and create a new object to send to the database
       .map(recipe => {
+        console.log('recipe: ', recipe);
+        console.log('this.props.userid: ', this.props.userid);
+        console.log('this.props: ', this.props);
         const newRecipe = {
-          userid: this.props.userid,
-          recipeId: recipe.id,
+          userId: this.props.userid,
+          uri: recipe.recipe.uri,
           label: recipe.recipe.label,
-          uri: recipe.recipe.uri
+          source: recipe.recipe.source,
+          url: recipe.recipe.url,
+          yield: recipe.recipe.yield,
+          dietLabels: recipe.recipe.dietLabels,
+          healthLabels: recipe.recipe.healthLabels,
+          ingredientLines: recipe.recipe.ingredientLines,
+          calories: recipe.recipe.calories,
+          image: recipe.recipe.image
         };
-        console.log('newRecipe: ', newRecipe);
         // save recipe then remove from the result state
         API.saveRecipe(newRecipe).then(() => {
-          console.log('this.props.userid: ', this.props.userid);
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.result.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.edamamresult.find(recipe => recipe.id === newRecipe.recipeId);
             // find the index of that recipe in the result array
-            const indexofRecipeToRemove = state.result.indexOf(recipeToRemove);
+            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
             // then delete that one item
-            state.result.splice(indexofRecipeToRemove, 1);
+            state.edamamresult.splice(indexofRecipeToRemove, 1);
+            console.log('state.result: ', state.edamamresult);
             // update the state
             return {
-              result: state.result
+              edamamresult: state.edamamresult
             };
           });
         });
@@ -121,6 +138,9 @@ class Home extends Component {
   };
 
   render() {
+    if (this.state.error) {
+      return <div>{this.state.error}</div>;
+    }
     if (this.state.loading) {
       return (
         <div>

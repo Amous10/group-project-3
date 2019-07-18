@@ -33,6 +33,9 @@ module.exports = {
         return results.data.hits;
       })
       .then(recipes => res.json(recipes))
-      .catch(err => res.status(422).json(err));
+      .catch(err => {
+        console.log('err: ', err);
+        res.status(422).json({ message: 'An error occurred while fetching the data.' });
+      });
   }
 };

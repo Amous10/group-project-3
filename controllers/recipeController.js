@@ -2,14 +2,14 @@ const db = require('../models');
 
 module.exports = {
   findAll: function(req, res) {
-    db.Recipe.find({ userId: req.body.userID })
+    db.Recipe.find({ userId: req.body.userId })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
   create: function(req, res) {
     //TODO Add userid to relate the tables.
-    console.log('Hitting the create Pantry in controller');
+    console.log('Hitting the create Recipe in controller');
     console.log('req.body: ', JSON.stringify(req.body));
     console.log('req.user._id: ', req.user._id);
 
