@@ -51,10 +51,8 @@ export default function RecipeCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites" onClick={props.handleRecipeSave || props.handleRecipeDelete} data-id={props.uri}>
-          <a>
-            <FavoriteIcon />
-          </a>
+        <IconButton data-id={props.uri} onClick={props.handleRecipeSave || props.handleRecipeDelete} aria-label="Add to favorites">
+          <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="Share">
           <a href={props.shareurl} target="_blank">
