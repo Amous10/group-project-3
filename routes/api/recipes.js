@@ -5,9 +5,13 @@ const recipeController = require('../../controllers/recipeController');
 router
   .route('/')
   // find all saved recipes in database
-  .get(recipeController.findAll)
+  //.get(recipeController.findAll)
   //   post a book to the database
   .post(recipeController.create);
+
+  router
+/* .route('/')
+  .get(recipeController.findAll); */
 
 // router
 //   .route('/api/recipes/:uid')
@@ -19,5 +23,9 @@ router
   .route('/:id')
   // delete book from database if saved
   .delete(recipeController.remove);
+ router
+.route('/:id')
+  .get(recipeController.findAll); 
+
 
 module.exports = router;

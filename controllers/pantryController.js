@@ -3,7 +3,7 @@ const db = require('../models');
 // Defining methods for the booksController
 module.exports = {
   findAll: function(req, res) {
-    db.Pantry.find({"userId": req.body.userID})
+    db.Pantry.find({userId: req.body.userId})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -16,8 +16,8 @@ module.exports = {
     console.log('req.user._id: ', req.user._id);
   
   
-    db.Pantry.findOneAndUpdate({ "userId": req.body.userId, "pantryItem" : req.body.pantryItem},
-     { "$set": { "userID": req.body.userId, "pantryItem": req.body.pantryItem}},{new:true, upsert:true})
+    db.Pantry.findOneAndUpdate({ userId: req.body.userId, pantryItem : req.body.pantryItem},
+     { $set: { userId: req.body.userId, pantryItem: req.body.pantryItem}},{new:true, upsert:true})
         
     .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
