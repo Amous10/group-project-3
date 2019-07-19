@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const RecipeSchema = new Schema({
   userId: {
     type: String,
-    required: false
+    required: true
   },
   uri: {
     type: String,

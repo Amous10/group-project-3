@@ -77,7 +77,7 @@ class App extends Component {
             <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
             <Route exact path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <Signup />} />
-            {/* <Route exact path="/api/recipes" component={Recipes} /> */}
+            <Route exact path="/api/recipes" render ={() => <Recipes userid={this.state.userid} />}/> 
             {/* <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} /> */}
             {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
