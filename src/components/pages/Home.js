@@ -1,114 +1,137 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
 import Image from '../Image';
-// import Navbar from '../Nav';
 import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
-import Card from '../Card';
-import CardWrapper from '../CardWrapper';
+import SearchFood from '../SearchFood';
+import RecipeCard from '../RecipeCard';
+import RecipeCardWrapper from '../RecipeCardWrapper';
 import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
+// import ToDo from '../ToDo/ToDo';
+import TodoList from '../TodoList/TodoList';
+import Grid from '@material-ui/core/Grid';
+import SpacingGrid from '../Grid';
 
 class Home extends Component {
   state = {
-    result: [],
-    search: '',
+    error: '',
+    edamamresult: [],
+    searchfood: '',
     loading: false
   };
 
-  searchBooks = query => {
+  searchRecipes = query => {
     // start UI spinner
-    this.setState({ loading: true, result: [] });
+    this.setState({ loading: true, edamamresult: [] });
 
-    // make a call to google books api
-    API.callGoogle(query).then(books => {
-      // API.callFood2Fork(query).then(books => {
-      // if the response is > 0
-      if (books.data.length > 0) {
-        // stop the UI spinner
-        this.setState({ loading: false });
-        console.log(books.data);
+    // make a call to edamam api
+    API.callEdamam(query)
+      .then(recipes => {
+        console.log('recipes: ', recipes);
+        if (recipes.data.length > 0) {
+          // stop the UI spinner
+          this.setState({ loading: false });
+          console.log('recipes data: ', recipes.data);
 
-        // make a call to my database and retrieve all books stored
-        API.getBooks({}).then(dbBooks => {
-          // empty array to hold all of the books
-          const dbBooksIds = [];
-          // iterate over stored books and push book ids to empty array
-          dbBooks.data.forEach(book => {
-            dbBooksIds.push(book.bookId);
+          // make a call to database and retrieve all recipes stored
+          API.getRecipes({}).then(dbFoods => {
+            // empty array to hold all of the recipes
+
+            const dbFoodsIds = [];
+            // iterate over stored recipes and push recipe ids to empty array
+            dbFoods.data.forEach(recipe => {
+              dbFoodsIds.push(recipe.recipeId);
+            });
+            // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
+            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
+            console.log('filtderedFoods: ', filteredFoods);
+
+            //  set new state for result
+            this.setState({
+              edamamresult: filteredFoods
+            });
           });
-          // filter all of the stored books and return books where stored book id doesn't match id coming from google api call
-          const filteredBooks = books.data.filter(book => !dbBooksIds.includes(book.id));
-
-          //  set new state for result
+        } else {
           this.setState({
-            result: filteredBooks
+            edamamresult: []
           });
-        });
-        // .catch(err => {
-        //     console.log(err)
-        // })
-      } else {
+        }
+      })
+      .catch(err => {
+        console.log('ERROR:', err.response.data.message);
         this.setState({
-          books: []
+          error: err.response.data.message,
+          loading: false
         });
-      }
-    });
+      });
   };
 
-  handleInputChange = e => {
+  handleInputChangeFood = e => {
     const value = e.target.value;
     // const name = e.target.name;
     this.setState({
-      search: value
+      searchfood: value
     });
   };
-
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
-  handleFormSubmit = e => {
+  handleFormSubmitFood = e => {
     e.preventDefault();
     // run google call with search parameter
-    this.searchBooks(this.state.search);
-    console.log(this.state.search);
+    this.searchRecipes(this.state.searchfood);
+    console.log('this.state.searchfood', this.state.searchfood);
     this.setState({
-      search: ''
+      searchfood: ''
     });
   };
 
-  saveBook = e => {
+  saveRecipe = e => {
     // get the id of the book when 'save' is clicked
-    const thisCardsId = e.target.getAttribute('data-id');
-    console.log(thisCardsId);
+    const thisCardsId = e.currentTarget.getAttribute('data-id');
 
-    const newSavedBook = this.state.result;
-    // filter this.state.result to return books where the id is the same as the book clicked
-    newSavedBook
-      .filter(result => result.id === thisCardsId)
-      // then map over book and create a new object to send to the database
-      .map(book => {
-        const newBook = {
-          bookId: book.id,
-          title: book.volumeInfo.title,
-          authors: book.volumeInfo.authors,
-          description: book.volumeInfo.description,
-          image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : null,
-          link: book.volumeInfo.infoLink
+    const newSavedRecipe = this.state.edamamresult;
+    // console.log('this.state.edamamresult: ', this.state.edamamresult);
+    // filter this.state.result to return recipes where the id is the same as the recipe clicked
+    newSavedRecipe
+      .filter(result => result.recipe.uri === thisCardsId)
+      // then map over recipe and create a new object to send to the database
+      .map(recipe => {
+        console.log('recipe: ', recipe);
+        console.log('this.props.userid: ', this.props.userid);
+        console.log('this.props: ', this.props);
+       
+
+        let Uri = recipe.recipe.uri;
+        Uri = Uri.split("recipe_");
+        Uri = Uri[1]+ this.props.userid;
+        const newRecipe = {
+          userId: this.props.userid,
+          uri: Uri,
+          label: recipe.recipe.label,
+          source: recipe.recipe.source,
+          url: recipe.recipe.url,
+          yield: recipe.recipe.yield,
+          dietLabels: recipe.recipe.dietLabels,
+          healthLabels: recipe.recipe.healthLabels,
+          ingredientLines: recipe.recipe.ingredientLines,
+          calories: recipe.recipe.calories,
+          image: recipe.recipe.image
         };
-        // save book then remove from the result state
-        API.saveBook(newBook).then(() => {
+        // save recipe then remove from the result state
+        API.saveRecipe(newRecipe).then(() => {
           this.setState(state => {
-            // find which book to remove from state by finding the book in the result array that matches the clicked book
-            const bookToRemove = state.result.find(book => book.id === newBook.bookId);
-            // find the index of that book in the result array
-            const indexofBookToRemove = state.result.indexOf(bookToRemove);
+            // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
+            const recipeToRemove = state.edamamresult.find(recipe => recipe.id === newRecipe.recipeId);
+            // find the index of that recipe in the result array
+            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
             // then delete that one item
-            state.result.splice(indexofBookToRemove, 1);
+            state.edamamresult.splice(indexofRecipeToRemove, 1);
+            console.log('state.result: ', state.edamamresult);
             // update the state
             return {
-              result: state.result
+              edamamresult: state.edamamresult
             };
           });
         });
@@ -120,6 +143,9 @@ class Home extends Component {
   };
 
   render() {
+    if (this.state.error) {
+      return <div>{this.state.error}</div>;
+    }
     if (this.state.loading) {
       return (
         <div>
@@ -153,29 +179,37 @@ class Home extends Component {
       <div>
         {/* <Navbar /> */}
         <Image />
+
         <Jumbotron>
-          <Searchbar value={this.state.search} handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} />
+          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
         </Jumbotron>
+        {/* <TodoList /> */}
+
         <Container>
           <Row>
             <Col>
-              <CardWrapper count={this.state.result.length} title={'Results'} message={this.state.result === 0 ? 'Enter your ingredients to search for recipes' : null}>
-                {this.state.result.map(result => (
-                  <Card
-                    key={result.id}
-                    url={result.volumeInfo.imageLinks ? result.volumeInfo.imageLinks.smallThumbnail : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
-                    name={result.volumeInfo.title}
-                    author={result.volumeInfo.authors}
-                    infoLink={result.volumeInfo.infoLink}
-                    desc={result.volumeInfo.description ? result.volumeInfo.description : 'No description'}
-                    handleBookSave={this.saveBook}
-                    id={result.id}
+              <RecipeCardWrapper
+                count={this.state.edamamresult.length}
+                title={'Results'}
+                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+              >
+                {this.state.edamamresult.map(edamamresult => (
+                  <RecipeCard
+                    key={edamamresult.recipe.uri}
+                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    label={edamamresult.recipe.label}
+                    uri={edamamresult.recipe.uri}
+                    shareurl={edamamresult.recipe.url}
+                    source={edamamresult.recipe.source}
+                    yield={edamamresult.recipe.yield}
+                    calories={edamamresult.recipe.calories}
+                    handleRecipeSave={this.saveRecipe}
                     leftButton={'View'}
                     rightButton={'Save'}
                   />
                 ))}
-              </CardWrapper>
-              <Alert modalMessage={'Book added to saved page!'} />
+              </RecipeCardWrapper>
+              <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
           </Row>
         </Container>

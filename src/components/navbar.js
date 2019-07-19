@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route, Link } from 'react-router-dom';
-import logo from '../logo.svg';
+// import logo from '../img/logo.svg';
+import logo from '../img/pie.svg';
+
 import '../App.css';
 import axios from 'axios';
 
@@ -21,7 +23,8 @@ class Navbar extends Component {
         if (response.status === 200) {
           this.props.updateUser({
             loggedIn: false,
-            username: null
+            username: null,
+            userid: null
           });
         }
       })
@@ -44,10 +47,17 @@ class Navbar extends Component {
                 <Link to={'/'} className="btn btn-link text-secondary">
                   <span className="text-secondary">New Search</span>
                 </Link>
-                <Link to={'/api/books'} className="btn btn-link text-secondary">
+                <Link
+                  to={'/api/recipes'}
+                  className="btn btn-link text-secondary"
+                >
                   <span className="text-secondary">Saved Recipes</span>
                 </Link>
-                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
+                <Link
+                  to="#"
+                  className="btn btn-link text-secondary"
+                  onClick={this.logout}
+                >
                   <span className="text-secondary">Logout</span>
                 </Link>
               </section>
