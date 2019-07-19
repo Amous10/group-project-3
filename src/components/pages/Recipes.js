@@ -16,7 +16,7 @@ class Recipes extends Component {
 
      userId:this.props.userid
    }
-    console.log("recipeMount");
+    
     API.getRecipes(user.userId)
       .then(res => 
        this.setState({ result: res.data })
@@ -29,8 +29,8 @@ class Recipes extends Component {
   }
   deleteRecipe = e => {
     // get the id of the recipe when 'delete' is clicked
-    const thisCardsId = e.target.getAttribute('data-id');
-    console.log(thisCardsId);
+    const thisCardsId = e.currentTarget.getAttribute('data-id');
+    console.log("this card",thisCardsId);
     // delete recipe with the given id
     API.deleteRecipe(thisCardsId).then(() => {
       console.log('recipe deleted');
