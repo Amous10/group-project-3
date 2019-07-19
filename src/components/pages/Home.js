@@ -100,7 +100,7 @@ class Home extends Component {
       .map(recipe => {
         let Uri = recipe.recipe.uri;
         Uri = Uri.split('recipe_');
-        Uri = Uri[0] = this.props.userid;
+        Uri = Uri[1] + this.props.userid;
 
         const newRecipe = {
           userId: this.props.userid,
