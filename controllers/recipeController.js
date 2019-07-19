@@ -33,7 +33,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    console.log('remove', req.params.id);
+    // console.log('remove', req.params.id);
     db.Recipe.findOne({ uri: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))

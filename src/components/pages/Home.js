@@ -98,17 +98,13 @@ class Home extends Component {
       .filter(result => result.recipe.uri === thisCardsId)
       // then map over recipe and create a new object to send to the database
       .map(recipe => {
-        console.log('recipe: ', recipe);
-        console.log('this.props.userid: ', this.props.userid);
-        console.log('this.props: ', this.props);
-       
-
         let Uri = recipe.recipe.uri;
-        Uri = Uri.split("recipe_");
-        
+        Uri = Uri.split('recipe_');
+        Uri = Uri[0] = this.props.userid;
+
         const newRecipe = {
           userId: this.props.userid,
-          uri: Uri[1],
+          uri: Uri,
           label: recipe.recipe.label,
           source: recipe.recipe.source,
           url: recipe.recipe.url,
@@ -128,7 +124,7 @@ class Home extends Component {
             const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
             // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
-            console.log('state.result: ', state.edamamresult);
+
             // update the state
             return {
               edamamresult: state.edamamresult
