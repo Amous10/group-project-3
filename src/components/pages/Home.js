@@ -105,10 +105,10 @@ class Home extends Component {
 
         let Uri = recipe.recipe.uri;
         Uri = Uri.split("recipe_");
-        
+        Uri = Uri[1]+ this.props.userid;
         const newRecipe = {
           userId: this.props.userid,
-          uri: Uri[1],
+          uri: Uri,
           label: recipe.recipe.label,
           source: recipe.recipe.source,
           url: recipe.recipe.url,
