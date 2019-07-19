@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route, Link } from 'react-router-dom';
 // import logo from '../img/logo.svg';
-import logo from '../img/pot.svg';
+import logo from '../img/mustache.svg';
 
 import '../App.css';
 import axios from 'axios';

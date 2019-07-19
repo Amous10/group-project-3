@@ -2,16 +2,17 @@ const db = require('../models');
 
 module.exports = {
   findAll: function(req, res) {
-    db.Recipe.find({ userId: req.body.userId })
+    db.Recipe.find({ userId: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
   create: function(req, res) {
-    // console.log('Hitting the create Recipe in controller');
-    // console.log('req.body: ', JSON.stringify(req.body));
-    // console.log('req.user._id: ', req.user._id);
-
+    //TODO Add userid to relate the tables.
+    /*     console.log('Hitting the create Recipe in controller');
+    console.log('req.body: ', JSON.stringify(req.body));
+    console.log('req.user._id: ', req.user._id); */
+    console.log('Inside create recipe save');
     db.Recipe.findOneAndUpdate(
       { userId: req.body.userId, uri: req.body.uri },
       {
@@ -37,7 +38,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Recipe.findOneAndRemove({ userId: req.params.id, uri: req.body.uri })
+    // console.log('req.params.id: ', req.params.id);
+    db.Recipe.findById({ uri: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

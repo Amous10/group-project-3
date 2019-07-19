@@ -6,8 +6,9 @@ export default {
     return axios.get('/api/edamam', { params: { q: query } });
   },
   // Gets all recipes
-  getRecipes: function() {
-    return axios.get('/api/recipes');
+  getRecipes: function(userid) {
+    console.log('getting axios recipes', userid);
+    return axios.get('/api/recipes/' + userid);
   },
   //Deletes the book with the given id
   deleteRecipe: function(id) {
