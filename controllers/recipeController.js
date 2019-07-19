@@ -8,11 +8,6 @@ module.exports = {
   },
 
   create: function(req, res) {
-    //TODO Add userid to relate the tables.
-    /*     console.log('Hitting the create Recipe in controller');
-    console.log('req.body: ', JSON.stringify(req.body));
-    console.log('req.user._id: ', req.user._id); */
-    console.log('Inside create recipe save');
     db.Recipe.findOneAndUpdate(
       { userId: req.body.userId, uri: req.body.uri },
       {
@@ -38,7 +33,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    // console.log('req.params.id: ', req.params.id);
+    console.log('remove', req.params.id);
     db.Recipe.findById({ uri: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))

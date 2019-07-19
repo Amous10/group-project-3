@@ -101,9 +101,14 @@ class Home extends Component {
         console.log('recipe: ', recipe);
         console.log('this.props.userid: ', this.props.userid);
         console.log('this.props: ', this.props);
+       
+
+        let Uri = recipe.recipe.uri;
+        Uri = Uri.split("recipe_");
+        
         const newRecipe = {
           userId: this.props.userid,
-          uri: recipe.recipe.uri,
+          uri: Uri[1],
           label: recipe.recipe.label,
           source: recipe.recipe.source,
           url: recipe.recipe.url,

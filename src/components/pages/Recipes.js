@@ -26,7 +26,7 @@ class Recipes extends Component {
   deleteRecipe = e => {
     // get the id of the recipe when 'delete' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
-    console.log('thisCardsId', thisCardsId);
+    console.log('this card', thisCardsId);
     // delete recipe with the given id
     API.deleteRecipe(thisCardsId).then(() => {
       console.log('recipe deleted');
