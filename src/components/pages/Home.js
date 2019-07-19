@@ -188,21 +188,24 @@ class Home extends Component {
                 title={'Results'}
                 message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
               >
-                {this.state.edamamresult.map(edamamresult => (
-                  <RecipeCard
-                    key={edamamresult.recipe.uri}
-                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
-                    label={edamamresult.recipe.label}
-                    uri={edamamresult.recipe.uri}
-                    shareurl={edamamresult.recipe.url}
-                    source={edamamresult.recipe.source}
-                    yield={edamamresult.recipe.yield}
-                    calories={edamamresult.recipe.calories}
-                    handleRecipeSave={this.saveRecipe}
-                    leftButton={'View'}
-                    rightButton={'Save'}
-                  />
-                ))}
+                {this.state.edamamresult.map(edamamresult => {
+                  console.log('hit bitch');
+                  return (
+                    <RecipeCard
+                      key={edamamresult.recipe.uri}
+                      imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                      label={edamamresult.recipe.label}
+                      uri={edamamresult.recipe.uri}
+                      shareurl={edamamresult.recipe.url}
+                      source={edamamresult.recipe.source}
+                      yield={edamamresult.recipe.yield}
+                      calories={edamamresult.recipe.calories}
+                      handleRecipeSave={this.saveRecipe}
+                      leftButton={'View'}
+                      rightButton={'Save'}
+                    />
+                  );
+                })}
               </RecipeCardWrapper>
               <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>

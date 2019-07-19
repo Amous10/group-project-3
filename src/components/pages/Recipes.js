@@ -5,9 +5,9 @@ import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
 import Jumbotron from '../Jumbotron';
-// import Navbar from '../Nav';
-import CardWrapper from '../CardWrapper';
-import Card from '../Card';
+
+import RecipeCardWrapper from '../RecipeCardWrapper';
+import RecipeCard from '../RecipeCard';
 
 class Recipes extends Component {
   state = {
@@ -58,23 +58,24 @@ class Recipes extends Component {
         <Container>
           <Row>
             <Col>
-              <CardWrapper count={this.state.result.length} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved books!' : null}>
+              <RecipeCardWrapper count={this.state.result.length} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved books!' : null}>
                 {this.state.result.map(result => (
-                  <Card
-                    key={result._id}
-                    url={result.image ? result.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
-                    name={result.title}
-                    author={result.authors}
-                    infoLink={result.link}
-                    desc={result.description ? result.description : 'No description'}
-                    id={result._id}
-                    handleRecipeDelete={this.deleteRecipe}
+                  <RecipeCard
+                    key={result.recipe.uri}
+                    imgurl={result.recipe.image ? result.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    label={result.recipe.label}
+                    uri={result.recipe.uri}
+                    shareurl={result.recipe.url}
+                    source={result.recipe.source}
+                    yield={result.recipe.yield}
+                    calories={result.recipe.calories}
+                    handleRecipeSave={this.saveRecipe}
                     leftButton={'View'}
                     rightButton={'Delete'}
                   />
                 ))}
-              </CardWrapper>
-              <Alert modalMessage={'Recipe deleted!'} />
+              </RecipeCardWrapper>
+              <Alert modalMessage={'Recipe Removed From Your Profile!'} />
             </Col>
           </Row>
         </Container>

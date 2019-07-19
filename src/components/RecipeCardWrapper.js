@@ -42,20 +42,6 @@ const RecipeCardWrapper = props => {
       {/* </Grid> */}
       {/* </Grid> */}
     </Grid>
-
-    // <div className={classes.root}>
-    //   <div className="col 3">
-    //     <div className="card">
-    //       <div className="card-content black-text">
-    //         <span className="card-title">
-    //           {props.count} {props.title}
-    //         </span>
-    //         <h5 className="center-align">{props.message}</h5>
-    //         <div className="row">{props.children}</div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
