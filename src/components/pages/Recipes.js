@@ -39,10 +39,8 @@ class Recipes extends Component {
 
         
         const recipeToRemove = state.result.find(recipe => {
-          console.log("recipeid", recipe.id);
-          console.log("recipe_id", recipe._id);
-          console.log("card id", thisCardsId);
-          return recipe.id === thisCardsId}
+          
+          return recipe.uri === thisCardsId}
           );
         
         // find the index of that recipe in the result array
