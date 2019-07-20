@@ -119,10 +119,21 @@ class Home extends Component {
         API.saveRecipe(newRecipe).then(() => {
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.edamamresult.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.edamamresult.find(recipe => 
+              {
+                return recipe.recipe.image === newRecipe.image;
+             
+            });
+            
+            
+            
+            console.log("recipeToRemove", recipeToRemove);
+             console.log ("newRecipe", newRecipe);
+             console.log("id of recipe", state.edamamresult);
             // find the index of that recipe in the result array
             const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
-            // then delete that one item
+            console.log("indext to remove", indexofRecipeToRemove);
+           // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
 
             // update the state

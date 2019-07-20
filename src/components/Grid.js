@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import RecipeCard from './RecipeCard';
 import RecipeCardWrapper from './RecipeCardWrapper';
-
+import RecipeCardDetail from './RecipeCardDetail';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1

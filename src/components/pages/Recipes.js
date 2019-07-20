@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
 import Container from '../Container';
+import {Link} from "react-router-dom";
 import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
@@ -34,9 +35,16 @@ class Recipes extends Component {
         // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe's id
 
         const recipeToRemove = state.result.find(recipe => {
+<<<<<<< HEAD
           return recipe._id === thisCardsId;
         });
 
+=======
+          
+          return recipe.uri === thisCardsId}
+          );
+        
+>>>>>>> 4bcf4bb45cfda80d955bbf6b4ee9ff78a0b17e24
         // find the index of that recipe in the result array
         const indexofRecipeToRemove = state.result.indexOf(recipeToRemove);
         // then delete that one item
@@ -59,8 +67,9 @@ class Recipes extends Component {
         <Container>
           <Row>
             <Col>
-              <RecipeCardWrapper count={this.state.result.length} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved recipes!' : null}>
+              <RecipeCardWrapper count={this.state.result.length} key={this.state.result._id} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved recipes!' : null}>
                 {this.state.result.map(result => {
+<<<<<<< HEAD
                   return (
                     <RecipeCard
                       key={result._id}
@@ -77,6 +86,31 @@ class Recipes extends Component {
                     />
                   );
                 })}
+=======
+                 // console.log('hit bitches', result);
+                   
+                 return ( 
+                 
+                 <Link to={"/api/recipesdetail/" + result._id}>                 
+                
+                 <RecipeCard
+                    
+                  key={result._id} 
+                 
+                  imgurl={result.image ? result.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    label={result.label}
+                    uri={result.uri}
+                    shareurl={result.url}
+                    source={result.source}
+                    yield={result.yield}
+                    calories={result.calories}
+                    handleRecipeDelete={this.deleteRecipe}
+                    leftButton={'View'}
+                    rightButton={'Delete'} 
+                  />
+                  </Link>
+                )})}
+>>>>>>> 4bcf4bb45cfda80d955bbf6b4ee9ff78a0b17e24
               </RecipeCardWrapper>
               <Alert modalMessage={'Recipe deleted!'} />
             </Col>

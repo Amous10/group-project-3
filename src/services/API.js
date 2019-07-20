@@ -10,6 +10,11 @@ export default {
     console.log('getting axios recipes', userid);
     return axios.get('/api/recipes/' + userid);
   },
+
+  getRecipesD: function(id) {
+    console.log("getting details recipes", id);
+     return axios.get('/api/recipesdetail/' + id);
+   },
   //Deletes the book with the given id
   deleteRecipe: function(id) {
     return axios.delete('/api/recipes/' + id);
