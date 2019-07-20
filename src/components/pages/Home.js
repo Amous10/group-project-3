@@ -98,14 +98,10 @@ class Home extends Component {
       .filter(result => result.recipe.uri === thisCardsId)
       // then map over recipe and create a new object to send to the database
       .map(recipe => {
-        console.log('recipe: ', recipe);
-        console.log('this.props.userid: ', this.props.userid);
-        console.log('this.props: ', this.props);
-       
-
         let Uri = recipe.recipe.uri;
-        Uri = Uri.split("recipe_");
-        Uri = Uri[1]+ this.props.userid;
+        Uri = Uri.split('recipe_');
+        Uri = Uri[1] + this.props.userid;
+
         const newRecipe = {
           userId: this.props.userid,
           uri: Uri,
@@ -123,12 +119,23 @@ class Home extends Component {
         API.saveRecipe(newRecipe).then(() => {
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.edamamresult.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.edamamresult.find(recipe => 
+              {
+                return recipe.recipe.image === newRecipe.image;
+             
+            });
+            
+            
+            
+            console.log("recipeToRemove", recipeToRemove);
+             console.log ("newRecipe", newRecipe);
+             console.log("id of recipe", state.edamamresult);
             // find the index of that recipe in the result array
             const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
-            // then delete that one item
+            console.log("indext to remove", indexofRecipeToRemove);
+           // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
-            console.log('state.result: ', state.edamamresult);
+
             // update the state
             return {
               edamamresult: state.edamamresult
@@ -193,21 +200,24 @@ class Home extends Component {
                 title={'Results'}
                 message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
               >
-                {this.state.edamamresult.map(edamamresult => (
-                  <RecipeCard
-                    key={edamamresult.recipe.uri}
-                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
-                    label={edamamresult.recipe.label}
-                    uri={edamamresult.recipe.uri}
-                    shareurl={edamamresult.recipe.url}
-                    source={edamamresult.recipe.source}
-                    yield={edamamresult.recipe.yield}
-                    calories={edamamresult.recipe.calories}
-                    handleRecipeSave={this.saveRecipe}
-                    leftButton={'View'}
-                    rightButton={'Save'}
-                  />
-                ))}
+                {this.state.edamamresult.map(edamamresult => {
+                  console.log('hit bitch');
+                  return (
+                    <RecipeCard
+                      key={edamamresult.recipe.uri}
+                      imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                      label={edamamresult.recipe.label}
+                      uri={edamamresult.recipe.uri}
+                      shareurl={edamamresult.recipe.url}
+                      source={edamamresult.recipe.source}
+                      yield={edamamresult.recipe.yield}
+                      calories={edamamresult.recipe.calories}
+                      handleRecipeSave={this.saveRecipe}
+                      leftButton={'View'}
+                      rightButton={'Save'}
+                    />
+                  );
+                })}
               </RecipeCardWrapper>
               <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
