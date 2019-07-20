@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require('../models');
 
 module.exports = {
   findAll: function(req, res) {
@@ -8,24 +8,18 @@ module.exports = {
   },
 
   findOne: function(req, res) {
-
-     console.log("inside findone", req.params.id);
+    console.log('inside findone', req.params.id);
     db.Recipe.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  },
 
-
-  ,
   create: function(req, res) {
-<<<<<<< HEAD
-=======
     //TODO Add userid to relate the tables.
     /*     console.log('Hitting the create Recipe in controller');
     console.log('req.body: ', JSON.stringify(req.body));
     console.log('req.user._id: ', req.user._id); */
-    console.log("Inside create recipe save");
->>>>>>> 4bcf4bb45cfda80d955bbf6b4ee9ff78a0b17e24
+    console.log('Inside create recipe save');
     db.Recipe.findOneAndUpdate(
       { userId: req.body.userId, uri: req.body.uri },
       {
