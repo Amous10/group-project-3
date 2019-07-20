@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
 import Container from '../Container';
+import {Link} from "react-router-dom";
 import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
@@ -65,15 +66,19 @@ class Recipes extends Component {
         <Container>
           <Row>
             <Col>
-              <RecipeCardWrapper count={this.state.result.length} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved recipes!' : null}>
+              <RecipeCardWrapper count={this.state.result.length} key={this.state.result._id} title={'Saved Recipes'} message={this.state.result === 0 ? 'No saved recipes!' : null}>
                 {this.state.result.map(result => {
                  // console.log('hit bitches', result);
-                  return ( 
-                                  
+                   
+                 return ( 
+                 
+                 <Link to={"/api/recipesdetail/" + result._id}>                 
+                
                  <RecipeCard
                     
-                 key={result._id}
-                    imgurl={result.image ? result.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                  key={result._id} 
+                 
+                  imgurl={result.image ? result.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
                     label={result.label}
                     uri={result.uri}
                     shareurl={result.url}
@@ -84,6 +89,7 @@ class Recipes extends Component {
                     leftButton={'View'}
                     rightButton={'Delete'} 
                   />
+                  </Link>
                 )})}
               </RecipeCardWrapper>
               <Alert modalMessage={'Recipe deleted!'} />
