@@ -7,7 +7,7 @@ export default {
   },
   // Gets all recipes
   getRecipes: function(userid) {
-   console.log("getting axios recipes", userid);
+    console.log('getting axios recipes', userid);
     return axios.get('/api/recipes/' + userid);
   },
 
