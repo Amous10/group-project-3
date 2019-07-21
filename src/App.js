@@ -79,7 +79,7 @@ class App extends Component {
             <Route exact path="/signup" render={() => <Signup />} />
             <Route exact path="/api/recipes" render ={() => <Recipes userid={this.state.userid} />}/> 
             <Route exact path="/api/recipesdetail/:id" component={RecipesD} /> 
-            
+            <Route exact path="/homedetail/:id" component={RecipesD} /> 
             {/* <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} /> */}
             {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
