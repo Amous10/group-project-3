@@ -47,7 +47,9 @@ class Home extends Component {
               dbFoodsIds.push(recipe.recipeId);
             });
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
+            const filteredFoods = recipes.data.filter(
+              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
+            );
             console.log('filtderedFoods: ', filteredFoods);
 
             //  set new state for result
@@ -101,11 +103,10 @@ class Home extends Component {
         console.log('recipe: ', recipe);
         console.log('this.props.userid: ', this.props.userid);
         console.log('this.props: ', this.props);
-       
 
         let Uri = recipe.recipe.uri;
-        Uri = Uri.split("recipe_");
-        
+        Uri = Uri.split('recipe_');
+
         const newRecipe = {
           userId: this.props.userid,
           uri: Uri[1],
@@ -123,9 +124,13 @@ class Home extends Component {
         API.saveRecipe(newRecipe).then(() => {
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.edamamresult.find(recipe => recipe.id === newRecipe.recipeId);
+            const recipeToRemove = state.edamamresult.find(
+              recipe => recipe.id === newRecipe.recipeId
+            );
             // find the index of that recipe in the result array
-            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
+            const indexofRecipeToRemove = state.edamamresult.indexOf(
+              recipeToRemove
+            );
             // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
             console.log('state.result: ', state.edamamresult);
@@ -181,7 +186,11 @@ class Home extends Component {
         <Image />
 
         <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+          <SearchFood
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
         </Jumbotron>
         {/* <TodoList /> */}
 
@@ -191,12 +200,20 @@ class Home extends Component {
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
-                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={
+                  this.state.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
               >
                 {this.state.edamamresult.map(edamamresult => (
                   <RecipeCard
                     key={edamamresult.recipe.uri}
-                    imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                    imgurl={
+                      edamamresult.recipe.image
+                        ? edamamresult.recipe.image
+                        : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                    }
                     label={edamamresult.recipe.label}
                     uri={edamamresult.recipe.uri}
                     shareurl={edamamresult.recipe.url}
