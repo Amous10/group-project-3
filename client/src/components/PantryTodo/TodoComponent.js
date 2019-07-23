@@ -66,7 +66,9 @@ class TodoComponent extends React.Component {
   // }
   componentDidMount() {
     try {
-      this.setState({ tasks: this.props.tasks });
+      if (this.props.tasks) {
+        this.setState({ tasks: this.props.tasks });
+      }
       // console.log('this.props.tasks on Update: ', this.props.tasks);
     } catch (e) {
       console.log('error');
@@ -83,6 +85,11 @@ class TodoComponent extends React.Component {
     this.setState({ tasks: tasks, newTask: '' });
   };
 
+  keyPress = e => {
+    if (e.key === 'Enter') {
+      this.addTask();
+    }
+  };
   selectedFoods = () => {
     // let { tasks, queryString } = this.state;
     let { tasks } = this.state;
@@ -117,7 +124,7 @@ class TodoComponent extends React.Component {
     return (
       <div id="main" style={styles.main}>
         <header style={styles.header}>
-          <TextField label="Add new food" value={newTask} onChange={this.onTextUpdate} />
+          <TextField label="Add new food" value={newTask} onChange={this.onTextUpdate} onKeyPress={this.keyPress} />
           <Button variant="raised" color="primary" disabled={!newTask} onClick={this.addTask}>
             Add
           </Button>
