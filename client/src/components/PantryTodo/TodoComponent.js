@@ -74,7 +74,6 @@ class TodoComponent extends React.Component {
       console.log('error');
     }
   }
-
   onTextUpdate = e => {
     this.setState({ newTask: e.target.value });
   };
