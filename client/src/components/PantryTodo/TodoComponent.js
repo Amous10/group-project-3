@@ -66,13 +66,14 @@ class TodoComponent extends React.Component {
   // }
   componentDidMount() {
     try {
-      this.setState({ tasks: this.props.tasks });
+      if (this.props.tasks) {
+        this.setState({ tasks: this.props.tasks });
+      }
       // console.log('this.props.tasks on Update: ', this.props.tasks);
     } catch (e) {
       console.log('error');
     }
   }
-
   onTextUpdate = e => {
     this.setState({ newTask: e.target.value });
   };
@@ -83,6 +84,11 @@ class TodoComponent extends React.Component {
     this.setState({ tasks: tasks, newTask: '' });
   };
 
+  keyPress = e => {
+    if (e.key === 'Enter') {
+      this.addTask();
+    }
+  };
   selectedFoods = () => {
     // let { tasks, queryString } = this.state;
     let { tasks } = this.state;
@@ -117,8 +123,18 @@ class TodoComponent extends React.Component {
     return (
       <div id="main" style={styles.main}>
         <header style={styles.header}>
-          <TextField label="Add new food" value={newTask} onChange={this.onTextUpdate} />
-          <Button variant="raised" color="primary" disabled={!newTask} onClick={this.addTask}>
+          <TextField
+            label="Add new food"
+            value={newTask}
+            onChange={this.onTextUpdate}
+            onKeyPress={this.keyPress}
+          />
+          <Button
+            variant="raised"
+            color="primary"
+            disabled={!newTask}
+            onClick={this.addTask}
+          >
             Add
           </Button>
         </header>
@@ -129,12 +145,21 @@ class TodoComponent extends React.Component {
                 <div key={index} style={styles.todo}>
                   {index > 0 ? <Divider style={styles.divider} /> : ''}
                   <FormControlLabel
-                    control={<Switch color="primary" checked={!task.done} onChange={() => this.toggle(task)} />}
+                    control={
+                      <Switch
+                        color="primary"
+                        checked={!task.done}
+                        onChange={() => this.toggle(task)}
+                      />
+                    }
                     label={task.text}
                     style={task.done ? styles.done : styles.label}
                   />
                   <Tooltip title="Delete food" placement="top">
-                    <IconButton aria-label="delete" onClick={() => this.deleteTask(task)}>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => this.deleteTask(task)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Tooltip>
