@@ -49,12 +49,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function RecipeCard(props) {
- 
+
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
+
+
       <Link to={props.link + props.details }  >
+
         <CardHeader
           className={classes.cardheader}
           avatar={
@@ -63,7 +66,7 @@ export default function RecipeCard(props) {
             </Avatar>
           }
           title={props.label}
-        
+      
           subheader={props.source}
         />
 
@@ -80,6 +83,7 @@ export default function RecipeCard(props) {
           </Typography>
                  
          
+
           <Typography variant="body2" color="textSecondary" component="p">
             Calories: {Number(props.calories).toFixed(0)}
           </Typography>
