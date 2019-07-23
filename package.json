@@ -30,7 +30,7 @@
     "build": "cd client && npm run build",
     "install": "cd client && npm install",
     "seed": "node scripts/seedDB.js",
-    "start:all": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "concurrently nodemon \"nodemon --ignore ./client/\" \"npm run client\"",
     "start:prod": "node ./server/server.js",
     "heroku-postbuild": "npm run build"
