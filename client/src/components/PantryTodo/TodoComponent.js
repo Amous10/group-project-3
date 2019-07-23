@@ -52,9 +52,28 @@ const styles = {
 class TodoComponent extends React.Component {
   state = {
     tasks: [],
-    newTask: ''
+    newTask: '',
+    queryString: []
   };
 
+  // componentDidUpdate() {
+  //   try {
+  //     // this.setState({ tasks: this.props.tasks });
+  //     // console.log('this.props.tasks on Update: ', this.props.tasks);
+  //   } catch (e) {
+  //     console.log('error');
+  //   }
+  // }
+  componentDidMount() {
+    try {
+      if (this.props.tasks) {
+        this.setState({ tasks: this.props.tasks });
+      }
+      // console.log('this.props.tasks on Update: ', this.props.tasks);
+    } catch (e) {
+      console.log('error');
+    }
+  }
   onTextUpdate = e => {
     this.setState({ newTask: e.target.value });
   };
@@ -65,6 +84,26 @@ class TodoComponent extends React.Component {
     this.setState({ tasks: tasks, newTask: '' });
   };
 
+  keyPress = e => {
+    if (e.key === 'Enter') {
+      this.addTask();
+    }
+  };
+  selectedFoods = () => {
+    // let { tasks, queryString } = this.state;
+    let { tasks } = this.state;
+    let query = tasks
+      .filter(items => items.done)
+      .map(item => item.text)
+      .toString();
+
+    // console.log('String to Query', query);
+    this.props.setTasks(tasks);
+
+    this.props.searchRecipes(query);
+    // this.setState({ queryString: '' });
+  };
+
   deleteTask = task => {
     let { tasks } = this.state;
     tasks.splice(tasks.indexOf(task), 1);
@@ -73,6 +112,7 @@ class TodoComponent extends React.Component {
 
   toggle = task => {
     let { tasks } = this.state;
+
     tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
     this.setState({ tasks: tasks, newTask: '' });
   };
@@ -87,6 +127,7 @@ class TodoComponent extends React.Component {
             label="Add new food"
             value={newTask}
             onChange={this.onTextUpdate}
+            onKeyPress={this.keyPress}
           />
           <Button
             variant="raised"
@@ -127,6 +168,7 @@ class TodoComponent extends React.Component {
             </FormGroup>
           </Card>
         )}
+        <Button onClick={this.selectedFoods}>Search</Button>
       </div>
     );
   }
