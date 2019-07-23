@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8080;
 const user = require('../routes/user');
 const apiRoutes = require('../routes');
 
+app.use(express.static('client/build'));
 // MIDDLEWARE
 app.use(morgan('dev'));
 app.use(
@@ -44,13 +45,6 @@ app.use('/user', user);
 // });
 
 app.use(apiRoutes);
-
-// serves bundled react files in prod
-app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../client/build/index.html'), err => {
-		if (err) res.status(500).send(err);
-	});
-});
 
 // Starting Server
 app.listen(PORT, () => {
