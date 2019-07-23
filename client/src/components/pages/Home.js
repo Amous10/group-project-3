@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
+import { Redirect } from 'react-router-dom';
 import Image from '../Image';
 import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
+import RecipeCardHome from '../RecipeCardHome';
 import SearchFood from '../SearchFood';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
