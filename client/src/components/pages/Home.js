@@ -66,12 +66,7 @@ class Home extends Component {
         if (recipes.data.length > 0) {
           // stop the UI spinner
           this.setState({ loading: false });
-<<<<<<< HEAD
-          console.log("recipes data: ", recipes.data);
-
-=======
           console.log('recipes data: ', recipes.data);
->>>>>>> 6d3c08308e5cd668274b5b0e9e4f1a7684f05c35
           // make a call to database and retrieve all recipes stored
           API.getRecipes({}).then(dbFoods => {
             // empty array to hold all of the recipes
@@ -81,16 +76,8 @@ class Home extends Component {
               dbFoodsIds.push(recipe.recipeId);
             });
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-<<<<<<< HEAD
-            const filteredFoods = recipes.data.filter(
-              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
-            );
-            console.log("filtderedFoods: ", filteredFoods);
-
-=======
             const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
             console.log('filtderedFoods: ', filteredFoods);
->>>>>>> 6d3c08308e5cd668274b5b0e9e4f1a7684f05c35
             //  set new state for result
             this.setState({
               edamamresult: filteredFoods
@@ -154,12 +141,7 @@ class Home extends Component {
   };
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
-<<<<<<< HEAD
-    const thisCardsId = e.currentTarget.getAttribute("data-id");
-
-=======
     const thisCardsId = e.currentTarget.getAttribute('data-id');
->>>>>>> 6d3c08308e5cd668274b5b0e9e4f1a7684f05c35
     const newSavedRecipe = this.state.edamamresult;
     // console.log('this.state.edamamresult: ', this.state.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
@@ -259,20 +241,8 @@ class Home extends Component {
        
         {/* <Navbar /> */}
         <Image />
-<<<<<<< HEAD
-
-      
-
-        <Jumbotron>
-          <SearchFood
-            value={this.state.searchfood}
-            handleInputChangeFood={this.handleInputChangeFood}
-            handleFormSubmitFood={this.handleFormSubmitFood}
-          />
-=======
         <Jumbotron>
           <Searchbar value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
->>>>>>> 6d3c08308e5cd668274b5b0e9e4f1a7684f05c35
         </Jumbotron>
         {/* <TodoList /> */}
         {/* <PantryItems />
