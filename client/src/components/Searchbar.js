@@ -13,7 +13,7 @@ const Searchbar = props => {
           <textarea
             id="textarea1"
             className="materialize-textarea center-align"
-            onChange={props.handleInputChange}
+            onChange={props.handleInputChangeFood}
             value={props.value}
             name="search"
             type="text"
@@ -22,7 +22,7 @@ const Searchbar = props => {
           />
           <a
             className="indigo darken-4 waves-effect waves-light btn"
-            onClick={props.handleFormSubmit}
+            onClick={props.handleFormSubmitFood}
           >
             search
           </a>

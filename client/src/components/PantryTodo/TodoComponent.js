@@ -83,6 +83,11 @@ class TodoComponent extends React.Component {
     this.setState({ tasks: tasks, newTask: '' });
   };
 
+  // selectedFoods = () => {
+  //   let { queryString } = this.state;
+  //   String = selectedFoods.toString();
+  // };
+
   render() {
     const { tasks, newTask } = this.state;
 
@@ -134,6 +139,7 @@ class TodoComponent extends React.Component {
             </FormGroup>
           </Card>
         )}
+        <Button onClick={this.selectedFoods}>Search</Button>
       </div>
     );
   }

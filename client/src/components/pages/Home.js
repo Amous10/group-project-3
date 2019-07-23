@@ -8,7 +8,7 @@ import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
 import RecipeCardHome from '../RecipeCardHome';
-import SearchFood from '../SearchFood';
+// import SearchFood from '../SearchFood';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 // import { Modal, Button } from 'react-materialize';
@@ -79,7 +79,9 @@ class Home extends Component {
               dbFoodsIds.push(recipe.recipeId);
             });
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
+            const filteredFoods = recipes.data.filter(
+              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
+            );
             console.log('filtderedFoods: ', filteredFoods);
 
             //  set new state for result
@@ -109,7 +111,9 @@ class Home extends Component {
 
     const selectedCard = this.state.edamamresult;
 
-    const resultCard = selectedCard.filter(result => result.recipe.uri === name);
+    const resultCard = selectedCard.filter(
+      result => result.recipe.uri === name
+    );
     if (resultCard.length === 0) {
       this.setState({ redirect: false });
     }
@@ -146,9 +150,9 @@ class Home extends Component {
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
     console.log('this.state.searchfood', this.state.searchfood);
-    // this.setState({
-    //   searchfood: ""
-    // });
+    this.setState({
+      searchfood: ''
+    });
   };
 
   saveRecipe = e => {
@@ -191,7 +195,9 @@ class Home extends Component {
             console.log('newRecipe', newRecipe);
             console.log('id of recipe', state.edamamresult);
             // find the index of that recipe in the result array
-            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
+            const indexofRecipeToRemove = state.edamamresult.indexOf(
+              recipeToRemove
+            );
             console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
@@ -216,7 +222,11 @@ class Home extends Component {
           push
           to={{
             pathname: '/homedetail/2',
-            state: { result: this.state.resultcard, edamamresult: this.state.edamamresult, redirect: false }
+            state: {
+              result: this.state.resultcard,
+              edamamresult: this.state.edamamresult,
+              redirect: false
+            }
           }}
         />
       );
@@ -229,9 +239,7 @@ class Home extends Component {
         <div>
           {/* <Navbar /> */}
           <Image />
-          <Jumbotron>
-            <Searchbar />
-          </Jumbotron>
+          <Jumbotron>{/* <Searchbar /> */}</Jumbotron>
           <div className="row">
             <div className="col l12 center align">
               <div className="preloader-wrapper big active">
@@ -259,7 +267,11 @@ class Home extends Component {
         <Image />
 
         <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+          <Searchbar
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
         </Jumbotron>
         {/* <TodoList /> */}
         {/* <PantryItems />
@@ -275,14 +287,22 @@ class Home extends Component {
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
-                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={
+                  this.state.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
               >
                 {this.state.edamamresult.map(edamamresult => {
                   return (
                     <RecipeCardHome
                       RecordClick={this.RecordClick}
                       key={edamamresult.recipe.uri}
-                      imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                      imgurl={
+                        edamamresult.recipe.image
+                          ? edamamresult.recipe.image
+                          : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                      }
                       label={edamamresult.recipe.label}
                       uri={edamamresult.recipe.uri}
                       shareurl={edamamresult.recipe.url}
