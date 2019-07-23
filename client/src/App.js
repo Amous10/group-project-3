@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -8,6 +9,7 @@ import {
   Link
 } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+
 // components
 import Signup from './components/Signup.js';
 import LoginForm from './components/Login.js';

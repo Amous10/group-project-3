@@ -52,11 +52,36 @@ const styles = {
 class TodoComponent extends React.Component {
   state = {
     tasks: [],
-    newTask: ''
+    newTask: '',
+    queryString: []
   };
 
+  // componentDidUpdate() {
+  //   try {
+  //     // this.setState({ tasks: this.props.tasks });
+  //     // console.log('this.props.tasks on Update: ', this.props.tasks);
+  //   } catch (e) {
+  //     console.log('error');
+  //   }
+  // }
+  componentDidMount() {
+    try {
+      if (this.props.tasks) {
+        this.setState({ tasks: this.props.tasks });
+      }
+      // console.log('this.props.tasks on Update: ', this.props.tasks);
+    } catch (e) {
+      console.log('error');
+    }
+  }
   onTextUpdate = e => {
     this.setState({ newTask: e.target.value });
+  };
+
+  addTask = () => {
+    let { tasks, newTask } = this.state;
+    tasks.push({ text: newTask, done: false });
+    this.setState({ tasks: tasks, newTask: '' });
   };
 
   keyPress = e => {
@@ -64,11 +89,19 @@ class TodoComponent extends React.Component {
       this.addTask();
     }
   };
+  selectedFoods = () => {
+    // let { tasks, queryString } = this.state;
+    let { tasks } = this.state;
+    let query = tasks
+      .filter(items => items.done)
+      .map(item => item.text)
+      .toString();
 
-  addTask = () => {
-    let { tasks, newTask } = this.state;
-    tasks.push({ text: newTask, done: false });
-    this.setState({ tasks: tasks, newTask: '' });
+    // console.log('String to Query', query);
+    this.props.setTasks(tasks);
+
+    this.props.searchRecipes(query);
+    // this.setState({ queryString: '' });
   };
 
   deleteTask = task => {
@@ -79,14 +112,10 @@ class TodoComponent extends React.Component {
 
   toggle = task => {
     let { tasks } = this.state;
+
     tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
     this.setState({ tasks: tasks, newTask: '' });
   };
-
-  // selectedFoods = () => {
-  //   let { queryString } = this.state;
-  //   String = selectedFoods.toString();
-  // };
 
   render() {
     const { tasks, newTask } = this.state;
