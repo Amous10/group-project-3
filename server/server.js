@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8080;
 const user = require('../routes/user');
 const apiRoutes = require('../routes');
 
+app.use(express.static('client/build'));
 // MIDDLEWARE
 app.use(morgan('dev'));
 app.use(

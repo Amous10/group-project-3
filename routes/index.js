@@ -6,9 +6,10 @@ const apiRoutes = require('./api');
 router.use('/api', apiRoutes);
 console.log('--router.use("/api", apiRoutes);--');
 
-// If no API routes are hit, send the React app
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+// serves bundled react files in prod
+router.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'), err => {
+    if (err) res.status(500).send(err);
+  });
 });
-
 module.exports = router;
