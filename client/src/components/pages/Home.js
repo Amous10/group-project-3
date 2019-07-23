@@ -9,12 +9,26 @@ import Searchbar from '../Searchbar';
 import SearchFood from '../SearchFood';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import { Modal, Button } from 'react-materialize';
+// import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
+
+import TodoComponent from '../PantryTodo/TodoComponent';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
+
 // import ToDo from '../ToDo/ToDo';
-import TodoList from '../TodoList/TodoList';
-import Grid from '@material-ui/core/Grid';
-import SpacingGrid from '../Grid';
+// import PantryItems from '../PantryItems';
+// import PantryMain from '../PantryList/PantryMain';
+// import TodoList from '../TodoList/TodoList';
+// import Grid from '@material-ui/core/Grid';
+// import SpacingGrid from '../Grid';
+
+const pantryTheme = createMuiTheme({
+  palette: {
+    primary: green,
+    type: 'light' // Switching the dark mode on is a single property value change.
+  }
+});
 
 class Home extends Component {
   state = {
@@ -47,7 +61,9 @@ class Home extends Component {
               dbFoodsIds.push(recipe.recipeId);
             });
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
+            const filteredFoods = recipes.data.filter(
+              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
+            );
             console.log('filtderedFoods: ', filteredFoods);
 
             //  set new state for result
@@ -119,21 +135,19 @@ class Home extends Component {
         API.saveRecipe(newRecipe).then(() => {
           this.setState(state => {
             // find which recipe to remove from state by finding the recipe in the result array that matches the clicked recipe
-            const recipeToRemove = state.edamamresult.find(recipe => 
-              {
-                return recipe.recipe.image === newRecipe.image;
-             
+            const recipeToRemove = state.edamamresult.find(recipe => {
+              return recipe.recipe.image === newRecipe.image;
             });
-            
-            
-            
-            console.log("recipeToRemove", recipeToRemove);
-             console.log ("newRecipe", newRecipe);
-             console.log("id of recipe", state.edamamresult);
+
+            console.log('recipeToRemove', recipeToRemove);
+            console.log('newRecipe', newRecipe);
+            console.log('id of recipe', state.edamamresult);
             // find the index of that recipe in the result array
-            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
-            console.log("indext to remove", indexofRecipeToRemove);
-           // then delete that one item
+            const indexofRecipeToRemove = state.edamamresult.indexOf(
+              recipeToRemove
+            );
+            console.log('indext to remove', indexofRecipeToRemove);
+            // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
 
             // update the state
@@ -188,9 +202,19 @@ class Home extends Component {
         <Image />
 
         <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+          <SearchFood
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
         </Jumbotron>
         {/* <TodoList /> */}
+        {/* <PantryItems />
+        <PantryMain /> */}
+
+        <MuiThemeProvider theme={pantryTheme}>
+          <TodoComponent />
+        </MuiThemeProvider>
 
         <Container>
           <Row>
@@ -198,14 +222,21 @@ class Home extends Component {
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
-                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
+                message={
+                  this.state.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
               >
                 {this.state.edamamresult.map(edamamresult => {
-                  console.log('hit bitch');
                   return (
                     <RecipeCard
                       key={edamamresult.recipe.uri}
-                      imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                      imgurl={
+                        edamamresult.recipe.image
+                          ? edamamresult.recipe.image
+                          : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                      }
                       label={edamamresult.recipe.label}
                       uri={edamamresult.recipe.uri}
                       shareurl={edamamresult.recipe.url}
