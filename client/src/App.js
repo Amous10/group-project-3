@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-import { BrowserRouter as Router, Route, Switch, withRouter, Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
-=======
 
 import { BrowserRouter as Router, Route, Switch, withRouter, Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
 // components
 import Signup from './components/Signup.js';
 import LoginForm from './components/Login.js';
@@ -84,10 +79,6 @@ class App extends Component {
             {/* <Route exact path="/" component={Home} /> */}
             <Route exact path="/" render={() => <Home searchRecipe={this.searchRecipe} location={this.props.location} userid={this.state.userid} />} />
 
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
             <Route exact path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <Signup />} />
             <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} />

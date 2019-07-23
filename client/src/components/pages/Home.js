@@ -97,7 +97,6 @@ class Home extends Component {
         });
       });
   };
-55e302008eefee34058a03b8549533f5
   RecordClick = name => {
     console.log('get click', name);
     // preventDefault();
@@ -108,7 +107,6 @@ class Home extends Component {
       this.setState({ redirect: false });
     }
     console.log('selected Card', resultCard[0]);
-
     const ChosenRecipe = {
       userId: 0,
       uri: 0,
@@ -205,7 +203,6 @@ class Home extends Component {
           }}
         />
       );
-
     if (this.state.error) {
       return <div>{this.state.error}</div>;
     }

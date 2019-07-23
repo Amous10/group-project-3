@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,10 +22,6 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 0,
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
     paddingTop: '56.25%' // 16:9
   },
   avatar: {
@@ -51,26 +43,14 @@ const useStyles = makeStyles(theme => ({
   },
   iconshare: {
     color: '#69cc02'
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
   }
 }));
 
 export default function RecipeCardHome(props) {
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
       <CardHeader
         className={classes.cardheader}
         avatar={
@@ -97,10 +77,6 @@ export default function RecipeCardHome(props) {
       <CardActions disableSpacing className={classes.cardfooter}>
         <IconButton data-id={props.uri} onClick={props.handleRecipeSave || props.handleRecipeDelete} aria-label="Add to Favorites">
           {props.handleRecipeSave ? <FavoriteIcon className={classes.iconheart} /> : <DeleteForeverIcon className={classes.icontrash} />}
-<<<<<<< HEAD
-=======
-
->>>>>>> bbefd94a55e302008eefee34058a03b8549533f5
         </IconButton>
         <IconButton aria-label="Share">
           <a href={props.shareurl} target="_blank">
