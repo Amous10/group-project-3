@@ -9,12 +9,26 @@ import Searchbar from '../Searchbar';
 import SearchFood from '../SearchFood';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import { Modal, Button } from 'react-materialize';
+// import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
+
+import TodoComponent from '../PantryTodo/TodoComponent';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
+
 // import ToDo from '../ToDo/ToDo';
-import TodoList from '../TodoList/TodoList';
-import Grid from '@material-ui/core/Grid';
-import SpacingGrid from '../Grid';
+// import PantryItems from '../PantryItems';
+// import PantryMain from '../PantryList/PantryMain';
+// import TodoList from '../TodoList/TodoList';
+// import Grid from '@material-ui/core/Grid';
+// import SpacingGrid from '../Grid';
+
+const pantryTheme = createMuiTheme({
+  palette: {
+    primary: green,
+    type: 'light' // Switching the dark mode on is a single property value change.
+  }
+});
 
 class Home extends Component {
   state = {
@@ -195,6 +209,12 @@ class Home extends Component {
           />
         </Jumbotron>
         {/* <TodoList /> */}
+        {/* <PantryItems />
+        <PantryMain /> */}
+
+        <MuiThemeProvider theme={pantryTheme}>
+          <TodoComponent />
+        </MuiThemeProvider>
 
         <Container>
           <Row>
@@ -209,7 +229,6 @@ class Home extends Component {
                 }
               >
                 {this.state.edamamresult.map(edamamresult => {
-                  console.log('hit bitch');
                   return (
                     <RecipeCard
                       key={edamamresult.recipe.uri}

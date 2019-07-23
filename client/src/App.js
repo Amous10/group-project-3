@@ -74,16 +74,28 @@ class App extends Component {
 
           <Switch>
             {/* <Route exact path="/" component={Home} /> */}
-            <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
-            <Route exact path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
+            <Route
+              exact
+              path="/"
+              render={() => <Home userid={this.state.userid} />}
+            />
+            <Route
+              exact
+              path="/login"
+              render={() => <LoginForm updateUser={this.updateUser} />}
+            />
             <Route exact path="/signup" render={() => <Signup />} />
-            <Route exact path="/api/recipes" render ={() => <Recipes userid={this.state.userid} />}/> 
-            <Route exact path="/api/recipesdetail/:id" component={RecipesD} /> 
-            
+            <Route
+              exact
+              path="/api/recipes"
+              render={() => <Recipes userid={this.state.userid} />}
+            />
+            <Route exact path="/api/recipesdetail/:id" component={RecipesD} />
+
             {/* <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} /> */}
             {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
-            {/* <Route component={NoMatch} /> */}
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>

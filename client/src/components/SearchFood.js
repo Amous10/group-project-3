@@ -17,10 +17,13 @@ const SearchFood = props => {
             value={props.value}
             name="search"
             type="text"
-            placeholder="FOOD,Apples, cheese, lettuce, chicken"
+            placeholder="Apples, cheese, lettuce, chicken"
             id="search"
           />
-          <a className="indigo darken-4 waves-effect waves-light btn" onClick={props.handleFormSubmitFood}>
+          <a
+            className="indigo darken-4 waves-effect waves-light btn"
+            onClick={props.handleFormSubmitFood}
+          >
             search
           </a>
         </div>
