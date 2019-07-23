@@ -8,7 +8,7 @@ import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
 import RecipeCardHome from '../RecipeCardHome';
-import SearchFood from '../SearchFood';
+// import SearchFood from '../SearchFood';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 // import { Modal, Button } from 'react-materialize';
@@ -39,14 +39,17 @@ class Home extends Component {
     searchfood: '',
     loading: false,
     redirect: false,
-    resultcard: []
+    resultcard: [],
+    tasks: []
   };
 
   componentDidMount() {
     try {
       this.setState({ edamamresult: this.props.location.state.edamamresult });
+
+      console.log('this.props.tasks: ', this.props.tasks);
     } catch (e) {
-      console.log('error');
+      console.log('error', e);
       //const {result} = this.props.location.state;
       //console.log("result ", result);
       //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
@@ -56,6 +59,12 @@ class Home extends Component {
   // componentDidUpdate() {
   //   this.setState({edamamresult: this.props.location.state.edamamresult });
   // }
+
+  setTasks = tasks => {
+    this.setState({ tasks: tasks });
+    console.log('this.TASKS: ', tasks);
+  };
+
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
@@ -146,9 +155,9 @@ class Home extends Component {
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
     console.log('this.state.searchfood', this.state.searchfood);
-    // this.setState({
-    //   searchfood: ""
-    // });
+    this.setState({
+      searchfood: ''
+    });
   };
 
   saveRecipe = e => {
@@ -259,14 +268,14 @@ class Home extends Component {
         <Image />
 
         <Jumbotron>
-          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+          <Searchbar value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
         </Jumbotron>
         {/* <TodoList /> */}
         {/* <PantryItems />
         <PantryMain /> */}
 
         <MuiThemeProvider theme={pantryTheme}>
-          <TodoComponent />
+          <TodoComponent searchRecipes={this.searchRecipes} setTasks={this.setTasks} tasks={this.state.tasks} />
         </MuiThemeProvider>
 
         <Container>

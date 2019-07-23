@@ -52,8 +52,26 @@ const styles = {
 class TodoComponent extends React.Component {
   state = {
     tasks: [],
-    newTask: ''
+    newTask: '',
+    queryString: []
   };
+
+  // componentDidUpdate() {
+  //   try {
+  //     // this.setState({ tasks: this.props.tasks });
+  //     // console.log('this.props.tasks on Update: ', this.props.tasks);
+  //   } catch (e) {
+  //     console.log('error');
+  //   }
+  // }
+  componentDidMount() {
+    try {
+      this.setState({ tasks: this.props.tasks });
+      // console.log('this.props.tasks on Update: ', this.props.tasks);
+    } catch (e) {
+      console.log('error');
+    }
+  }
 
   onTextUpdate = e => {
     this.setState({ newTask: e.target.value });
@@ -65,6 +83,21 @@ class TodoComponent extends React.Component {
     this.setState({ tasks: tasks, newTask: '' });
   };
 
+  selectedFoods = () => {
+    // let { tasks, queryString } = this.state;
+    let { tasks } = this.state;
+    let query = tasks
+      .filter(items => items.done)
+      .map(item => item.text)
+      .toString();
+
+    // console.log('String to Query', query);
+    this.props.setTasks(tasks);
+
+    this.props.searchRecipes(query);
+    // this.setState({ queryString: '' });
+  };
+
   deleteTask = task => {
     let { tasks } = this.state;
     tasks.splice(tasks.indexOf(task), 1);
@@ -73,6 +106,7 @@ class TodoComponent extends React.Component {
 
   toggle = task => {
     let { tasks } = this.state;
+
     tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
     this.setState({ tasks: tasks, newTask: '' });
   };
@@ -83,17 +117,8 @@ class TodoComponent extends React.Component {
     return (
       <div id="main" style={styles.main}>
         <header style={styles.header}>
-          <TextField
-            label="Add new food"
-            value={newTask}
-            onChange={this.onTextUpdate}
-          />
-          <Button
-            variant="raised"
-            color="primary"
-            disabled={!newTask}
-            onClick={this.addTask}
-          >
+          <TextField label="Add new food" value={newTask} onChange={this.onTextUpdate} />
+          <Button variant="raised" color="primary" disabled={!newTask} onClick={this.addTask}>
             Add
           </Button>
         </header>
@@ -104,21 +129,12 @@ class TodoComponent extends React.Component {
                 <div key={index} style={styles.todo}>
                   {index > 0 ? <Divider style={styles.divider} /> : ''}
                   <FormControlLabel
-                    control={
-                      <Switch
-                        color="primary"
-                        checked={!task.done}
-                        onChange={() => this.toggle(task)}
-                      />
-                    }
+                    control={<Switch color="primary" checked={!task.done} onChange={() => this.toggle(task)} />}
                     label={task.text}
                     style={task.done ? styles.done : styles.label}
                   />
                   <Tooltip title="Delete food" placement="top">
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => this.deleteTask(task)}
-                    >
+                    <IconButton aria-label="delete" onClick={() => this.deleteTask(task)}>
                       <DeleteIcon />
                     </IconButton>
                   </Tooltip>
@@ -127,6 +143,7 @@ class TodoComponent extends React.Component {
             </FormGroup>
           </Card>
         )}
+        <Button onClick={this.selectedFoods}>Search</Button>
       </div>
     );
   }
