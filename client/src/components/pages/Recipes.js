@@ -74,13 +74,19 @@ class Recipes extends Component {
                     <RecipeCard
                       key={result._id}
                       details={result._id}
+                      /* <Link to={'/api/recipesdetail/' + result._id}>   </Link> */
+                     
                       imgurl={result.image ? result.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                     
+                     link="/api/recipesdetail/"
+                      home= "/api/recipes"
                       label={result.label}
                       uri={result.uri}
                       shareurl={result.url}
                       source={result.source}
                       yield={result.yield}
                       calories={result.calories}
+                   
                       handleRecipeDelete={this.deleteRecipe}
                       leftButton={'View'}
                       rightButton={'Delete'}

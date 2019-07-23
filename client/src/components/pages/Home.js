@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
+import { Redirect } from 'react-router-dom';
 import Image from '../Image';
 import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
 import Searchbar from '../Searchbar';
+import RecipeCardHome from '../RecipeCardHome';
 import SearchFood from '../SearchFood';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
@@ -35,9 +37,25 @@ class Home extends Component {
     error: '',
     edamamresult: [],
     searchfood: '',
-    loading: false
+    loading: false,
+    redirect: false,
+    resultcard: []
   };
 
+  componentDidMount() {
+    try {
+      this.setState({ edamamresult: this.props.location.state.edamamresult });
+    } catch (e) {
+      console.log('error');
+      //const {result} = this.props.location.state;
+      //console.log("result ", result);
+      //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
+    }
+  }
+
+  // componentDidUpdate() {
+  //   this.setState({edamamresult: this.props.location.state.edamamresult });
+  // }
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
@@ -61,9 +79,7 @@ class Home extends Component {
               dbFoodsIds.push(recipe.recipeId);
             });
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-            const filteredFoods = recipes.data.filter(
-              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
-            );
+            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
             console.log('filtderedFoods: ', filteredFoods);
 
             //  set new state for result
@@ -86,6 +102,38 @@ class Home extends Component {
       });
   };
 
+  RecordClick = name => {
+    console.log('get click', name);
+    // preventDefault();
+    // filter to get the card record that was clicked to redirect to RecipeD
+
+    const selectedCard = this.state.edamamresult;
+
+    const resultCard = selectedCard.filter(result => result.recipe.uri === name);
+    if (resultCard.length === 0) {
+      this.setState({ redirect: false });
+    }
+    console.log('selected Card', resultCard[0]);
+
+    const ChosenRecipe = {
+      userId: 0,
+      uri: 0,
+      label: resultCard[0].recipe.label,
+      source: resultCard[0].recipe.source,
+      url: resultCard[0].recipe.url,
+      yield: resultCard[0].recipe.yield,
+      dietLabels: resultCard[0].recipe.dietLabels,
+      healthLabels: resultCard[0].recipe.healthLabels,
+      ingredientLines: resultCard[0].recipe.ingredientLines,
+      calories: resultCard[0].recipe.calories,
+      image: resultCard[0].recipe.image
+    };
+
+    this.setState({ redirect: true, resultcard: ChosenRecipe });
+
+    return;
+  };
+
   handleInputChangeFood = e => {
     const value = e.target.value;
     // const name = e.target.name;
@@ -98,9 +146,9 @@ class Home extends Component {
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
     console.log('this.state.searchfood', this.state.searchfood);
-    this.setState({
-      searchfood: ''
-    });
+    // this.setState({
+    //   searchfood: ""
+    // });
   };
 
   saveRecipe = e => {
@@ -143,9 +191,7 @@ class Home extends Component {
             console.log('newRecipe', newRecipe);
             console.log('id of recipe', state.edamamresult);
             // find the index of that recipe in the result array
-            const indexofRecipeToRemove = state.edamamresult.indexOf(
-              recipeToRemove
-            );
+            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
             console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
@@ -164,6 +210,17 @@ class Home extends Component {
   };
 
   render() {
+    if (this.state.redirect)
+      return (
+        <Redirect
+          push
+          to={{
+            pathname: '/homedetail/2',
+            state: { result: this.state.resultcard, edamamresult: this.state.edamamresult, redirect: false }
+          }}
+        />
+      );
+
     if (this.state.error) {
       return <div>{this.state.error}</div>;
     }
@@ -202,11 +259,7 @@ class Home extends Component {
         <Image />
 
         <Jumbotron>
-          <SearchFood
-            value={this.state.searchfood}
-            handleInputChangeFood={this.handleInputChangeFood}
-            handleFormSubmitFood={this.handleFormSubmitFood}
-          />
+          <SearchFood value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
         </Jumbotron>
         {/* <TodoList /> */}
         {/* <PantryItems />
@@ -222,21 +275,14 @@ class Home extends Component {
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
                 title={'Results'}
-                message={
-                  this.state.edamamresult === 0
-                    ? 'Enter your ingredients to search for recipes'
-                    : null
-                }
+                message={this.state.edamamresult === 0 ? 'Enter your ingredients to search for recipes' : null}
               >
                 {this.state.edamamresult.map(edamamresult => {
                   return (
-                    <RecipeCard
+                    <RecipeCardHome
+                      RecordClick={this.RecordClick}
                       key={edamamresult.recipe.uri}
-                      imgurl={
-                        edamamresult.recipe.image
-                          ? edamamresult.recipe.image
-                          : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
-                      }
+                      imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
                       label={edamamresult.recipe.label}
                       uri={edamamresult.recipe.uri}
                       shareurl={edamamresult.recipe.url}

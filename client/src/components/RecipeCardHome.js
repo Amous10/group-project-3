@@ -48,13 +48,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeCard(props) {
+export default function RecipeCardHome(props) {
  
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <Link to={props.link + props.details }  >
+      
         <CardHeader
           className={classes.cardheader}
           avatar={
@@ -67,10 +67,12 @@ export default function RecipeCard(props) {
           subheader={props.source}
         />
 
-        <CardMedia
-          className={classes.media}
+        <CardMedia  onClick={() => props.RecordClick(props.uri)}
+          
+         className={classes.media}
           image={props.imgurl}
           title={props.name}
+        
         />
 
         <CardContent>
@@ -84,7 +86,7 @@ export default function RecipeCard(props) {
             Calories: {Number(props.calories).toFixed(0)}
           </Typography>
         </CardContent>
-      </Link>
+    
 
       <CardActions disableSpacing className={classes.cardfooter}>
         <IconButton
