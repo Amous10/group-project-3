@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import{ Redirect}  from "react-router-dom";
 import API from "../../services/API";
 import Container from "../Container";
 import { Link } from "react-router-dom";
@@ -11,12 +12,15 @@ class RecipesD extends Component {
   state = {
     result: [],
     home:"",
-    hometext:""
+    hometext:"",
+    redirect: false,
+    edamamresult: []
   };
   componentDidMount() {
     console.log("RecipeD is here");
     if (this.props.match.params.id ==2){
-    this.setState({result: this.props.location.state.result });
+    this.setState({result: this.props.location.state.result,  
+      edamamresult: this.props.location.state.edamamresult });
    
     let home ="/";
     let hometext = "Back to Search ";
@@ -49,6 +53,8 @@ class RecipesD extends Component {
   componentDidUpdate() {
     console.log(this.state.result);
   }
+  
+  
   deleteRecipe = e => {
     // get the id of the recipe when 'delete' is clicked
     const thisCardsId = e.currentTarget.getAttribute("data-id");
@@ -60,14 +66,26 @@ class RecipesD extends Component {
     }
   };
   render() {
+    if (this.state.redirect)
+    return  (<Redirect push to={{
+     pathname: "/",
+     state: {  edamamresult:this.state.edamamresult
+        }
+   }}
+ />) 
+
     return (
       <div>
         {/* <Navbar /> */}
         
         <Jumbotron />
-        <Link to={this.state.home}>
-          <h2>← {this.state.hometext}</h2>
-        </Link>
+        
+          <h2 onClick={()=> this.setState({redirect: true})}>← {this.state.hometext}</h2>
+       
+       
+      
+       
+       
         <Container>
           <Row>
             <Col>

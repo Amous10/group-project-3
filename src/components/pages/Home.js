@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import{ Redirect}  from "react-router-dom";
 import API from "../../services/API";
+import { Link } from "react-router-dom";
 import Image from "../Image";
 import Container from "../Container";
 import Row from "../Row";
@@ -27,6 +28,26 @@ class Home extends Component {
     resultcard:[]
   };
 
+  componentDidMount() {
+   
+    try{
+
+      this.setState({edamamresult: this.props.location.state.edamamresult });
+    }
+    catch(e){
+
+    console.log('error');
+  //const {result} = this.props.location.state;
+   //console.log("result ", result);
+   //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
+     
+  
+  }
+  }
+
+  // componentDidUpdate() {
+  //   this.setState({edamamresult: this.props.location.state.edamamresult });
+  // }
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
@@ -122,9 +143,9 @@ RecordClick = name => {
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
     console.log("this.state.searchfood", this.state.searchfood);
-    this.setState({
-      searchfood: ""
-    });
+    // this.setState({
+    //   searchfood: ""
+    // });
   };
 
   saveRecipe = e => {
@@ -190,9 +211,11 @@ RecordClick = name => {
   render() {
     
     if (this.state.redirect)
-       return  (<Redirect to={{
+       return  (<Redirect push to={{
         pathname: "/homedetail/2",
-        state: { result: this.state.resultcard }
+        state: { result: this.state.resultcard , 
+          edamamresult:this.state.edamamresult,
+          redirect:false }
       }}
     />) 
     
@@ -231,7 +254,6 @@ RecordClick = name => {
     return (
       <div>
        
-
        
         {/* <Navbar /> */}
         <Image />
