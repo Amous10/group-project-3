@@ -75,26 +75,6 @@ class App extends Component {
 
           <Switch>
             {/* <Route exact path="/" component={Home} /> */}
-<<<<<<< HEAD:client/src/App.js
-            <Route
-              exact
-              path="/"
-              render={() => <Home userid={this.state.userid} />}
-            />
-            <Route
-              exact
-              path="/login"
-              render={() => <LoginForm updateUser={this.updateUser} />}
-            />
-            <Route exact path="/signup" render={() => <Signup />} />
-            <Route
-              exact
-              path="/api/recipes"
-              render={() => <Recipes userid={this.state.userid} />}
-            />
-            <Route exact path="/api/recipesdetail/:id" component={RecipesD} />
-
-=======
             <Route exact path="/" render={() => <Home searchRecipe={this.searchRecipe} location={this.props.location} userid={this.state.userid} />} />
             
             <Route exact path="/login" render={() => <LoginForm updateUser={this.updateUser} />} />
@@ -102,7 +82,6 @@ class App extends Component {
             <Route exact path="/api/recipes" render ={() => <Recipes userid={this.state.userid} />}/> 
             <Route exact path="/api/recipesdetail/:id" component={RecipesD} /> 
             <Route exact path="/homedetail/:id" component={RecipesD} /> 
->>>>>>> b816dfccab6b130a16d08790e4c8eb789753c504:src/App.js
             {/* <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} /> */}
             {/* <Route path="/recipes" exact component={Recipes} />
               <Route path="/recipes/:id" component={SingleRecipe} /> */}
