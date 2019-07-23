@@ -59,6 +59,12 @@ class TodoComponent extends React.Component {
     this.setState({ newTask: e.target.value });
   };
 
+  keyPress = e => {
+    if (e.key === 'Enter') {
+      this.addTask();
+    }
+  };
+
   addTask = () => {
     let { tasks, newTask } = this.state;
     tasks.push({ text: newTask, done: false });
@@ -87,6 +93,7 @@ class TodoComponent extends React.Component {
             label="Add new food"
             value={newTask}
             onChange={this.onTextUpdate}
+            onKeyPress={this.keyPress}
           />
           <Button
             variant="raised"
