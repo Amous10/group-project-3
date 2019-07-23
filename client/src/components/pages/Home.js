@@ -13,25 +13,21 @@ import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 // import { Modal, Button } from 'react-materialize';
 import Alert from '../Alert';
-
 import TodoComponent from '../PantryTodo/TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-
 // import ToDo from '../ToDo/ToDo';
 // import PantryItems from '../PantryItems';
 // import PantryMain from '../PantryList/PantryMain';
 // import TodoList from '../TodoList/TodoList';
 // import Grid from '@material-ui/core/Grid';
 // import SpacingGrid from '../Grid';
-
 const pantryTheme = createMuiTheme({
   palette: {
     primary: green,
     type: 'light' // Switching the dark mode on is a single property value change.
   }
 });
-
 class Home extends Component {
   state = {
     error: '',
@@ -42,11 +38,9 @@ class Home extends Component {
     resultcard: [],
     tasks: []
   };
-
   componentDidMount() {
     try {
       this.setState({ edamamresult: this.props.location.state.edamamresult });
-
       console.log('this.props.tasks: ', this.props.tasks);
     } catch (e) {
       console.log('error', e);
@@ -55,20 +49,16 @@ class Home extends Component {
       //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
     }
   }
-
   // componentDidUpdate() {
   //   this.setState({edamamresult: this.props.location.state.edamamresult });
   // }
-
   setTasks = tasks => {
     this.setState({ tasks: tasks });
     console.log('this.TASKS: ', tasks);
   };
-
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
-
     // make a call to edamam api
     API.callEdamam(query)
       .then(recipes => {
@@ -77,11 +67,9 @@ class Home extends Component {
           // stop the UI spinner
           this.setState({ loading: false });
           console.log('recipes data: ', recipes.data);
-
           // make a call to database and retrieve all recipes stored
           API.getRecipes({}).then(dbFoods => {
             // empty array to hold all of the recipes
-
             const dbFoodsIds = [];
             // iterate over stored recipes and push recipe ids to empty array
             dbFoods.data.forEach(recipe => {
@@ -90,7 +78,6 @@ class Home extends Component {
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
             const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
             console.log('filtderedFoods: ', filteredFoods);
-
             //  set new state for result
             this.setState({
               edamamresult: filteredFoods
@@ -110,14 +97,12 @@ class Home extends Component {
         });
       });
   };
-
+55e302008eefee34058a03b8549533f5
   RecordClick = name => {
     console.log('get click', name);
     // preventDefault();
     // filter to get the card record that was clicked to redirect to RecipeD
-
     const selectedCard = this.state.edamamresult;
-
     const resultCard = selectedCard.filter(result => result.recipe.uri === name);
     if (resultCard.length === 0) {
       this.setState({ redirect: false });
@@ -137,12 +122,9 @@ class Home extends Component {
       calories: resultCard[0].recipe.calories,
       image: resultCard[0].recipe.image
     };
-
     this.setState({ redirect: true, resultcard: ChosenRecipe });
-
     return;
   };
-
   handleInputChangeFood = e => {
     const value = e.target.value;
     // const name = e.target.name;
@@ -159,11 +141,9 @@ class Home extends Component {
       searchfood: ''
     });
   };
-
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
-
     const newSavedRecipe = this.state.edamamresult;
     // console.log('this.state.edamamresult: ', this.state.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
@@ -174,7 +154,6 @@ class Home extends Component {
         let Uri = recipe.recipe.uri;
         Uri = Uri.split('recipe_');
         Uri = Uri[1] + this.props.userid;
-
         const newRecipe = {
           userId: this.props.userid,
           uri: Uri,
@@ -195,7 +174,6 @@ class Home extends Component {
             const recipeToRemove = state.edamamresult.find(recipe => {
               return recipe.recipe.image === newRecipe.image;
             });
-
             console.log('recipeToRemove', recipeToRemove);
             console.log('newRecipe', newRecipe);
             console.log('id of recipe', state.edamamresult);
@@ -204,7 +182,6 @@ class Home extends Component {
             console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
-
             // update the state
             return {
               edamamresult: state.edamamresult
@@ -217,7 +194,6 @@ class Home extends Component {
       window.$('#foo').modal('open');
     }
   };
-
   render() {
     if (this.state.redirect)
       return (
@@ -266,18 +242,15 @@ class Home extends Component {
       <div>
         {/* <Navbar /> */}
         <Image />
-
         <Jumbotron>
           <Searchbar value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
         </Jumbotron>
         {/* <TodoList /> */}
         {/* <PantryItems />
         <PantryMain /> */}
-
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent searchRecipes={this.searchRecipes} setTasks={this.setTasks} tasks={this.state.tasks} />
         </MuiThemeProvider>
-
         <Container>
           <Row>
             <Col>
@@ -313,5 +286,4 @@ class Home extends Component {
     );
   }
 }
-
 export default Home;
