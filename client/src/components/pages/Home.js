@@ -46,10 +46,10 @@ class Home extends Component {
     }
   }
 
-  // setTasks = tasks => {
-  //   this.setState({ tasks: tasks });
-  //   console.log('this.TASKS: ', tasks);
-  // };
+  setTasks = tasks => {
+    this.setState({ tasks: tasks });
+    console.log('this.TASKS: ', tasks);
+  };
 
   RecordClick = name => {
     console.log('get click', name);
@@ -132,8 +132,9 @@ class Home extends Component {
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
 
             // update the state
+            //TODO Unnecessary?
             return {
-              edamamresult: state.edamamresult
+              edamamresult: this.props.edamamresult
             };
           });
         });
@@ -194,11 +195,11 @@ class Home extends Component {
         {/* <Navbar /> */}
 
         <MuiThemeProvider theme={pantryTheme}>
-          {/* <TodoComponent
-            searchRecipes={this.searchRecipes}
+          <TodoComponent
+            searchRecipes={this.props.searchRecipes}
             setTasks={this.setTasks}
             tasks={this.state.tasks}
-          /> */}
+          />
         </MuiThemeProvider>
 
         <Container>
