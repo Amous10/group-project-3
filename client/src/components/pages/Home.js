@@ -28,10 +28,6 @@ class Home extends Component {
   state = {
     error: '',
     edamamresult: [],
-<<<<<<< HEAD
-    searchfood: '',
-=======
->>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
     loading: false,
     redirect: false,
     resultcard: [],
