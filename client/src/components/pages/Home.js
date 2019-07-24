@@ -6,7 +6,7 @@ import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
-import Searchbar from '../Searchbar';
+// import Searchbar from '../Searchbar';
 import RecipeCardHome from '../RecipeCardHome';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
@@ -27,7 +27,6 @@ class Home extends Component {
   state = {
     error: '',
     edamamresult: [],
-    searchfood: '',
     loading: false,
     redirect: false,
     resultcard: [],
@@ -36,78 +35,28 @@ class Home extends Component {
 
   componentDidMount() {
     try {
-      this.setState({ edamamresult: this.props.location.state.edamamresult });
+      // this.setState({ edamamresult: this.props.edamamresult });
+      // console.log('HOME this.props.edamamresult: ', this.props.edamamresult);
+      // console.log('HOME this.edamamresult: ', this.props.edamamresult);
     } catch (e) {
       console.log('error');
       //const {result} = this.props.location.state;
       //console.log("result ", result);
-      //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
+      //{  this.setState({edamamresult: this.props.location.props.edamamresult });   }
     }
   }
 
-  // componentDidUpdate() {
-  //   this.setState({edamamresult: this.props.location.state.edamamresult });
-  // }
-
-  setTasks = tasks => {
-    this.setState({ tasks: tasks });
-    console.log('this.TASKS: ', tasks);
-  };
-  searchRecipes = query => {
-    // start UI spinner
-    this.setState({ loading: true, edamamresult: [] });
-
-    // make a call to edamam api
-    API.callEdamam(query)
-      .then(recipes => {
-        console.log('recipes: ', recipes);
-        if (recipes.data.length > 0) {
-          // stop the UI spinner
-          this.setState({ loading: false });
-          console.log('recipes data: ', recipes.data);
-
-          // make a call to database and retrieve all recipes stored
-          API.getRecipes({}).then(dbFoods => {
-            // empty array to hold all of the recipes
-
-            const dbFoodsIds = [];
-            // iterate over stored recipes and push recipe ids to empty array
-            dbFoods.data.forEach(recipe => {
-              dbFoodsIds.push(recipe.recipeId);
-            });
-            // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-            const filteredFoods = recipes.data.filter(
-              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
-            );
-            console.log('filtderedFoods: ', filteredFoods);
-
-            //  set new state for result
-            this.setState({
-              edamamresult: filteredFoods
-            });
-          });
-        } else {
-          this.setState({
-            edamamresult: []
-          });
-        }
-      })
-      .catch(err => {
-        console.log('ERROR:', err.response.data.message);
-        this.setState({
-          error: err.response.data.message,
-          loading: false
-        });
-      });
-  };
+  // setTasks = tasks => {
+  //   this.setState({ tasks: tasks });
+  //   console.log('this.TASKS: ', tasks);
+  // };
 
   RecordClick = name => {
     console.log('get click', name);
     // preventDefault();
     // filter to get the card record that was clicked to redirect to RecipeD
 
-    const selectedCard = this.state.edamamresult;
-
+    const selectedCard = this.props.edamamresult;
     const resultCard = selectedCard.filter(
       result => result.recipe.uri === name
     );
@@ -135,29 +84,12 @@ class Home extends Component {
     return;
   };
 
-  handleInputChangeFood = e => {
-    const value = e.target.value;
-    // const name = e.target.name;
-    this.setState({
-      searchfood: value
-    });
-  };
-  handleFormSubmitFood = e => {
-    e.preventDefault();
-    // run google call with search parameter
-    this.searchRecipes(this.state.searchfood);
-    console.log('this.state.searchfood', this.state.searchfood);
-    this.setState({
-      searchfood: ''
-    });
-  };
-
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
 
-    const newSavedRecipe = this.state.edamamresult;
-    // console.log('this.state.edamamresult: ', this.state.edamamresult);
+    const newSavedRecipe = this.props.edamamresult;
+    // console.log('this.props.edamamresult: ', this.props.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
     newSavedRecipe
       .filter(result => result.recipe.uri === thisCardsId)
@@ -221,7 +153,7 @@ class Home extends Component {
             pathname: '/homedetail/2',
             state: {
               result: this.state.resultcard,
-              edamamresult: this.state.edamamresult,
+              edamamresult: this.props.edamamresult,
               redirect: false
             }
           }}
@@ -260,33 +192,28 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
-        <Searchbar
-          value={this.state.searchfood}
-          handleInputChangeFood={this.handleInputChangeFood}
-          handleFormSubmitFood={this.handleFormSubmitFood}
-        />
 
         <MuiThemeProvider theme={pantryTheme}>
-          <TodoComponent
+          {/* <TodoComponent
             searchRecipes={this.searchRecipes}
             setTasks={this.setTasks}
             tasks={this.state.tasks}
-          />
+          /> */}
         </MuiThemeProvider>
 
         <Container>
           <Row>
             <Col>
               <RecipeCardWrapper
-                count={this.state.edamamresult.length}
+                count={this.props.edamamresult.length}
                 title={'Results'}
                 message={
-                  this.state.edamamresult === 0
+                  this.props.edamamresult === 0
                     ? 'Enter your ingredients to search for recipes'
                     : null
                 }
               >
-                {this.state.edamamresult.map(edamamresult => {
+                {this.props.edamamresult.map(edamamresult => {
                   return (
                     <RecipeCardHome
                       RecordClick={this.RecordClick}
@@ -309,6 +236,7 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
+
               <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
           </Row>

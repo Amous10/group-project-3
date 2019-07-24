@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import API from './services/API';
 
 import {
   BrowserRouter as Router,
@@ -14,18 +15,24 @@ import { Redirect } from 'react-router-dom';
 import Signup from './components/Signup.js';
 import LoginForm from './components/Login.js';
 import Navbar from './components/Navbar.js';
-
+import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
 import Recipes from './components/pages/Recipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipesD from './components/pages/RecipesD';
+import Searchbar from './components/Searchbar';
 class App extends Component {
   constructor() {
     super();
     this.state = {
       loggedIn: false,
       username: null,
-      userid: null
+      userid: null,
+      error: '',
+      edamamresult: [],
+      searchfood: '',
+      loading: false,
+      tasks: []
     };
 
     this.getUser = this.getUser.bind(this);
@@ -40,6 +47,71 @@ class App extends Component {
   updateUser(userObject) {
     this.setState(userObject);
   }
+
+  handleInputChangeFood = e => {
+    const value = e.target.value;
+    // const name = e.target.name;
+    this.setState({
+      searchfood: value
+    });
+  };
+  handleFormSubmitFood = e => {
+    e.preventDefault();
+    // run google call with search parameter
+    this.searchRecipes(this.state.searchfood);
+    console.log('this.state.searchfood', this.state.searchfood);
+    this.setState({
+      searchfood: ''
+    });
+  };
+
+  searchRecipes = query => {
+    // start UI spinner
+    this.setState({ loading: true, edamamresult: [] });
+
+    // make a call to edamam api
+    API.callEdamam(query)
+      .then(recipes => {
+        console.log('recipes: ', recipes);
+        if (recipes.data.length > 0) {
+          // stop the UI spinner
+          this.setState({ loading: false });
+          console.log('recipes data: ', recipes.data);
+
+          // make a call to database and retrieve all recipes stored
+          API.getRecipes({}).then(dbFoods => {
+            // empty array to hold all of the recipes
+
+            const dbFoodsIds = [];
+            // iterate over stored recipes and push recipe ids to empty array
+            dbFoods.data.forEach(recipe => {
+              dbFoodsIds.push(recipe.recipeId);
+            });
+            // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
+            const filteredFoods = recipes.data.filter(
+              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
+            );
+            console.log('filtderedFoods: ', filteredFoods);
+
+            //  set new state for result
+            this.setState({
+              edamamresult: filteredFoods
+            });
+          });
+        } else {
+          this.setState({
+            edamamresult: []
+          });
+        }
+      })
+      .catch(err => {
+        console.log('ERROR:', err.response.data.message);
+        this.setState({
+          error: err.response.data.message,
+          loading: false
+        });
+      });
+  };
 
   getUser() {
     axios.get('/user/').then(response => {
@@ -70,19 +142,21 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+          <Searchbar
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
           {/* greet user if logged in: */}
           {this.state.loggedIn && (
             <p>
               Join the party, {this.state.username}! at {this.state.userid}
             </p>
           )}
-          {/* Routes to different components */}
-          {/* <Route exact path="/" component={Home} /> */}
-          {/* <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
-           */}
 
           <Switch>
-            {/* <Route exact path="/" component={Home} /> */}
+            {/* <Route exact path="/" component={Intro} /> */}
+
             <Route
               exact
               path="/"
@@ -91,6 +165,7 @@ class App extends Component {
                   searchRecipe={this.searchRecipe}
                   location={this.props.location}
                   userid={this.state.userid}
+                  edamamresult={this.state.edamamresult}
                 />
               )}
             />
