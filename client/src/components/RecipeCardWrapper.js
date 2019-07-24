@@ -5,9 +5,13 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
     // border: '2px solid #69cc02'
+    width: '70%',
+    marginLeft: 420,
+    marginRight: 20
   },
+
   control: {
     padding: theme.spacing(2)
   }
@@ -24,7 +28,7 @@ const RecipeCardWrapper = props => {
       {/* <Grid item xs={12}> */}
       {/* <Grid container justify="center" spacing={spacing}> */}
       {props.children.map((value, i) => (
-        <Grid xs={4} key={value.key} item>
+        <Grid xs={3} key={value.key} item>
           {value}
         </Grid>
       ))}

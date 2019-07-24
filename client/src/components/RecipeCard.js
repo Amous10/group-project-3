@@ -13,6 +13,7 @@ import { red, deepPurple } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ShareIcon from '@material-ui/icons/Share';
+import { NONAME } from 'dns';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#69cc02'
   },
   cardheader: {
+    // height: '25%',
     backgroundColor: '#deebdd',
     backgroundImage:
       'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',
@@ -73,7 +75,7 @@ export default function RecipeCard(props) {
 
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Recipe Yields: {props.yield} mongo:{props._id}
+            Recipe Yields: {props.yield}
           </Typography>
 
           <Typography variant="body2" color="textSecondary" component="p">
