@@ -7,7 +7,7 @@ import Container from '../Container';
 import Row from '../Row';
 import Jumbotron from '../Jumbotron';
 import Col from '../Col';
-import Searchbar from '../Searchbar';
+// import Searchbar from '../Searchbar';
 import RecipeCardHome from '../RecipeCardHome';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
@@ -28,7 +28,10 @@ class Home extends Component {
   state = {
     error: '',
     edamamresult: [],
+<<<<<<< HEAD
     searchfood: '',
+=======
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
     loading: false,
     redirect: false,
     resultcard: [],
@@ -37,15 +40,18 @@ class Home extends Component {
 
   componentDidMount() {
     try {
-      this.setState({ edamamresult: this.props.location.state.edamamresult });
+      // this.setState({ edamamresult: this.props.edamamresult });
+      // console.log('HOME this.props.edamamresult: ', this.props.edamamresult);
+      // console.log('HOME this.edamamresult: ', this.props.edamamresult);
     } catch (e) {
       console.log('error');
       //const {result} = this.props.location.state;
       //console.log("result ", result);
-      //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
+      //{  this.setState({edamamresult: this.props.location.props.edamamresult });   }
     }
   }
 
+<<<<<<< HEAD
   // componentDidUpdate() {
   //   this.setState({edamamresult: this.props.location.state.edamamresult });
   // }
@@ -101,14 +107,19 @@ class Home extends Component {
         });
       });
   };
+=======
+  // setTasks = tasks => {
+  //   this.setState({ tasks: tasks });
+  //   console.log('this.TASKS: ', tasks);
+  // };
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 
   RecordClick = name => {
     console.log('get click', name);
     // preventDefault();
     // filter to get the card record that was clicked to redirect to RecipeD
 
-    const selectedCard = this.state.edamamresult;
-
+    const selectedCard = this.props.edamamresult;
     const resultCard = selectedCard.filter(
       result => result.recipe.uri === name
     );
@@ -135,6 +146,7 @@ class Home extends Component {
 
     return;
   };
+<<<<<<< HEAD
 
   handleInputChangeFood = e => {
     const value = e.target.value;
@@ -152,13 +164,15 @@ class Home extends Component {
       searchfood: ''
     });
   };
+=======
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
 
-    const newSavedRecipe = this.state.edamamresult;
-    // console.log('this.state.edamamresult: ', this.state.edamamresult);
+    const newSavedRecipe = this.props.edamamresult;
+    // console.log('this.props.edamamresult: ', this.props.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
     newSavedRecipe
       .filter(result => result.recipe.uri === thisCardsId)
@@ -222,7 +236,7 @@ class Home extends Component {
             pathname: '/homedetail/2',
             state: {
               result: this.state.resultcard,
-              edamamresult: this.state.edamamresult,
+              edamamresult: this.props.edamamresult,
               redirect: false
             }
           }}
@@ -261,33 +275,44 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
+<<<<<<< HEAD
         <Searchbar
           value={this.state.searchfood}
           handleInputChangeFood={this.handleInputChangeFood}
           handleFormSubmitFood={this.handleFormSubmitFood}
         />
+=======
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 
         <MuiThemeProvider theme={pantryTheme}>
-          <TodoComponent
+          {/* <TodoComponent
             searchRecipes={this.searchRecipes}
             setTasks={this.setTasks}
             tasks={this.state.tasks}
-          />
+          /> */}
         </MuiThemeProvider>
 
         <Container>
           <Row>
             <Col>
               <RecipeCardWrapper
+<<<<<<< HEAD
                 count={this.state.edamamresult.length}
+=======
+                count={this.props.edamamresult.length}
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
                 title={'Results'}
                 message={
-                  this.state.edamamresult === 0
+                  this.props.edamamresult === 0
                     ? 'Enter your ingredients to search for recipes'
                     : null
                 }
               >
+<<<<<<< HEAD
                 {this.state.edamamresult.map(edamamresult => {
+=======
+                {this.props.edamamresult.map(edamamresult => {
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
                   return (
                     <RecipeCardHome
                       RecordClick={this.RecordClick}
@@ -310,6 +335,10 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
               <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
           </Row>
