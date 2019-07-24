@@ -73,7 +73,7 @@ export default function RecipeCard(props) {
 
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Recipe Yields: {props.yield} mongo:{props._id}
+            Recipe Yields: {props.yield}
           </Typography>
 
           <Typography variant="body2" color="textSecondary" component="p">

@@ -9,10 +9,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   done: {
-    textDecoration: 'line-through',
+    color: '#94d162',
+    display: 'flex',
+    width: '100%'
+  },
+  mute: {
     opacity: '.5',
     display: 'flex',
     width: '100%'
@@ -25,8 +30,20 @@ const styles = {
   },
   main: {
     width: '100%',
+    minHeight: '600px',
     maxWidth: '400px',
-    margin: '20px auto'
+    margin: '20px auto',
+    backgroundColor: '#fafcf8',
+    borderRadius: 10,
+    padding: 10,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
+    border: 'solid #c9cac8'
   },
   card: {
     padding: '20px',
@@ -46,6 +63,11 @@ const styles = {
     position: 'absolute',
     width: '100%',
     top: 0
+  },
+  cursive: {
+    fontFamily: 'Satisfy',
+    marginBottom: '10px',
+    fontSize: '35px'
   }
 };
 
@@ -56,14 +78,6 @@ class TodoComponent extends React.Component {
     queryString: []
   };
 
-  // componentDidUpdate() {
-  //   try {
-  //     // this.setState({ tasks: this.props.tasks });
-  //     // console.log('this.props.tasks on Update: ', this.props.tasks);
-  //   } catch (e) {
-  //     console.log('error');
-  //   }
-  // }
   componentDidMount() {
     try {
       if (this.props.tasks) {
@@ -80,7 +94,7 @@ class TodoComponent extends React.Component {
 
   addTask = () => {
     let { tasks, newTask } = this.state;
-    tasks.push({ text: newTask, done: false });
+    tasks.push({ text: newTask, done: true });
     this.setState({ tasks: tasks, newTask: '' });
   };
 
@@ -122,9 +136,12 @@ class TodoComponent extends React.Component {
 
     return (
       <div id="main" style={styles.main}>
+        <Typography variant="h5" component="h2" style={styles.cursive}>
+          Your Pantry
+        </Typography>
         <header style={styles.header}>
           <TextField
-            label="Add new food"
+            label="ADD FOOD ITEM"
             value={newTask}
             onChange={this.onTextUpdate}
             onKeyPress={this.keyPress}
@@ -148,12 +165,12 @@ class TodoComponent extends React.Component {
                     control={
                       <Switch
                         color="primary"
-                        checked={!task.done}
+                        checked={task.done}
                         onChange={() => this.toggle(task)}
                       />
                     }
                     label={task.text}
-                    style={task.done ? styles.done : styles.label}
+                    style={task.done ? styles.done : styles.mute}
                   />
                   <Tooltip title="Delete food" placement="top">
                     <IconButton

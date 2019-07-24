@@ -29,11 +29,13 @@ const useStyles = makeStyles(theme => ({
   },
   cardheader: {
     backgroundColor: '#deebdd',
-    backgroundImage: 'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',
+    backgroundImage:
+      'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',
     backgroundBlendMode: 'lighten'
   },
   cardfooter: {
-    backgroundImage: 'linear-gradient(180deg, rgba(230,233,240,0.50) 100%, rgba(238,241,245,1.0) 100%)'
+    backgroundImage:
+      'linear-gradient(180deg, rgba(230,233,240,0.50) 100%, rgba(238,241,245,1.0) 100%)'
   },
   iconheart: {
     color: '#ff78dc'
@@ -62,7 +64,12 @@ export default function RecipeCardHome(props) {
         subheader={props.source}
       />
 
-      <CardMedia onClick={() => props.RecordClick(props.uri)} className={classes.media} image={props.imgurl} title={props.name} />
+      <CardMedia
+        onClick={() => props.RecordClick(props.uri)}
+        className={classes.media}
+        image={props.imgurl}
+        title={props.name}
+      />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -75,8 +82,16 @@ export default function RecipeCardHome(props) {
       </CardContent>
 
       <CardActions disableSpacing className={classes.cardfooter}>
-        <IconButton data-id={props.uri} onClick={props.handleRecipeSave || props.handleRecipeDelete} aria-label="Add to Favorites">
-          {props.handleRecipeSave ? <FavoriteIcon className={classes.iconheart} /> : <DeleteForeverIcon className={classes.icontrash} />}
+        <IconButton
+          data-id={props.uri}
+          onClick={props.handleRecipeSave || props.handleRecipeDelete}
+          aria-label="Add to Favorites"
+        >
+          {props.handleRecipeSave ? (
+            <FavoriteIcon className={classes.iconheart} />
+          ) : (
+            <DeleteForeverIcon className={classes.icontrash} />
+          )}
         </IconButton>
         <IconButton aria-label="Share">
           <a href={props.shareurl} target="_blank">
