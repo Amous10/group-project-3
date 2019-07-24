@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import API from '../../services/API';
 import { Redirect } from 'react-router-dom';
 import Image from '../Image';
@@ -22,6 +23,7 @@ import green from '@material-ui/core/colors/green';
 // import TodoList from '../TodoList/TodoList';
 // import Grid from '@material-ui/core/Grid';
 // import SpacingGrid from '../Grid';
+
 const pantryTheme = createMuiTheme({
   palette: {
     primary: green,
@@ -30,7 +32,7 @@ const pantryTheme = createMuiTheme({
 });
 class Home extends Component {
   state = {
-    error: "",
+    error: '',
     edamamresult: [],
     searchfood: '',
     loading: false,
@@ -38,9 +40,13 @@ class Home extends Component {
     resultcard: [],
     tasks: []
   };
+
   componentDidMount() {
     try {
-      this.setState({ edamamresult: this.props.location.state.edamamresult });
+      //this.setState({ edamamresult: this.props.location.state.edamamresult });
+      this.setState({
+        edamamresult: this.props.location.state.edamamresult
+      });
       console.log('this.props.tasks: ', this.props.tasks);
     } catch (e) {
       console.log('error', e);
@@ -62,7 +68,7 @@ class Home extends Component {
     // make a call to edamam api
     API.callEdamam(query)
       .then(recipes => {
-        console.log("recipes: ", recipes);
+        console.log('recipes: ', recipes);
         if (recipes.data.length > 0) {
           // stop the UI spinner
           this.setState({ loading: false });
@@ -76,7 +82,9 @@ class Home extends Component {
               dbFoodsIds.push(recipe.recipeId);
             });
             // filter all of the stored recipes and return recipes where stored recipe id doesn't match id coming from recipe2fork api call
-            const filteredFoods = recipes.data.filter(recipe => !dbFoodsIds.includes(recipe.recipe.uri));
+            const filteredFoods = recipes.data.filter(
+              recipe => !dbFoodsIds.includes(recipe.recipe.uri)
+            );
             console.log('filtderedFoods: ', filteredFoods);
             //  set new state for result
             this.setState({
@@ -90,19 +98,23 @@ class Home extends Component {
         }
       })
       .catch(err => {
-        console.log("ERROR:", err.response.data.message);
+        console.log('ERROR:', err.response.data.message);
         this.setState({
           error: err.response.data.message,
           loading: false
         });
       });
   };
+
   RecordClick = name => {
     console.log('get click', name);
     // preventDefault();
     // filter to get the card record that was clicked to redirect to RecipeD
+    // history.push({ pathname: '/', state: this.state });
     const selectedCard = this.state.edamamresult;
-    const resultCard = selectedCard.filter(result => result.recipe.uri === name);
+    const resultCard = selectedCard.filter(
+      result => result.recipe.uri === name
+    );
     if (resultCard.length === 0) {
       this.setState({ redirect: false });
     }
@@ -121,6 +133,8 @@ class Home extends Component {
       image: resultCard[0].recipe.image
     };
     this.setState({ redirect: true, resultcard: ChosenRecipe });
+
+    //this.setState(this.props.location.edamamresult: ChosenRecipe)
     return;
   };
   handleInputChangeFood = e => {
@@ -150,7 +164,7 @@ class Home extends Component {
       // then map over recipe and create a new object to send to the database
       .map(recipe => {
         let Uri = recipe.recipe.uri;
-        Uri = Uri.split("recipe_");
+        Uri = Uri.split('recipe_');
         Uri = Uri[1] + this.props.userid;
         const newRecipe = {
           userId: this.props.userid,
@@ -176,7 +190,9 @@ class Home extends Component {
             console.log('newRecipe', newRecipe);
             console.log('id of recipe', state.edamamresult);
             // find the index of that recipe in the result array
-            const indexofRecipeToRemove = state.edamamresult.indexOf(recipeToRemove);
+            const indexofRecipeToRemove = state.edamamresult.indexOf(
+              recipeToRemove
+            );
             console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             state.edamamresult.splice(indexofRecipeToRemove, 1);
@@ -189,7 +205,7 @@ class Home extends Component {
       });
     // perform modal dialogue
     {
-      window.$("#foo").modal("open");
+      window.$('#foo').modal('open');
     }
   };
   render() {
@@ -199,7 +215,11 @@ class Home extends Component {
           push
           to={{
             pathname: '/homedetail/2',
-            state: { result: this.state.resultcard, edamamresult: this.state.edamamresult, redirect: false }
+            state: {
+              result: this.state.resultcard,
+              edamamresult: this.state.edamamresult,
+              redirect: false
+            }
           }}
         />
       );
@@ -237,28 +257,34 @@ class Home extends Component {
     // else
     return (
       <div>
-       
-       
         {/* <Navbar /> */}
         <Image />
         <Jumbotron>
-          <Searchbar value={this.state.searchfood} handleInputChangeFood={this.handleInputChangeFood} handleFormSubmitFood={this.handleFormSubmitFood} />
+          <Searchbar
+            value={this.state.searchfood}
+            handleInputChangeFood={this.handleInputChangeFood}
+            handleFormSubmitFood={this.handleFormSubmitFood}
+          />
         </Jumbotron>
         {/* <TodoList /> */}
         {/* <PantryItems />
         <PantryMain /> */}
         <MuiThemeProvider theme={pantryTheme}>
-          <TodoComponent searchRecipes={this.searchRecipes} setTasks={this.setTasks} tasks={this.state.tasks} />
+          <TodoComponent
+            searchRecipes={this.searchRecipes}
+            setTasks={this.setTasks}
+            tasks={this.state.tasks}
+          />
         </MuiThemeProvider>
         <Container>
           <Row>
             <Col>
               <RecipeCardWrapper
                 count={this.state.edamamresult.length}
-                title={"Results"}
+                title={'Results'}
                 message={
                   this.state.edamamresult === 0
-                    ? "Enter your ingredients to search for recipes"
+                    ? 'Enter your ingredients to search for recipes'
                     : null
                 }
               >
@@ -267,7 +293,11 @@ class Home extends Component {
                     <RecipeCardHome
                       RecordClick={this.RecordClick}
                       key={edamamresult.recipe.uri}
-                      imgurl={edamamresult.recipe.image ? edamamresult.recipe.image : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'}
+                      imgurl={
+                        edamamresult.recipe.image
+                          ? edamamresult.recipe.image
+                          : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+                      }
                       label={edamamresult.recipe.label}
                       uri={edamamresult.recipe.uri}
                       shareurl={edamamresult.recipe.url}
@@ -275,13 +305,13 @@ class Home extends Component {
                       yield={edamamresult.recipe.yield}
                       calories={edamamresult.recipe.calories}
                       handleRecipeSave={this.saveRecipe}
-                      leftButton={"View"}
-                      rightButton={"Save"}
+                      leftButton={'View'}
+                      rightButton={'Save'}
                     />
                   );
                 })}
               </RecipeCardWrapper>
-              <Alert modalMessage={"Recipe added to saved page!"} />
+              <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
           </Row>
         </Container>

@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
-// components
 import Signup from './components/Signup.js';
 import LoginForm from './components/Login.js';
 import Navbar from './components/Navbar.js';
@@ -19,7 +18,10 @@ import Home from './components/pages/Home';
 import Recipes from './components/pages/Recipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipesD from './components/pages/RecipesD';
+const ThemeContext = React.createContext('light');
+// components
 class App extends Component {
+  getChildContext() {}
   constructor() {
     super();
     this.state = {
@@ -83,6 +85,7 @@ class App extends Component {
 
           <Switch>
             {/* <Route exact path="/" component={Home} /> */}
+
             <Route
               exact
               path="/"
