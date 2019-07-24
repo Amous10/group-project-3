@@ -163,7 +163,7 @@ class App extends Component {
               path="/"
               render={() => (
                 <Home
-                  searchRecipe={this.searchRecipe}
+                  searchRecipes={this.searchRecipes}
                   location={this.props.location}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}

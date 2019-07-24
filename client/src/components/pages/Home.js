@@ -52,14 +52,18 @@ class Home extends Component {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   // componentDidUpdate() {
   //   this.setState({edamamresult: this.props.location.state.edamamresult });
   // }
 
+=======
+>>>>>>> ed1754d0b43a3f64f266e832a45154cd22f65c9e
   setTasks = tasks => {
     this.setState({ tasks: tasks });
     console.log('this.TASKS: ', tasks);
   };
+<<<<<<< HEAD
   searchRecipes = query => {
     // start UI spinner
     this.setState({ loading: true, edamamresult: [] });
@@ -113,6 +117,8 @@ class Home extends Component {
   //   console.log('this.TASKS: ', tasks);
   // };
 >>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
+=======
+>>>>>>> ed1754d0b43a3f64f266e832a45154cd22f65c9e
 
   RecordClick = name => {
     console.log('get click', name);
@@ -215,8 +221,9 @@ class Home extends Component {
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
 
             // update the state
+            //TODO Unnecessary?
             return {
-              edamamresult: state.edamamresult
+              edamamresult: this.props.edamamresult
             };
           });
         });
@@ -285,11 +292,11 @@ class Home extends Component {
 >>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 
         <MuiThemeProvider theme={pantryTheme}>
-          {/* <TodoComponent
-            searchRecipes={this.searchRecipes}
+          <TodoComponent
+            searchRecipes={this.props.searchRecipes}
             setTasks={this.setTasks}
             tasks={this.state.tasks}
-          /> */}
+          />
         </MuiThemeProvider>
 
         <Container>
