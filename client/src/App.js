@@ -26,12 +26,7 @@ import Home from './components/pages/Home';
 import Recipes from './components/pages/Recipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipesD from './components/pages/RecipesD';
-<<<<<<< HEAD
-const ThemeContext = React.createContext('light');
-// components
-=======
 import Searchbar from './components/Searchbar';
->>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 class App extends Component {
   getChildContext() {}
   constructor() {
@@ -167,11 +162,7 @@ class App extends Component {
           )}
 
           <Switch>
-<<<<<<< HEAD
-            {/* <Route exact path="/" component={Home} /> */}
-=======
             {/* <Route exact path="/" component={Intro} /> */}
->>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 
             <Route
               exact
