@@ -35,28 +35,16 @@ class Home extends Component {
 
   componentDidMount() {
     try {
-      this.setState({ edamamresult: this.props.edamamresult });
-      console.log('HOME this.props.edamamresult: ', this.props.edamamresult);
-      console.log('HOME this.edamamresult: ', this.state.edamamresult);
+      // this.setState({ edamamresult: this.props.edamamresult });
+      // console.log('HOME this.props.edamamresult: ', this.props.edamamresult);
+      // console.log('HOME this.edamamresult: ', this.props.edamamresult);
     } catch (e) {
       console.log('error');
       //const {result} = this.props.location.state;
       //console.log("result ", result);
-      //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
+      //{  this.setState({edamamresult: this.props.location.props.edamamresult });   }
     }
   }
-  // componentDidUpdate() {
-  //   try {
-  //     this.setState({ edamamresult: this.props.edamamresult });
-  //     console.log('this.props.edamamresult: ', this.props.edamamresult);
-  //     console.log('this.sedamamresult: ', this.state.edamamresult);
-  //   } catch (e) {
-  //     console.log('error');
-  //     //const {result} = this.props.location.state;
-  //     //console.log("result ", result);
-  //     //{  this.setState({edamamresult: this.props.location.state.edamamresult });   }
-  //   }
-  // }
 
   // setTasks = tasks => {
   //   this.setState({ tasks: tasks });
@@ -68,7 +56,7 @@ class Home extends Component {
     // preventDefault();
     // filter to get the card record that was clicked to redirect to RecipeD
 
-    const selectedCard = this.state.edamamresult;
+    const selectedCard = this.props.edamamresult;
     const resultCard = selectedCard.filter(
       result => result.recipe.uri === name
     );
@@ -100,8 +88,8 @@ class Home extends Component {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
 
-    const newSavedRecipe = this.state.edamamresult;
-    // console.log('this.state.edamamresult: ', this.state.edamamresult);
+    const newSavedRecipe = this.props.edamamresult;
+    // console.log('this.props.edamamresult: ', this.props.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
     newSavedRecipe
       .filter(result => result.recipe.uri === thisCardsId)
@@ -165,7 +153,7 @@ class Home extends Component {
             pathname: '/homedetail/2',
             state: {
               result: this.state.resultcard,
-              edamamresult: this.state.edamamresult,
+              edamamresult: this.props.edamamresult,
               redirect: false
             }
           }}
@@ -217,15 +205,15 @@ class Home extends Component {
           <Row>
             <Col>
               <RecipeCardWrapper
-                count={this.state.edamamresult.length}
+                count={this.props.edamamresult.length}
                 title={'Results'}
                 message={
-                  this.state.edamamresult === 0
+                  this.props.edamamresult === 0
                     ? 'Enter your ingredients to search for recipes'
                     : null
                 }
               >
-                {this.state.edamamresult.map(edamamresult => {
+                {this.props.edamamresult.map(edamamresult => {
                   return (
                     <RecipeCardHome
                       RecordClick={this.RecordClick}
