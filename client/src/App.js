@@ -76,10 +76,6 @@ class App extends Component {
               Join the party, {this.state.username}! at {this.state.userid}
             </p>
           )}
-          {/* Routes to different components */}
-          {/* <Route exact path="/" component={Home} /> */}
-          {/* <Route exact path="/" render={() => <Home userid={this.state.userid} />} />
-           */}
 
           <Switch>
             {/* <Route exact path="/" component={Home} /> */}

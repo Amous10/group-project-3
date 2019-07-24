@@ -12,7 +12,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const styles = {
   done: {
-    textDecoration: 'line-through',
+    color: 'green',
+    display: 'flex',
+    width: '100%'
+  },
+  mute: {
     opacity: '.5',
     display: 'flex',
     width: '100%'
@@ -80,7 +84,7 @@ class TodoComponent extends React.Component {
 
   addTask = () => {
     let { tasks, newTask } = this.state;
-    tasks.push({ text: newTask, done: false });
+    tasks.push({ text: newTask, done: true });
     this.setState({ tasks: tasks, newTask: '' });
   };
 
@@ -123,8 +127,18 @@ class TodoComponent extends React.Component {
     return (
       <div id="main" style={styles.main}>
         <header style={styles.header}>
-          <TextField label="Add new food" value={newTask} onChange={this.onTextUpdate} onKeyPress={this.keyPress} />
-          <Button variant="raised" color="primary" disabled={!newTask} onClick={this.addTask}>
+          <TextField
+            label="Add new food"
+            value={newTask}
+            onChange={this.onTextUpdate}
+            onKeyPress={this.keyPress}
+          />
+          <Button
+            variant="raised"
+            color="primary"
+            disabled={!newTask}
+            onClick={this.addTask}
+          >
             Add
           </Button>
         </header>
@@ -135,12 +149,21 @@ class TodoComponent extends React.Component {
                 <div key={index} style={styles.todo}>
                   {index > 0 ? <Divider style={styles.divider} /> : ''}
                   <FormControlLabel
-                    control={<Switch color="primary" checked={!task.done} onChange={() => this.toggle(task)} />}
+                    control={
+                      <Switch
+                        color="primary"
+                        checked={task.done}
+                        onChange={() => this.toggle(task)}
+                      />
+                    }
                     label={task.text}
-                    style={task.done ? styles.done : styles.label}
+                    style={task.done ? styles.done : styles.mute}
                   />
                   <Tooltip title="Delete food" placement="top">
-                    <IconButton aria-label="delete" onClick={() => this.deleteTask(task)}>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => this.deleteTask(task)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Tooltip>

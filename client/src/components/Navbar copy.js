@@ -1,45 +1,16 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import logo from '../img/pot.svg';
+import { Route, Link } from 'react-router-dom';
+// import logo from '../img/logo.svg';
+import logo from '../img/mustache.svg';
+
 import '../App.css';
 import axios from 'axios';
-import Modal from 'react-modal';
-import LoginForm from './Login';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
 
 class Navbar extends Component {
   constructor() {
     super();
     this.logout = this.logout.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.state = {
-      modalIsOpen: false
-    };
-  }
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
   }
 
   logout(event) {
@@ -64,8 +35,6 @@ class Navbar extends Component {
 
   render() {
     const loggedIn = this.props.loggedIn;
-    // console.log('navbar render, props: ');
-    // console.log(this.props);
 
     return (
       <div>
@@ -89,26 +58,6 @@ class Navbar extends Component {
                 >
                   <span className="text-secondary">Logout</span>
                 </Link>
-                <Link
-                  to="#"
-                  className="btn btn-link text-secondary"
-                  onClick={this.openModal}
-                >
-                  <span className="text-secondary">Login</span>
-                </Link>
-
-                <Modal
-                  isOpen={this.state.modalIsOpen}
-                  onAfterOpen={this.afterOpenModal}
-                  onRequestClose={this.closeModal}
-                  style={customStyles}
-                  contentLabel="Example Modal"
-                  closeModal={this.closeModal}
-                >
-                  <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
-
-                  <LoginForm />
-                </Modal>
               </section>
             ) : (
               <section className="navbar-section">
