@@ -260,11 +260,11 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
-        {/* <Searchbar
+        <Searchbar
           value={this.state.searchfood}
           handleInputChangeFood={this.handleInputChangeFood}
           handleFormSubmitFood={this.handleFormSubmitFood}
-        /> */}
+        />
 
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent

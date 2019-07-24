@@ -12,22 +12,23 @@ font-family: 'Sintony', sans-serif;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  /* animation: App-logo-spin infinite 20s linear; */
   height: 80px;
+  opacity: 0;
 }
 
 .App-header {
   background-color: #7cd417d0;
-
-  height: 60px;
+  height: 75px;
   padding: 20px;
-  color: rgb(49, 51, 49);
 }
 
 .App-title {
   font-family: 'Satisfy', cursive;
-  font-size: 2em;
+  font-size: 2.75em;
   margin-top: -95px;
+  color: white;
+  text-shadow: 2px 2px #c1ceb3;
 }
 
 .App-intro {
@@ -56,11 +57,15 @@ html {
   background-image: './img/theone.jpg';
 }
 
-.text-secondary {
+.text-second {
   font-size: 20px;
   color: #ffffff;
   font-weight: bolder;
 }
+a.text-second:visited {
+  color: #ffffff;
+}
+
 .navbar {
   margin-top: auto;
 }

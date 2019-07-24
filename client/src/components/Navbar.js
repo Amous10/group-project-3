@@ -44,33 +44,30 @@ class Navbar extends Component {
           <div className="col-4">
             {loggedIn ? (
               <section className="navbar-section">
-                <Link to={'/'} className="btn btn-link text-secondary">
-                  <span className="text-secondary">New Search</span>
+                <Link to={'/'} className="btn btn-link text-second">
+                  <span className="text-second">New Search</span>
                 </Link>
-                <Link
-                  to={'/api/recipes'}
-                  className="btn btn-link text-secondary"
-                >
-                  <span className="text-secondary">Saved Recipes</span>
+                <Link to={'/api/recipes'} className="btn btn-link text-second">
+                  <span className="text-second">Saved Recipes</span>
                 </Link>
                 <Link
                   to="#"
-                  className="btn btn-link text-secondary"
+                  className="btn btn-link text-second"
                   onClick={this.logout}
                 >
-                  <span className="text-secondary">Logout</span>
+                  <span className="text-second">Logout</span>
                 </Link>
               </section>
             ) : (
               <section className="navbar-section">
-                <Link to="/" className="btn btn-link text-secondary">
-                  <span className="text-secondary">Home</span>
+                <Link to="/" className="btn btn-link text-second">
+                  <span className="text-second">Home</span>
                 </Link>
-                <Link to="/login" className="btn btn-link text-secondary">
-                  <span className="text-secondary">Login</span>
+                <Link to="/login" className="btn btn-link text-second">
+                  <span className="text-second">Login</span>
                 </Link>
                 <Link to="/signup" className="btn btn-link">
-                  <span className="text-secondary">Sign Up</span>
+                  <span className="text-second">Sign Up</span>
                 </Link>
               </section>
             )}

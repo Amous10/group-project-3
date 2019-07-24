@@ -26,13 +26,14 @@ const styles = {
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: '10px'
   },
   main: {
     width: '100%',
-    minHeight: '600px',
-    maxWidth: '400px',
-    margin: '20px auto',
+    minHeight: '700px',
+    maxWidth: '300px',
+    margin: '10px 10px',
     backgroundColor: '#deebdd',
     borderRadius: 10,
     padding: 10,
@@ -46,8 +47,8 @@ const styles = {
     border: 'solid #c9cac8'
   },
   card: {
-    padding: '20px',
-    margin: '20px 0'
+    padding: '10px',
+    margin: '10px 10px'
   },
   todo: {
     position: 'relative',
@@ -57,16 +58,16 @@ const styles = {
   },
   label: {
     display: 'flex',
-    width: '100%'
+    width: '80%'
   },
   divider: {
     position: 'absolute',
     width: '100%',
     top: 0
   },
-  cursive: {
+  title: {
     fontFamily: 'Satisfy',
-    marginBottom: '10px',
+    marginBottom: '15px',
     fontSize: '35px'
   }
 };
@@ -136,7 +137,7 @@ class TodoComponent extends React.Component {
 
     return (
       <div id="main" style={styles.main}>
-        <Typography variant="h5" component="h2" style={styles.cursive}>
+        <Typography variant="h5" style={styles.title}>
           Your Pantry
         </Typography>
         <header style={styles.header}>
