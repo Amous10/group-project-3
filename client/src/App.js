@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-=======
 import API from './services/API';
->>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 
 import {
   BrowserRouter as Router,
@@ -14,10 +11,7 @@ import {
 } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
-<<<<<<< HEAD
-=======
 // components
->>>>>>> 3c90d5fbb5368ddc28f52063fb66ae20f745c369
 import Signup from './components/Signup.js';
 import LoginForm from './components/Login.js';
 import Navbar from './components/Navbar.js';
