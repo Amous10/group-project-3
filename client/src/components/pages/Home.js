@@ -235,7 +235,7 @@ class Home extends Component {
       return (
         <div>
           {/* <Navbar /> */}
-          <Searchbar />
+          {/* <Searchbar /> */}
           <div className="row">
             <div className="col l12 center align">
               <div className="preloader-wrapper big active">

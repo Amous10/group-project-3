@@ -33,7 +33,7 @@ const styles = {
     minHeight: '600px',
     maxWidth: '400px',
     margin: '20px auto',
-    backgroundColor: '#fafcf8',
+    backgroundColor: '#deebdd',
     borderRadius: 10,
     padding: 10,
     shadowColor: '#000000',
