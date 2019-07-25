@@ -133,9 +133,9 @@ class Home extends Component {
 
             // update the state
             //TODO Unnecessary?
-            return {
-              edamamresult: this.props.edamamresult
-            };
+            // return {
+            //   edamamresult: this.props.edamamresult
+            // };
           });
         });
       });

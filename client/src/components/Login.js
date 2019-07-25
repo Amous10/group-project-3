@@ -30,12 +30,12 @@ class LoginForm extends Component {
         password: this.state.password
       })
       .then(response => {
-        console.log('login response: ');
-        console.log(response);
+        console.log('response', response);
         if (response.status === 200) {
           // update App.js state
           this.props.updateUser({
             loggedIn: true,
+            userid: response.data._id,
             username: response.data.username
           });
           // update the state to redirect to home
@@ -51,11 +51,11 @@ class LoginForm extends Component {
   }
 
   render() {
-      console.log('this.state.redirectTo: ', this.state.redirectTo);
+    console.log('this.state.redirectTo: ', this.state.redirectTo);
     if (this.state.redirectTo) {
       return <Redirect to={{ pathname: this.state.redirectTo }} />;
     } else {
-        console.log('aasdfasdfasdfasdfasdfsadf')
+      console.log('redirect');
       return (
         <div>
           <h4>Login</h4>
@@ -67,7 +67,15 @@ class LoginForm extends Component {
                 </label>
               </div>
               <div className="col-3 col-mr-auto">
-                <input className="form-input" type="text" id="username" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} />
+                <input
+                  className="form-input"
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
               </div>
             </div>
             <div className="form-group">
@@ -77,12 +85,23 @@ class LoginForm extends Component {
                 </label>
               </div>
               <div className="col-3 col-mr-auto">
-                <input className="form-input" placeholder="password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                <input
+                  className="form-input"
+                  placeholder="password"
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
               </div>
             </div>
             <div className="form-group ">
               <div className="col-7" />
-              <button className="btn btn-primary col-1 col-mr-auto" onClick={this.handleSubmit} type="submit">
+              <button
+                className="btn btn-primary col-1 col-mr-auto"
+                onClick={this.handleSubmit}
+                type="submit"
+              >
                 Login
               </button>
             </div>
