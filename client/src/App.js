@@ -142,11 +142,11 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-          <Searchbar
+          {/* <Searchbar
             value={this.state.searchfood}
             handleInputChangeFood={this.handleInputChangeFood}
             handleFormSubmitFood={this.handleFormSubmitFood}
-          />
+          /> */}
           {/* greet user if logged in: */}
           {this.state.loggedIn && (
             <p>

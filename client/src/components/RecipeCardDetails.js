@@ -14,7 +14,7 @@ import ShareIcon from '@material-ui/icons/Share';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 800,
+    maxWidth: 400,
     marginTop: 10,
     marginBottom: 10
   },
@@ -55,11 +55,11 @@ export default function RecipeCardDetail({ recipe }) {
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Diet Labels:{recipe.dietLabels}
+          {recipe.dietLabels}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Health Labels: {recipe.healthLabels}
+          {recipe.healthLabels}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
@@ -67,11 +67,11 @@ export default function RecipeCardDetail({ recipe }) {
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Labels: {recipe.labels}
+          {recipe.labels}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Source: {recipe.source}
+          {recipe.source}
         </Typography>
       </CardContent>
     </Card>

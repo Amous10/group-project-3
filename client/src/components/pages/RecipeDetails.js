@@ -42,7 +42,7 @@ class RecipeDetails extends Component {
 
         <Jumbotron />
 
-        <h2 onClick={() => this.props.history.goBack()}>← {goBackText}</h2>
+        <h5 onClick={() => this.props.history.goBack()}>← {goBackText}</h5>
 
         <Container>
           <Row>

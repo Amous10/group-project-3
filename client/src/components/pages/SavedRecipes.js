@@ -6,7 +6,7 @@ import Col from '../Col';
 import Alert from '../Alert';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCard from '../RecipeCard';
-class Recipes extends Component {
+class SavedRecipes extends Component {
   state = {
     result: []
   };
@@ -71,7 +71,7 @@ class Recipes extends Component {
                       recipe={result}
                       history={this.props.history}
                       redirectTo={`/api/recipesdetail/${result._id}`}
-                      goBackText="Go back to your recipes"
+                      goBackText="Back to your recipes"
                       link="/api/recipesdetail/"
                       home="/api/recipes"
                       handleRecipeDelete={this.deleteRecipe}
@@ -90,4 +90,4 @@ class Recipes extends Component {
   }
 }
 
-export default Recipes;
+export default SavedRecipes;
