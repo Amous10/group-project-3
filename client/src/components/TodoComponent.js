@@ -10,6 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
+import { SSL_OP_SINGLE_DH_USE } from 'constants';
 
 const styles = {
   done: {
@@ -34,8 +35,12 @@ const styles = {
     minHeight: '700px',
     maxWidth: '340px',
     margin: '10px 10px',
-    backgroundColor: '#deebdd',
-    borderRadius: 10,
+    // backgroundColor: '#deebdd',
+    backgroundColor: 'whitesmoke',
+    borderStyle: 'solid',
+    borderWidth: 0.5,
+    borderColor: '#c9cac8',
+    borderRadius: 5,
     padding: 10,
     shadowColor: '#000000',
     shadowOffset: {
@@ -43,8 +48,7 @@ const styles = {
       height: 3
     },
     shadowRadius: 5,
-    shadowOpacity: 1.0,
-    border: 'solid #c9cac8'
+    shadowOpacity: 1.0
   },
   card: {
     padding: '10px',
@@ -90,7 +94,9 @@ class TodoComponent extends React.Component {
     }
   }
   onTextUpdate = e => {
-    this.setState({ newTask: e.target.value });
+    if (e.target.value.match('^[a-zA-Z ]*$') != null) {
+      this.setState({ newTask: e.target.value });
+    }
   };
 
   addTask = () => {

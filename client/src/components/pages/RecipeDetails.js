@@ -7,9 +7,9 @@ import Row from '../Row';
 import Col from '../Col';
 import Jumbotron from '../Jumbotron';
 // import RecipeCardWrapper from '../RecipeCardWrapper';
-import RecipeCardDetails from '../RecipeCardDetail';
+import RecipeCardDetails from '../RecipeCardDetails';
 
-class RecipesD extends Component {
+class RecipeDetails extends Component {
   state = {
     result: [],
     home: '',
@@ -42,7 +42,7 @@ class RecipesD extends Component {
 
         <Jumbotron />
 
-        <h2 onClick={() => this.props.history.goBack()}>← {goBackText}</h2>
+        <h5 onClick={() => this.props.history.goBack()}>← {goBackText}</h5>
 
         <Container>
           <Row>
@@ -61,4 +61,4 @@ class RecipesD extends Component {
   }
 }
 
-export default RecipesD;
+export default RecipeDetails;
