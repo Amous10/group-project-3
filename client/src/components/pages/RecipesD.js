@@ -8,6 +8,7 @@ import Col from '../Col';
 import Jumbotron from '../Jumbotron';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCardDetails from '../RecipeCardDetail';
+
 class RecipesD extends Component {
   state = {
     result: [],
@@ -16,40 +17,6 @@ class RecipesD extends Component {
     redirect: false,
     edamamresult: []
   };
-  componentDidMount() {
-    console.log('RecipeD is here');
-    if (this.props.match.params.id == 2) {
-      this.setState({
-        result: this.props.location.state.result,
-        edamamresult: this.props.location.state.edamamresult
-      });
-      this.forceUpdate();
-      let home = '/';
-      let hometext = 'Back to Search ';
-      this.setState({ home: home, hometext: hometext });
-    }
-    const user = {
-      userId: this.props.userid
-    };
-    console.log('inside recipesd', this.props.match.params.id);
-    console.log('inside recipesdPropState', this.props.location.state);
-
-    let passId = this.props.match.params.id;
-    console.log('Mystate', this.state.result);
-    if (passId != 2) {
-      API.getRecipesD(this.props.match.params.id)
-        .then(res => {
-          this.setState({ result: res.data });
-          let home = '/api/recipes';
-          let hometext = 'Back to Saved Recipes';
-
-          this.setState({ home: home, hometext: hometext });
-          return console.log('setting state', this.state.result);
-        })
-
-        .catch(err => console.log(err));
-    }
-  }
 
   componentDidUpdate() {
     console.log(this.state.result);
@@ -66,16 +33,8 @@ class RecipesD extends Component {
     }
   };
   render() {
-    if (this.state.redirect)
-      return (
-        <Redirect
-          push
-          to={{
-            pathname: '/',
-            state: { edamamresult: this.state.edamamresult }
-          }}
-        />
-      );
+    console.log('props', this.props);
+    const { result: recipe, goBackText } = this.props.location.state;
 
     return (
       <div>
@@ -83,29 +42,14 @@ class RecipesD extends Component {
 
         <Jumbotron />
 
-        <h2 onClick={() => this.setState({ redirect: true })}>
-          ← {this.state.hometext}
-        </h2>
+        <h2 onClick={() => this.props.history.goBack()}>← {goBackText}</h2>
 
         <Container>
           <Row>
             <Col>
               <RecipeCardDetails
-                key={this.state.result._id}
-                imgurl={
-                  this.state.result.image
-                    ? this.state.result.image
-                    : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
-                }
-                label={this.state.result.label}
-                uri={this.state.result.uri}
-                shareurl={this.state.result.url}
-                source={this.state.result.source}
-                yield={this.state.result.yield}
-                calories={this.state.result.calories}
-                healthLabels={this.state.result.healthLabels}
-                dietLabels={this.state.result.dietLabels}
-                ingredientLines={this.state.result.ingredientLines}
+                key={recipe.uri}
+                recipe={recipe}
                 leftButton={'View'}
                 rightButton={'Delete'}
               />

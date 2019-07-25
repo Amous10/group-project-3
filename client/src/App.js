@@ -161,8 +161,9 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => (
+              render={props => (
                 <Home
+                  {...props}
                   searchRecipes={this.searchRecipes}
                   location={this.props.location}
                   userid={this.state.userid}
@@ -174,13 +175,17 @@ class App extends Component {
             <Route
               exact
               path="/login"
-              render={() => <LoginForm updateUser={this.updateUser} />}
+              render={props => (
+                <LoginForm {...props} updateUser={this.updateUser} />
+              )}
             />
             <Route exact path="/signup" render={() => <Signup />} />
             <Route
               exact
               path="/api/recipes"
-              render={() => <Recipes userid={this.state.userid} />}
+              render={props => (
+                <Recipes {...props} userid={this.state.userid} />
+              )}
             />
             <Route exact path="/api/recipesdetail/:id" component={RecipesD} />
             <Route exact path="/homedetail/:id" component={RecipesD} />
