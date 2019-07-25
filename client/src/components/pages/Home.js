@@ -13,7 +13,6 @@ import green from '@material-ui/core/colors/green';
 
 import Grid from '@material-ui/core/Grid';
 
-
 const pantryTheme = createMuiTheme({
   palette: {
     primary: green,
@@ -79,10 +78,9 @@ class Home extends Component {
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
-            //TODO Unnecessary?
-            // return {
-            //   edamamresult: this.props.edamamresult
-            // };
+            return {
+              edamamresult: this.props.edamamresult
+            };
           });
         });
       });
@@ -144,7 +142,7 @@ class Home extends Component {
                 }
               >
                 {this.props.edamamresult.map(edamamresult => {
-                  console.log('AAAAAAA', edamamresult);
+                  // console.log('AAAAAAA', edamamresult);
                   return (
                     <RecipeCardHome
                       key={edamamresult.recipe.uri}
