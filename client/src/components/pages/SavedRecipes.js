@@ -5,7 +5,7 @@ import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import RecipeCardHome from '../RecipeCardHome';
+import RecipeCard from '../RecipeCard';
 class Recipes extends Component {
   state = {
     result: []
@@ -66,11 +66,12 @@ class Recipes extends Component {
               >
                 {this.state.result.map(result => {
                   return (
-                    <RecipeCardHome
+                    <RecipeCard
                       key={result._id}
                       recipe={result}
                       history={this.props.history}
                       redirectTo={`/api/recipesdetail/${result._id}`}
+                      goBackText="Go back to your recipes"
                       link="/api/recipesdetail/"
                       home="/api/recipes"
                       handleRecipeDelete={this.deleteRecipe}

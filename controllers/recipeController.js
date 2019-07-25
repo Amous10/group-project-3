@@ -15,11 +15,10 @@ module.exports = {
   },
 
   create: function(req, res) {
-    //TODO Add userid to relate the tables.
-    /*     console.log('Hitting the create Recipe in controller');
+    /*console.log('Hitting the create Recipe in controller');
     console.log('req.body: ', JSON.stringify(req.body));
     console.log('req.user._id: ', req.user._id); */
-    console.log('Inside create recipe save');
+    // console.log('Inside create recipe save');
     if (!req.body.userId) {
       return;
     }

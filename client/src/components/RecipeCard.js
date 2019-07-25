@@ -13,23 +13,28 @@ import { red, deepPurple } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ShareIcon from '@material-ui/icons/Share';
-import { NONAME } from 'dns';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 340,
+    maxWidth: 250,
+    maxHeight: 360,
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   media: {
     height: 0,
-    paddingTop: '56.25%' // 16:9
+    paddingTop: '45.25%' // 16:9
   },
   avatar: {
     backgroundColor: '#69cc02'
   },
   cardheader: {
-    height: 100,
+    minHeight: '100px',
+    maxHeight: '150px',
     backgroundColor: '#deebdd',
     backgroundImage:
       'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',
@@ -50,43 +55,55 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeCard(props) {
+export default function RecipeCard({ recipe, ...props }) {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <Link to={props.link + props.details}>
-        <CardHeader
-          className={classes.cardheader}
-          avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              {props.source.charAt(0)}
-            </Avatar>
-          }
-          title={props.label}
-          subheader={props.source}
-        />
+      <CardHeader
+        className={classes.cardheader}
+        avatar={
+          <Avatar aria-label="Recipe" className={classes.avatar}>
+            {recipe.source.charAt(0)}
+          </Avatar>
+        }
+        title={recipe.label}
+        subheader={recipe.source}
+      />
 
-        <CardMedia
-          className={classes.media}
-          image={props.imgurl}
-          title={props.name}
-        />
+      <CardMedia
+        onClick={() =>
+          props.history.push({
+            pathname: props.redirectTo,
+            state: {
+              result: recipe,
+              edamamresult: props.edamamresult,
+              goBackText: props.goBackText
+            }
+          })
+        }
+        className={classes.media}
+        image={
+          recipe.image
+            ? recipe.image
+            : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+        }
+        title={recipe.name}
+      />
 
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Recipe Yields: {props.yield}
-          </Typography>
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Recipe Yields: {recipe.yield}
+        </Typography>
 
-          <Typography variant="body2" color="textSecondary" component="p">
-            Calories: {Number(props.calories).toFixed(0)}
-          </Typography>
-        </CardContent>
-      </Link>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Calories: {Number(recipe.calories).toFixed(0)}
+        </Typography>
+      </CardContent>
 
       <CardActions disableSpacing className={classes.cardfooter}>
         <IconButton
-          data-id={props.uri}
+          data-id={recipe.uri}
           onClick={props.handleRecipeSave || props.handleRecipeDelete}
           aria-label="Add to Favorites"
         >
@@ -97,7 +114,7 @@ export default function RecipeCard(props) {
           )}
         </IconButton>
         <IconButton aria-label="Share">
-          <a href={props.shareurl} target="_blank">
+          <a href={recipe.shareurl} target="_blank">
             <ShareIcon className={classes.iconshare} />
           </a>
         </IconButton>

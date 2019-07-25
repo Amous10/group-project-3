@@ -4,7 +4,7 @@ import Row from '../Row';
 import Col from '../Col';
 import Container from '../Container';
 // import Searchbar from '../Searchbar';
-import RecipeCardHome from '../RecipeCardHome';
+import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import Alert from '../Alert';
 import TodoComponent from '../PantryTodo/TodoComponent';
@@ -144,7 +144,7 @@ class Home extends Component {
                 {this.props.edamamresult.map(edamamresult => {
                   // console.log('AAAAAAA', edamamresult);
                   return (
-                    <RecipeCardHome
+                    <RecipeCard
                       key={edamamresult.recipe.uri}
                       edamamresult={edamamresult}
                       goBackText="Go back to home"
