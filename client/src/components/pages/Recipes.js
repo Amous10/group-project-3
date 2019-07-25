@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
 import Container from '../Container';
-import { Link } from 'react-router-dom';
 import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
-import Jumbotron from '../Jumbotron';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import RecipeCard from '../RecipeCard';
+import RecipeCardHome from '../RecipeCardHome';
 class Recipes extends Component {
   state = {
     result: []
@@ -67,33 +65,18 @@ class Recipes extends Component {
                 message={this.state.result === 0 ? 'No saved recipes!' : null}
               >
                 {this.state.result.map(result => {
-                  // console.log('hit bitches', result);
-
                   return (
-                    // <Link to={'/api/recipesdetail/' + result._id}>
-                    <RecipeCard
+                    <RecipeCardHome
                       key={result._id}
-                      details={result._id}
-                      /* <Link to={'/api/recipesdetail/' + result._id}>   </Link> */
-
-                      imgurl={
-                        result.image
-                          ? result.image
-                          : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
-                      }
+                      recipe={result}
+                      history={this.props.history}
+                      redirectTo={`/api/recipesdetail/${result._id}`}
                       link="/api/recipesdetail/"
                       home="/api/recipes"
-                      label={result.label}
-                      uri={result.uri}
-                      shareurl={result.url}
-                      source={result.source}
-                      yield={result.yield}
-                      calories={result.calories}
                       handleRecipeDelete={this.deleteRecipe}
                       leftButton={'View'}
                       rightButton={'Delete'}
                     />
-                    // </Link>
                   );
                 })}
               </RecipeCardWrapper>

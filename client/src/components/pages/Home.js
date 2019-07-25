@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
-import { Redirect } from 'react-router-dom';
-import Image from '../Image';
-import Container from '../Container';
 import Row from '../Row';
-import Jumbotron from '../Jumbotron';
 import Col from '../Col';
+import Container from '../Container';
 // import Searchbar from '../Searchbar';
 import RecipeCardHome from '../RecipeCardHome';
-import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import Alert from '../Alert';
-
 import TodoComponent from '../PantryTodo/TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+
 import Grid from '@material-ui/core/Grid';
+
 
 const pantryTheme = createMuiTheme({
   palette: {
@@ -23,7 +20,6 @@ const pantryTheme = createMuiTheme({
     type: 'light' // Switching the dark mode on is a single property value change.
   }
 });
-
 class Home extends Component {
   state = {
     error: '',
@@ -34,61 +30,14 @@ class Home extends Component {
     tasks: []
   };
 
-  componentDidMount() {
-    try {
-      // this.setState({ edamamresult: this.props.edamamresult });
-      // console.log('HOME this.props.edamamresult: ', this.props.edamamresult);
-      // console.log('HOME this.edamamresult: ', this.props.edamamresult);
-    } catch (e) {
-      console.log('error');
-      //const {result} = this.props.location.state;
-      //console.log("result ", result);
-      //{  this.setState({edamamresult: this.props.location.props.edamamresult });   }
-    }
-  }
-
   setTasks = tasks => {
     this.setState({ tasks: tasks });
     console.log('this.TASKS: ', tasks);
   };
 
-  RecordClick = name => {
-    console.log('get click', name);
-    // preventDefault();
-    // filter to get the card record that was clicked to redirect to RecipeD
-
-    const selectedCard = this.props.edamamresult;
-    const resultCard = selectedCard.filter(
-      result => result.recipe.uri === name
-    );
-    if (resultCard.length === 0) {
-      this.setState({ redirect: false });
-    }
-    console.log('selected Card', resultCard[0]);
-
-    const ChosenRecipe = {
-      userId: 0,
-      uri: 0,
-      label: resultCard[0].recipe.label,
-      source: resultCard[0].recipe.source,
-      url: resultCard[0].recipe.url,
-      yield: resultCard[0].recipe.yield,
-      dietLabels: resultCard[0].recipe.dietLabels,
-      healthLabels: resultCard[0].recipe.healthLabels,
-      ingredientLines: resultCard[0].recipe.ingredientLines,
-      calories: resultCard[0].recipe.calories,
-      image: resultCard[0].recipe.image
-    };
-
-    this.setState({ redirect: true, resultcard: ChosenRecipe });
-
-    return;
-  };
-
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
-
     const newSavedRecipe = this.props.edamamresult;
     // console.log('this.props.edamamresult: ', this.props.edamamresult);
     // filter this.state.result to return recipes where the id is the same as the recipe clicked
@@ -99,7 +48,6 @@ class Home extends Component {
         let Uri = recipe.recipe.uri;
         Uri = Uri.split('recipe_');
         Uri = Uri[1] + this.props.userid;
-
         const newRecipe = {
           userId: this.props.userid,
           uri: Uri,
@@ -120,7 +68,6 @@ class Home extends Component {
             const recipeToRemove = this.props.edamamresult.find(recipe => {
               return recipe.recipe.image === newRecipe.image;
             });
-
             console.log('recipeToRemove', recipeToRemove);
             console.log('newRecipe', newRecipe);
             console.log('id of recipe', this.props.edamamresult);
@@ -131,12 +78,11 @@ class Home extends Component {
             console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
-
             // update the state
             //TODO Unnecessary?
-            return {
-              edamamresult: this.props.edamamresult
-            };
+            // return {
+            //   edamamresult: this.props.edamamresult
+            // };
           });
         });
       });
@@ -145,23 +91,7 @@ class Home extends Component {
       window.$('#foo').modal('open');
     }
   };
-
   render() {
-    if (this.state.redirect)
-      return (
-        <Redirect
-          push
-          to={{
-            pathname: '/homedetail/2',
-            state: {
-              result: this.state.resultcard,
-              edamamresult: this.props.edamamresult,
-              redirect: false
-            }
-          }}
-        />
-      );
-
     if (this.state.error) {
       return <div>{this.state.error}</div>;
     }
@@ -194,7 +124,6 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
-
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
@@ -202,7 +131,6 @@ class Home extends Component {
             tasks={this.state.tasks}
           />
         </MuiThemeProvider>
-
         <Container>
           <Row>
             <Col>
@@ -216,21 +144,15 @@ class Home extends Component {
                 }
               >
                 {this.props.edamamresult.map(edamamresult => {
+                  console.log('AAAAAAA', edamamresult);
                   return (
                     <RecipeCardHome
-                      RecordClick={this.RecordClick}
                       key={edamamresult.recipe.uri}
-                      imgurl={
-                        edamamresult.recipe.image
-                          ? edamamresult.recipe.image
-                          : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
-                      }
-                      label={edamamresult.recipe.label}
-                      uri={edamamresult.recipe.uri}
-                      shareurl={edamamresult.recipe.url}
-                      source={edamamresult.recipe.source}
-                      yield={edamamresult.recipe.yield}
-                      calories={edamamresult.recipe.calories}
+                      edamamresult={edamamresult}
+                      goBackText="Go back to home"
+                      recipe={edamamresult.recipe}
+                      history={this.props.history}
+                      redirectTo="/homedetail/2"
                       handleRecipeSave={this.saveRecipe}
                       leftButton={'View'}
                       rightButton={'Save'}
@@ -238,7 +160,6 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-
               <Alert modalMessage={'Recipe added to saved page!'} />
             </Col>
           </Row>
@@ -247,5 +168,4 @@ class Home extends Component {
     );
   }
 }
-
 export default Home;
