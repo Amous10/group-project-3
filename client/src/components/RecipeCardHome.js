@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeCardHome(props) {
+export default function RecipeCardHome({ recipe, ...props }) {
   const classes = useStyles();
 
   return (
@@ -57,33 +57,46 @@ export default function RecipeCardHome(props) {
         className={classes.cardheader}
         avatar={
           <Avatar aria-label="Recipe" className={classes.avatar}>
-            {props.source.charAt(0)}
+            {recipe.source.charAt(0)}
           </Avatar>
         }
-        title={props.label}
-        subheader={props.source}
+        title={recipe.label}
+        subheader={recipe.source}
       />
 
       <CardMedia
-        onClick={() => props.RecordClick(props.uri)}
+        onClick={() =>
+          props.history.push({
+            pathname: props.redirectTo,
+            state: {
+              result: recipe,
+              edamamresult: props.edamamresult,
+              goBackText: props.goBackText
+            }
+          })
+        }
         className={classes.media}
-        image={props.imgurl}
-        title={props.name}
+        image={
+          recipe.image
+            ? recipe.image
+            : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+        }
+        title={recipe.name}
       />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Recipe Yields: {props.yield}
+          Recipe Yields: {recipe.yield}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Calories: {Number(props.calories).toFixed(0)}
+          Calories: {Number(recipe.calories).toFixed(0)}
         </Typography>
       </CardContent>
 
       <CardActions disableSpacing className={classes.cardfooter}>
         <IconButton
-          data-id={props.uri}
+          data-id={recipe.uri}
           onClick={props.handleRecipeSave || props.handleRecipeDelete}
           aria-label="Add to Favorites"
         >
@@ -94,7 +107,7 @@ export default function RecipeCardHome(props) {
           )}
         </IconButton>
         <IconButton aria-label="Share">
-          <a href={props.shareurl} target="_blank">
+          <a href={recipe.shareurl} target="_blank">
             <ShareIcon className={classes.iconshare} />
           </a>
         </IconButton>
