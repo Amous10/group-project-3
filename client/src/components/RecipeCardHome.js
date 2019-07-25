@@ -16,18 +16,25 @@ import ShareIcon from '@material-ui/icons/Share';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: 250,
+    maxHeight: 360,
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   media: {
     height: 0,
-    paddingTop: '56.25%' // 16:9
+    paddingTop: '45.25%' // 16:9
   },
   avatar: {
     backgroundColor: '#69cc02'
   },
   cardheader: {
+    minHeight: '100px',
+    maxHeight: '150px',
     backgroundColor: '#deebdd',
     backgroundImage:
       'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',

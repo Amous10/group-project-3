@@ -32,7 +32,7 @@ const styles = {
   main: {
     width: '100%',
     minHeight: '700px',
-    maxWidth: '300px',
+    maxWidth: '340px',
     margin: '10px 10px',
     backgroundColor: '#deebdd',
     borderRadius: 10,

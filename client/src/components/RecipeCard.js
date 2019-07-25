@@ -17,7 +17,7 @@ import { NONAME } from 'dns';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: 340,
     marginTop: 10,
     marginBottom: 10
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#69cc02'
   },
   cardheader: {
-    // height: '25%',
+    height: 100,
     backgroundColor: '#deebdd',
     backgroundImage:
       'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',

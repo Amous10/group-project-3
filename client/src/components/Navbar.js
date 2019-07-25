@@ -6,6 +6,7 @@ import '../App.css';
 import axios from 'axios';
 import Modal from 'react-modal';
 import LoginForm from './Login';
+import Grid from '@material-ui/core/Grid';
 
 const customStyles = {
   content: {
@@ -68,66 +69,64 @@ class Navbar extends Component {
     // console.log(this.props);
 
     return (
-      <div>
-        <header className="navbar App-header" id="nav-container">
-          <div className="col-4">
-            {loggedIn ? (
-              <section className="navbar-section">
-                <Link to={'/'} className="btn btn-link text-second">
-                  <span className="text-second">New Search</span>
-                </Link>
-                <Link to={'/api/recipes'} className="btn btn-link text-second">
-                  <span className="text-second">Saved Recipes</span>
-                </Link>
-                <Link
-                  to="#"
-                  className="btn btn-link text-second"
-                  onClick={this.logout}
-                >
-                  <span className="text-second">Logout</span>
-                </Link>
-                <Link
-                  to="#"
-                  className="btn btn-link text-secondary"
-                  onClick={this.openModal}
-                >
-                  <span className="text-secondary">Login</span>
-                </Link>
+      <header className="navbar App-header" id="nav-container">
+        <Grid md="4">
+          {loggedIn ? (
+            <section className="navbar-section">
+              <Link to={'/'} className="btn btn-link text-second">
+                <span className="text-second">New Search</span>
+              </Link>
+              <Link to={'/api/recipes'} className="btn btn-link text-second">
+                <span className="text-second">Saved Recipes</span>
+              </Link>
+              <Link
+                to="#"
+                className="btn btn-link text-second"
+                onClick={this.logout}
+              >
+                <span className="text-second">Logout</span>
+              </Link>
+              <Link
+                to="#"
+                className="btn btn-link text-secondary"
+                onClick={this.openModal}
+              >
+                <span className="text-secondary">Login</span>
+              </Link>
 
-                <Modal
-                  isOpen={this.state.modalIsOpen}
-                  onAfterOpen={this.afterOpenModal}
-                  onRequestClose={this.closeModal}
-                  style={customStyles}
-                  contentLabel="Example Modal"
-                  closeModal={this.closeModal}
-                >
-                  <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
+              <Modal
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+                closeModal={this.closeModal}
+              >
+                <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
 
-                  <LoginForm />
-                </Modal>
-              </section>
-            ) : (
-              <section className="navbar-section">
-                <Link to="/" className="btn btn-link text-second">
-                  <span className="text-second">Home</span>
-                </Link>
-                <Link to="/login" className="btn btn-link text-second">
-                  <span className="text-second">Login</span>
-                </Link>
-                <Link to="/signup" className="btn btn-link">
-                  <span className="text-second">Sign Up</span>
-                </Link>
-              </section>
-            )}
-          </div>
-          <div className="col-4 col-mr-auto">
-            <div id="top-filler" />
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Pantry Chef</h1>
-          </div>
-        </header>
-      </div>
+                <LoginForm />
+              </Modal>
+            </section>
+          ) : (
+            <section className="navbar-section">
+              <Link to="/" className="btn btn-link text-second">
+                <span className="text-second">Home</span>
+              </Link>
+              <Link to="/login" className="btn btn-link text-second">
+                <span className="text-second">Login</span>
+              </Link>
+              <Link to="/signup" className="btn btn-link">
+                <span className="text-second">Sign Up</span>
+              </Link>
+            </section>
+          )}
+        </Grid>
+        <Grid md="4" className="col-mr-auto">
+          <div id="top-filler" />
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Pantry Chef</h1>
+        </Grid>
+      </header>
     );
   }
 }
