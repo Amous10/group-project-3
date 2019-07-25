@@ -5,8 +5,8 @@ import Row from '../Row';
 import Col from '../Col';
 import Alert from '../Alert';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import RecipeCardHome from '../RecipeCard';
-class Recipes extends Component {
+import RecipeCard from '../RecipeCard';
+class SavedRecipes extends Component {
   state = {
     result: []
   };
@@ -66,7 +66,7 @@ class Recipes extends Component {
               >
                 {this.state.result.map(result => {
                   return (
-                    <RecipeCardHome
+                    <RecipeCard
                       key={result._id}
                       recipe={result}
                       history={this.props.history}
@@ -90,4 +90,4 @@ class Recipes extends Component {
   }
 }
 
-export default Recipes;
+export default SavedRecipes;
