@@ -7,8 +7,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     // border: '2px solid #69cc02'
-    width: '100%',
-    marginRight: 20
+    width: '70%',
+    marginRight: 20,
+    marginLeft: 420
   },
 
   control: {
