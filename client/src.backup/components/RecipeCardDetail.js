@@ -43,7 +43,7 @@ export default function RecipeCardDetail({ recipe }) {
       />
       <CardMedia
         className={classes.media}
-        image={recipe.image}
+        image={recipe.imgurl}
         title={recipe.name}
       />
       <CardContent>

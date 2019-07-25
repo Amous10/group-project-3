@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router-dom';
-// import API from '../../services/API';
+import { Redirect } from 'react-router-dom';
+import API from '../../services/API';
 import Container from '../Container';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Row from '../Row';
 import Col from '../Col';
 import Jumbotron from '../Jumbotron';
-// import RecipeCardWrapper from '../RecipeCardWrapper';
+import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCardDetails from '../RecipeCardDetail';
 
 class RecipesD extends Component {
@@ -28,9 +28,9 @@ class RecipesD extends Component {
     console.log('this card', thisCardsId);
     // delete recipe with the given id
 
-    // {
-    //   window.$('#foo').modal('open');
-    // }
+    {
+      window.$('#foo').modal('open');
+    }
   };
   render() {
     console.log('props', this.props);

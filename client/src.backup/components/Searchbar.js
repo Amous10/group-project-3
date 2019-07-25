@@ -5,7 +5,7 @@ const Div = styled.div`
   margin-top: 50px;
 `;
 
-const SearchPantry = props => {
+const Searchbar = props => {
   return (
     <Div className="container">
       <div className="row">
@@ -13,17 +13,14 @@ const SearchPantry = props => {
           <textarea
             id="textarea1"
             className="materialize-textarea center-align"
-            onChange={props.handleInputChangePantryFood}
+            onChange={props.handleInputChangeFood}
             value={props.value}
             name="search"
             type="text"
             placeholder="Apples, cheese, lettuce, chicken"
             id="search"
           />
-          <a
-            className="indigo darken-4 waves-effect waves-light btn"
-            onClick={props.handleFormSubmitPantryFood}
-          >
+          <a className="" onClick={props.handleFormSubmitFood}>
             search
           </a>
         </div>
@@ -32,4 +29,4 @@ const SearchPantry = props => {
   );
 };
 
-export default SearchPantry;
+export default Searchbar;
