@@ -7,8 +7,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     // border: '2px solid #69cc02'
-    width: '70%',
-    marginLeft: 420,
+    width: '100%',
     marginRight: 20
   },
 
@@ -19,22 +18,17 @@ const useStyles = makeStyles(theme => ({
 
 // const RecipeCardWrapper = props => {
 const RecipeCardWrapper = props => {
-  const [spacing] = React.useState(2);
   const classes = useStyles();
   console.log('props.children', props.children);
 
   return (
     <Grid container className={classes.root} justify="center" spacing={2}>
-      {/* <Grid item xs={12}> */}
-      {/* <Grid container justify="center" spacing={spacing}> */}
       {props.children.map((value, i) => (
-        <Grid xs={3} key={value.key} item>
+        <Grid xs={12} sm={6} md={3} key={value.key} item>
           {value}
         </Grid>
       ))}
     </Grid>
-    // </Grid>
-    // </Grid>
   );
 };
 

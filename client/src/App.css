@@ -40,11 +40,10 @@ font-family: 'Sintony', sans-serif;
 }
 
 .container {
-  margin-left: 420px;
   margin-right: auto;
   padding-left: 0.4rem;
   padding-right: 0.4rem;
-  width: 70%;
+  width: 100%;
 }
 /* .MuiGrid-container {
   width: 70%;

@@ -26,7 +26,7 @@ const pantryTheme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    edamamresult: [],
+    // edamamresult: [],
     loading: false,
     redirect: false,
     resultcard: [],

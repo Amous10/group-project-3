@@ -91,7 +91,7 @@ class App extends Component {
             const filteredFoods = recipes.data.filter(
               recipe => !dbFoodsIds.includes(recipe.recipe.uri)
             );
-            console.log('filtderedFoods: ', filteredFoods);
+            console.log('filteredFoods: ', filteredFoods);
 
             //  set new state for result
             this.setState({
