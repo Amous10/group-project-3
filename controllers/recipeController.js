@@ -20,6 +20,9 @@ module.exports = {
     console.log('req.body: ', JSON.stringify(req.body));
     console.log('req.user._id: ', req.user._id); */
     console.log('Inside create recipe save');
+    if (!req.body.userId) {
+      return;
+    }
     db.Recipe.findOneAndUpdate(
       { userId: req.body.userId, uri: req.body.uri },
       {

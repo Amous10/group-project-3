@@ -10,6 +10,10 @@ import Alert from '../Alert';
 import TodoComponent from '../PantryTodo/TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+
+import Grid from '@material-ui/core/Grid';
+
+
 const pantryTheme = createMuiTheme({
   palette: {
     primary: green,
