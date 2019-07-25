@@ -26,7 +26,7 @@
     "nodemon": "^1.18.7"
   },
   "scripts": {
-    "api": "nodemon --ignore ./client/ ./server/server.js",
+    "api": "nodemon --delay 2 --ignore ./client/ ./server/server.js",
     "client": "cd client && npm run start",
     "build": "cd client && npm run build",
     "install": "cd client && npm install",
