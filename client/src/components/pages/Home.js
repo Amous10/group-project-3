@@ -4,10 +4,10 @@ import Row from '../Row';
 import Col from '../Col';
 import Container from '../Container';
 // import Searchbar from '../Searchbar';
-import RecipeCardHome from '../RecipeCardHome';
+import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import Alert from '../Alert';
-import TodoComponent from '../PantryTodo/TodoComponent';
+import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
@@ -142,12 +142,11 @@ class Home extends Component {
                 }
               >
                 {this.props.edamamresult.map(edamamresult => {
-                  // console.log('AAAAAAA', edamamresult);
                   return (
-                    <RecipeCardHome
+                    <RecipeCard
                       key={edamamresult.recipe.uri}
                       edamamresult={edamamresult}
-                      goBackText="Go back to home"
+                      goBackText="Go back to recipes"
                       recipe={edamamresult.recipe}
                       history={this.props.history}
                       redirectTo="/homedetail/2"
@@ -158,7 +157,7 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              <Alert modalMessage={'Recipe added to saved page!'} />
+              {/* <Alert modalMessage={'Recipe added to saved page!'} /> */}
             </Col>
           </Row>
         </Container>
