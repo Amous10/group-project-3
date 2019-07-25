@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeCardHome({ recipe, ...props }) {
+export default function RecipeCard({ recipe, ...props }) {
   const classes = useStyles();
 
   return (
