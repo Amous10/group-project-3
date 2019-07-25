@@ -20,10 +20,7 @@ const Searchbar = props => {
             placeholder="Apples, cheese, lettuce, chicken"
             id="search"
           />
-          <a
-            className="indigo darken-4 waves-effect waves-light btn"
-            onClick={props.handleFormSubmitFood}
-          >
+          <a className="" onClick={props.handleFormSubmitFood}>
             search
           </a>
         </div>

@@ -19,7 +19,7 @@ const pantryTheme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    edamamresult: [],
+    // edamamresult: [],
     loading: false,
     redirect: false,
     resultcard: [],
@@ -76,9 +76,9 @@ class Home extends Component {
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
             //TODO Unnecessary?
-            return {
-              edamamresult: this.props.edamamresult
-            };
+            // return {
+            //   edamamresult: this.props.edamamresult
+            // };
           });
         });
       });
