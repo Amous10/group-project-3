@@ -1,49 +1,123 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
+// import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logo from '../img/pot.svg';
+import logo from '../img/logo.png';
 import '../App.css';
 import axios from 'axios';
-import Modal from 'react-modal';
-import LoginForm from './Login';
+// import Modal from 'react-modal';
+// import LoginForm from './Login';
 import Grid from '@material-ui/core/Grid';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import SavedIcon from '@material-ui/icons/Favorite';
+import NewSearchIcon from '@material-ui/icons/FindReplace';
+import LoginIcon from '@material-ui/icons/Fingerprint';
+import SignupIcon from '@material-ui/icons/AssignmentInd';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import InputBase from '@material-ui/core/InputBase';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    // backgroundColor: `#aeaeae`,
+    // borderTop: 'solid 2px  #a7c93f'
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block'
+    }
+  },
+  navbar: {
+    marginBottom: '50px;'
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(10),
+      width: 'auto'
+    }
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  searchButton: {
+    pointerEvents: 'none',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.35),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.65)
+    },
+    marginRight: theme.spacing(1),
+    marginLeft: 0,
+    position: 'relative'
+    // margin: '6px'
+  },
+  logo: {
+    height: '10%',
+    pointerEvents: 'none'
+  },
+  inputRoot: {
+    color: 'inherit'
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: 170,
+      '&:focus': {
+        width: 300
+      }
+    }
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex'
+    }
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
   }
-};
+}));
 
-class Navbar extends Component {
-  constructor() {
-    super();
-    this.logout = this.logout.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.state = {
-      modalIsOpen: false
-    };
-  }
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  logout(event) {
+export default function Navbar({ ...props }) {
+  const logout = event => {
     event.preventDefault();
     console.log('logging out');
     axios
@@ -51,7 +125,7 @@ class Navbar extends Component {
       .then(response => {
         console.log(response.data);
         if (response.status === 200) {
-          this.props.updateUser({
+          props.updateUser({
             loggedIn: false,
             username: null,
             userid: null
@@ -61,74 +135,255 @@ class Navbar extends Component {
       .catch(error => {
         console.log('Logout error');
       });
+  };
+
+  const loggedIn = props.loggedIn;
+  const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  function handleProfileMenuOpen(event) {
+    setAnchorEl(event.currentTarget);
   }
 
-  render() {
-    const loggedIn = this.props.loggedIn;
-    // console.log('navbar render, props: ');
-    // console.log(this.props);
+  function handleMobileMenuClose() {
+    setMobileMoreAnchorEl(null);
+  }
 
-    return (
-      <header className="navbar App-header" id="nav-container">
-        <Grid md="4">
+  function handleMenuClose() {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+
+  function handleMobileMenuOpen(event) {
+    setMobileMoreAnchorEl(event.currentTarget);
+  }
+
+  function handleSearchFoodsSubmit(event) {
+    console.log('handlebuttonclick', event);
+
+    // props.searchRecipes(query);
+  }
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {loggedIn ? (
+        <div>
+          <MenuItem onClick={handleMenuClose}>
+            <Link to="#" className="btn btn-link text-second" onClick={logout}>
+              <span className="text-primary">Logout, {props.userName}.</span>
+            </Link>
+          </MenuItem>
+        </div>
+      ) : (
+        <div>
+          <MenuItem onClick={handleMenuClose}>
+            <IconButton aria-label="login" color="inherit">
+              <LoginIcon />
+            </IconButton>
+            <Link to={'/login'} className="btn btn-link text-primary">
+              <span className="text-primary">Login</span>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <IconButton aria-label="signup" color="inherit">
+              <SignupIcon />
+            </IconButton>
+            <Link to={'/signup'} className="btn btn-link text-primary">
+              <span className="text-primary">Sign Up</span>
+            </Link>
+          </MenuItem>
+        </div>
+      )}
+    </Menu>
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      {loggedIn ? (
+        <div>
+          <MenuItem onClick={handleMenuClose}>
+            <IconButton aria-label="new recipe search" color="inherit">
+              <NewSearchIcon />
+            </IconButton>
+            <Link to={'/'} className="btn btn-link text-primary">
+              <span className="text-primary">New Search</span>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <IconButton aria-label="new recipe search" color="inherit">
+              <Badge
+                badgeContent={props.savedLength ? props.savedLength : 0}
+                color="secondary"
+              >
+                <SavedIcon />
+              </Badge>
+            </IconButton>
+            <Link to={'/api/recipes'} className="btn btn-link text-primary">
+              <span className="texct-primary">Saved Recipes</span>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <span className="btn btn-link text-primary">Profile</span>
+          </MenuItem>
+        </div>
+      ) : (
+        <div>
+          <MenuItem onClick={handleMenuClose}>
+            <IconButton aria-label="new recipe search" color="inherit">
+              <NewSearchIcon />
+            </IconButton>
+            <Link to={'/'} className="btn btn-link text-primary">
+              <span className="text-primary">New Search</span>
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <span className="btn btn-link text-primary">Profile</span>
+          </MenuItem>
+        </div>
+      )}
+    </Menu>
+  );
+
+  return (
+    <div className={(classes.grow, classes.navbar)}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            {/* <MenuIcon /> */}
+            <img src={logo} className="App-logo" alt="logo" />
+          </IconButton>
+          {/* <Typography className={classes.title} variant="h6" noWrap> */}
+          <Typography className={`App-title`} variant="h6" noWrap>
+            Pantry Chef
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search Recipes…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              // onChange={props.handleInputChangeFood}
+            />
+            {/* <Button
+              className={classes.searchButton}
+              onClick={handleSearchFoodsSubmit('rawr')}
+            >
+              Search
+            </Button> */}
+          </div>
+          <Button
+              className={classes.searchButton}
+              onClick={handleSearchFoodsSubmit('rawr')}
+            >
+              Search
+            </Button>
+          <div className={classes.grow} />
           {loggedIn ? (
-            <section className="navbar-section">
+            <div className={classes.sectionDesktop}>
               <Link to={'/'} className="btn btn-link text-second">
-                <span className="text-second">New Search</span>
+                <Button>
+                  <span className="text-second">New Search</span>
+                </Button>
               </Link>
               <Link to={'/api/recipes'} className="btn btn-link text-second">
-                <span className="text-second">Saved Recipes</span>
+                <Button>
+                  <span className="text-second">Saved Recipes</span>
+                </Button>
               </Link>
-              <Link
-                to="#"
-                className="btn btn-link text-second"
-                onClick={this.logout}
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
               >
-                <span className="text-second">Logout</span>
-              </Link>
-              <Link
-                to="#"
-                className="btn btn-link text-secondary"
-                onClick={this.openModal}
-              >
-                <span className="text-secondary">Login</span>
-              </Link>
-
-              <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-                closeModal={this.closeModal}
-              >
-                <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
-
-                <LoginForm />
-              </Modal>
-            </section>
+                <AccountCircle />
+              </IconButton>
+            </div>
           ) : (
-            <section className="navbar-section">
-              <Link to="/" className="btn btn-link text-second">
-                <span className="text-second">Home</span>
+            <div className={classes.sectionDesktop}>
+              <Link to={'/'} className="btn btn-link text-second">
+                <Button>
+                  <span className="text-second">New Search</span>
+                </Button>
               </Link>
-              <Link to="/login" className="btn btn-link text-second">
-                <span className="text-second">Login</span>
-              </Link>
-              <Link to="/signup" className="btn btn-link">
-                <span className="text-second">Sign Up</span>
-              </Link>
-            </section>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
           )}
-        </Grid>
-        <Grid md="4" className="col-mr-auto">
-          <div id="top-filler" />
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Pantry Chef</h1>
-        </Grid>
-      </header>
-    );
-  }
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </div>
+  );
 }
-
-export default Navbar;

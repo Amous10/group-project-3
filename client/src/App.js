@@ -141,18 +141,14 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-          {/* <Searchbar
-            value={this.state.searchfood}
+          <Navbar
+            updateUser={this.updateUser}
+            loggedIn={this.state.loggedIn}
+            savedLength={this.state.edamamresult.length}
+            userName={this.state.username}
             handleInputChangeFood={this.handleInputChangeFood}
             handleFormSubmitFood={this.handleFormSubmitFood}
-          /> */}
-          {/* greet user if logged in: */}
-          {this.state.loggedIn && (
-            <p>
-              Join the party, {this.state.username}! at {this.state.userid}
-            </p>
-          )}
+          />
 
           <Switch>
             {/* <Route exact path="/" component={Intro} /> */}
