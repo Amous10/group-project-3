@@ -5,14 +5,14 @@ const foodRoutes = require('./foods');
 const recipeRoutes = require('./recipes');
 const edamamRoutes = require('./edamam');
 const recipeDetailRoutes = require('./recipesdetail');
-const pantryRoutes = require('./pantry');
+const ingredientRoutes = require('./ingredients');
 //  routes
 
 router.use('/foods', foodRoutes);
 router.use('/recipes', recipeRoutes);
 router.use('/edamam', edamamRoutes);
 router.use('/recipesdetail', recipeDetailRoutes);
-router.use('/pantry', pantryRoutes);
+router.use('/ingredients', ingredientRoutes);
 
 console.log('--either books or google route hit--');
 module.exports = router;

@@ -26,10 +26,10 @@ export default {
   },
   getPantry: function(id) {
     console.log('getting details Pantry', id);
-    return axios.get('/' + id);
+    return axios.get('/api/ingredients/' + id);
   },
   savePantry: function(pantrydata, userid) {
     console.log('userid: ', userid);
-    return axios.post('/', pantrydata);
+    return axios.post('/api/ingredients/', pantrydata);
   }
 };
