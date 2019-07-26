@@ -73,7 +73,7 @@ export default function RecipeCardDetail({ recipe }) {
         </Typography>
 
         <div
-          classname={classes.ingredientBox}
+          className={classes.ingredientBox}
           style={{ textAlign: 'left', marginTop: 20 }}
         >
           <h4 style={{ textAlign: 'center' }}>Ingredients</h4>
