@@ -10,7 +10,6 @@ import Alert from '../Alert';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-
 import Grid from '@material-ui/core/Grid';
 
 const pantryTheme = createMuiTheme({
@@ -122,6 +121,7 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
+
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}

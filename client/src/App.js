@@ -155,7 +155,7 @@ class App extends Component {
           )}
 
           <Switch>
-            {/* <Route exact path="/" component={Intro} /> */}
+            <Route exact path="/intro" component={Intro} />
 
             <Route
               exact
