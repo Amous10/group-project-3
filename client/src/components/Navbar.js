@@ -28,8 +28,8 @@ import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    // backgroundColor: `#aeaeae`,
-    // borderTop: 'solid 2px  #a7c93f'
+    backgroundColor: `#aeaeae`,
+    borderTop: 'solid 2px  #a7c93f'
   },
   grow: {
     flexGrow: 1
@@ -321,11 +321,11 @@ export default function Navbar({ ...props }) {
             </Button> */}
           </div>
           <Button
-              className={classes.searchButton}
-              onClick={handleSearchFoodsSubmit('rawr')}
-            >
-              Search
-            </Button>
+            className={classes.searchButton}
+            onClick={handleSearchFoodsSubmit('rawr')}
+          >
+            Search
+          </Button>
           <div className={classes.grow} />
           {loggedIn ? (
             <div className={classes.sectionDesktop}>
