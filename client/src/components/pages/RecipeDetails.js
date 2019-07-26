@@ -8,6 +8,7 @@ import Col from '../Col';
 import Jumbotron from '../Jumbotron';
 // import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCardDetails from '../RecipeCardDetails';
+import Grid from '@material-ui/core/Grid';
 
 class RecipeDetails extends Component {
   state = {
@@ -40,22 +41,21 @@ class RecipeDetails extends Component {
       <div>
         {/* <Navbar /> */}
 
-        <Jumbotron />
+        <h5
+          style={{ color: '#389636', textAlign: 'left', marginLeft: 10 }}
+          onClick={() => this.props.history.goBack()}
+        >
+          ← {goBackText}
+        </h5>
 
-        <h5 onClick={() => this.props.history.goBack()}>← {goBackText}</h5>
-
-        <Container>
-          <Row>
-            <Col>
-              <RecipeCardDetails
-                key={recipe.uri}
-                recipe={recipe}
-                leftButton={'View'}
-                rightButton={'Delete'}
-              />
-            </Col>
-          </Row>
-        </Container>
+        <Grid container item xs={12} justify="center">
+          <RecipeCardDetails
+            key={recipe.uri}
+            recipe={recipe}
+            leftButton={'View'}
+            rightButton={'Delete'}
+          />
+        </Grid>
       </div>
     );
   }
