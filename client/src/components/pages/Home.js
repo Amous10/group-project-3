@@ -26,13 +26,22 @@ class Home extends Component {
     loading: false,
     redirect: false,
     resultcard: [],
-    tasks: []
+    tasks: [],
+    pantry: []
   };
 
   setTasks = tasks => {
     this.setState({ tasks: tasks });
     console.log('this.TASKS: ', tasks);
   };
+
+  componentDidMount() {
+    const user = {
+      userId: this.props.userid
+    };
+
+    this.setState(this.props.tasks);
+  }
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
