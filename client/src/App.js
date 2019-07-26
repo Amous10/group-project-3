@@ -114,10 +114,17 @@ class App extends Component {
       });
   };
 
+  getPantry(user) {
+    API.getPantry(user)
+      .then(res => this.setState({ tasks: res.data }))
+      .catch(err => console.log(err));
+  }
+
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ');
       if (response.data.user) {
+        this.getPantry(response.data.user._id);
         console.log('Get User: There is a user saved in the server session: ');
         console.log(response.data.user._id);
 
@@ -167,6 +174,7 @@ class App extends Component {
                   location={this.props.location}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
+                  tasks={this.state.tasks}
                 />
               )}
             />

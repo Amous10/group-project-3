@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PantrySchema = new Schema({
@@ -7,8 +7,8 @@ const PantrySchema = new Schema({
     required: false
   },
   pantryItem: {
-    type: String,
-    required: true
+    type: Array,
+    required: false
   }
 });
 
