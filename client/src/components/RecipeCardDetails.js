@@ -92,7 +92,10 @@ export default function RecipeCardDetail({ recipe }) {
           style={{ fontStyle: 'italic' }}
           component="p"
         >
-          Full recipe at: <a href={recipe.url}>{recipe.source}</a>
+          Full recipe at:{' '}
+          <a href={recipe.url} target="_blank">
+            {recipe.source}
+          </a>
         </Typography>
       </CardContent>
     </Card>
