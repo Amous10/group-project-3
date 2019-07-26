@@ -12,7 +12,7 @@ module.exports = {
     //TODO Add userid to relate the tables.
     console.log('Hitting the create Pantry in controller');
     console.log('req.body: ', JSON.stringify(req.body));
-    console.log('req.user._id: ', req.user._id);
+    console.logls('req.user._id: ', req.user._id);
 
     db.Pantry.findOneAndUpdate(
       { userId: req.body.userId },

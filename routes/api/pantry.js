@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const pantryController = require('../../pantryController');
+const pantryController = require('../../controllers/pantryController');
 
 // Matches with "/api/recipes/"
 router
