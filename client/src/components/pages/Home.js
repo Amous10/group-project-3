@@ -3,14 +3,11 @@ import API from '../../services/API';
 import Row from '../Row';
 import Col from '../Col';
 import Container from '../Container';
-// import Searchbar from '../Searchbar';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import Alert from '../Alert';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-import Grid from '@material-ui/core/Grid';
 
 const pantryTheme = createMuiTheme({
   palette: {
@@ -21,7 +18,6 @@ const pantryTheme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    // edamamresult: [],
     loading: false,
     redirect: false,
     resultcard: [],
@@ -92,10 +88,6 @@ class Home extends Component {
           });
         });
       });
-    // perform modal dialogue
-    {
-      window.$('#foo').modal('open');
-    }
   };
   render() {
     if (this.state.error) {
@@ -166,7 +158,6 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              {/* <Alert modalMessage={'Recipe added to saved page!'} /> */}
             </Col>
           </Row>
         </Container>

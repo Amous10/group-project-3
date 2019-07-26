@@ -46,9 +46,6 @@ class SavedRecipes extends Component {
         };
       });
     });
-    {
-      window.$('#foo').modal('open');
-    }
   };
   render() {
     return (
@@ -81,7 +78,6 @@ class SavedRecipes extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              <Alert modalMessage={'Recipe deleted!'} />
             </Col>
           </Row>
         </Container>

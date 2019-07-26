@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   navbar: {
-    marginBottom: '50px;'
+    // marginBottom: '50px;'
   },
   search: {
     position: 'relative',
