@@ -114,7 +114,7 @@ export default function RecipeCard({ recipe, ...props }) {
           )}
         </IconButton>
         <IconButton aria-label="Share">
-          <a href={recipe.shareurl} target="_blank">
+          <a href={recipe.url} target="_blank">
             <ShareIcon className={classes.iconshare} />
           </a>
         </IconButton>

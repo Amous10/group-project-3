@@ -155,7 +155,7 @@ class Home extends Component {
                     <RecipeCard
                       key={edamamresult.recipe.uri}
                       edamamresult={edamamresult}
-                      goBackText="Go back to recipes"
+                      goBackText="Back to recipes"
                       recipe={edamamresult.recipe}
                       history={this.props.history}
                       redirectTo="/homedetail/2"
