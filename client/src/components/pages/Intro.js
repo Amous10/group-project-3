@@ -1,15 +1,12 @@
 import React from 'react';
-
-// import ProductHero from './modules/views/ProductHero';
-
-// import ProductHowItWorks from './modules/views/ProductHowItWorks';
+import ProductHero from '../OnePirate/ProductHero';
+import ProductHowItWorks from '../OnePirate/ProductHowItWorks';
 
 function Intro() {
   return (
     <React.Fragment>
-      {/* <ProductHero /> */}
-
-      {/* <ProductHowItWorks /> */}
+      <ProductHero />
+      <ProductHowItWorks />
     </React.Fragment>
   );
 }
