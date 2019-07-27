@@ -18,17 +18,7 @@ const pantryTheme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    // edamamresult: [],
-    loading: false,
-    redirect: false,
-    resultcard: [],
-    tasks: [],
-    pantry: []
-  };
-
-  setTasks = tasks => {
-    this.setState({ tasks: tasks });
-    console.log('this.TASKS: ', tasks);
+    loading: false
   };
 
   componentDidMount() {
@@ -125,11 +115,11 @@ class Home extends Component {
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
-            setTasks={this.setTasks}
             tasks={this.props.tasks}
             userid={this.props.userid}
           />
         </MuiThemeProvider>
+
         <Container>
           <Row>
             <Col>

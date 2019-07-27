@@ -34,6 +34,7 @@ class LoginForm extends Component {
         if (response.status === 200) {
           this.props.getpantry(response.data._id);
           // update App.js state
+          this.props.getPantry(response.data._id);
           this.props.updateUser({
             loggedIn: true,
             userid: response.data._id,
