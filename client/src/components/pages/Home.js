@@ -8,6 +8,7 @@ import RecipeCardWrapper from '../RecipeCardWrapper';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+import CircularIndeterminate from '../CircularIndeterminate';
 
 const theme = createMuiTheme({
   palette: {
@@ -114,33 +115,36 @@ class Home extends Component {
     }
     if (this.state.loading) {
       return (
-        <div>
-          {/* <Navbar /> */}
-          {/* <Searchbar /> */}
-          <div className="row">
-            <div className="col l12 center align">
-              <div className="preloader-wrapper big active">
-                <div className="spinner-layer spinner-blue-only">
-                  <div className="circle-clipper left">
-                    <div className="circle" />
-                  </div>
-                  <div className="gap-patch">
-                    <div className="circle" />
-                  </div>
-                  <div className="circle-clipper right">
-                    <div className="circle" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CircularIndeterminate />
+
+        // <div>
+        //   {/* <Navbar /> */}
+        //   {/* <Searchbar /> */}
+        //   <div className="row">
+        //     <div className="col l12 center align">
+        //       <div className="preloader-wrapper big active">
+        //         <div className="spinner-layer spinner-blue-only">
+        //           <div className="circle-clipper left">
+        //             <div className="circle" />
+        //           </div>
+        //           <div className="gap-patch">
+        //             <div className="circle" />
+        //           </div>
+        //           <div className="circle-clipper right">
+        //             <div className="circle" />
+        //           </div>
+        //         </div>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
       );
     }
     // else
     return (
       <div>
         {/* <Navbar /> */}
+        <CircularIndeterminate />
 
         <MuiThemeProvider theme={theme}>
           <TodoComponent

@@ -16,8 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 250,
-    maxHeight: 360,
+    maxWidth: 260,
+    maxHeight: 370,
     marginTop: 10,
     marginBottom: 10,
     height: '100%',
@@ -27,12 +27,13 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 0,
-    paddingTop: '45.25%' // 16:9
+    paddingTop: '50.25%' // 16:9
   },
-  avatar: {
-    backgroundColor: '#69cc02'
-  },
+  // avatar: {
+  //   backgroundColor: '#69cc02'
+  // },
   cardheader: {
+    font: 15,
     minHeight: '100px',
     maxHeight: '150px',
     backgroundColor: '#deebdd',
@@ -51,7 +52,8 @@ const useStyles = makeStyles(theme => ({
     color: '#ff0000'
   },
   iconshare: {
-    color: '#69cc02'
+    color: '#a6c844',
+    fontWeight: 'bold'
   }
 }));
 
@@ -62,13 +64,12 @@ export default function RecipeCard({ recipe, ...props }) {
     <Card className={classes.card}>
       <CardHeader
         className={classes.cardheader}
-        avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            {recipe.source.charAt(0)}
-          </Avatar>
-        }
+        // avatar={
+        //   <Avatar aria-label="Recipe" className={classes.avatar}>
+        //     {recipe.source.charAt(0)}
+        //   </Avatar>
+        // }
         title={recipe.label}
-        subheader={recipe.source}
       />
 
       <CardMedia
@@ -114,10 +115,11 @@ export default function RecipeCard({ recipe, ...props }) {
           )}
         </IconButton>
         <IconButton aria-label="Share">
-          <a href={recipe.url} target="_blank">
-            <ShareIcon className={classes.iconshare} />
-          </a>
+          <ShareIcon className={classes.iconshare} />
         </IconButton>
+        <a href={recipe.url} className={classes.iconshare} target="_blank">
+          {recipe.source}
+        </a>
       </CardActions>
     </Card>
   );

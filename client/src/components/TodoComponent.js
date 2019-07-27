@@ -30,10 +30,10 @@ const styles = {
     marginBottom: '10px'
   },
   main: {
+    margin: 30,
     width: '100%',
     minHeight: '700px',
     maxWidth: '340px',
-    margin: '10px 10px',
     // backgroundColor: '#deebdd',
     backgroundColor: 'whitesmoke',
     borderStyle: 'solid',
