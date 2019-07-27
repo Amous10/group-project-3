@@ -9,11 +9,6 @@ module.exports = {
   },
 
   create: function(req, res) {
-    //TODO Add userid to relate the tables.
-    console.log('Hitting the create Pantry in controller');
-    console.log('req.body: ', JSON.stringify(req.body));
-    console.logls('req.user._id: ', req.user._id);
-
     db.Ingredient.findOneAndUpdate(
       { userId: req.body.userId },
       { $set: { userId: req.body.userId, pantryItems: req.body.pantryItems } },
