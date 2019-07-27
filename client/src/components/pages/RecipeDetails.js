@@ -40,9 +40,8 @@ class RecipeDetails extends Component {
     return (
       <div>
         {/* <Navbar /> */}
-
         <h5
-          style={{ color: '#389636', textAlign: 'left', marginLeft: 10 }}
+          style={{ color: '#389636', textAlign: 'center', marginLeft: 10 }}
           onClick={() => this.props.history.goBack()}
         >
           ← {goBackText}

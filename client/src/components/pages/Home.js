@@ -8,10 +8,7 @@ import RecipeCardWrapper from '../RecipeCardWrapper';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-<<<<<<< HEAD
 import CircularIndeterminate from '../CircularIndeterminate';
-=======
->>>>>>> 0c5e2f197b3ade16e5b9b432de90ec50ee654130
 
 const theme = createMuiTheme({
   palette: {
@@ -152,7 +149,7 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
-        <CircularIndeterminate />
+        {/* <CircularIndeterminate /> */}
 
         <MuiThemeProvider theme={theme}>
           <TodoComponent

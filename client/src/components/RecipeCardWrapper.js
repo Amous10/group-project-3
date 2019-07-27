@@ -7,13 +7,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     // border: '2px solid #69cc02'
-    width: '70%',
-    marginRight: 20,
-    marginLeft: 360
+    width: '100%',
+    margin: 10
   },
 
   control: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(1)
   }
 }));
 
@@ -25,7 +24,7 @@ const RecipeCardWrapper = props => {
   return (
     <Grid container className={classes.root} justify="center" spacing={2}>
       {props.children.map((value, i) => (
-        <Grid xs={12} sm={6} md={4} key={value.key} item>
+        <Grid xs={12} sm={6} md={3} key={value.key} item>
           {value}
         </Grid>
       ))}
