@@ -28,8 +28,10 @@ import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    backgroundColor: `#aeaeae`,
-    borderTop: 'solid 2px  #a7c93f'
+    // backgroundColor: `#aeaeae`,
+    // backgroundColor: `#a7c93f`,
+    backgroundColor: '#a7c93f',
+    // borderTop: 'solid 2px  #F69F04'
   },
   grow: {
     flexGrow: 1
@@ -44,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   navbar: {
-    marginBottom: '50px;'
+    // marginBottom: '50px;'
   },
   search: {
     position: 'relative',
@@ -71,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   },
   searchButton: {
-    pointerEvents: 'none',
+    // pointerEvents: 'none',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: theme.shape.borderRadius,
@@ -313,16 +315,10 @@ export default function Navbar({ ...props }) {
               inputProps={{ 'aria-label': 'search' }}
               // onChange={props.handleInputChangeFood}
             />
-            {/* <Button
-              className={classes.searchButton}
-              onClick={handleSearchFoodsSubmit('rawr')}
-            >
-              Search
-            </Button> */}
           </div>
           <Button
             className={classes.searchButton}
-            onClick={handleSearchFoodsSubmit('rawr')}
+            onClick={handleSearchFoodsSubmit}
           >
             Search
           </Button>
