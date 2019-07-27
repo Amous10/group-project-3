@@ -3,7 +3,10 @@ import API from '../../services/API';
 import Container from '../Container';
 import Row from '../Row';
 import Col from '../Col';
+<<<<<<< HEAD
 // import Alert from '../Alert';
+=======
+>>>>>>> 0c5e2f197b3ade16e5b9b432de90ec50ee654130
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCard from '../RecipeCard';
 class SavedRecipes extends Component {
@@ -46,9 +49,12 @@ class SavedRecipes extends Component {
         };
       });
     });
+<<<<<<< HEAD
     // {
     //   window.$('#foo').modal('open');
     // }
+=======
+>>>>>>> 0c5e2f197b3ade16e5b9b432de90ec50ee654130
   };
   render() {
     return (
@@ -81,7 +87,10 @@ class SavedRecipes extends Component {
                   );
                 })}
               </RecipeCardWrapper>
+<<<<<<< HEAD
               {/* <Alert modalMessage={'Recipe deleted!'} /> */}
+=======
+>>>>>>> 0c5e2f197b3ade16e5b9b432de90ec50ee654130
             </Col>
           </Row>
         </Container>

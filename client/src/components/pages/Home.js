@@ -8,7 +8,10 @@ import RecipeCardWrapper from '../RecipeCardWrapper';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+<<<<<<< HEAD
 import CircularIndeterminate from '../CircularIndeterminate';
+=======
+>>>>>>> 0c5e2f197b3ade16e5b9b432de90ec50ee654130
 
 const theme = createMuiTheme({
   palette: {
@@ -54,9 +57,14 @@ class Home extends Component {
     const user = {
       userId: this.props.userid
     };
-
-    this.setState(this.props.tasks);
   }
+
+  /*   componentDidUpdate() {
+    console.log('home will prop', this.props.tasks);
+    this.setState({ tasks: this.props.tasks });
+  }
+ */
+  comp;
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -150,7 +158,8 @@ class Home extends Component {
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
             setTasks={this.setTasks}
-            tasks={this.state.tasks}
+            tasks={this.props.tasks}
+            userid={this.props.userid}
           />
         </MuiThemeProvider>
         <Container>

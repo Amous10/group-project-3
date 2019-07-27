@@ -10,7 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
-
+import API from '../services/API';
 const styles = {
   done: {
     color: '#94d162',
@@ -84,14 +84,31 @@ class TodoComponent extends React.Component {
 
   componentDidMount() {
     try {
-      if (this.props.tasks) {
-        this.setState({ tasks: this.props.tasks });
+      console.log('I will mount', this.props);
+
+      if (this.props.tasks.pantryItems) {
+        this.setState({ tasks: this.props.tasks.pantryItems });
       }
-      // console.log('this.props.tasks on Update: ', this.props.tasks);
+      console.log('this.props.tasks on Update: ', this.props.tasks);
     } catch (e) {
       console.log('error');
     }
   }
+
+  savePantry = () => {
+    const newSavedPantry = {
+      userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
+      pantryItems: this.state.tasks
+    };
+
+    // save recipe then remove from the result state
+    API.savePantry(newSavedPantry).then(response => {
+      this.setState({ newTask: '' });
+      // this.setState({ tasks: response.data });
+      console.log(response.data);
+    });
+  };
+
   onTextUpdate = e => {
     if (e.target.value.match('^[a-zA-Z ]*$') != null) {
       this.setState({ newTask: e.target.value });
@@ -101,7 +118,7 @@ class TodoComponent extends React.Component {
   addTask = () => {
     let { tasks, newTask } = this.state;
     tasks.push({ text: newTask, done: true });
-    this.setState({ tasks: tasks, newTask: '' });
+    this.setState({ tasks: tasks }, this.savePantry);
   };
 
   keyPress = e => {
