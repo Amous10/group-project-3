@@ -133,8 +133,8 @@ class Home extends Component {
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
             setTasks={this.setTasks}
-            tasks={this.props.tasks[0]}
-            userid={this.props.userId}
+            tasks={this.props.tasks}
+            userid={this.props.userid}
           />
         </MuiThemeProvider>
         <Container>

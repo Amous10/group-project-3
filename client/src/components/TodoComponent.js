@@ -97,13 +97,14 @@ class TodoComponent extends React.Component {
 
   savePantry = () => {
     const newSavedPantry = {
-      userId: this.props.userid,
+      userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
       pantryItems: this.state.tasks
     };
 
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
       this.setState({ newTask: '' });
+      // this.setState({ tasks: response.data });
       console.log(response.data);
     });
   };
