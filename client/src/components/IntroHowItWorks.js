@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Button from '../OnePirate/Button';
-import Typography from '../OnePirate/Typography';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import StepOneImage from '../img/fridge.svg';
+import StepTwoImage from '../img/foods.svg';
+import StepThreeImage from '../img/serve.svg';
 
 const styles = theme => ({
   root: {
@@ -41,12 +44,6 @@ const styles = theme => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4)
   },
-  curvyLines: {
-    pointerEvents: 'none',
-    position: 'absolute',
-    top: -180,
-    opacity: 0.7
-  },
   button: {
     marginTop: theme.spacing(8)
   }
@@ -58,11 +55,6 @@ function ProductHowItWorks(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productCurvyLines.png"
-          className={classes.curvyLines}
-          alt="curvy lines"
-        />
         <Typography
           variant="h4"
           marked="center"
@@ -77,8 +69,8 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
-                  alt="suitcase"
+                  src={StepOneImage}
+                  alt="pantry"
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
@@ -89,11 +81,7 @@ function ProductHowItWorks(props) {
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
-                  alt="graph"
-                  className={classes.image}
-                />
+                <img src={StepTwoImage} alt="foods" className={classes.image} />
                 <Typography variant="h5" align="center">
                   First come, first served. Our offers are in limited
                   quantities, so be quick.
@@ -104,8 +92,8 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks3.svg"
-                  alt="clock"
+                  src={StepThreeImage}
+                  alt="favorites"
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
@@ -122,7 +110,7 @@ function ProductHowItWorks(props) {
           variant="contained"
           className={classes.button}
           component="a"
-          href="/premium-themes/onepirate/sign-up/"
+          href="/"
         >
           Fill Your Pantry
         </Button>

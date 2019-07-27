@@ -10,7 +10,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
-import { SSL_OP_SINGLE_DH_USE } from 'constants';
 
 const styles = {
   done: {

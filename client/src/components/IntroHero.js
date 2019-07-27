@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '../OnePirate/Button';
-import Typography from '../OnePirate/Typography';
-import ProductHeroLayout from './ProductHeroLayout';
-// import { url } from 'inspector';
-import { backgroundImage } from '../../img/theone.jpg';
-
-// const backgroundImage =
-// 'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
-//   `url{'../../img/theone.jpg'}`;
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import IntroHeroLayout from './IntroHeroLayout';
+import backgroundImage from '../img/theone.jpg';
 
 const styles = theme => ({
   background: {
-    // backgroundImage: `url(../../../../img/theone.jpg)`,
-    // backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${backgroundImage})`,
     backgroundColor: '#fcfcfc', // Average color of the background image.
     backgroundPosition: 'center'
   },
@@ -34,14 +28,13 @@ const styles = theme => ({
   }
 });
 
-function ProductHero(props) {
+function IntroHero(props) {
   const { classes } = props;
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
+    <IntroHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
-      <img src={backgroundImage} className="App-logo" alt="logo" />
-      {/* <img style={{ display: 'none' }} src={backgroundImage} alt="" /> */}
+      <img style={{ display: 'none' }} src={backgroundImage} alt="" />
       <Typography color="inherit" align="center" variant="h4" marked="center">
         Time to Eat Again? Not sure what to Make?
       </Typography>
@@ -59,19 +52,19 @@ function ProductHero(props) {
         size="small"
         className={classes.button}
         component="a"
-        href="/premium-themes/onepirate/sign-up/"
+        href="/signup"
       >
         Sign In
       </Button>
       <Typography variant="body2" color="#fffff" className={classes.more}>
         Discover the experience
       </Typography>
-    </ProductHeroLayout>
+    </IntroHeroLayout>
   );
 }
 
-ProductHero.propTypes = {
+IntroHero.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ProductHero);
+export default withStyles(styles)(IntroHero);

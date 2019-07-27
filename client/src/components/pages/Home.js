@@ -6,11 +6,11 @@ import Container from '../Container';
 // import Searchbar from '../Searchbar';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import Alert from '../Alert';
+// import Alert from '../Alert';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 const pantryTheme = createMuiTheme({
   palette: {
@@ -25,13 +25,22 @@ class Home extends Component {
     loading: false,
     redirect: false,
     resultcard: [],
-    tasks: []
+    tasks: [],
+    pantry: []
   };
 
   setTasks = tasks => {
     this.setState({ tasks: tasks });
     console.log('this.TASKS: ', tasks);
   };
+
+  componentDidMount() {
+    const user = {
+      userId: this.props.userid
+    };
+
+    this.setState(this.props.tasks);
+  }
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -84,9 +93,9 @@ class Home extends Component {
         });
       });
     // perform modal dialogue
-    {
-      window.$('#foo').modal('open');
-    }
+    // {
+    //   window.$('#foo').modal('open');
+    // }
   };
   render() {
     if (this.state.error) {

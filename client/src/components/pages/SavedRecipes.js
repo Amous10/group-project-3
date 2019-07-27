@@ -3,7 +3,7 @@ import API from '../../services/API';
 import Container from '../Container';
 import Row from '../Row';
 import Col from '../Col';
-import Alert from '../Alert';
+// import Alert from '../Alert';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCard from '../RecipeCard';
 class SavedRecipes extends Component {
@@ -46,9 +46,9 @@ class SavedRecipes extends Component {
         };
       });
     });
-    {
-      window.$('#foo').modal('open');
-    }
+    // {
+    //   window.$('#foo').modal('open');
+    // }
   };
   render() {
     return (
@@ -81,7 +81,7 @@ class SavedRecipes extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              <Alert modalMessage={'Recipe deleted!'} />
+              {/* <Alert modalMessage={'Recipe deleted!'} /> */}
             </Col>
           </Row>
         </Container>

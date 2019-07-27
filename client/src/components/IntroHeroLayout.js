@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowIcon from '@material-ui/icons/ArrowDropDownCircle';
 
 const styles = theme => ({
   root: {
@@ -44,6 +46,7 @@ const styles = theme => ({
     zIndex: -2
   },
   arrowDown: {
+    height: 50,
     position: 'absolute',
     bottom: theme.spacing(4)
   }
@@ -55,22 +58,14 @@ function ProductHeroLayout(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productHeroWonder.png"
-          alt="wonder"
-          width="147"
-          height="80"
-        />
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        <img
-          className={classes.arrowDown}
-          src="/static/themes/onepirate/productHeroArrowDown.png"
-          height="16"
-          width="12"
-          alt="arrow down"
-        />
+        <div className={classes.arrowDown}>
+          <IconButton aria-label="down arrow" color="inherit">
+            <ArrowIcon />
+          </IconButton>
+        </div>
       </Container>
     </section>
   );
