@@ -115,12 +115,12 @@ class App extends Component {
   };
 
   getPantry(user) {
-    // API.getPantry(user)
-    //   .then(res => {
-    //     console.log('getPantry', res.data);
-    //     this.setState({ tasks: res.data });
-    //   })
-    //   .catch(err => console.log(err));
+    API.getPantry(user)
+      .then(res => {
+        console.log('getPantry', res.data);
+        this.setState({ tasks: res.data });
+      })
+      .catch(err => console.log(err));
   }
 
   getUser() {

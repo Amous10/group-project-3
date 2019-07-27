@@ -110,6 +110,7 @@ class TodoComponent extends React.Component {
       userId: this.props.userid,
       pantryItems: this.props.tasks
     };
+    console.log('newSavedPantry: ', newSavedPantry);
 
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
@@ -129,6 +130,7 @@ class TodoComponent extends React.Component {
     let { newTask } = this.state;
     this.props.setTasks(newTask);
     this.savePantry();
+    this.setState({ newTask: '' });
   };
 
   keyPress = e => {
