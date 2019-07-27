@@ -17,9 +17,9 @@ import LoginForm from './components/Login.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
-import Recipes from './components/pages/Recipes';
+import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
-import RecipesD from './components/pages/RecipesD';
+import RecipeDetails from './components/pages/RecipeDetails';
 import Searchbar from './components/Searchbar';
 class App extends Component {
   getChildContext() {}
@@ -114,10 +114,17 @@ class App extends Component {
       });
   };
 
+  getPantry(user) {
+    API.getPantry(user)
+      .then(res => this.setState({ tasks: res.data }))
+      .catch(err => console.log(err));
+  }
+
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ');
       if (response.data.user) {
+        this.getPantry(response.data.user._id);
         console.log('Get User: There is a user saved in the server session: ');
         console.log(response.data.user._id);
 
@@ -141,21 +148,17 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-          <Searchbar
-            value={this.state.searchfood}
+          <Navbar
+            updateUser={this.updateUser}
+            loggedIn={this.state.loggedIn}
+            savedLength={this.state.edamamresult.length}
+            userName={this.state.username}
             handleInputChangeFood={this.handleInputChangeFood}
             handleFormSubmitFood={this.handleFormSubmitFood}
           />
-          {/* greet user if logged in: */}
-          {this.state.loggedIn && (
-            <p>
-              Join the party, {this.state.username}! at {this.state.userid}
-            </p>
-          )}
 
           <Switch>
-            {/* <Route exact path="/" component={Intro} /> */}
+            <Route exact path="/intro" component={Intro} />
 
             <Route
               exact
@@ -167,6 +170,7 @@ class App extends Component {
                   location={this.props.location}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
+                  tasks={this.state.tasks}
                 />
               )}
             />
@@ -183,14 +187,15 @@ class App extends Component {
               exact
               path="/api/recipes"
               render={props => (
-                <Recipes {...props} userid={this.state.userid} />
+                <SavedRecipes {...props} userid={this.state.userid} />
               )}
             />
-            <Route exact path="/api/recipesdetail/:id" component={RecipesD} />
-            <Route exact path="/homedetail/:id" component={RecipesD} />
-            {/* <Route exact path="/api/recipes" render={() => <Recipes userid={this.state.userid} />} /> */}
-            {/* <Route path="/recipes" exact component={Recipes} />
-              <Route path="/recipes/:id" component={SingleRecipe} /> */}
+            <Route
+              exact
+              path="/api/recipesdetail/:id"
+              component={RecipeDetails}
+            />
+            <Route exact path="/homedetail/:id" component={RecipeDetails} />
             <Route component={NoMatch} />
           </Switch>
         </div>

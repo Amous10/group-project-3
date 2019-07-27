@@ -4,15 +4,13 @@ import Row from '../Row';
 import Col from '../Col';
 import Container from '../Container';
 // import Searchbar from '../Searchbar';
-import RecipeCardHome from '../RecipeCardHome';
+import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import Alert from '../Alert';
-import TodoComponent from '../PantryTodo/TodoComponent';
+// import Alert from '../Alert';
+import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-
-import Grid from '@material-ui/core/Grid';
-
+// import Grid from '@material-ui/core/Grid';
 
 const pantryTheme = createMuiTheme({
   palette: {
@@ -27,13 +25,22 @@ class Home extends Component {
     loading: false,
     redirect: false,
     resultcard: [],
-    tasks: []
+    tasks: [],
+    pantry: []
   };
 
   setTasks = tasks => {
     this.setState({ tasks: tasks });
     console.log('this.TASKS: ', tasks);
   };
+
+  componentDidMount() {
+    const user = {
+      userId: this.props.userid
+    };
+
+    this.setState(this.props.tasks);
+  }
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -79,17 +86,16 @@ class Home extends Component {
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
-            //TODO Unnecessary?
-            // return {
-            //   edamamresult: this.props.edamamresult
-            // };
+            return {
+              edamamresult: this.props.edamamresult
+            };
           });
         });
       });
     // perform modal dialogue
-    {
-      window.$('#foo').modal('open');
-    }
+    // {
+    //   window.$('#foo').modal('open');
+    // }
   };
   render() {
     if (this.state.error) {
@@ -124,6 +130,7 @@ class Home extends Component {
     return (
       <div>
         {/* <Navbar /> */}
+
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
@@ -144,12 +151,11 @@ class Home extends Component {
                 }
               >
                 {this.props.edamamresult.map(edamamresult => {
-                  console.log('AAAAAAA', edamamresult);
                   return (
-                    <RecipeCardHome
+                    <RecipeCard
                       key={edamamresult.recipe.uri}
                       edamamresult={edamamresult}
-                      goBackText="Go back to home"
+                      goBackText="Back to recipes"
                       recipe={edamamresult.recipe}
                       history={this.props.history}
                       redirectTo="/homedetail/2"
@@ -160,7 +166,7 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              <Alert modalMessage={'Recipe added to saved page!'} />
+              {/* <Alert modalMessage={'Recipe added to saved page!'} /> */}
             </Col>
           </Row>
         </Container>

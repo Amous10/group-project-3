@@ -7,6 +7,12 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import LoginForm from './Login';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import { makeStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const customStyles = {
   content: {
@@ -18,6 +24,29 @@ const customStyles = {
     transform: 'translate(-50%, -50%)'
   }
 };
+
+// const navStyle = {
+//   ul: {
+//     margin: 0,
+//     padding: 0
+//   },
+//   li: {
+//     listStyle: 'none'
+//   },
+
+//   appBar: {
+//     borderBottom: `1px solid #ffee00`
+//   },
+//   toolbar: {
+//     flexWrap: 'wrap'
+//   },
+//   toolbarTitle: {
+//     flexGrow: 1
+//   },
+//   link: {
+//     margin: `1, 1.5`
+//   }
+// };
 
 class Navbar extends Component {
   constructor() {

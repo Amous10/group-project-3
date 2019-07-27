@@ -3,10 +3,10 @@ import API from '../../services/API';
 import Container from '../Container';
 import Row from '../Row';
 import Col from '../Col';
-import Alert from '../Alert';
+// import Alert from '../Alert';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import RecipeCardHome from '../RecipeCardHome';
-class Recipes extends Component {
+import RecipeCard from '../RecipeCard';
+class SavedRecipes extends Component {
   state = {
     result: []
   };
@@ -46,9 +46,9 @@ class Recipes extends Component {
         };
       });
     });
-    {
-      window.$('#foo').modal('open');
-    }
+    // {
+    //   window.$('#foo').modal('open');
+    // }
   };
   render() {
     return (
@@ -66,11 +66,12 @@ class Recipes extends Component {
               >
                 {this.state.result.map(result => {
                   return (
-                    <RecipeCardHome
+                    <RecipeCard
                       key={result._id}
                       recipe={result}
                       history={this.props.history}
                       redirectTo={`/api/recipesdetail/${result._id}`}
+                      goBackText="Back to your recipes"
                       link="/api/recipesdetail/"
                       home="/api/recipes"
                       handleRecipeDelete={this.deleteRecipe}
@@ -80,7 +81,7 @@ class Recipes extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              <Alert modalMessage={'Recipe deleted!'} />
+              {/* <Alert modalMessage={'Recipe deleted!'} /> */}
             </Col>
           </Row>
         </Container>
@@ -89,4 +90,4 @@ class Recipes extends Component {
   }
 }
 
-export default Recipes;
+export default SavedRecipes;
