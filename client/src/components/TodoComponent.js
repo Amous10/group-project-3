@@ -102,12 +102,11 @@ class TodoComponent extends React.Component {
     }
   }
 
-  savePantry = () => {
+  savePantry = obj => {
     const newSavedPantry = {
       userId: this.props.userid,
-      pantryItems: this.state.newTask
+      pantryItems: obj
     };
-    console.log('newSavedPantry: ', newSavedPantry);
 
     console.log('newSavedPantry', newSavedPantry);
     // save recipe then remove from the result state
@@ -126,9 +125,10 @@ class TodoComponent extends React.Component {
 
   addTask = () => {
     let { newTask } = this.state;
-    this.props.setTasks(newTask);
-    this.savePantry();
-    this.setState({ newTask: '' });
+    // this.props.setTasks(newTask);
+    let taskObj = { text: newTask, done: true };
+    this.props.setTasks(taskObj);
+    this.savePantry(taskObj);
   };
 
   keyPress = e => {
@@ -195,30 +195,33 @@ class TodoComponent extends React.Component {
         {tasks.length > 0 && (
           <Card style={styles.card}>
             <FormGroup>
-              {tasks.map((task, index) => (
-                <div key={index} style={styles.todo}>
-                  {index > 0 ? <Divider style={styles.divider} /> : ''}
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        color="primary"
-                        checked={task.done}
-                        onChange={() => this.toggle(task)}
-                      />
-                    }
-                    label={task.text}
-                    style={task.done ? styles.done : styles.mute}
-                  />
-                  <Tooltip title="Delete food" placement="top">
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => this.deleteTask(task)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                </div>
-              ))}
+              {tasks.map(task =>
+                task.pantryItems.map((task, index) => (
+                  // {tasks.map((task, index) => (
+                  <div key={index} style={styles.todo}>
+                    {index > 0 ? <Divider style={styles.divider} /> : ''}
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          color="primary"
+                          checked={task.done}
+                          onChange={() => this.toggle(task)}
+                        />
+                      }
+                      label={task.text}
+                      style={task.done ? styles.done : styles.mute}
+                    />
+                    <Tooltip title="Delete food" placement="top">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => this.deleteTask(task)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                ))
+              )}
             </FormGroup>
           </Card>
         )}

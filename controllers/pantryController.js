@@ -11,7 +11,10 @@ module.exports = {
   create: function(req, res) {
     db.Ingredient.findOneAndUpdate(
       { userId: req.body.userId },
-      { $set: { userId: req.body.userId, pantryItems: req.body.pantryItems } },
+      {
+        $set: { userId: req.body.userId },
+        $push: { pantryItems: req.body.pantryItems }
+      },
       { new: true, upsert: true }
     )
 

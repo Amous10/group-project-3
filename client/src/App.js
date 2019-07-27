@@ -50,8 +50,11 @@ class App extends Component {
   }
 
   setTasks = tasks => {
-    const newTasks = [...this.state.tasks, tasks];
-    this.setState({ tasks: newTasks });
+    // const newTasks = [...this.state.tasks, tasks];
+    // this.setState({ tasks: newTasks });
+
+    const { pantryItems } = this.state.tasks[0];
+    pantryItems.push(tasks);
   };
 
   handleInputChangeFood = e => {
