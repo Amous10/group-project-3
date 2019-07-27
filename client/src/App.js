@@ -144,6 +144,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('APP STATE', this.state);
     return (
       <Router>
         <div className="App">

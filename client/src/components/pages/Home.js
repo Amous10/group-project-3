@@ -120,6 +120,7 @@ class Home extends Component {
             userid={this.props.userid}
           />
         </MuiThemeProvider>
+
         <Container>
           <Row>
             <Col>

@@ -32,6 +32,7 @@ class LoginForm extends Component {
       .then(response => {
         console.log('response', response);
         if (response.status === 200) {
+          this.props.getpantry(response.data._id);
           // update App.js state
           this.props.getPantry(response.data._id);
           this.props.updateUser({
