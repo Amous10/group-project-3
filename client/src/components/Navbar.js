@@ -28,8 +28,10 @@ import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    backgroundColor: `#aeaeae`,
-    borderTop: 'solid 2px  #a7c93f'
+    // backgroundColor: `#aeaeae`,
+    // backgroundColor: `#a7c93f`,
+    backgroundColor: '#a7c93f'
+    // borderTop: 'solid 2px  #F69F04'
   },
   grow: {
     flexGrow: 1
@@ -38,13 +40,23 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
   title: {
+    // fontFamily: `'Satisfy', cursive`,
+    fontSize: '1.25em',
+    color: 'white',
+    textShadow: '1px 1px #c1ceb3',
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '1.75em'
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '2.25em'
     }
   },
   navbar: {
-    marginBottom: '50px;'
+    // marginBottom: '50px;'
   },
   search: {
     position: 'relative',
@@ -71,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   },
   searchButton: {
-    pointerEvents: 'none',
+    // pointerEvents: 'none',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: theme.shape.borderRadius,
@@ -96,9 +108,9 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: 170,
+      width: 250,
       '&:focus': {
-        width: 300
+        width: 350
       }
     }
   },
@@ -163,10 +175,15 @@ export default function Navbar({ ...props }) {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
-  function handleSearchFoodsSubmit(event) {
-    console.log('handlebuttonclick', event);
-
-    // props.searchRecipes(query);
+  function handleOnKeyPress(event) {
+    if (event.key === 'Enter') {
+      if (event.target.value.match('^[a-zA-Z ]*$') != null) {
+        props.searchRecipes(event.target.value);
+        event.target.value = '';
+      } else {
+        event.target.value = 'Apple Fritters';
+      }
+    }
   }
 
   const menuId = 'primary-search-account-menu';
@@ -296,15 +313,17 @@ export default function Navbar({ ...props }) {
             {/* <MenuIcon /> */}
             <img src={logo} className="App-logo" alt="logo" />
           </IconButton>
-          {/* <Typography className={classes.title} variant="h6" noWrap> */}
-          <Typography className={`App-title`} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" noWrap>
+            {/* <Typography className={`App-title`} variant="h6" noWrap> */}
             Pantry Chef
           </Typography>
+          {/* <div className={classes.search} onKeyPress={handleOnKeyPress}> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
+              onKeyPress={handleOnKeyPress}
               placeholder="Search Recipes…"
               classes={{
                 root: classes.inputRoot,
@@ -313,19 +332,13 @@ export default function Navbar({ ...props }) {
               inputProps={{ 'aria-label': 'search' }}
               // onChange={props.handleInputChangeFood}
             />
-            {/* <Button
-              className={classes.searchButton}
-              onClick={handleSearchFoodsSubmit('rawr')}
-            >
-              Search
-            </Button> */}
           </div>
-          <Button
+          {/* <Button
             className={classes.searchButton}
-            onClick={handleSearchFoodsSubmit('rawr')}
+            onClick={handleSearchFoodsSubmit}
           >
             Search
-          </Button>
+          </Button> */}
           <div className={classes.grow} />
           {loggedIn ? (
             <div className={classes.sectionDesktop}>

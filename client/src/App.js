@@ -153,8 +153,7 @@ class App extends Component {
             loggedIn={this.state.loggedIn}
             savedLength={this.state.edamamresult.length}
             userName={this.state.username}
-            handleInputChangeFood={this.handleInputChangeFood}
-            handleFormSubmitFood={this.handleFormSubmitFood}
+            searchRecipes={this.searchRecipes}
           />
 
           <Switch>
