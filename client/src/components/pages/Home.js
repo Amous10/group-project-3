@@ -5,9 +5,11 @@ import Col from '../Col';
 import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
+// import Alert from '../Alert';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+// import Grid from '@material-ui/core/Grid';
 
 const pantryTheme = createMuiTheme({
   palette: {
@@ -88,6 +90,10 @@ class Home extends Component {
           });
         });
       });
+    // perform modal dialogue
+    // {
+    //   window.$('#foo').modal('open');
+    // }
   };
   render() {
     if (this.state.error) {
