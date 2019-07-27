@@ -3,14 +3,11 @@ import API from '../../services/API';
 import Row from '../Row';
 import Col from '../Col';
 import Container from '../Container';
-// import Searchbar from '../Searchbar';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import Alert from '../Alert';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-import Grid from '@material-ui/core/Grid';
 
 const pantryTheme = createMuiTheme({
   palette: {
@@ -38,9 +35,14 @@ class Home extends Component {
     const user = {
       userId: this.props.userid
     };
-
-    this.setState(this.props.tasks);
   }
+
+  /*   componentDidUpdate() {
+    console.log('home will prop', this.props.tasks);
+    this.setState({ tasks: this.props.tasks });
+  }
+ */
+  comp;
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -92,10 +94,6 @@ class Home extends Component {
           });
         });
       });
-    // perform modal dialogue
-    {
-      window.$('#foo').modal('open');
-    }
   };
   render() {
     if (this.state.error) {
@@ -135,7 +133,8 @@ class Home extends Component {
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
             setTasks={this.setTasks}
-            tasks={this.state.tasks}
+            tasks={this.props.tasks[0]}
+            userid={this.props.userId}
           />
         </MuiThemeProvider>
         <Container>
@@ -166,7 +165,6 @@ class Home extends Component {
                   );
                 })}
               </RecipeCardWrapper>
-              {/* <Alert modalMessage={'Recipe added to saved page!'} /> */}
             </Col>
           </Row>
         </Container>
