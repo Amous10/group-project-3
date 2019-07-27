@@ -37,13 +37,6 @@ class Home extends Component {
     };
   }
 
-  /*   componentDidUpdate() {
-    console.log('home will prop', this.props.tasks);
-    this.setState({ tasks: this.props.tasks });
-  }
- */
-  comp;
-
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');

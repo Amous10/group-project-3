@@ -86,6 +86,8 @@ class TodoComponent extends React.Component {
     try {
       console.log('I will mount', this.props);
 
+      this.getPantry(this.props.userid);
+
       if (this.props.tasks.pantryItems) {
         this.setState({ tasks: this.props.tasks.pantryItems });
       }
@@ -95,17 +97,27 @@ class TodoComponent extends React.Component {
     }
   }
 
+  getPantry(user) {
+    console.log('getpantry user', user);
+    API.getPantry(user)
+      .then(res => {
+        console.log('my getpantry res', res.data);
+        this.setState({ tasks: res.data });
+      })
+      .catch(err => console.log(err));
+  }
+
   savePantry = () => {
     const newSavedPantry = {
       userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
       pantryItems: this.state.tasks
     };
-
+    console.log('inside save p', this.props.userid);
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
       this.setState({ newTask: '' });
       // this.setState({ tasks: response.data });
-      console.log(response.data);
+      console.log('saving the pantry', response.data);
     });
   };
 
