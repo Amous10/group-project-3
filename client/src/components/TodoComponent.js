@@ -84,28 +84,38 @@ class TodoComponent extends React.Component {
 
   componentDidMount() {
     try {
-      console.log('I will mount', this.props);
-
       if (this.props.tasks.pantryItems) {
-        this.setState({ tasks: this.props.tasks.pantryItems });
+        console.log(
+          'this.props.tasks.pantryItems: ',
+          this.props.tasks.pantryItems
+        );
+
+        // this.setState({ tasks: this.props.tasks.pantryItems });
+      } else {
+        console.log(
+          'NONE this.props.tasks.pantryItems: ',
+          this.props.tasks.pantryItems
+        );
       }
-      console.log('this.props.tasks on Update: ', this.props.tasks);
     } catch (e) {
-      console.log('error');
+      console.log('error', e);
     }
   }
 
   savePantry = () => {
+    console.log('SAVE PANTRY ITEMS', this.props.tasks);
+    console.log('this.props.userid: ', this.props.userid);
+    console.log('this.props.tasks: ', this.props.tasks);
     const newSavedPantry = {
-      userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
-      pantryItems: this.state.tasks
+      userId: this.props.userid,
+      pantryItems: this.props.tasks
     };
 
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
       this.setState({ newTask: '' });
       // this.setState({ tasks: response.data });
-      console.log(response.data);
+      console.log('response.data after API Save Pantry: ', response.data);
     });
   };
 
@@ -116,9 +126,9 @@ class TodoComponent extends React.Component {
   };
 
   addTask = () => {
-    let { tasks, newTask } = this.state;
-    tasks.push({ text: newTask, done: true });
-    this.setState({ tasks: tasks }, this.savePantry);
+    let { newTask } = this.state;
+    this.props.setTasks(newTask);
+    this.savePantry();
   };
 
   keyPress = e => {
@@ -128,34 +138,37 @@ class TodoComponent extends React.Component {
   };
   selectedFoods = () => {
     // let { tasks, queryString } = this.state;
-    let { tasks } = this.state;
+    let { tasks } = this.props;
     let query = tasks
       .filter(items => items.done)
       .map(item => item.text)
       .toString();
 
     // console.log('String to Query', query);
-    this.props.setTasks(tasks);
+    //this.props.setTasks(tasks);
 
     this.props.searchRecipes(query);
     // this.setState({ queryString: '' });
   };
 
   deleteTask = task => {
-    let { tasks } = this.state;
+    let { tasks } = this.props;
     tasks.splice(tasks.indexOf(task), 1);
-    this.setState({ tasks: tasks, newTask: '' });
+    this.setState({ newTask: '' });
+    this.props.setTasks(tasks);
   };
 
   toggle = task => {
-    let { tasks } = this.state;
+    let { tasks } = this.props;
 
     tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
-    this.setState({ tasks: tasks, newTask: '' });
+    // this.setState({ newTask: '' });
+    this.props.setTasks(tasks);
   };
 
   render() {
-    const { tasks, newTask } = this.state;
+    const { newTask } = this.state;
+    const { tasks } = this.props;
 
     return (
       <div id="main" style={styles.main}>

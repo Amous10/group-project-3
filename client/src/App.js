@@ -49,9 +49,14 @@ class App extends Component {
     this.setState(userObject);
   }
 
+  setTasks = tasks => {
+    const newTasks = [...this.state.tasks, tasks];
+    this.setState({ tasks: newTasks });
+  };
+
   handleInputChangeFood = e => {
     const value = e.target.value;
-    // const name = e.target.name;
+
     this.setState({
       searchfood: value
     });
@@ -60,7 +65,6 @@ class App extends Component {
     e.preventDefault();
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
-    console.log('this.state.searchfood', this.state.searchfood);
     this.setState({
       searchfood: ''
     });
@@ -73,11 +77,9 @@ class App extends Component {
     // make a call to edamam api
     API.callEdamam(query)
       .then(recipes => {
-        console.log('recipes: ', recipes);
         if (recipes.data.length > 0) {
           // stop the UI spinner
           this.setState({ loading: false });
-          console.log('recipes data: ', recipes.data);
 
           // make a call to database and retrieve all recipes stored
           API.getRecipes({}).then(dbFoods => {
@@ -92,7 +94,6 @@ class App extends Component {
             const filteredFoods = recipes.data.filter(
               recipe => !dbFoodsIds.includes(recipe.recipe.uri)
             );
-            console.log('filteredFoods: ', filteredFoods);
 
             //  set new state for result
             this.setState({
@@ -106,7 +107,6 @@ class App extends Component {
         }
       })
       .catch(err => {
-        console.log('ERROR:', err.response.data.message);
         this.setState({
           error: err.response.data.message,
           loading: false
@@ -115,18 +115,18 @@ class App extends Component {
   };
 
   getPantry(user) {
-    API.getPantry(user)
-      .then(res => this.setState({ tasks: res.data }))
-      .catch(err => console.log(err));
+    // API.getPantry(user)
+    //   .then(res => {
+    //     console.log('getPantry', res.data);
+    //     this.setState({ tasks: res.data });
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   getUser() {
     axios.get('/user/').then(response => {
-      console.log('Get user response: ');
       if (response.data.user) {
         this.getPantry(response.data.user._id);
-        console.log('Get User: There is a user saved in the server session: ');
-        console.log(response.data.user._id);
 
         this.setState({
           loggedIn: true,
@@ -134,7 +134,6 @@ class App extends Component {
           userid: response.data.user._id
         });
       } else {
-        console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null,
@@ -170,6 +169,7 @@ class App extends Component {
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
                   tasks={this.state.tasks}
+                  setTasks={this.setTasks}
                 />
               )}
             />
@@ -178,7 +178,11 @@ class App extends Component {
               exact
               path="/login"
               render={props => (
-                <LoginForm {...props} updateUser={this.updateUser} />
+                <LoginForm
+                  {...props}
+                  updateUser={this.updateUser}
+                  getPantry={this.getPantry}
+                />
               )}
             />
             <Route exact path="/signup" render={() => <Signup />} />

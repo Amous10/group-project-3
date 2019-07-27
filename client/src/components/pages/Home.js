@@ -18,17 +18,7 @@ const pantryTheme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    // edamamresult: [],
-    loading: false,
-    redirect: false,
-    resultcard: [],
-    tasks: [],
-    pantry: []
-  };
-
-  setTasks = tasks => {
-    this.setState({ tasks: tasks });
-    console.log('this.TASKS: ', tasks);
+    loading: false
   };
 
   componentDidMount() {
@@ -36,13 +26,6 @@ class Home extends Component {
       userId: this.props.userid
     };
   }
-
-  /*   componentDidUpdate() {
-    console.log('home will prop', this.props.tasks);
-    this.setState({ tasks: this.props.tasks });
-  }
- */
-  comp;
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -132,9 +115,8 @@ class Home extends Component {
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
-            setTasks={this.setTasks}
+            setTasks={this.props.setTasks}
             tasks={this.props.tasks}
-            // tasks={this.state.tasks}
             userid={this.props.userid}
           />
         </MuiThemeProvider>
