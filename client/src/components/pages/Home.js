@@ -136,6 +136,7 @@ class Home extends Component {
             searchRecipes={this.props.searchRecipes}
             setTasks={this.setTasks}
             tasks={this.state.tasks}
+            userid={this.props.userid}
           />
         </MuiThemeProvider>
         <Container>
