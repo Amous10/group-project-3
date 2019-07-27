@@ -115,6 +115,7 @@ class Home extends Component {
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
+            setTasks={this.props.setTasks}
             tasks={this.props.tasks}
             userid={this.props.userid}
           />

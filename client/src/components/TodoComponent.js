@@ -103,14 +103,12 @@ class TodoComponent extends React.Component {
   }
 
   savePantry = () => {
-    console.log('SAVE PANTRY ITEMS', this.props.tasks);
-    console.log('this.props.userid: ', this.props.userid);
-    console.log('this.props.tasks: ', this.props.tasks);
     const newSavedPantry = {
       userId: this.props.userid,
-      pantryItems: this.props.tasks
+      pantryItems: this.state.newTask
     };
 
+    console.log('newSavedPantry', newSavedPantry);
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
       this.setState({ newTask: '' });
@@ -170,6 +168,7 @@ class TodoComponent extends React.Component {
     const { newTask } = this.state;
     const { tasks } = this.props;
 
+    console.log('TodoComponent', this.state);
     return (
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
