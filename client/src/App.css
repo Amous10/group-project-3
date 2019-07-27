@@ -5,6 +5,22 @@ font-family: 'Gentium Basic', serif;
 font-family: 'Julius Sans One', sans-serif;
 font-family: 'Sintony', sans-serif;
 */
+:root {
+  /* Place variables within here to use the variables globally. */
+  color: var(--lt-green);
+}
+
+.custom-variables {
+  --lt-green: #a6c844;
+  --some-keyword: italic;
+  --some-size: 1.25em;
+  --some-complex-value: 1px 1px 2px whitesmoke, 0 0 1em slategray,
+    0 0 0.2em slategray;
+  color: var(--lt-green);
+  font-size: var(--some-size);
+  font-style: var(--some-keyword);
+  text-shadow: var(--some-complex-value);
+}
 
 .App {
   text-align: center;
