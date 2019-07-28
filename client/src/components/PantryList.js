@@ -30,7 +30,7 @@ const styles = {
     marginBottom: '10px'
   },
   main: {
-    margin: 10,
+    // margin: 10,
     marginTop: 40,
     width: '100%',
     minHeight: '700px',

@@ -309,7 +309,7 @@ export default function Navbar({ ...props }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            href="/"
+            href="/intro"
           >
             <img src={logo} className="App-logo" alt="logo" />
           </IconButton>

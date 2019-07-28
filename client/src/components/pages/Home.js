@@ -99,46 +99,47 @@ class Home extends Component {
     // else
     return (
       <div>
-        <MuiThemeProvider theme={pantryTheme}>
-          <PantryList
-            searchRecipes={this.props.searchRecipes}
-            pantryItems={this.props.pantryItems}
-            setPantryState={this.props.setPantryState}
-            toggleDeletePantryState={this.props.toggleDeletePantryState}
-            userid={this.props.userid}
-          />
-        </MuiThemeProvider>
-        <Container>
-          <Row>
-            <Col>
-              <RecipeCardWrapper
-                count={this.props.edamamresult.length}
-                title={'Results'}
-                message={
-                  this.props.edamamresult === 0
-                    ? 'Enter your ingredients to search for recipes'
-                    : null
-                }
-              >
-                {this.props.edamamresult.map(edamamresult => {
-                  return (
-                    <RecipeCard
-                      key={edamamresult.recipe.uri}
-                      edamamresult={edamamresult}
-                      goBackText="Back to recipes"
-                      recipe={edamamresult.recipe}
-                      history={this.props.history}
-                      redirectTo="/homedetail/2"
-                      handleRecipeSave={this.saveRecipe}
-                      leftButton={'View'}
-                      rightButton={'Save'}
-                    />
-                  );
-                })}
-              </RecipeCardWrapper>
-            </Col>
-          </Row>
-        </Container>
+        <Grid className="home-recipes" container item xs={12} justify="center">
+          <Grid item xs={3}>
+            <MuiThemeProvider theme={theme}>
+              <PantryList
+                searchRecipes={this.props.searchRecipes}
+                pantryItems={this.props.pantryItems}
+                setPantryState={this.props.setPantryState}
+                toggleDeletePantryState={this.props.toggleDeletePantryState}
+                userid={this.props.userid}
+              />
+            </MuiThemeProvider>
+          </Grid>
+          <Grid item xs={9} style={{ maxWidth: '69%' }}>
+            <RecipeCardWrapper
+              style={{ maxWidth: '69%' }}
+              count={this.props.edamamresult.length}
+              title={'Results'}
+              message={
+                this.props.edamamresult === 0
+                  ? 'Enter your ingredients to search for recipes'
+                  : null
+              }
+            >
+              {this.props.edamamresult.map(edamamresult => {
+                return (
+                  <RecipeCard
+                    key={edamamresult.recipe.uri}
+                    edamamresult={edamamresult}
+                    goBackText="Back to recipes"
+                    recipe={edamamresult.recipe}
+                    history={this.props.history}
+                    redirectTo="/homedetail/2"
+                    handleRecipeSave={this.saveRecipe}
+                    leftButton={'View'}
+                    rightButton={'Save'}
+                  />
+                );
+              })}
+            </RecipeCardWrapper>
+          </Grid>
+        </Grid>
       </div>
     );
   }

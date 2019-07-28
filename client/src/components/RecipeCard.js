@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ShareIcon from '@material-ui/icons/Share';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -81,26 +82,27 @@ export default function RecipeCard({ recipe, ...props }) {
           </Avatar>
         }
       />
-
-      <CardMedia
-        onClick={() =>
-          props.history.push({
-            pathname: props.redirectTo,
-            state: {
-              result: recipe,
-              edamamresult: props.edamamresult,
-              goBackText: props.goBackText
-            }
-          })
-        }
-        className={classes.media}
-        image={
-          recipe.image
-            ? recipe.image
-            : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
-        }
-        title={recipe.name}
-      />
+      <Tooltip title="View Recipe" placement="top">
+        <CardMedia
+          onClick={() =>
+            props.history.push({
+              pathname: props.redirectTo,
+              state: {
+                result: recipe,
+                edamamresult: props.edamamresult,
+                goBackText: props.goBackText
+              }
+            })
+          }
+          className={classes.media}
+          image={
+            recipe.image
+              ? recipe.image
+              : 'https://via.placeholder.com/128x193.png/000000/FFFFFF?text=No+Picture!'
+          }
+          title={recipe.name}
+        />
+      </Tooltip>
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -116,11 +118,16 @@ export default function RecipeCard({ recipe, ...props }) {
           aria-label="Add to Favorites"
         >
           {props.handleRecipeSave ? (
-            <FavoriteIcon className={classes.iconheart} />
+            <Tooltip title="Add Favorite!" placement="top">
+              <FavoriteIcon className={classes.iconheart} />
+            </Tooltip>
           ) : (
-            <DeleteForeverIcon className={classes.icontrash} />
+            <Tooltip title="Remove me?" placement="top">
+              <DeleteForeverIcon className={classes.icontrash} />
+            </Tooltip>
           )}
         </IconButton>
+
         {/* <IconButton aria-label="Share">
           <ShareIcon className={classes.iconshare} />
         </IconButton> */}

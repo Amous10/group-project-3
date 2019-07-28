@@ -4,7 +4,7 @@ import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCard from '../RecipeCard';
 import SavedRecipesHero from '../SavedRecipesHero';
 import Grid from '@material-ui/core/Grid';
-import TodoComponent from '../TodoComponent';
+import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -71,7 +71,7 @@ class SavedRecipes extends Component {
       <React.Fragment>
         <SavedRecipesHero title={'Your Faves!'} />
         <Grid className="home-recipes" container item xs={12} justify="center">
-          <Grid item xs={9}>
+          <Grid item xs={9} style={{ maxWidth: '69%' }}>
             <RecipeCardWrapper
               style={{ maxWidth: '69%' }}
               count={this.state.result.length}
@@ -98,7 +98,7 @@ class SavedRecipes extends Component {
           </Grid>
           <Grid item xs={3}>
             <MuiThemeProvider theme={theme.primary}>
-              <TodoComponent
+              <ShoppingList
                 className="home-recipes"
                 // justify="center"
                 searchRecipes={this.props.searchRecipes}

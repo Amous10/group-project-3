@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import API from '../services/API';
 const styles = {
   done: {
-    color: '#94d162',
+    color: '#3f51b5',
     display: 'flex',
     width: '100%'
   },
@@ -36,7 +36,7 @@ const styles = {
     minHeight: '700px',
     maxWidth: '340px',
     // backgroundColor: '#deebdd',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#fcf8c7',
     borderStyle: 'solid',
     borderWidth: 0.5,
     borderColor: '#c9cac8',
@@ -72,7 +72,8 @@ const styles = {
   title: {
     fontFamily: 'Satisfy',
     marginBottom: '15px',
-    fontSize: '35px'
+    fontSize: '35px',
+    color: '#3f51b5'
   }
 };
 
@@ -162,7 +163,7 @@ class ShoppingList extends React.Component {
       // className={xs-{this.props.grid[0]}}
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
-          Your Pantry
+          Shopping List
         </Typography>
         <header style={styles.header}>
           <TextField
