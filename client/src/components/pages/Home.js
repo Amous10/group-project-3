@@ -7,7 +7,9 @@ import PantryList from '../PantryList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
+import backgroundImage from '../../img/bg6.jpg';
 import SavedRecipesHero from '../SavedRecipesHero';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -25,6 +27,15 @@ const theme = createMuiTheme({
     // error: will use the default color
   }
 });
+
+const styles = {
+  bgimage: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: `rgba(255,255,255, 0.5)`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  }
+};
 
 class Home extends Component {
   state = {
@@ -99,7 +110,8 @@ class Home extends Component {
     }
     // else
     return (
-      <div>
+      <div style={styles.bgimage}>
+        {/* <div> */}
         <Grid className="home-recipes" container item xs={12} justify="center">
           <Grid item xs={3}>
             <MuiThemeProvider theme={theme}>
@@ -135,6 +147,8 @@ class Home extends Component {
                     handleRecipeSave={this.saveRecipe}
                     leftButton={'View'}
                     rightButton={'Save'}
+                    onMouseOver={this.onToggleOpen}
+                    onMouseOut={this.onToggleOpen}
                   />
                 );
               })}

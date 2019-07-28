@@ -6,7 +6,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import backgroundImage from '../img/bg2.jpg';
+import backgroundImage from '../img/platefruitveg.jpg';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Tooltip from '@material-ui/core/Tooltip';
+import CardActions from '@material-ui/core/CardActions';
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -15,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: 'center'
   },
   card: {
-    maxWidth: 550,
+    maxWidth: 400,
+    maxHeight: 713,
     marginTop: 10,
     marginBottom: 10
   },
@@ -25,10 +29,14 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  iconheart: {
+    color: '#ff78dc',
+    textAlign: 'left'
   }
 }));
 
-export default function RecipeCardDetails({ recipe }) {
+export default function RecipeCardDetails({ recipe, ...props }) {
   const classes = useStyles();
 
   return (
@@ -86,17 +94,26 @@ export default function RecipeCardDetails({ recipe }) {
         <Typography variant="body2" color="textSecondary" component="p">
           {recipe.labels}
         </Typography>
-
-        <Typography
-          variant="body2"
-          style={{ fontStyle: 'italic' }}
-          component="p"
-        >
-          Full recipe at:{' '}
-          <a href={recipe.url} target="_blank">
-            {recipe.source}
-          </a>
-        </Typography>
+        <CardActions disableSpacing className={classes.cardfooter}>
+          <Tooltip title="Add Favorite!" placement="top">
+            <FavoriteIcon
+              className={classes.iconheart}
+              data-id={recipe.uri}
+              onClick={props.handleRecipeSave}
+              aria-label="Add to Favorites"
+            />
+          </Tooltip>
+          <Typography
+            variant="body2"
+            style={{ fontStyle: 'italic' }}
+            component="p"
+          >
+            Full recipe at:{' '}
+            <a href={recipe.url} target="_blank">
+              {recipe.source}
+            </a>
+          </Typography>
+        </CardActions>
       </CardContent>
     </Card>
   );
