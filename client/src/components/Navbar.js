@@ -309,8 +309,8 @@ export default function Navbar({ ...props }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            href="/"
           >
-            {/* <MenuIcon /> */}
             <img src={logo} className="App-logo" alt="logo" />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>

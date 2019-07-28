@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router-dom';
-// import API from '../../services/API';
-import Container from '../Container';
-// import { Link } from 'react-router-dom';
-import Row from '../Row';
-import Col from '../Col';
-import Jumbotron from '../Jumbotron';
-// import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCardDetails from '../RecipeCardDetails';
 import Grid from '@material-ui/core/Grid';
+import backgroundImage from '../../img/platefruitveg.jpg';
+
+const styles = {
+  bgimage: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: `rgba(255,255,255, 0.5)`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  }
+};
 
 class RecipeDetails extends Component {
   state = {
@@ -27,21 +29,22 @@ class RecipeDetails extends Component {
     // get the id of the recipe when 'delete' is clicked
     const thisCardsId = e.currentTarget.getAttribute('data-id');
     console.log('this card', thisCardsId);
-    // delete recipe with the given id
-
-    // {
-    //   window.$('#foo').modal('open');
-    // }
   };
   render() {
     console.log('props', this.props);
     const { result: recipe, goBackText } = this.props.location.state;
 
     return (
-      <div>
+      <div style={styles.bgimage}>
         {/* <Navbar /> */}
+        {/* <img style={styles.bgimage} src={backgroundImage} alt="" /> */}
+
         <h5
-          style={{ color: '#389636', textAlign: 'center', marginLeft: 10 }}
+          style={{
+            color: 'rgb(129, 150, 69)',
+            textAlign: 'center',
+            padding: '1rem'
+          }}
           onClick={() => this.props.history.goBack()}
         >
           ← {goBackText}

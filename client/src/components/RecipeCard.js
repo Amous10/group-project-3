@@ -15,7 +15,7 @@ import ShareIcon from '@material-ui/icons/Share';
 const useStyles = makeStyles(theme => ({
   card: {
     fontSize: '15px',
-    maxWidth: 280,
+    maxWidth: 270,
     maxHeight: 400,
     marginTop: 10,
     marginBottom: 10,

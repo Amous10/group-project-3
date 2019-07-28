@@ -76,7 +76,7 @@ const styles = {
   }
 };
 
-class TodoComponent extends React.Component {
+class ShoppingList extends React.Component {
   state = {
     tasks: [],
     newTask: '',
@@ -216,4 +216,4 @@ class TodoComponent extends React.Component {
   }
 }
 
-export default TodoComponent;
+export default ShoppingList;

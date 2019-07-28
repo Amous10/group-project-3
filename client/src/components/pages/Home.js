@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
-import Row from '../Row';
-import Col from '../Col';
 import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import TodoComponent from '../TodoComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 import CircularIndeterminate from '../CircularIndeterminate';
-
+import Grid from '@material-ui/core/Grid';
+import SavedRecipesHero from '../SavedRecipesHero';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -27,13 +25,6 @@ const theme = createMuiTheme({
     // error: will use the default color
   }
 });
-
-// const pantryTheme = createMuiTheme({
-//   palette: {
-//     primary: 'green',
-//     type: 'light' // Switching the dark mode on is a single property value change.
-//   }
-// });
 
 class Home extends Component {
   state = {
@@ -61,7 +52,7 @@ class Home extends Component {
     this.setState({ tasks: this.props.tasks });
   }
  */
-  comp;
+  // comp;
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -119,77 +110,56 @@ class Home extends Component {
       return <div>{this.state.error}</div>;
     }
     if (this.state.loading) {
-      return (
-        <CircularIndeterminate />
-
-        // <div>
-        //   {/* <Navbar /> */}
-        //   {/* <Searchbar /> */}
-        //   <div className="row">
-        //     <div className="col l12 center align">
-        //       <div className="preloader-wrapper big active">
-        //         <div className="spinner-layer spinner-blue-only">
-        //           <div className="circle-clipper left">
-        //             <div className="circle" />
-        //           </div>
-        //           <div className="gap-patch">
-        //             <div className="circle" />
-        //           </div>
-        //           <div className="circle-clipper right">
-        //             <div className="circle" />
-        //           </div>
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        // </div>
-      );
+      return <CircularIndeterminate />;
     }
     // else
     return (
       <div>
-        {/* <Navbar /> */}
         {/* <CircularIndeterminate /> */}
-
-        <MuiThemeProvider theme={theme}>
-          <TodoComponent
-            searchRecipes={this.props.searchRecipes}
-            setTasks={this.setTasks}
-            tasks={this.props.tasks}
-            userid={this.props.userid}
-          />
-        </MuiThemeProvider>
-        <Container>
-          <Row>
-            <Col>
-              <RecipeCardWrapper
-                count={this.props.edamamresult.length}
-                title={'Results'}
-                message={
-                  this.props.edamamresult === 0
-                    ? 'Enter your ingredients to search for recipes'
-                    : null
-                }
-              >
-                {this.props.edamamresult.map(edamamresult => {
-                  return (
-                    <RecipeCard
-                      key={edamamresult.recipe.uri}
-                      edamamresult={edamamresult}
-                      goBackText="Back to recipes"
-                      recipe={edamamresult.recipe}
-                      history={this.props.history}
-                      redirectTo="/homedetail/2"
-                      handleRecipeSave={this.saveRecipe}
-                      leftButton={'View'}
-                      rightButton={'Save'}
-                    />
-                  );
-                })}
-              </RecipeCardWrapper>
-            </Col>
-          </Row>
-        </Container>
+        {/* <SavedRecipesHero /> */}
+        <Grid className="home-recipes" container item xs={12} justify="center">
+          <Grid item xs={3}>
+            <MuiThemeProvider theme={theme}>
+              <TodoComponent
+                className="home-recipes"
+                justify="center"
+                searchRecipes={this.props.searchRecipes}
+                setTasks={this.setTasks}
+                tasks={this.props.tasks}
+                userid={this.props.userid}
+              />
+            </MuiThemeProvider>
+          </Grid>
+          <Grid item xs={9}>
+            <RecipeCardWrapper
+              style={{ maxWidth: '69%' }}
+              count={this.props.edamamresult.length}
+              title={'Results'}
+              message={
+                this.props.edamamresult === 0
+                  ? 'Enter your ingredients to search for recipes'
+                  : null
+              }
+            >
+              {this.props.edamamresult.map(edamamresult => {
+                return (
+                  <RecipeCard
+                    xs={4}
+                    key={edamamresult.recipe.uri}
+                    edamamresult={edamamresult}
+                    goBackText="Back to recipes"
+                    recipe={edamamresult.recipe}
+                    history={this.props.history}
+                    redirectTo="/homedetail/2"
+                    handleRecipeSave={this.saveRecipe}
+                    leftButton={'View'}
+                    rightButton={'Save'}
+                  />
+                );
+              })}
+            </RecipeCardWrapper>
+          </Grid>
+        </Grid>
       </div>
     );
   }

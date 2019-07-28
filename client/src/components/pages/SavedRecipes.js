@@ -1,10 +1,30 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
-import Container from '../Container';
-import Row from '../Row';
-import Col from '../Col';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import RecipeCard from '../RecipeCard';
+import SavedRecipesHero from '../SavedRecipesHero';
+import Grid from '@material-ui/core/Grid';
+import TodoComponent from '../TodoComponent';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#a6c844'
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '#b4b2ae',
+      main: '#8b8e91',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#f3aa4e'
+    }
+    // error: will use the default color
+  }
+});
+
 class SavedRecipes extends Component {
   state = {
     result: []
@@ -48,39 +68,48 @@ class SavedRecipes extends Component {
   };
   render() {
     return (
-      <div>
-        {/* <Navbar /> */}
-        {/* <Jumbotron /> */}
-        <Container>
-          <Row>
-            <Col>
-              <RecipeCardWrapper
-                count={this.state.result.length}
-                key={this.state.result._id}
-                title={'Saved Recipes'}
-                message={this.state.result === 0 ? 'No saved recipes!' : null}
-              >
-                {this.state.result.map(result => {
-                  return (
-                    <RecipeCard
-                      key={result._id}
-                      recipe={result}
-                      history={this.props.history}
-                      redirectTo={`/api/recipesdetail/${result._id}`}
-                      goBackText="Back to your recipes"
-                      link="/api/recipesdetail/"
-                      home="/api/recipes"
-                      handleRecipeDelete={this.deleteRecipe}
-                      leftButton={'View'}
-                      rightButton={'Delete'}
-                    />
-                  );
-                })}
-              </RecipeCardWrapper>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <React.Fragment>
+        <SavedRecipesHero title={'Your Faves!'} />
+        <Grid className="home-recipes" container item xs={12} justify="center">
+          <Grid item xs={9}>
+            <RecipeCardWrapper
+              style={{ maxWidth: '69%' }}
+              count={this.state.result.length}
+              key={this.state.result._id}
+              message={this.state.result === 0 ? 'No saved recipes!' : null}
+            >
+              {this.state.result.map(result => {
+                return (
+                  <RecipeCard
+                    key={result._id}
+                    recipe={result}
+                    history={this.props.history}
+                    redirectTo={`/api/recipesdetail/${result._id}`}
+                    goBackText="Back to your recipes"
+                    link="/api/recipesdetail/"
+                    home="/api/recipes"
+                    handleRecipeDelete={this.deleteRecipe}
+                    leftButton={'View'}
+                    rightButton={'Delete'}
+                  />
+                );
+              })}
+            </RecipeCardWrapper>
+          </Grid>
+          <Grid item xs={3}>
+            <MuiThemeProvider theme={theme.primary}>
+              <TodoComponent
+                className="home-recipes"
+                // justify="center"
+                searchRecipes={this.props.searchRecipes}
+                setTasks={this.setTasks}
+                tasks={this.props.tasks}
+                userid={this.props.userid}
+              />
+            </MuiThemeProvider>
+          </Grid>
+        </Grid>
+      </React.Fragment>
     );
   }
 }

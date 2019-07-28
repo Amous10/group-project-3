@@ -4,16 +4,16 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import Link from '@material-ui/core/Link';
+import backgroundImage from '../img/bg2.jpg';
 
 const useStyles = makeStyles(theme => ({
+  background: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: '#fcfcfc', // Average color of the background image.
+    backgroundPosition: 'center'
+  },
   card: {
     maxWidth: 550,
     marginTop: 10,
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeCardDetail({ recipe }) {
+export default function RecipeCardDetails({ recipe }) {
   const classes = useStyles();
 
   return (
@@ -52,7 +52,7 @@ export default function RecipeCardDetail({ recipe }) {
         <Typography
           m={2}
           variant="body2"
-          style={{ color: '#389636' }}
+          style={{ color: '#a6c844' }}
           component="p"
         >
           Calories: {Number(recipe.calories).toFixed(0)}
