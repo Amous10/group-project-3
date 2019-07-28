@@ -20,7 +20,6 @@ import Home from './components/pages/Home';
 import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
-import Searchbar from './components/Searchbar';
 class App extends Component {
   getChildContext() {}
   constructor() {
@@ -33,7 +32,9 @@ class App extends Component {
       edamamresult: [],
       searchfood: '',
       loading: false,
-      tasks: []
+      tasks: [],
+      pantryItems: [],
+      groceryItems: []
     };
 
     this.getUser = this.getUser.bind(this);
@@ -53,8 +54,26 @@ class App extends Component {
     // const newTasks = [...this.state.tasks, tasks];
     // this.setState({ tasks: newTasks });
 
-    const { pantryItems } = this.state.tasks[0];
-    pantryItems.push(tasks);
+    console.log('checking state', this.state);
+    console.log('checking state length', this.state.tasks.length);
+
+    console.log('checking param tasks', tasks);
+
+    if (this.state.tasks.length > 0) {
+      // const { pantryItems } = this.state.tasks[0];
+      // pantryItems.push(tasks);
+    } else {
+      console.log('about to push tasks');
+      this.setState({ tasks: tasks });
+    }
+  };
+  setPantryState = pantry => {
+    const newPantryItem = [...this.state.pantryItems, pantry];
+    this.setState({ pantryItems: newPantryItem });
+  };
+  setGroceryState = grocery => {
+    const newGroceryItem = [...this.state.groceryItems, grocery];
+    this.setState({ groceryItems: newGroceryItem });
   };
 
   handleInputChangeFood = e => {
@@ -120,8 +139,8 @@ class App extends Component {
   getPantry(user) {
     API.getPantry(user)
       .then(res => {
-        console.log('getPantry', res.data);
-        this.setState({ tasks: res.data });
+        const { pantryItems, groceryItems } = res.data[0];
+        this.setState({ pantryItems: pantryItems, groceryItems: groceryItems });
       })
       .catch(err => console.log(err));
   }
@@ -174,6 +193,8 @@ class App extends Component {
                   edamamresult={this.state.edamamresult}
                   tasks={this.state.tasks}
                   setTasks={this.setTasks}
+                  pantryItems={this.state.pantryItems}
+                  setPantryState={this.setPantryState}
                 />
               )}
             />

@@ -139,12 +139,18 @@ class TodoComponent extends React.Component {
   selectedFoods = () => {
     // let { tasks, queryString } = this.state;
     let { tasks } = this.props;
-    let query = tasks
+
+    // let query = tasks
+    //   .filter(items => items.done)
+    //   .map(item => item.text)
+    //   .toString();
+
+    let { pantryItems } = tasks[0];
+    let query = pantryItems
       .filter(items => items.done)
       .map(item => item.text)
       .toString();
 
-    // console.log('String to Query', query);
     //this.props.setTasks(tasks);
 
     this.props.searchRecipes(query);
@@ -170,7 +176,6 @@ class TodoComponent extends React.Component {
     const { newTask } = this.state;
     const { tasks } = this.props;
 
-    console.log('TodoComponent', this.state);
     return (
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
