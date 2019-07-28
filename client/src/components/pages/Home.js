@@ -98,6 +98,7 @@ class Home extends Component {
             };
           });
         });
+        return true; //eslint return warning for arrow fn
       });
   };
   render() {

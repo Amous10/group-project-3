@@ -4,13 +4,9 @@ import { Link } from 'react-router-dom';
 import logo from '../img/logo.png';
 import '../App.css';
 import axios from 'axios';
-// import Modal from 'react-modal';
-// import LoginForm from './Login';
-import Grid from '@material-ui/core/Grid';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
@@ -245,7 +241,7 @@ export default function Navbar({ ...props }) {
             <IconButton aria-label="new recipe search" color="inherit">
               <NewSearchIcon />
             </IconButton>
-            <Link to={'/'} className="btn btn-link text-primary">
+            <Link to={'/search/'} className="btn btn-link text-primary">
               <span className="text-primary">New Search</span>
             </Link>
           </MenuItem>
@@ -280,7 +276,7 @@ export default function Navbar({ ...props }) {
             <IconButton aria-label="new recipe search" color="inherit">
               <NewSearchIcon />
             </IconButton>
-            <Link to={'/'} className="btn btn-link text-primary">
+            <Link to={'/search/'} className="btn btn-link text-primary">
               <span className="text-primary">New Search</span>
             </Link>
           </MenuItem>
@@ -342,7 +338,7 @@ export default function Navbar({ ...props }) {
           <div className={classes.grow} />
           {loggedIn ? (
             <div className={classes.sectionDesktop}>
-              <Link to={'/'} className="btn btn-link text-second">
+              <Link to={'/search/'} className="btn btn-link text-second">
                 <Button>
                   <span className="text-second">New Search</span>
                 </Button>
@@ -365,7 +361,7 @@ export default function Navbar({ ...props }) {
             </div>
           ) : (
             <div className={classes.sectionDesktop}>
-              <Link to={'/'} className="btn btn-link text-second">
+              <Link to={'/search/'} className="btn btn-link text-second">
                 <Button>
                   <span className="text-second">New Search</span>
                 </Button>
