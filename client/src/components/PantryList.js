@@ -75,7 +75,7 @@ const styles = {
   }
 };
 
-class TodoComponent extends React.Component {
+class PantryList extends React.Component {
   state = {
     newPantryItem: ''
   };
@@ -201,4 +201,4 @@ class TodoComponent extends React.Component {
   }
 }
 
-export default TodoComponent;
+export default PantryList;

@@ -5,7 +5,7 @@ import Col from '../Col';
 import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import TodoComponent from '../TodoComponent';
+import PantryList from '../PantryList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
@@ -111,7 +111,7 @@ class Home extends Component {
     return (
       <div>
         <MuiThemeProvider theme={pantryTheme}>
-          <TodoComponent
+          <PantryList
             searchRecipes={this.props.searchRecipes}
             pantryItems={this.props.pantryItems}
             setPantryState={this.props.setPantryState}
