@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import ShareIcon from '@material-ui/icons/Share';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
@@ -29,16 +28,16 @@ const useStyles = makeStyles(theme => ({
     height: 10,
     paddingTop: '60.25%', // 16:9
     pointerEvents: 'auto',
-    cursor: 'pointer',
-    hover: {
-      transition: 0.2,
-      scale: '110%'
-    }
+    cursor: 'pointer'
+    // hover: {
+    //   transition: 0.2,
+    //   scale: '110%'
+    // }
   },
 
-  // avatar: {
-  //   backgroundColor: '#69cc02'
-  // },
+  avatar: {
+    backgroundColor: '#a6c844'
+  },
   cardheader: {
     fontSize: '15px',
     height: '30%',
@@ -63,7 +62,7 @@ const useStyles = makeStyles(theme => ({
     color: '#a6c844',
     fontWeight: 'bold',
     marginLeft: 12,
-    fontSize: '1rem'
+    fontSize: '.75rem'
   }
 }));
 
@@ -84,6 +83,8 @@ export default function RecipeCard({ recipe, ...props }) {
       />
       <Tooltip title="View Recipe" placement="top">
         <CardMedia
+          onMouseOver={props.onToggleOpen}
+          onMouseOut={props.onToggleOpen}
           onClick={() =>
             props.history.push({
               pathname: props.redirectTo,
@@ -132,7 +133,6 @@ export default function RecipeCard({ recipe, ...props }) {
           <ShareIcon className={classes.iconshare} />
         </IconButton> */}
         <a href={recipe.url} className={classes.sourcelink} target="_blank">
-          {'@'}
           {recipe.source}
         </a>
       </CardActions>

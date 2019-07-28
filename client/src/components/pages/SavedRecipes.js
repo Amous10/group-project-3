@@ -6,6 +6,7 @@ import SavedRecipesHero from '../SavedRecipesHero';
 import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import backgroundImage from '../../img/cherries.jpg';
 
 const theme = createMuiTheme({
   palette: {
@@ -24,6 +25,15 @@ const theme = createMuiTheme({
     // error: will use the default color
   }
 });
+
+const styles = {
+  bgimage: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: `rgba(255,255,255, 0.5)`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  }
+};
 
 class SavedRecipes extends Component {
   state = {
@@ -68,48 +78,56 @@ class SavedRecipes extends Component {
   };
   render() {
     return (
-      <React.Fragment>
-        <SavedRecipesHero title={'Your Faves!'} />
-        <Grid className="home-recipes" container item xs={12} justify="center">
-          <Grid item xs={9} style={{ maxWidth: '69%' }}>
-            <RecipeCardWrapper
-              style={{ maxWidth: '69%' }}
-              count={this.state.result.length}
-              key={this.state.result._id}
-              message={this.state.result === 0 ? 'No saved recipes!' : null}
-            >
-              {this.state.result.map(result => {
-                return (
-                  <RecipeCard
-                    key={result._id}
-                    recipe={result}
-                    history={this.props.history}
-                    redirectTo={`/api/recipesdetail/${result._id}`}
-                    goBackText="Back to your recipes"
-                    link="/api/recipesdetail/"
-                    home="/api/recipes"
-                    handleRecipeDelete={this.deleteRecipe}
-                    leftButton={'View'}
-                    rightButton={'Delete'}
-                  />
-                );
-              })}
-            </RecipeCardWrapper>
+      <div style={styles.bgimage}>
+        <React.Fragment>
+          <SavedRecipesHero title={'Your Faves!'} />
+          <Grid
+            className="home-recipes"
+            container
+            item
+            xs={12}
+            justify="center"
+          >
+            <Grid item xs={9} style={{ maxWidth: '69%' }}>
+              <RecipeCardWrapper
+                style={{ maxWidth: '69%' }}
+                count={this.state.result.length}
+                key={this.state.result._id}
+                message={this.state.result === 0 ? 'No saved recipes!' : null}
+              >
+                {this.state.result.map(result => {
+                  return (
+                    <RecipeCard
+                      key={result._id}
+                      recipe={result}
+                      history={this.props.history}
+                      redirectTo={`/api/recipesdetail/${result._id}`}
+                      goBackText="Back to your recipes"
+                      link="/api/recipesdetail/"
+                      home="/api/recipes"
+                      handleRecipeDelete={this.deleteRecipe}
+                      leftButton={'View'}
+                      rightButton={'Delete'}
+                    />
+                  );
+                })}
+              </RecipeCardWrapper>
+            </Grid>
+            <Grid item xs={3}>
+              <MuiThemeProvider theme={theme.primary}>
+                <ShoppingList
+                  className="home-recipes"
+                  // justify="center"
+                  searchRecipes={this.props.searchRecipes}
+                  setTasks={this.setTasks}
+                  tasks={this.props.tasks}
+                  userid={this.props.userid}
+                />
+              </MuiThemeProvider>
+            </Grid>
           </Grid>
-          <Grid item xs={3}>
-            <MuiThemeProvider theme={theme.primary}>
-              <ShoppingList
-                className="home-recipes"
-                // justify="center"
-                searchRecipes={this.props.searchRecipes}
-                setTasks={this.setTasks}
-                tasks={this.props.tasks}
-                userid={this.props.userid}
-              />
-            </MuiThemeProvider>
-          </Grid>
-        </Grid>
-      </React.Fragment>
+        </React.Fragment>
+      </div>
     );
   }
 }
