@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    // border: '2px solid #69cc02'
+    // border: '2px solid #69cc02',
     width: '70%',
     marginRight: 20,
     marginLeft: 360

@@ -10,7 +10,6 @@ const IngredientSchema = new Schema({
     type: Array,
     required: false
   },
-
   groceryItems: {
     type: Array,
     required: false

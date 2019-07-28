@@ -5,7 +5,7 @@ import Col from '../Col';
 import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import TodoComponent from '../TodoComponent';
+import PantryList from '../PantryList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
@@ -18,17 +18,7 @@ const pantryTheme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    // edamamresult: [],
-    loading: false,
-    redirect: false,
-    resultcard: [],
-    tasks: [],
-    pantry: []
-  };
-
-  setTasks = tasks => {
-    this.setState({ tasks: tasks });
-    console.log('this.TASKS: ', tasks);
+    loading: false
   };
 
   componentDidMount() {
@@ -36,13 +26,6 @@ class Home extends Component {
       userId: this.props.userid
     };
   }
-
-  /*   componentDidUpdate() {
-    console.log('home will prop', this.props.tasks);
-    this.setState({ tasks: this.props.tasks });
-  }
- */
-  comp;
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -127,13 +110,12 @@ class Home extends Component {
     // else
     return (
       <div>
-        {/* <Navbar /> */}
-
         <MuiThemeProvider theme={pantryTheme}>
-          <TodoComponent
+          <PantryList
             searchRecipes={this.props.searchRecipes}
-            setTasks={this.setTasks}
-            tasks={this.props.tasks}
+            pantryItems={this.props.pantryItems}
+            setPantryState={this.props.setPantryState}
+            toggleDeletePantryState={this.props.toggleDeletePantryState}
             userid={this.props.userid}
           />
         </MuiThemeProvider>

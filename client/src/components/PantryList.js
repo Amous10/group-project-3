@@ -75,87 +75,74 @@ const styles = {
   }
 };
 
-class TodoComponent extends React.Component {
+class PantryList extends React.Component {
   state = {
-    tasks: [],
-    newTask: '',
-    queryString: []
+    newPantryItem: ''
   };
 
-  componentDidMount() {
-    try {
-      console.log('I will mount', this.props);
-
-      if (this.props.tasks.pantryItems) {
-        this.setState({ tasks: this.props.tasks.pantryItems });
-      }
-      console.log('this.props.tasks on Update: ', this.props.tasks);
-    } catch (e) {
-      console.log('error');
-    }
-  }
-
-  savePantry = () => {
+  savePantry = obj => {
     const newSavedPantry = {
-      userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
-      pantryItems: this.state.tasks
+      userId: this.props.userid,
+      pantryItems: obj
     };
 
+    console.log('newSavedPantry', newSavedPantry);
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
-      this.setState({ newTask: '' });
-      // this.setState({ tasks: response.data });
-      console.log(response.data);
+      this.setState({ newPantryItem: '' });
+      console.log('response.data after API Save Pantry: ', response.data);
     });
   };
 
   onTextUpdate = e => {
     if (e.target.value.match('^[a-zA-Z ]*$') != null) {
-      this.setState({ newTask: e.target.value });
+      this.setState({ newPantryItem: e.target.value });
     }
   };
 
-  addTask = () => {
-    let { tasks, newTask } = this.state;
-    tasks.push({ text: newTask, done: true });
-    this.setState({ tasks: tasks }, this.savePantry);
+  addItem = () => {
+    let { newPantryItem } = this.state;
+    // this.props.setPantryState(newPantryItem);
+    let itemObj = { text: newPantryItem, done: true };
+    this.props.setPantryState(itemObj);
+    this.savePantry(itemObj);
   };
 
   keyPress = e => {
     if (e.key === 'Enter') {
-      this.addTask();
+      this.addItem();
     }
   };
   selectedFoods = () => {
-    // let { tasks, queryString } = this.state;
-    let { tasks } = this.state;
-    let query = tasks
+    let { pantryItems } = this.props;
+
+    let query = pantryItems
       .filter(items => items.done)
       .map(item => item.text)
       .toString();
 
-    // console.log('String to Query', query);
-    this.props.setTasks(tasks);
-
     this.props.searchRecipes(query);
-    // this.setState({ queryString: '' });
   };
 
-  deleteTask = task => {
-    let { tasks } = this.state;
-    tasks.splice(tasks.indexOf(task), 1);
-    this.setState({ tasks: tasks, newTask: '' });
+  deleteItem = item => {
+    let { pantryItems } = this.props;
+    pantryItems.splice(pantryItems.indexOf(item), 1);
+    this.setState({ newPantryItem: '' });
+    this.props.toggleDeletePantryState(pantryItems);
   };
 
-  toggle = task => {
-    let { tasks } = this.state;
-
-    tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
-    this.setState({ tasks: tasks, newTask: '' });
+  toggle = item => {
+    let { pantryItems } = this.props;
+    pantryItems[pantryItems.indexOf(item)].done = !pantryItems[
+      pantryItems.indexOf(item)
+    ].done;
+    this.setState({ newPantryItem: '' });
+    this.props.toggleDeletePantryState(pantryItems);
   };
 
   render() {
-    const { tasks, newTask } = this.state;
+    const { newPantryItem } = this.state;
+    const { pantryItems } = this.props;
 
     return (
       <div id="main" style={styles.main}>
@@ -165,40 +152,40 @@ class TodoComponent extends React.Component {
         <header style={styles.header}>
           <TextField
             label="ADD FOOD ITEM"
-            value={newTask}
+            value={newPantryItem}
             onChange={this.onTextUpdate}
             onKeyPress={this.keyPress}
           />
           <Button
             variant="raised"
             color="primary"
-            disabled={!newTask}
-            onClick={this.addTask}
+            disabled={!newPantryItem}
+            onClick={this.addItem}
           >
             Add
           </Button>
         </header>
-        {tasks.length > 0 && (
+        {pantryItems.length > 0 && (
           <Card style={styles.card}>
             <FormGroup>
-              {tasks.map((task, index) => (
+              {pantryItems.map((item, index) => (
                 <div key={index} style={styles.todo}>
                   {index > 0 ? <Divider style={styles.divider} /> : ''}
                   <FormControlLabel
                     control={
                       <Switch
                         color="primary"
-                        checked={task.done}
-                        onChange={() => this.toggle(task)}
+                        checked={item.done}
+                        onChange={() => this.toggle(item)}
                       />
                     }
-                    label={task.text}
-                    style={task.done ? styles.done : styles.mute}
+                    label={item.text}
+                    style={item.done ? styles.done : styles.mute}
                   />
                   <Tooltip title="Delete food" placement="top">
                     <IconButton
                       aria-label="delete"
-                      onClick={() => this.deleteTask(task)}
+                      onClick={() => this.deleteItem(item)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -214,4 +201,4 @@ class TodoComponent extends React.Component {
   }
 }
 
-export default TodoComponent;
+export default PantryList;
