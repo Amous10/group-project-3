@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import API from '../services/API';
 const styles = {
   done: {
-    color: '#94d162',
+    color: '#3f51b5',
     display: 'flex',
     width: '100%'
   },
@@ -30,13 +30,13 @@ const styles = {
     marginBottom: '10px'
   },
   main: {
-    // margin: 10,
+    margin: 10,
     marginTop: 40,
     width: '100%',
     minHeight: '700px',
     maxWidth: '340px',
     // backgroundColor: '#deebdd',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#fcf8c7',
     borderStyle: 'solid',
     borderWidth: 0.5,
     borderColor: '#c9cac8',
@@ -72,122 +72,136 @@ const styles = {
   title: {
     fontFamily: 'Satisfy',
     marginBottom: '15px',
-    fontSize: '35px'
+    fontSize: '35px',
+    color: '#3f51b5'
   }
 };
 
-class PantryList extends React.Component {
+class ShoppingList extends React.Component {
   state = {
-    newPantryItem: ''
+    tasks: [],
+    newTask: '',
+    queryString: []
   };
 
-  savePantry = obj => {
+  componentDidMount() {
+    try {
+      console.log('I will mount', this.props);
+
+      if (this.props.tasks.pantryItems) {
+        this.setState({ tasks: this.props.tasks.pantryItems });
+      }
+      console.log('this.props.tasks on Update: ', this.props.tasks);
+    } catch (e) {
+      console.log('error');
+    }
+  }
+
+  savePantry = () => {
     const newSavedPantry = {
-      userId: this.props.userid,
-      pantryItems: obj
+      userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
+      pantryItems: this.state.tasks
     };
 
-    console.log('newSavedPantry', newSavedPantry);
     // save recipe then remove from the result state
     API.savePantry(newSavedPantry).then(response => {
-      this.setState({ newPantryItem: '' });
-      console.log('response.data after API Save Pantry: ', response.data);
+      this.setState({ newTask: '' });
+      // this.setState({ tasks: response.data });
+      console.log(response.data);
     });
   };
 
   onTextUpdate = e => {
     if (e.target.value.match('^[a-zA-Z ]*$') != null) {
-      this.setState({ newPantryItem: e.target.value });
+      this.setState({ newTask: e.target.value });
     }
   };
 
-  addItem = () => {
-    let { newPantryItem } = this.state;
-    // this.props.setPantryState(newPantryItem);
-    let itemObj = { text: newPantryItem, done: true };
-    this.props.setPantryState(itemObj);
-    this.savePantry(itemObj);
+  addTask = () => {
+    let { tasks, newTask } = this.state;
+    tasks.push({ text: newTask, done: true });
+    this.setState({ tasks: tasks }, this.savePantry);
   };
 
   keyPress = e => {
     if (e.key === 'Enter') {
-      this.addItem();
+      this.addTask();
     }
   };
   selectedFoods = () => {
-    let { pantryItems } = this.props;
-
-    let query = pantryItems
+    // let { tasks, queryString } = this.state;
+    let { tasks } = this.state;
+    let query = tasks
       .filter(items => items.done)
       .map(item => item.text)
       .toString();
 
+    // console.log('String to Query', query);
+    this.props.setTasks(tasks);
+
     this.props.searchRecipes(query);
+    // this.setState({ queryString: '' });
   };
 
-  deleteItem = item => {
-    let { pantryItems } = this.props;
-    pantryItems.splice(pantryItems.indexOf(item), 1);
-    this.setState({ newPantryItem: '' });
-    this.props.toggleDeletePantryState(pantryItems);
+  deleteTask = task => {
+    let { tasks } = this.state;
+    tasks.splice(tasks.indexOf(task), 1);
+    this.setState({ tasks: tasks, newTask: '' });
   };
 
-  toggle = item => {
-    let { pantryItems } = this.props;
-    pantryItems[pantryItems.indexOf(item)].done = !pantryItems[
-      pantryItems.indexOf(item)
-    ].done;
-    this.setState({ newPantryItem: '' });
-    this.props.toggleDeletePantryState(pantryItems);
+  toggle = task => {
+    let { tasks } = this.state;
+
+    tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
+    this.setState({ tasks: tasks, newTask: '' });
   };
 
   render() {
-    const { newPantryItem } = this.state;
-    const { pantryItems } = this.props;
+    const { tasks, newTask } = this.state;
 
     return (
       // className={xs-{this.props.grid[0]}}
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
-          Your Pantry
+          Shopping List
         </Typography>
         <header style={styles.header}>
           <TextField
             label="ADD FOOD ITEM"
-            value={newPantryItem}
+            value={newTask}
             onChange={this.onTextUpdate}
             onKeyPress={this.keyPress}
           />
           <Button
             variant="raised"
             color="primary"
-            disabled={!newPantryItem}
-            onClick={this.addItem}
+            disabled={!newTask}
+            onClick={this.addTask}
           >
             Add
           </Button>
         </header>
-        {pantryItems.length > 0 && (
+        {tasks.length > 0 && (
           <Card style={styles.card}>
             <FormGroup>
-              {pantryItems.map((item, index) => (
+              {tasks.map((task, index) => (
                 <div key={index} style={styles.todo}>
                   {index > 0 ? <Divider style={styles.divider} /> : ''}
                   <FormControlLabel
                     control={
                       <Switch
                         color="primary"
-                        checked={item.done}
-                        onChange={() => this.toggle(item)}
+                        checked={task.done}
+                        onChange={() => this.toggle(task)}
                       />
                     }
-                    label={item.text}
-                    style={item.done ? styles.done : styles.mute}
+                    label={task.text}
+                    style={task.done ? styles.done : styles.mute}
                   />
                   <Tooltip title="Delete food" placement="top">
                     <IconButton
                       aria-label="delete"
-                      onClick={() => this.deleteItem(item)}
+                      onClick={() => this.deleteTask(task)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -203,4 +217,4 @@ class PantryList extends React.Component {
   }
 }
 
-export default PantryList;
+export default ShoppingList;
