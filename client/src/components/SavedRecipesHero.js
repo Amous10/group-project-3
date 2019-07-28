@@ -27,6 +27,8 @@ export default function Hero() {
             border="solid"
             padding={0}
             textDecoration="underline"
+            fontFamily="Satisfy"
+            fontStyle="italic"
           >
             Your Faves!
           </Typography>
