@@ -18,7 +18,7 @@ font-family: 'Sintony', sans-serif;
 }
 
 .App-header {
-  background-color: #7cd417d0;
+  /* background-color: #7cd417d0; */
   height: 75px;
   padding: 20px;
 }
@@ -70,17 +70,4 @@ a.text-second:visited {
 }
 #top-filler {
   margin-bottom: auto;
-}
-
-/* #nav-container {
-  align-items: flex-end;
-} */
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

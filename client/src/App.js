@@ -6,10 +6,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  withRouter,
-  Link
+  withRouter
 } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
 // components
 import Signup from './components/Signup.js';
@@ -20,6 +18,8 @@ import Home from './components/pages/Home';
 import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
+import CircularIndeterminate from './components/CircularIndeterminate';
+
 class App extends Component {
   getChildContext() {}
   constructor() {

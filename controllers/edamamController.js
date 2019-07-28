@@ -14,7 +14,7 @@ module.exports = {
     //console.log('BUILDING: ', eAPIurl + eAPPid + eAPIkey, { params: req.query });
 
     axios
-      .get(eAPIurl + eAPPid + eAPIkey, {
+      .get(eAPIurl + eAPPid + eAPIkey + '&from=0&to=12&', {
         params: req.query
       }) // .get('https://api.edamam.com/search?q=chicken&app_id=fe86e086&app_key=088766c47703a5f9c1bdcb2069f19a79&from=0&to=3&calories=591-722&health=alcohol-free')
       // .get(
@@ -35,7 +35,9 @@ module.exports = {
       .then(recipes => res.json(recipes))
       .catch(err => {
         console.log('err: ', err);
-        res.status(422).json({ message: 'An error occurred while fetching the data.' });
+        res
+          .status(422)
+          .json({ message: 'An error occurred while fetching the data.' });
       });
   }
 };
