@@ -87,6 +87,7 @@ class Home extends Component {
             };
           });
         });
+        return true; //eslint return warning for arrow fn
       });
   };
   render() {
@@ -99,48 +100,6 @@ class Home extends Component {
     // else
     return (
       <div>
-<<<<<<< HEAD
-        <MuiThemeProvider theme={pantryTheme}>
-          <PantryList
-            searchRecipes={this.props.searchRecipes}
-            pantryItems={this.props.pantryItems}
-            setPantryState={this.props.setPantryState}
-            toggleDeletePantryState={this.props.toggleDeletePantryState}
-            userid={this.props.userid}
-          />
-        </MuiThemeProvider>
-        <Container>
-          <Row>
-            <Col>
-              <RecipeCardWrapper
-                count={this.props.edamamresult.length}
-                title={'Results'}
-                message={
-                  this.props.edamamresult === 0
-                    ? 'Enter your ingredients to search for recipes'
-                    : null
-                }
-              >
-                {this.props.edamamresult.map(edamamresult => {
-                  return (
-                    <RecipeCard
-                      key={edamamresult.recipe.uri}
-                      edamamresult={edamamresult}
-                      goBackText="Back to recipes"
-                      recipe={edamamresult.recipe}
-                      history={this.props.history}
-                      redirectTo="/homedetail/2"
-                      handleRecipeSave={this.saveRecipe}
-                      leftButton={'View'}
-                      rightButton={'Save'}
-                    />
-                  );
-                })}
-              </RecipeCardWrapper>
-            </Col>
-          </Row>
-        </Container>
-=======
         <Grid className="home-recipes" container item xs={12} justify="center">
           <Grid item xs={3}>
             <MuiThemeProvider theme={theme}>
@@ -182,7 +141,6 @@ class Home extends Component {
             </RecipeCardWrapper>
           </Grid>
         </Grid>
->>>>>>> 81c94e2bb61ad8fb938233dadd9c229ebd40b442
       </div>
     );
   }

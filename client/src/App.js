@@ -12,6 +12,7 @@ import {
 // components
 import Signup from './components/Signup.js';
 import LoginForm from './components/Login.js';
+// import LoginPortal from './components/LoginPortal.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
@@ -167,11 +168,11 @@ class App extends Component {
           />
 
           <Switch>
-            <Route exact path="/intro" component={Intro} />
+            <Route exact path="/" component={Intro} />
 
             <Route
               exact
-              path="/"
+              path="/search"
               render={props => (
                 <Home
                   {...props}
@@ -191,6 +192,7 @@ class App extends Component {
               path="/login"
               render={props => (
                 <LoginForm
+                  // <LoginPortal
                   {...props}
                   updateUser={this.updateUser}
                   getPantry={this.getPantry}

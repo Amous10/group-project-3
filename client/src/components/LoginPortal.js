@@ -1,32 +1,47 @@
-import withRoot from './modules/withRoot';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+
 // --- Post bootstrap -----
 import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import Typography from './modules/components/Typography';
-import AppFooter from './modules/views/AppFooter';
-import AppAppBar from './modules/views/AppAppBar';
-import AppForm from './modules/views/AppForm';
-import { email, required } from './modules/form/validation';
-import RFTextField from './modules/form/RFTextField';
-import FormButton from './modules/form/FormButton';
-import FormFeedback from './modules/form/FormFeedback';
+import Typography from '@material-ui/core/Typography';
+// import AppForm from '@material-ui/core/Form';
+import { FormControl, Button } from '@material-ui/core';
+import { email, required } from './form/validation';
+import RFTextField from './form/RFTextField';
+import FormFeedback from './form/FormFeedback';
+import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const useStyles = makeStyles(theme => ({
+  main: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(6)
+  },
   form: {
     marginTop: theme.spacing(6)
   },
   button: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
+    backgroundColor: '#a7c93f',
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.black, 0.25)
+      // color: '#a7c93f'
+    },
+    color: '#ffffff'
   },
   feedback: {
     marginTop: theme.spacing(2)
   }
 }));
 
-function SignIn() {
+function LoginPortal({ ...props }) {
+  const formEmail = '';
+  const formPassword = '';
+  const redirectTo = null;
+
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
 
@@ -42,26 +57,28 @@ function SignIn() {
 
     return errors;
   };
-
-  const handleSubmit = () => {
+  const handleSubmitOld = () => {
     setSent(true);
+  };
+  const handleSubmit = values => {
+    console.log('values: ', values);
+    setSent(true);
+  };
+
+  const handleChange = () => {
+    // setSent(true);
   };
 
   return (
     <React.Fragment>
-      <AppAppBar />
-      <AppForm>
+      <FormControl className={classes.main}>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
             Sign In
           </Typography>
           <Typography variant="body2" align="center">
             {'Not a member yet? '}
-            <Link
-              href="/premium-themes/onepirate/sign-up/"
-              align="center"
-              underline="always"
-            >
+            <Link href="/signup/" align="center" underline="always">
               Sign Up here
             </Link>
           </Typography>
@@ -71,8 +88,8 @@ function SignIn() {
           subscription={{ submitting: true }}
           validate={validate}
         >
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+          {({ handleSubmit, submitting }) => (
+            <form onSubmit={handleSubmit} className={classes.form} noValidate>
               <Field
                 autoComplete="email"
                 autoFocus
@@ -106,30 +123,22 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
-              <FormButton
+              <Button
                 className={classes.button}
+                onClick={handleSubmit}
                 disabled={submitting || sent}
                 size="large"
                 color="secondary"
                 fullWidth
               >
                 {submitting || sent ? 'In progress…' : 'Sign In'}
-              </FormButton>
+              </Button>
             </form>
           )}
         </Form>
-        <Typography align="center">
-          <Link
-            underline="always"
-            href="/premium-themes/onepirate/forgot-password/"
-          >
-            Forgot password?
-          </Link>
-        </Typography>
-      </AppForm>
-      <AppFooter />
+      </FormControl>
     </React.Fragment>
   );
 }
 
-export default withRoot(SignIn);
+export default LoginPortal;
