@@ -32,7 +32,6 @@ class App extends Component {
       edamamresult: [],
       searchfood: '',
       loading: false,
-      tasks: [],
       pantryItems: [],
       groceryItems: []
     };
@@ -50,30 +49,19 @@ class App extends Component {
     this.setState(userObject);
   }
 
-  setTasks = tasks => {
-    // const newTasks = [...this.state.tasks, tasks];
-    // this.setState({ tasks: newTasks });
-
-    console.log('checking state', this.state);
-    console.log('checking state length', this.state.tasks.length);
-
-    console.log('checking param tasks', tasks);
-
-    if (this.state.tasks.length > 0) {
-      // const { pantryItems } = this.state.tasks[0];
-      // pantryItems.push(tasks);
-    } else {
-      console.log('about to push tasks');
-      this.setState({ tasks: tasks });
-    }
-  };
   setPantryState = pantry => {
     const newPantryItem = [...this.state.pantryItems, pantry];
     this.setState({ pantryItems: newPantryItem });
   };
+  toggleDeletePantryState = pantry => {
+    this.setState({ pantryItems: this.state.pantryItems, pantry: '' });
+  };
   setGroceryState = grocery => {
     const newGroceryItem = [...this.state.groceryItems, grocery];
     this.setState({ groceryItems: newGroceryItem });
+  };
+  toggleDeleteGroceryState = grocery => {
+    this.setState({ groceryItems: this.state.groceryItems, grocery: '' });
   };
 
   handleInputChangeFood = e => {
@@ -191,10 +179,9 @@ class App extends Component {
                   location={this.props.location}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
-                  tasks={this.state.tasks}
-                  setTasks={this.setTasks}
                   pantryItems={this.state.pantryItems}
                   setPantryState={this.setPantryState}
+                  toggleDeletePantryState={this.toggleDeletePantryState}
                 />
               )}
             />

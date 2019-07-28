@@ -110,17 +110,15 @@ class Home extends Component {
     // else
     return (
       <div>
-        {/* <Navbar /> */}
-
         <MuiThemeProvider theme={pantryTheme}>
           <TodoComponent
             searchRecipes={this.props.searchRecipes}
-            setTasks={this.props.setTasks}
-            tasks={this.props.tasks}
+            pantryItems={this.props.pantryItems}
+            setPantryState={this.props.setPantryState}
+            toggleDeletePantryState={this.props.toggleDeletePantryState}
             userid={this.props.userid}
           />
         </MuiThemeProvider>
-
         <Container>
           <Row>
             <Col>
