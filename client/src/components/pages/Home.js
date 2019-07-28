@@ -3,7 +3,7 @@ import API from '../../services/API';
 import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
-import TodoComponent from '../TodoComponent';
+import PantryList from '../PantryList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
@@ -29,16 +29,7 @@ const theme = createMuiTheme({
 class Home extends Component {
   state = {
     error: '',
-    loading: false,
-    redirect: false,
-    resultcard: [],
-    tasks: [],
-    pantry: []
-  };
-
-  setTasks = tasks => {
-    this.setState({ tasks: tasks });
-    console.log('this.TASKS: ', tasks);
+    loading: false
   };
 
   componentDidMount() {
@@ -46,13 +37,6 @@ class Home extends Component {
       userId: this.props.userid
     };
   }
-
-  /*   componentDidUpdate() {
-    console.log('home will prop', this.props.tasks);
-    this.setState({ tasks: this.props.tasks });
-  }
- */
-  // comp;
 
   saveRecipe = e => {
     // get the id of the book when 'save' is clicked
@@ -115,51 +99,46 @@ class Home extends Component {
     // else
     return (
       <div>
-        {/* <CircularIndeterminate /> */}
-        {/* <SavedRecipesHero /> */}
-        <Grid className="home-recipes" container item xs={12} justify="center">
-          <Grid item xs={3}>
-            <MuiThemeProvider theme={theme}>
-              <TodoComponent
-                className="home-recipes"
-                justify="center"
-                searchRecipes={this.props.searchRecipes}
-                setTasks={this.setTasks}
-                tasks={this.props.tasks}
-                userid={this.props.userid}
-              />
-            </MuiThemeProvider>
-          </Grid>
-          <Grid item xs={9}>
-            <RecipeCardWrapper
-              style={{ maxWidth: '69%' }}
-              count={this.props.edamamresult.length}
-              title={'Results'}
-              message={
-                this.props.edamamresult === 0
-                  ? 'Enter your ingredients to search for recipes'
-                  : null
-              }
-            >
-              {this.props.edamamresult.map(edamamresult => {
-                return (
-                  <RecipeCard
-                    xs={4}
-                    key={edamamresult.recipe.uri}
-                    edamamresult={edamamresult}
-                    goBackText="Back to recipes"
-                    recipe={edamamresult.recipe}
-                    history={this.props.history}
-                    redirectTo="/homedetail/2"
-                    handleRecipeSave={this.saveRecipe}
-                    leftButton={'View'}
-                    rightButton={'Save'}
-                  />
-                );
-              })}
-            </RecipeCardWrapper>
-          </Grid>
-        </Grid>
+        <MuiThemeProvider theme={pantryTheme}>
+          <PantryList
+            searchRecipes={this.props.searchRecipes}
+            pantryItems={this.props.pantryItems}
+            setPantryState={this.props.setPantryState}
+            toggleDeletePantryState={this.props.toggleDeletePantryState}
+            userid={this.props.userid}
+          />
+        </MuiThemeProvider>
+        <Container>
+          <Row>
+            <Col>
+              <RecipeCardWrapper
+                count={this.props.edamamresult.length}
+                title={'Results'}
+                message={
+                  this.props.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
+              >
+                {this.props.edamamresult.map(edamamresult => {
+                  return (
+                    <RecipeCard
+                      key={edamamresult.recipe.uri}
+                      edamamresult={edamamresult}
+                      goBackText="Back to recipes"
+                      recipe={edamamresult.recipe}
+                      history={this.props.history}
+                      redirectTo="/homedetail/2"
+                      handleRecipeSave={this.saveRecipe}
+                      leftButton={'View'}
+                      rightButton={'Save'}
+                    />
+                  );
+                })}
+              </RecipeCardWrapper>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

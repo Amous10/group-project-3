@@ -32,7 +32,8 @@ class App extends Component {
       edamamresult: [],
       searchfood: '',
       loading: false,
-      tasks: []
+      pantryItems: [],
+      groceryItems: []
     };
 
     this.getUser = this.getUser.bind(this);
@@ -48,9 +49,24 @@ class App extends Component {
     this.setState(userObject);
   }
 
+  setPantryState = pantry => {
+    const newPantryItem = [...this.state.pantryItems, pantry];
+    this.setState({ pantryItems: newPantryItem });
+  };
+  toggleDeletePantryState = pantry => {
+    this.setState({ pantryItems: this.state.pantryItems, pantry: '' });
+  };
+  setGroceryState = grocery => {
+    const newGroceryItem = [...this.state.groceryItems, grocery];
+    this.setState({ groceryItems: newGroceryItem });
+  };
+  toggleDeleteGroceryState = grocery => {
+    this.setState({ groceryItems: this.state.groceryItems, grocery: '' });
+  };
+
   handleInputChangeFood = e => {
     const value = e.target.value;
-    // const name = e.target.name;
+
     this.setState({
       searchfood: value
     });
@@ -59,7 +75,6 @@ class App extends Component {
     e.preventDefault();
     // run google call with search parameter
     this.searchRecipes(this.state.searchfood);
-    console.log('this.state.searchfood', this.state.searchfood);
     this.setState({
       searchfood: ''
     });
@@ -72,11 +87,9 @@ class App extends Component {
     // make a call to edamam api
     API.callEdamam(query)
       .then(recipes => {
-        console.log('recipes: ', recipes);
         if (recipes.data.length > 0) {
           // stop the UI spinner
           this.setState({ loading: false });
-          console.log('recipes data: ', recipes.data);
 
           // make a call to database and retrieve all recipes stored
           API.getRecipes({}).then(dbFoods => {
@@ -91,7 +104,6 @@ class App extends Component {
             const filteredFoods = recipes.data.filter(
               recipe => !dbFoodsIds.includes(recipe.recipe.uri)
             );
-            console.log('filteredFoods: ', filteredFoods);
 
             //  set new state for result
             this.setState({
@@ -105,7 +117,6 @@ class App extends Component {
         }
       })
       .catch(err => {
-        console.log('ERROR:', err.response.data.message);
         this.setState({
           error: err.response.data.message,
           loading: false
@@ -115,17 +126,17 @@ class App extends Component {
 
   getPantry(user) {
     API.getPantry(user)
-      .then(res => this.setState({ tasks: res.data }))
+      .then(res => {
+        const { pantryItems, groceryItems } = res.data[0];
+        this.setState({ pantryItems: pantryItems, groceryItems: groceryItems });
+      })
       .catch(err => console.log(err));
   }
 
   getUser() {
     axios.get('/user/').then(response => {
-      console.log('Get user response: ');
       if (response.data.user) {
         this.getPantry(response.data.user._id);
-        console.log('Get User: There is a user saved in the server session: ');
-        console.log(response.data.user._id);
 
         this.setState({
           loggedIn: true,
@@ -133,7 +144,6 @@ class App extends Component {
           userid: response.data.user._id
         });
       } else {
-        console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null,
@@ -144,6 +154,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('APP STATE', this.state);
     return (
       <Router>
         <div className="App">
@@ -168,7 +179,9 @@ class App extends Component {
                   location={this.props.location}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
-                  tasks={this.state.tasks}
+                  pantryItems={this.state.pantryItems}
+                  setPantryState={this.setPantryState}
+                  toggleDeletePantryState={this.toggleDeletePantryState}
                 />
               )}
             />
@@ -177,7 +190,11 @@ class App extends Component {
               exact
               path="/login"
               render={props => (
-                <LoginForm {...props} updateUser={this.updateUser} />
+                <LoginForm
+                  {...props}
+                  updateUser={this.updateUser}
+                  getPantry={this.getPantry}
+                />
               )}
             />
             <Route exact path="/signup" render={() => <Signup />} />
