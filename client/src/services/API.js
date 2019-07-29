@@ -31,5 +31,9 @@ export default {
   savePantry: function(pantrydata, userid) {
     console.log('userid: ', userid);
     return axios.post('/api/ingredients/', pantrydata);
+  },
+  updatePantry: function(pantryitems, id) {
+    console.log('getting update Pantry', pantryitems);
+    return axios.put('/api/ingredients/' + id, pantryitems);
   }
 };
