@@ -20,5 +20,18 @@ module.exports = {
 
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  Update: function(req, res) {
+    console.log('updating pantry controller', req.body);
+    db.Ingredient.findOneAndUpdate(
+      { userId: req.params.id },
+      {
+        $set: { pantryItems: req.body }
+      },
+      { new: true, upsert: true }
+    )
+
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };

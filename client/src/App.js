@@ -55,6 +55,7 @@ class App extends Component {
     this.setState({ pantryItems: newPantryItem });
   };
   toggleDeletePantryState = pantry => {
+    this.UpdatePantry(pantry, this.state.userid);
     this.setState({ pantryItems: this.state.pantryItems, pantry: '' });
   };
   setGroceryState = grocery => {
@@ -130,6 +131,14 @@ class App extends Component {
       .then(res => {
         const { pantryItems, groceryItems } = res.data[0];
         this.setState({ pantryItems: pantryItems, groceryItems: groceryItems });
+      })
+      .catch(err => console.log(err));
+  }
+
+  UpdatePantry(item, user) {
+    API.updatePantry(item, user)
+      .then(res => {
+        console.log('updated the pantry with api', item);
       })
       .catch(err => console.log(err));
   }
