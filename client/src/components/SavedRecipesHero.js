@@ -16,10 +16,10 @@ export default function Hero() {
     <React.Fragment>
       {/* Hero unit */}
       <div className={classes.heroContent}>
-        <Card style={{ margin: 40 }}>
+        <Card style={{ marginTop: 20 }}>
           <Typography
             component="h1"
-            variant="h3"
+            variant="h4"
             align="center"
             color="textPrimary"
             gutterBottom
@@ -27,8 +27,7 @@ export default function Hero() {
             border="solid"
             padding={0}
             textDecoration="underline"
-            fontFamily="Satisfy"
-            fontStyle="italic"
+            // fontFamily='Satisfy'
           >
             Your Faves!
           </Typography>
