@@ -14,11 +14,12 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
-    color: '#fcfcfc',
-    backgroundColor: fade(theme.palette.common.white, 0.85),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.45)
-    }
+    marginTop: theme.spacing(8)
+    // color: '#fcfcfc',
+    // backgroundColor: fade(theme.palette.common.white, 0.85),
+    // '&:hover': {
+    //   backgroundColor: fade(theme.palette.common.white, 0.45)
+    // }
     // backgroundColor: '#f3aa4e',
     // contrastText: '#ffffff'
   },
@@ -54,11 +55,11 @@ function IntroHero(props) {
       </Typography>
       <Button
         color="primary"
+        size="medium"
         variant="contained"
-        size="small"
         className={classes.button}
         component="a"
-        href="/signup"
+        href="/login"
       >
         Sign In
       </Button>
