@@ -46,7 +46,7 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
-    // color: '#fcfcfc',
+    // color: '#ffffff',
     // backgroundColor: fade(theme.palette.common.black, 0.15),
     // '&:hover': {
     //   backgroundColor: fade(theme.palette.common.black, 0.05)
@@ -116,7 +116,7 @@ function IntroHowItWorks(props) {
           </Grid>
         </div>
         <Button
-          color="#f3aa4e"
+          color="primary"
           size="medium"
           variant="contained"
           className={classes.button}

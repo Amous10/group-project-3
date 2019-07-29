@@ -155,7 +155,7 @@ class PantryList extends React.Component {
         </Typography>
         <header style={styles.header}>
           <TextField
-            label="ADD FOOD ITEM"
+            label="ADD FOOD"
             value={newPantryItem}
             onChange={this.onTextUpdate}
             onKeyPress={this.keyPress}

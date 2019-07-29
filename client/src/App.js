@@ -44,6 +44,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getUser();
+    this.searchRecipes('chocolate');
   }
 
   updateUser(userObject) {
