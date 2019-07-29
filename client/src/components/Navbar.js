@@ -190,7 +190,7 @@ export default function Navbar({ ...props }) {
         } else {
           event.target.value = 'Peach Cobbler';
         }
-      } else {
+     } else {
         event.target.value = 'Blackberry Cobbler';
       }
     }
