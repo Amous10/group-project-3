@@ -13,7 +13,7 @@ module.exports = {
       { userId: req.body.userId },
       {
         $set: { userId: req.body.userId },
-        $push: { pantryItems: req.body.pantryItems }
+        $push: { groceryItems: req.body.groceryItems }
       },
       { new: true, upsert: true }
     )
@@ -22,11 +22,11 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   Update: function(req, res) {
-    console.log('updating pantry controller', req.body);
+    console.log('updating grocery controller', req.body);
     db.Ingredient.findOneAndUpdate(
       { userId: req.params.id },
       {
-        $set: { pantryItems: req.body }
+        $set: { groceryItems: req.body }
       },
       { new: true, upsert: true }
     )

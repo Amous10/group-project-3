@@ -63,6 +63,7 @@ function LoginPortal({ ...props }) {
         if (response.status === 200) {
           // update App.js state
           props.getPantry(response.data._id);
+          props.getGrocery(response.data._id);
           props.updateUser({
             loggedIn: true,
             userid: response.data._id,

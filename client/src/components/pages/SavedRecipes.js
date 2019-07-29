@@ -113,15 +113,13 @@ class SavedRecipes extends Component {
                 })}
               </RecipeCardWrapper>
             </Grid>
-            <Grid item md={6} xs={3}>
-              {/* <MuiThemeProvider theme={theme.primary}> */}
+            <Grid item xs={3}>
               <ShoppingList
-                className="home-recipes"
-                // justify="center"
-                searchRecipes={this.props.searchRecipes}
+                groceryItems={this.props.groceryItems}
+                setGroceryState={this.props.setGroceryState}
+                toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
                 userid={this.props.userid}
               />
-              {/* </MuiThemeProvider> */}
             </Grid>
           </Grid>
         </React.Fragment>

@@ -81,116 +81,105 @@ const styles = {
 
 class ShoppingList extends React.Component {
   state = {
-    tasks: [],
-    newTask: '',
-    queryString: []
+    newGroceryItem: ''
   };
 
-  savePantry = () => {
-    const newSavedPantry = {
-      userId: this.props.userid, //'5d30cd864d97081be0c66f23', //this.props.userid,
-      pantryItems: this.state.tasks
+  saveGrocery = obj => {
+    const newSavedGrocery = {
+      userId: this.props.userid,
+      groceryItems: obj
     };
 
     // save recipe then remove from the result state
-    API.savePantry(newSavedPantry).then(response => {
-      this.setState({ newTask: '' });
-      // this.setState({ tasks: response.data });
-      console.log(response.data);
+    API.saveGrocery(newSavedGrocery).then(response => {
+      this.setState({ newGroceryItem: '' });
+      console.log('response.data after API Save Grocery: ', response.data);
     });
   };
 
   onTextUpdate = e => {
     if (e.target.value.match('^[a-zA-Z ]*$') != null) {
-      this.setState({ newTask: e.target.value });
+      this.setState({ newGroceryItem: e.target.value });
     }
   };
 
-  addTask = () => {
-    let { tasks, newTask } = this.state;
-    tasks.push({ text: newTask, done: true });
-    this.setState({ tasks: tasks }, this.savePantry);
+  addItem = () => {
+    let { newGroceryItem } = this.state;
+    if (newGroceryItem !== '') {
+      let itemObj = { text: newGroceryItem, done: true };
+      this.props.setGroceryState(itemObj);
+      this.saveGrocery(itemObj);
+    }
   };
 
   keyPress = e => {
     if (e.key === 'Enter') {
-      this.addTask();
+      this.addItem();
     }
   };
-  selectedFoods = () => {
-    // let { tasks, queryString } = this.state;
-    let { tasks } = this.state;
-    let query = tasks
-      .filter(items => items.done)
-      .map(item => item.text)
-      .toString();
 
-    // console.log('String to Query', query);
-    this.props.setTasks(tasks);
-
-    this.props.searchRecipes(query);
-    // this.setState({ queryString: '' });
+  deleteItem = item => {
+    let { groceryItems } = this.props;
+    groceryItems.splice(groceryItems.indexOf(item), 1);
+    this.setState({ newGroceryItem: '' });
+    this.props.toggleDeleteGroceryState(groceryItems);
   };
 
-  deleteTask = task => {
-    let { tasks } = this.state;
-    tasks.splice(tasks.indexOf(task), 1);
-    this.setState({ tasks: tasks, newTask: '' });
-  };
-
-  toggle = task => {
-    let { tasks } = this.state;
-
-    tasks[tasks.indexOf(task)].done = !tasks[tasks.indexOf(task)].done;
-    this.setState({ tasks: tasks, newTask: '' });
+  toggle = item => {
+    let { groceryItems } = this.props;
+    groceryItems[groceryItems.indexOf(item)].done = !groceryItems[
+      groceryItems.indexOf(item)
+    ].done;
+    this.setState({ newGroceryItem: '' });
+    this.props.toggleDeleteGroceryState(groceryItems);
   };
 
   render() {
-    const { tasks, newTask } = this.state;
+    const { newGroceryItem } = this.state;
+    const { groceryItems } = this.props;
 
     return (
-      // className={xs-{this.props.grid[0]}}
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
           Shopping List
         </Typography>
         <header style={styles.header}>
           <TextField
-            label="ADD FOOD ITEM"
-            value={newTask}
+            label="ADD ITEM"
+            value={newGroceryItem}
             onChange={this.onTextUpdate}
             onKeyPress={this.keyPress}
           />
           <Button
             variant="raised"
             color="primary"
-            disabled={!newTask}
-            onClick={this.addTask}
+            disabled={!newGroceryItem}
+            onClick={this.addItem}
           >
             Add
           </Button>
         </header>
-        {tasks.length > 0 && (
+        {groceryItems.length > 0 && (
           <Card style={styles.card}>
             <FormGroup>
-              {tasks.map((task, index) => (
+              {groceryItems.map((item, index) => (
                 <div key={index} style={styles.todo}>
                   {index > 0 ? <Divider style={styles.divider} /> : ''}
                   <FormControlLabel
                     control={
                       <Switch
                         color="primary"
-                        checked={task.done}
-                        onChange={() => this.toggle(task)}
+                        checked={item.done}
+                        onChange={() => this.toggle(item)}
                       />
                     }
-                    label={task.text}
-                    style={task.done ? styles.done : styles.mute}
+                    label={item.text}
+                    style={item.done ? styles.done : styles.mute}
                   />
                   <Tooltip title="Delete food" placement="top">
                     <IconButton
                       aria-label="delete"
-                      onClick={() => this.deleteTask(task)}
+                      onClick={() => this.deleteItem(item)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -200,7 +189,6 @@ class ShoppingList extends React.Component {
             </FormGroup>
           </Card>
         )}
-        <Button onClick={this.selectedFoods}>Search</Button>
       </div>
     );
   }

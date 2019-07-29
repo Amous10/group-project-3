@@ -9,4 +9,6 @@ router
 
 router.route('/:id').get(pantryController.findAll);
 
+router.route('/:id').put(pantryController.Update);
+
 module.exports = router;

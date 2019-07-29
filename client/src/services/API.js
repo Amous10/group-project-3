@@ -12,24 +12,30 @@ export default {
   },
 
   getRecipesD: function(id) {
-    console.log('getting details recipes', id);
     return axios.get('/api/recipesdetail/' + id);
   },
-  //Deletes the book with the given id
   deleteRecipe: function(id) {
     return axios.delete('/api/recipes/' + id);
   },
-  // Saves a book to the database
   saveRecipe: function(recipedata, userid) {
-    console.log('userid: ', userid);
     return axios.post('/api/recipes/', recipedata);
   },
   getPantry: function(id) {
-    console.log('getting details Pantry', id);
     return axios.get('/api/ingredients/' + id);
   },
   savePantry: function(pantrydata, userid) {
-    console.log('userid: ', userid);
     return axios.post('/api/ingredients/', pantrydata);
+  },
+  updatePantry: function(pantryitems, id) {
+    return axios.put('/api/ingredients/' + id, pantryitems);
+  },
+  getGrocery: function(id) {
+    return axios.get('/api/grocery/' + id);
+  },
+  saveGrocery: function(grocerydata, userid) {
+    return axios.post('/api/grocery/', grocerydata);
+  },
+  updateGrocery: function(groceryitems, id) {
+    return axios.put('/api/grocery/' + id, groceryitems);
   }
 };

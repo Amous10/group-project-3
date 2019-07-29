@@ -55,6 +55,7 @@ class App extends Component {
     this.setState({ pantryItems: newPantryItem });
   };
   toggleDeletePantryState = pantry => {
+    this.UpdatePantry(pantry, this.state.userid);
     this.setState({ pantryItems: this.state.pantryItems, pantry: '' });
   };
   setGroceryState = grocery => {
@@ -62,6 +63,7 @@ class App extends Component {
     this.setState({ groceryItems: newGroceryItem });
   };
   toggleDeleteGroceryState = grocery => {
+    this.UpdateGrocery(grocery, this.state.userid);
     this.setState({ groceryItems: this.state.groceryItems, grocery: '' });
   };
 
@@ -128,8 +130,33 @@ class App extends Component {
   getPantry(user) {
     API.getPantry(user)
       .then(res => {
-        const { pantryItems, groceryItems } = res.data[0];
-        this.setState({ pantryItems: pantryItems, groceryItems: groceryItems });
+        const { pantryItems } = res.data[0];
+        this.setState({ pantryItems: pantryItems });
+      })
+      .catch(err => console.log(err));
+  }
+
+  getGrocery(user) {
+    API.getGrocery(user)
+      .then(res => {
+        const { groceryItems } = res.data[0];
+        this.setState({ groceryItems: groceryItems });
+      })
+      .catch(err => console.log(err));
+  }
+
+  UpdatePantry(item, user) {
+    API.updatePantry(item, user)
+      .then(res => {
+        console.log('updated the pantry with api', item);
+      })
+      .catch(err => console.log(err));
+  }
+
+  UpdateGrocery(item, user) {
+    API.updateGrocery(item, user)
+      .then(res => {
+        console.log('updated the grocery with api', item);
       })
       .catch(err => console.log(err));
   }
@@ -138,6 +165,7 @@ class App extends Component {
     axios.get('/user/').then(response => {
       if (response.data.user) {
         this.getPantry(response.data.user._id);
+        this.getGrocery(response.data.user._id);
 
         this.setState({
           loggedIn: true,
@@ -197,6 +225,7 @@ class App extends Component {
                   {...props}
                   updateUser={this.updateUser}
                   getPantry={this.getPantry}
+                  getGrocery={this.getGrocery}
                 />
               )}
             />
@@ -219,7 +248,13 @@ class App extends Component {
               exact
               path="/api/recipes"
               render={props => (
-                <SavedRecipes {...props} userid={this.state.userid} />
+                <SavedRecipes
+                  {...props}
+                  userid={this.state.userid}
+                  groceryItems={this.state.groceryItems}
+                  setGroceryState={this.setGroceryState}
+                  toggleDeleteGroceryState={this.toggleDeleteGroceryState}
+                />
               )}
             />
             <Route
