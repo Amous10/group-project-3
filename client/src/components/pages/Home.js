@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
-import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import PantryList from '../PantryList';
@@ -8,7 +7,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
 import backgroundImage from '../../img/bg6.jpg';
-import SavedRecipesHero from '../SavedRecipesHero';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,6 +32,11 @@ const styles = {
     backgroundColor: `rgba(255,255,255, 0.5)`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
+  },
+  grid: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 };
 
@@ -112,7 +115,8 @@ class Home extends Component {
     return (
       <div style={styles.bgimage}>
         {/* <div> */}
-        <Grid className="home-recipes" container item xs={12} justify="center">
+        {/* <CircularIndeterminate /> */}
+        <Grid className={styles.grid} container item xs={12} justify="center">
           <Grid item xs={3}>
             <MuiThemeProvider theme={theme}>
               <PantryList
