@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -10,6 +10,7 @@ import backgroundImage from '../img/platefruitveg.jpg';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Tooltip from '@material-ui/core/Tooltip';
 import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     maxWidth: 500,
-    maxHeight: 803,
+    // maxHeight: 900,
     marginTop: 10,
     marginBottom: 10
   },
@@ -46,6 +47,16 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 10,
     fontSize: '1rem',
     fontStyle: 'italic'
+  },
+  button: {
+    backgroundColor: fade(theme.palette.common.black, 0.05),
+    '&:hover': {
+      color: '#4a4a4a',
+      backgroundColor: fade(theme.palette.common.black, 0.05)
+    }
+    // '&:visited': {
+    //   color: '#A6C844'
+    // }
   }
 }));
 
@@ -124,13 +135,24 @@ export default function RecipeCardDetails({ recipe, ...props }) {
               className={classes.sourcelink}
             >
               Full recipe at:
-              <a
+              {/* <a
                 href={recipe.url}
                 target="_blank"
                 className={classes.sourcelink}
               >
                 {recipe.source}
-              </a>
+              </a> */}
+              <Button
+                // color="primary"
+                // variant="contained"
+                size="small"
+                className={`${classes.button} ${classes.sourcelink}`}
+                component="a"
+                href={recipe.url}
+                target="_blank"
+              >
+                {recipe.source}
+              </Button>
             </Typography>
           </Tooltip>
         </CardActions>

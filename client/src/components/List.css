@@ -23,6 +23,7 @@
     /* width: 100%; */
     /* background-color: aqua; */
   }
+<<<<<<< HEAD
 
   .left-grid {
     /* float: right; */
@@ -33,4 +34,6 @@
     width: 10px !important;
     background-color: yellow;
   }
+=======
+>>>>>>> edaf5e8621fc40e03ec06123b621e9137b7326c0
 }

@@ -177,7 +177,11 @@ export default function Navbar({ ...props }) {
         props.searchRecipes(event.target.value);
         event.target.value = '';
         // redirect to home search
+<<<<<<< HEAD
         // props.history.push({
+=======
+        // props.location.history.push({
+>>>>>>> edaf5e8621fc40e03ec06123b621e9137b7326c0
         //   pathname: '/search'
         // });
       } else {
@@ -196,6 +200,7 @@ export default function Navbar({ ...props }) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      
     >
       {loggedIn ? (
         <div>
