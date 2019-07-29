@@ -14,7 +14,9 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
-    color: 'white'
+    color: '#fcfcfc',
+    backgroundColor: '#f3aa4e',
+    contrastText: 'white'
   },
   h5: {
     marginBottom: theme.spacing(4),
@@ -47,7 +49,7 @@ function IntroHero(props) {
         Let Pantry Chef help you whip something up!
       </Typography>
       <Button
-        color="primary"
+        // color="primary"
         variant="contained"
         size="small"
         className={classes.button}

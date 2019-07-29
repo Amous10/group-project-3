@@ -21,6 +21,7 @@ import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
 import CircularIndeterminate from './components/CircularIndeterminate';
+import IntroHowItWorks from './components/IntroHowItWorks';
 
 class App extends Component {
   getChildContext() {}
@@ -205,6 +206,7 @@ class App extends Component {
               path="/login2"
               render={props => (
                 <LoginForm
+                  // <LoginPortal
                   {...props}
                   updateUser={this.updateUser}
                   getPantry={this.getPantry}

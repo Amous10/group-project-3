@@ -42,14 +42,16 @@ const useStyles = makeStyles(theme => ({
     fontSize: '15px',
     height: '30%',
     // maxHeight: '80px',
-    backgroundColor: '#deebdd',
-    backgroundImage:
-      'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(187,219,190,0.50) 45%)',
+    backgroundColor: '#e1e2e1',
+    // backgroundImage:
+    // 'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(183,219,190,0.50) 45%)',
+    // 'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(192,207,149,0.50) 65%)',
     backgroundBlendMode: 'lighten'
   },
   cardfooter: {
-    backgroundImage:
-      'linear-gradient(180deg, rgba(230,233,240,0.50) 100%, rgba(238,241,245,1.0) 100%)',
+    backgroundColor: '#f5f5f5',
+    // backgroundImage:
+    //   'linear-gradient(180deg, rgba(230,233,240,0.50) 100%, rgba(238,241,245,1.0) 100%)',
     height: '15%'
   },
   iconheart: {

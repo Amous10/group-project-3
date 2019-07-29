@@ -18,11 +18,15 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: 'center'
   },
   card: {
-    maxWidth: 400,
-    maxHeight: 713,
+    maxWidth: 500,
+    maxHeight: 803,
     marginTop: 10,
     marginBottom: 10
   },
+  header: {
+    backgroundColor: '#f3f7e8'
+  },
+
   media: {
     height: 0,
     paddingTop: '50.25%' // 16:9
@@ -32,7 +36,16 @@ const useStyles = makeStyles(theme => ({
   },
   iconheart: {
     color: '#ff78dc',
-    textAlign: 'left'
+    textAlign: 'left',
+    marginRight: 50,
+    cursor: 'pointer'
+  },
+  sourcelink: {
+    color: '#a6c844',
+    fontWeight: 'bold',
+    marginLeft: 10,
+    fontSize: '1rem',
+    fontStyle: 'italic'
   }
 }));
 
@@ -48,7 +61,8 @@ export default function RecipeCardDetails({ recipe, ...props }) {
           </Avatar>
         }  */
         title={recipe.label}
-        subheader={recipe.source}
+        className={classes.header}
+        // subheader={recipe.source}
       />
       <CardMedia
         className={classes.media}
@@ -103,16 +117,22 @@ export default function RecipeCardDetails({ recipe, ...props }) {
               aria-label="Add to Favorites"
             />
           </Tooltip>
-          <Typography
-            variant="body2"
-            style={{ fontStyle: 'italic' }}
-            component="p"
-          >
-            Full recipe at:{' '}
-            <a href={recipe.url} target="_blank">
-              {recipe.source}
-            </a>
-          </Typography>
+          <Tooltip title="Link to Recipe!" placement="top">
+            <Typography
+              variant="body2"
+              component="p"
+              className={classes.sourcelink}
+            >
+              Full recipe at:
+              <a
+                href={recipe.url}
+                target="_blank"
+                className={classes.sourcelink}
+              >
+                {recipe.source}
+              </a>
+            </Typography>
+          </Tooltip>
         </CardActions>
       </CardContent>
     </Card>

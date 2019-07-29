@@ -30,8 +30,9 @@ const styles = {
     marginBottom: '10px'
   },
   main: {
-    margin: 10,
-    marginTop: 40,
+    position: 'relative',
+    marginTop: 50,
+    marginLeft: 50,
     width: '100%',
     minHeight: '700px',
     maxWidth: '340px',
