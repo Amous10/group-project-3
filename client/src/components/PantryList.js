@@ -105,10 +105,11 @@ class PantryList extends React.Component {
 
   addItem = () => {
     let { newPantryItem } = this.state;
-    // this.props.setPantryState(newPantryItem);
-    let itemObj = { text: newPantryItem, done: true };
-    this.props.setPantryState(itemObj);
-    this.savePantry(itemObj);
+    if (newPantryItem !== '') {
+      let itemObj = { text: newPantryItem, done: true };
+      this.props.setPantryState(itemObj);
+      this.savePantry(itemObj);
+    }
   };
 
   keyPress = e => {
@@ -148,8 +149,6 @@ class PantryList extends React.Component {
     const { pantryItems } = this.props;
 
     return (
-      // className={xs-{this.props.grid[0]}}
-
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
           Your Pantry
