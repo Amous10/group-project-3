@@ -127,33 +127,36 @@ class Home extends Component {
             </MuiThemeProvider>
           </Grid>
           <Grid item xs={9} className="grid" style={{ maxWidth: '69%' }}>
-            <RecipeCardWrapper
-              count={this.props.edamamresult.length}
-              title={'Results'}
-              message={
-                this.props.edamamresult === 0
-                  ? 'Enter your ingredients to search for recipes'
-                  : null
-              }
-            >
-              {this.props.edamamresult.map(edamamresult => {
-                return (
-                  <RecipeCard
-                    key={edamamresult.recipe.uri}
-                    edamamresult={edamamresult}
-                    goBackText="Back to recipes"
-                    recipe={edamamresult.recipe}
-                    history={this.props.history}
-                    redirectTo="/homedetail/2"
-                    handleRecipeSave={this.saveRecipe}
-                    leftButton={'View'}
-                    rightButton={'Save'}
-                    onMouseOver={this.onToggleOpen}
-                    onMouseOut={this.onToggleOpen}
-                  />
-                );
-              })}
-            </RecipeCardWrapper>
+            <Grid item xs={12}>
+              {' '}
+              <RecipeCardWrapper
+                count={this.props.edamamresult.length}
+                title={'Results'}
+                message={
+                  this.props.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
+              >
+                {this.props.edamamresult.map(edamamresult => {
+                  return (
+                    <RecipeCard
+                      key={edamamresult.recipe.uri}
+                      edamamresult={edamamresult}
+                      goBackText="Back to recipes"
+                      recipe={edamamresult.recipe}
+                      history={this.props.history}
+                      redirectTo="/homedetail/2"
+                      handleRecipeSave={this.saveRecipe}
+                      leftButton={'View'}
+                      rightButton={'Save'}
+                      onMouseOver={this.onToggleOpen}
+                      onMouseOut={this.onToggleOpen}
+                    />
+                  );
+                })}
+              </RecipeCardWrapper>
+            </Grid>
           </Grid>
         </Grid>
       </div>

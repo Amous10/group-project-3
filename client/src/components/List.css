@@ -4,9 +4,24 @@
     /* background-color: red !important; */
   }
 }
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 980px) {
   #main {
     max-width: 265px !important;
+  }
+}
+@media only screen and (max-width: 940px) {
+  #main {
+    max-width: 225px !important;
+  }
+}
+@media only screen and (max-width: 780px) {
+  #main {
+    max-width: 200px !important;
+  }
+}
+@media only screen and (max-width: 680px) {
+  #main {
+    max-width: 185px !important;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -20,6 +35,8 @@
     position: absolute;
     top: 1;
     left: 1;
+    background-image: url('../img/CurvyLines.png');
+    /* background-color: green; */
     /* width: 100%; */
     /* background-color: aqua; */
   }
