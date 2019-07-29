@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from '../../services/API';
-import Container from '../Container';
 import RecipeCard from '../RecipeCard';
 import RecipeCardWrapper from '../RecipeCardWrapper';
 import PantryList from '../PantryList';
@@ -8,7 +7,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
 import backgroundImage from '../../img/bg6.jpg';
-import SavedRecipesHero from '../SavedRecipesHero';
 
 const theme = createMuiTheme({
   palette: {
@@ -35,14 +33,15 @@ const styles = {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   }
+  // grid: {
+  //   // display: 'none',
+  //   // [theme.breakpoints.down('xs')]: {
+  //   //   display: 'none'
+  //   // }
+  // }
 };
 
 class Home extends Component {
-  state = {
-    error: '',
-    loading: false
-  };
-
   componentDidMount() {
     const user = {
       userId: this.props.userid
@@ -102,10 +101,7 @@ class Home extends Component {
       });
   };
   render() {
-    if (this.state.error) {
-      return <div>{this.state.error}</div>;
-    }
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <CircularIndeterminate />;
     }
     // else
@@ -124,9 +120,8 @@ class Home extends Component {
               />
             </MuiThemeProvider>
           </Grid>
-          <Grid item xs={9} style={{ maxWidth: '69%' }}>
+          <Grid item xs={9} className="grid" style={{ maxWidth: '69%' }}>
             <RecipeCardWrapper
-              style={{ maxWidth: '69%' }}
               count={this.props.edamamresult.length}
               title={'Results'}
               message={

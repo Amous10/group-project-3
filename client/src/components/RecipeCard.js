@@ -29,11 +29,12 @@ const useStyles = makeStyles(theme => ({
     height: 10,
     paddingTop: '60.25%', // 16:9
     pointerEvents: 'auto',
-    cursor: 'pointer'
-    // hover: {
-    //   transition: 0.2,
-    //   scale: '110%'
-    // }
+    cursor: 'pointer',
+    '&:hover': {
+      // transition: 0.2,
+      // scale: '110%'
+      transform: 'scale(1.1)'
+    }
   },
 
   avatar: {
