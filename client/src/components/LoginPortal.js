@@ -85,14 +85,6 @@ function LoginPortal({ ...props }) {
       });
     // setSent(true);
   };
-  const handleSubmit = values => {
-    console.log('values: ', values);
-    setSent(true);
-  };
-
-  const handleChange = () => {
-    // setSent(true);
-  };
 
   return (
     <React.Fragment>

@@ -176,6 +176,10 @@ export default function Navbar({ ...props }) {
       if (event.target.value.match('^[a-zA-Z ]*$') != null) {
         props.searchRecipes(event.target.value);
         event.target.value = '';
+        // redirect to home search
+        // props.history.push({
+        //   pathname: '/search'
+        // });
       } else {
         event.target.value = 'Apple Fritters';
       }
