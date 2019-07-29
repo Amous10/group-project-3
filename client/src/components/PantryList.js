@@ -91,10 +91,12 @@ class PantryList extends React.Component {
 
     console.log('newSavedPantry', newSavedPantry);
     // save recipe then remove from the result state
-    API.savePantry(newSavedPantry).then(response => {
-      this.setState({ newPantryItem: '' });
-      console.log('response.data after API Save Pantry: ', response.data);
-    });
+    if (this.props.userid != null) {
+      API.savePantry(newSavedPantry).then(response => {
+        this.setState({ newPantryItem: '' });
+        console.log('response.data after API Save Pantry: ', response.data);
+      });
+    }
   };
 
   onTextUpdate = e => {
