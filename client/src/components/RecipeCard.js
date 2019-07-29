@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -59,6 +60,16 @@ const useStyles = makeStyles(theme => ({
   },
   icontrash: {
     color: '#ff0000'
+  },
+  button: {
+    // backgroundColor: fade(theme.palette.common.white, 0.85),
+    '&:hover': {
+      color: '#4a4a4a',
+      backgroundColor: fade(theme.palette.common.white, 0.45)
+    },
+    '&:visited': {
+      color: '#A6C844'
+    }
   },
   sourcelink: {
     color: '#a6c844',
@@ -134,9 +145,20 @@ export default function RecipeCard({ recipe, ...props }) {
         {/* <IconButton aria-label="Share">
           <ShareIcon className={classes.iconshare} />
         </IconButton> */}
-        <a href={recipe.url} className={classes.sourcelink} target="_blank">
+        <Button
+          // color="primary"
+          // variant="contained"
+          size="small"
+          className={`${classes.button} ${classes.sourcelink}`}
+          component="a"
+          href={recipe.url}
+          target="_blank"
+        >
           {recipe.source}
-        </a>
+        </Button>
+        {/* <a href={recipe.url} className={classes.sourcelink} target="_blank">
+          {recipe.source}
+        </a> */}
       </CardActions>
     </Card>
   );

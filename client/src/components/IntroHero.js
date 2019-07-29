@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, fade } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IntroHeroLayout from './IntroHeroLayout';
@@ -15,8 +15,12 @@ const styles = theme => ({
   button: {
     minWidth: 200,
     color: '#fcfcfc',
-    backgroundColor: '#f3aa4e',
-    contrastText: 'white'
+    backgroundColor: fade(theme.palette.common.white, 0.85),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.45)
+    }
+    // backgroundColor: '#f3aa4e',
+    // contrastText: '#ffffff'
   },
   h5: {
     marginBottom: theme.spacing(4),

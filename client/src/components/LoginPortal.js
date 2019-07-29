@@ -1,18 +1,13 @@
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-
-// --- Post bootstrap -----
 import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-// import AppForm from '@material-ui/core/Form';
 import { FormControl, Button } from '@material-ui/core';
 import { email, required } from './form/validation';
 import RFTextField from './form/RFTextField';
 import FormFeedback from './form/FormFeedback';
-import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -38,13 +33,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LoginPortal({ ...props }) {
-  const formEmail = '';
-  const formPassword = '';
-  const redirectTo = null;
-
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
-
+  let banner = 'Sign In';
   const validate = values => {
     const errors = required(['email', 'password'], values);
 
@@ -57,15 +48,41 @@ function LoginPortal({ ...props }) {
 
     return errors;
   };
-  const handleSubmitOld = () => {
-    setSent(true);
-  };
-  const handleSubmit = values => {
-    console.log('values: ', values);
-    setSent(true);
-  };
 
-  const handleChange = () => {
+  const handleSubmit = values => {
+    const { email, password } = values;
+    console.log('values: ', email);
+    console.log('values: ', password);
+    axios
+      .post('/user/login', {
+        username: email,
+        password: password
+      })
+      .then(response => {
+        console.log('response', response);
+        if (response.status === 200) {
+          // update App.js state
+          props.getPantry(response.data._id);
+          props.updateUser({
+            loggedIn: true,
+            userid: response.data._id,
+            username: response.data.username
+          });
+          // redirect to home search
+          props.history.push({
+            pathname: '/search/'
+          });
+        } else if (response.status === 401) {
+          console.log('login error: 401 (Unauthorized)');
+        } else {
+          console.log('login not working...');
+        }
+      })
+      .catch(error => {
+        banner = 'Error Logging In';
+        console.log('login error: ');
+        console.log(error);
+      });
     // setSent(true);
   };
 
@@ -74,7 +91,7 @@ function LoginPortal({ ...props }) {
       <FormControl className={classes.main}>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
+            {banner}
           </Typography>
           <Typography variant="body2" align="center">
             {'Not a member yet? '}
