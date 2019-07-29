@@ -1,35 +1,42 @@
-import withRoot from './modules/withRoot';
-// --- Post bootstrap -----
 import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
-import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import { makeStyles, fade } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import Typography from './modules/components/Typography';
-import AppFooter from './modules/views/AppFooter';
-import AppAppBar from './modules/views/AppAppBar';
-import AppForm from './modules/views/AppForm';
-import { email, required } from './modules/form/validation';
-import RFTextField from './modules/form/RFTextField';
-import FormButton from './modules/form/FormButton';
-import FormFeedback from './modules/form/FormFeedback';
+import { Field, Form, FormSpy } from 'react-final-form';
+import Typography from '@material-ui/core/Typography';
+import { FormControl, Button } from '@material-ui/core';
+import { email, required } from './form/validation';
+import RFTextField from './form/RFTextField';
+import FormFeedback from './form/FormFeedback';
 
 const useStyles = makeStyles(theme => ({
+  main: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(6)
+  },
   form: {
     marginTop: theme.spacing(6)
   },
   button: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
+    backgroundColor: '#a7c93f',
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.black, 0.25)
+      // color: '#a7c93f'
+    },
+    color: '#ffffff'
   },
   feedback: {
     marginTop: theme.spacing(2)
   }
 }));
 
-function SignIn() {
+function SignUpPortal({ ...props }) {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
-
+  let banner = 'Sign Up';
   const validate = values => {
     const errors = required(['email', 'password'], values);
 
@@ -43,26 +50,46 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = values => {
+    const { email, password } = values;
+
+    //request to server to add a new username/password
+    axios
+      .post('/user/', {
+        username: email,
+        password: password
+      })
+      .then(response => {
+        console.log(response);
+        if (!response.data.errmsg) {
+          console.log('successful signup');
+          if (response.status === 200) {
+            // redirect to home search
+            props.history.push({
+              pathname: '/login/'
+            });
+          }
+        } else {
+          console.log('username already taken');
+        }
+      })
+      .catch(error => {
+        console.log('signup error: ');
+        console.log(error);
+      });
     setSent(true);
   };
 
   return (
     <React.Fragment>
-      <AppAppBar />
-      <AppForm>
+      <FormControl className={classes.main}>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
+            {banner}
           </Typography>
           <Typography variant="body2" align="center">
-            {'Not a member yet? '}
-            <Link
-              href="/premium-themes/onepirate/sign-up/"
-              align="center"
-              underline="always"
-            >
-              Sign Up here
+            <Link href="/login/" underline="always">
+              Already have an account?
             </Link>
           </Typography>
         </React.Fragment>
@@ -71,11 +98,11 @@ function SignIn() {
           subscription={{ submitting: true }}
           validate={validate}
         >
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+          {({ handleSubmit, submitting }) => (
+            <form onSubmit={handleSubmit} className={classes.form} noValidate>
+              <Grid container spacing={2} />
               <Field
                 autoComplete="email"
-                autoFocus
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
@@ -83,11 +110,9 @@ function SignIn() {
                 margin="normal"
                 name="email"
                 required
-                size="large"
               />
               <Field
                 fullWidth
-                size="large"
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
@@ -106,30 +131,21 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
-              <FormButton
+              <Button
                 className={classes.button}
+                onClick={handleSubmit}
                 disabled={submitting || sent}
-                size="large"
                 color="secondary"
                 fullWidth
               >
-                {submitting || sent ? 'In progress…' : 'Sign In'}
-              </FormButton>
+                {submitting || sent ? 'In progress…' : 'Sign Up'}
+              </Button>
             </form>
           )}
         </Form>
-        <Typography align="center">
-          <Link
-            underline="always"
-            href="/premium-themes/onepirate/forgot-password/"
-          >
-            Forgot password?
-          </Link>
-        </Typography>
-      </AppForm>
-      <AppFooter />
+      </FormControl>
     </React.Fragment>
   );
 }
 
-export default withRoot(SignIn);
+export default SignUpPortal;

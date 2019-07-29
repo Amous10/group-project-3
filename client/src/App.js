@@ -11,8 +11,8 @@ import {
 
 // components
 import Signup from './components/Signup.js';
-import LoginForm from './components/Login.js';
-// import LoginPortal from './components/LoginPortal.js';
+import SignUpPortal from './components/SignUpPortal.js';
+import LoginPortal from './components/LoginPortal.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
@@ -191,15 +191,17 @@ class App extends Component {
               exact
               path="/login"
               render={props => (
-                <LoginForm
-                  // <LoginPortal
+                // <LoginForm
+                <LoginPortal
                   {...props}
                   updateUser={this.updateUser}
                   getPantry={this.getPantry}
                 />
               )}
             />
-            <Route exact path="/signup" render={() => <Signup />} />
+
+            <Route exact path="/signup" render={() => <SignUpPortal />} />
+            <Route exact path="/signup2" render={() => <Signup />} />
             <Route
               exact
               path="/api/recipes"
