@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, fade } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -45,8 +45,15 @@ const styles = theme => ({
     marginBottom: theme.spacing(4)
   },
   button: {
-    marginTop: theme.spacing(8),
-    backgroundColor: '#f3aa4e'
+    minWidth: 200,
+    // color: '#fcfcfc',
+    // backgroundColor: fade(theme.palette.common.black, 0.15),
+    // '&:hover': {
+    //   backgroundColor: fade(theme.palette.common.black, 0.05)
+    // },
+    marginTop: theme.spacing(8)
+    // backgroundColor: '#f3aa4e',
+    // contrastText: '#ffffff'
   }
 });
 

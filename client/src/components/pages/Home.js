@@ -38,14 +38,15 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between'
   }
+  // grid: {
+  //   // display: 'none',
+  //   // [theme.breakpoints.down('xs')]: {
+  //   //   display: 'none'
+  //   // }
+  // }
 };
 
 class Home extends Component {
-  state = {
-    error: '',
-    loading: false
-  };
-
   componentDidMount() {
     const user = {
       userId: this.props.userid
@@ -105,10 +106,7 @@ class Home extends Component {
       });
   };
   render() {
-    if (this.state.error) {
-      return <div>{this.state.error}</div>;
-    }
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <CircularIndeterminate />;
     }
     // else
@@ -128,9 +126,8 @@ class Home extends Component {
               />
             </MuiThemeProvider>
           </Grid>
-          <Grid item xs={9} style={{ maxWidth: '69%' }}>
+          <Grid item xs={9} className="grid" style={{ maxWidth: '69%' }}>
             <RecipeCardWrapper
-              style={{ maxWidth: '69%' }}
               count={this.props.edamamresult.length}
               title={'Results'}
               message={

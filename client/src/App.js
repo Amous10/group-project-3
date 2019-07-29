@@ -179,6 +179,7 @@ class App extends Component {
                   {...props}
                   searchRecipes={this.searchRecipes}
                   location={this.props.location}
+                  loading={this.state.loading}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
                   pantryItems={this.state.pantryItems}
