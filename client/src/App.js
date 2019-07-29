@@ -12,6 +12,7 @@ import {
 // components
 import Signup from './components/Signup.js';
 import SignUpPortal from './components/SignUpPortal.js';
+import LoginForm from './components/Login.js';
 import LoginPortal from './components/LoginPortal.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
@@ -193,6 +194,17 @@ class App extends Component {
               render={props => (
                 // <LoginForm
                 <LoginPortal
+                  {...props}
+                  updateUser={this.updateUser}
+                  getPantry={this.getPantry}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/login2"
+              render={props => (
+                <LoginForm
                   {...props}
                   updateUser={this.updateUser}
                   getPantry={this.getPantry}
