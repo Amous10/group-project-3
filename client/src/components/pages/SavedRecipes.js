@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import backgroundImage from '../../img/cherries.jpg';
-
+import '../List.css';
 // const theme = createMuiTheme({
 //   palette: {
 //     primary: {
@@ -88,7 +88,7 @@ class SavedRecipes extends Component {
             xs={12}
             // justify="center"
           >
-            <Grid item xs={9} style={{ maxWidth: '69%' }}>
+            <Grid item xs={9} className="left-grid" style={{ maxWidth: '69%' }}>
               <RecipeCardWrapper
                 style={{ maxWidth: '69%' }}
                 count={this.state.result.length}
@@ -113,14 +113,12 @@ class SavedRecipes extends Component {
                 })}
               </RecipeCardWrapper>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={6} xs={3}>
               {/* <MuiThemeProvider theme={theme.primary}> */}
               <ShoppingList
                 className="home-recipes"
                 // justify="center"
                 searchRecipes={this.props.searchRecipes}
-                setTasks={this.setTasks}
-                tasks={this.props.tasks}
                 userid={this.props.userid}
               />
               {/* </MuiThemeProvider> */}

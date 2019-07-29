@@ -10,6 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
+import './List.css';
 import API from '../services/API';
 const styles = {
   done: {
@@ -84,19 +85,6 @@ class ShoppingList extends React.Component {
     newTask: '',
     queryString: []
   };
-
-  componentDidMount() {
-    try {
-      console.log('I will mount', this.props);
-
-      if (this.props.tasks.pantryItems) {
-        this.setState({ tasks: this.props.tasks.pantryItems });
-      }
-      console.log('this.props.tasks on Update: ', this.props.tasks);
-    } catch (e) {
-      console.log('error');
-    }
-  }
 
   savePantry = () => {
     const newSavedPantry = {
