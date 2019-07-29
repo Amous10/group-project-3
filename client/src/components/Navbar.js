@@ -177,7 +177,7 @@ export default function Navbar({ ...props }) {
         props.searchRecipes(event.target.value);
         event.target.value = '';
         // redirect to home search
-        // props.history.push({
+        // props.location.history.push({
         //   pathname: '/search'
         // });
       } else {
@@ -196,6 +196,7 @@ export default function Navbar({ ...props }) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      
     >
       {loggedIn ? (
         <div>
