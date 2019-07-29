@@ -180,6 +180,7 @@ export default function Navbar({ ...props }) {
         if (event.target.value.trim() !== '') {
           props.searchRecipes(event.target.value.trim());
           event.target.value = '';
+          //TODO REDIRECT
           // redirect to home search
           if (props.history) {
             console.log('props.history: ', props.history);

@@ -91,10 +91,12 @@ class ShoppingList extends React.Component {
     };
 
     // save recipe then remove from the result state
-    API.saveGrocery(newSavedGrocery).then(response => {
-      this.setState({ newGroceryItem: '' });
-      console.log('response.data after API Save Grocery: ', response.data);
-    });
+    if (this.props.userid != null) {
+      API.saveGrocery(newSavedGrocery).then(response => {
+        this.setState({ newGroceryItem: '' });
+        console.log('response.data after API Save Grocery: ', response.data);
+      });
+    }
   };
 
   onTextUpdate = e => {
