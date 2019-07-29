@@ -40,6 +40,7 @@ class LoginForm extends Component {
             username: response.data.username
           });
           // update the state to redirect to home
+
           this.setState({
             redirectTo: '/'
           });

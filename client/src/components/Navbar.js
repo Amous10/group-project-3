@@ -173,15 +173,21 @@ export default function Navbar({ ...props }) {
 
   function handleOnKeyPress(event) {
     if (event.key === 'Enter') {
-      if (event.target.value.match('^[a-zA-Z ]*$') != null) {
+      if (
+        event.target.value !== '' &&
+        event.target.value.match('^[a-zA-Z ]*$') != null
+      ) {
         props.searchRecipes(event.target.value);
         event.target.value = '';
         // redirect to home search
-        // props.history.push({
-        //   pathname: '/search'
-        // });
+        if (props.history) {
+          console.log('props.history: ', props.history);
+          props.history.push({
+            pathname: '/search'
+          });
+        } else console.log('NO props.history: ', props.history);
       } else {
-        event.target.value = 'Apple Fritters';
+        event.target.value = 'Blackberry Cobbler';
       }
     }
   }

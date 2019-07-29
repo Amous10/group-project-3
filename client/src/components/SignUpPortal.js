@@ -64,10 +64,14 @@ function SignUpPortal({ ...props }) {
         if (!response.data.errmsg) {
           console.log('successful signup');
           if (response.status === 200) {
-            // redirect to home search
-            props.history.push({
-              pathname: '/login/'
-            });
+            // // redirect to home search
+            // props.history.push({
+            //   pathname: '/login/'
+            // });
+            //TODO: REDIRECT
+            if (typeof window !== 'undefined') {
+              window.location.href = '/login/';
+            }
           }
         } else {
           console.log('username already taken');

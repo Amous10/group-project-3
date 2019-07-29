@@ -69,10 +69,14 @@ function LoginPortal({ ...props }) {
             userid: response.data._id,
             username: response.data.username
           });
+          //TODO: REDIRECT
+          if (typeof window !== 'undefined') {
+            window.location.href = '/search/';
+          }
           // redirect to home search
-          props.history.push({
-            pathname: '/search/'
-          });
+          // props.history.push({
+          //   pathname: '/search/'
+          // });
         } else if (response.status === 401) {
           console.log('login error: 401 (Unauthorized)');
         } else {
