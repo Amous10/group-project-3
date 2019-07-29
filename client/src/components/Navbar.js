@@ -305,14 +305,20 @@ export default function Navbar({ ...props }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            href="/intro"
+            href="/"
           >
             <img src={logo} className="App-logo" alt="logo" />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            {/* <Typography className={`App-title`} variant="h6" noWrap> */}
+            {/* <Typography
+            className={`${classes.title} ${classes.grow}`}
+            href="/"
+            variant="h6"
+            noWrap
+          > */}
             Pantry Chef
           </Typography>
+
           {/* <div className={classes.search} onKeyPress={handleOnKeyPress}> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
