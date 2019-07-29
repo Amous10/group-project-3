@@ -113,7 +113,7 @@ class SavedRecipes extends Component {
                 })}
               </RecipeCardWrapper>
             </Grid>
-            <Grid item md={6} xs={3}>
+            <Grid item xs={3}>
               {/* <MuiThemeProvider theme={theme.primary}> */}
               <ShoppingList
                 className="home-recipes"

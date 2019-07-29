@@ -35,11 +35,11 @@ font-family: 'Sintony', sans-serif;
   font-size: large;
 }
 
-.App-hover {
+/* .App-hover {
   text-decoration: 'none';
   text-emphasis: none;
   color: '#7cd417d0';
-}
+} */
 
 #main {
   position: absolute;

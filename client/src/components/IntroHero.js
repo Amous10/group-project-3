@@ -53,7 +53,7 @@ function IntroHero(props) {
         Let Pantry Chef help you whip something up!
       </Typography>
       <Button
-        color="primary"
+        // color="primary"
         variant="contained"
         size="small"
         className={classes.button}
