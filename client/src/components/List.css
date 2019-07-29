@@ -17,9 +17,11 @@
   }
   .grid {
     /* float: right; */
+    background-image: url('../img/CurvyLines.png');
     position: absolute;
     top: 1;
     left: 1;
+    /* background-color: green; */
     /* width: 100%; */
     /* background-color: aqua; */
   }
