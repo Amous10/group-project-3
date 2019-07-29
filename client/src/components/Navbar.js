@@ -177,16 +177,20 @@ export default function Navbar({ ...props }) {
         event.target.value !== '' &&
         event.target.value.match('^[a-zA-Z ]*$') != null
       ) {
-        props.searchRecipes(event.target.value);
-        event.target.value = '';
-        // redirect to home search
-        if (props.history) {
-          console.log('props.history: ', props.history);
-          props.history.push({
-            pathname: '/search'
-          });
-        } else console.log('NO props.history: ', props.history);
-      } else {
+        if (event.target.value.trim() !== '') {
+          props.searchRecipes(event.target.value.trim());
+          event.target.value = '';
+          // redirect to home search
+          if (props.history) {
+            console.log('props.history: ', props.history);
+            props.history.push({
+              pathname: '/search'
+            });
+          } else console.log('NO props.history: ', props.history);
+        } else {
+          event.target.value = 'Peach Cobbler';
+        }
+     } else {
         event.target.value = 'Blackberry Cobbler';
       }
     }
