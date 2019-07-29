@@ -7,24 +7,24 @@ import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import backgroundImage from '../../img/cherries.jpg';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      // light: will be calculated from palette.primary.main,
-      main: '#a6c844'
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
-    },
-    secondary: {
-      light: '#b4b2ae',
-      main: '#8b8e91',
-      // dark: will be calculated from palette.secondary.main,
-      contrastText: '#f3aa4e'
-    }
-    // error: will use the default color
-  }
-});
+import '../List.css';
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       // light: will be calculated from palette.primary.main,
+//       main: '#a6c844'
+//       // dark: will be calculated from palette.primary.main,
+//       // contrastText: will be calculated to contrast with palette.primary.main
+//     },
+//     secondary: {
+//       light: '#b4b2ae',
+//       main: '#8b8e91',
+//       // dark: will be calculated from palette.secondary.main,
+//       contrastText: '#f3aa4e'
+//     }
+//     // error: will use the default color
+//   }
+// });
 
 const styles = {
   bgimage: {
@@ -86,9 +86,9 @@ class SavedRecipes extends Component {
             container
             item
             xs={12}
-            justify="center"
+            // justify="center"
           >
-            <Grid item xs={9} style={{ maxWidth: '69%' }}>
+            <Grid item xs={9} className="left-grid" style={{ maxWidth: '69%' }}>
               <RecipeCardWrapper
                 style={{ maxWidth: '69%' }}
                 count={this.state.result.length}
@@ -114,16 +114,14 @@ class SavedRecipes extends Component {
               </RecipeCardWrapper>
             </Grid>
             <Grid item xs={3}>
-              <MuiThemeProvider theme={theme.primary}>
-                <ShoppingList
-                  className="home-recipes"
-                  // justify="center"
-                  searchRecipes={this.props.searchRecipes}
-                  setTasks={this.setTasks}
-                  tasks={this.props.tasks}
-                  userid={this.props.userid}
-                />
-              </MuiThemeProvider>
+              {/* <MuiThemeProvider theme={theme.primary}> */}
+              <ShoppingList
+                className="home-recipes"
+                // justify="center"
+                searchRecipes={this.props.searchRecipes}
+                userid={this.props.userid}
+              />
+              {/* </MuiThemeProvider> */}
             </Grid>
           </Grid>
         </React.Fragment>

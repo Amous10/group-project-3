@@ -3,6 +3,7 @@ import RecipeCardDetails from '../RecipeCardDetails';
 import Grid from '@material-ui/core/Grid';
 import backgroundImage from '../../img/platefruitveg.jpg';
 import Button from '@material-ui/core/Button';
+import { fade } from '@material-ui/core/styles';
 
 const styles = {
   bgimage: {
@@ -13,10 +14,12 @@ const styles = {
   },
 
   button: {
-    background: `rgba(255,255,255, 1)`,
-    // &button:hover{
-    //   background:'rgba(255,255,255, 0.5)';
-    // }
+    backgroundColor: `rgba(255,255,255, 1)`,
+
+    '&:hover': {
+      backgroundColor: fade('#4a4a4a', 0.05)
+      // color: 'rgb(129, 10, 169)'
+    },
     color: 'rgb(129, 150, 69)',
     padding: 10,
     // opacity: 0.9,

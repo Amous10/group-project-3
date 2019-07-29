@@ -11,15 +11,15 @@ import {
 
 // components
 import Signup from './components/Signup.js';
+import SignUpPortal from './components/SignUpPortal.js';
 import LoginForm from './components/Login.js';
-// import LoginPortal from './components/LoginPortal.js';
+import LoginPortal from './components/LoginPortal.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
 import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
-import CircularIndeterminate from './components/CircularIndeterminate';
 
 class App extends Component {
   getChildContext() {}
@@ -178,6 +178,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" component={Intro} />
+            {/* <Route exact path="/works" component={IntroHowItWorks} /> */}
 
             <Route
               exact
@@ -187,6 +188,7 @@ class App extends Component {
                   {...props}
                   searchRecipes={this.searchRecipes}
                   location={this.props.location}
+                  loading={this.state.loading}
                   userid={this.state.userid}
                   edamamresult={this.state.edamamresult}
                   pantryItems={this.state.pantryItems}
@@ -200,6 +202,18 @@ class App extends Component {
               exact
               path="/login"
               render={props => (
+                // <LoginForm
+                <LoginPortal
+                  {...props}
+                  updateUser={this.updateUser}
+                  getPantry={this.getPantry}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/login2"
+              render={props => (
                 <LoginForm
                   // <LoginPortal
                   {...props}
@@ -208,7 +222,9 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/signup" render={() => <Signup />} />
+
+            <Route exact path="/signup" render={() => <SignUpPortal />} />
+            <Route exact path="/signup2" render={() => <Signup />} />
             <Route
               exact
               path="/api/recipes"

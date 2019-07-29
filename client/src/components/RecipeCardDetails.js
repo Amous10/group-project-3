@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -10,6 +10,7 @@ import backgroundImage from '../img/platefruitveg.jpg';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Tooltip from '@material-ui/core/Tooltip';
 import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -18,11 +19,15 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: 'center'
   },
   card: {
-    maxWidth: 400,
-    maxHeight: 713,
+    maxWidth: 500,
+    // maxHeight: 900,
     marginTop: 10,
     marginBottom: 10
   },
+  header: {
+    backgroundColor: '#f3f7e8'
+  },
+
   media: {
     height: 0,
     paddingTop: '50.25%' // 16:9
@@ -32,7 +37,26 @@ const useStyles = makeStyles(theme => ({
   },
   iconheart: {
     color: '#ff78dc',
-    textAlign: 'left'
+    textAlign: 'left',
+    marginRight: 50,
+    cursor: 'pointer'
+  },
+  sourcelink: {
+    color: '#a6c844',
+    fontWeight: 'bold',
+    marginLeft: 10,
+    fontSize: '1rem',
+    fontStyle: 'italic'
+  },
+  button: {
+    backgroundColor: fade(theme.palette.common.black, 0.05),
+    '&:hover': {
+      color: '#4a4a4a',
+      backgroundColor: fade(theme.palette.common.black, 0.05)
+    }
+    // '&:visited': {
+    //   color: '#A6C844'
+    // }
   }
 }));
 
@@ -48,7 +72,8 @@ export default function RecipeCardDetails({ recipe, ...props }) {
           </Avatar>
         }  */
         title={recipe.label}
-        subheader={recipe.source}
+        className={classes.header}
+        // subheader={recipe.source}
       />
       <CardMedia
         className={classes.media}
@@ -103,16 +128,33 @@ export default function RecipeCardDetails({ recipe, ...props }) {
               aria-label="Add to Favorites"
             />
           </Tooltip>
-          <Typography
-            variant="body2"
-            style={{ fontStyle: 'italic' }}
-            component="p"
-          >
-            Full recipe at:{' '}
-            <a href={recipe.url} target="_blank">
-              {recipe.source}
-            </a>
-          </Typography>
+          <Tooltip title="Link to Recipe!" placement="top">
+            <Typography
+              variant="body2"
+              component="p"
+              className={classes.sourcelink}
+            >
+              Full recipe at:
+              {/* <a
+                href={recipe.url}
+                target="_blank"
+                className={classes.sourcelink}
+              >
+                {recipe.source}
+              </a> */}
+              <Button
+                // color="primary"
+                // variant="contained"
+                size="small"
+                className={`${classes.button} ${classes.sourcelink}`}
+                component="a"
+                href={recipe.url}
+                target="_blank"
+              >
+                {recipe.source}
+              </Button>
+            </Typography>
+          </Tooltip>
         </CardActions>
       </CardContent>
     </Card>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, fade } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -45,11 +45,19 @@ const styles = theme => ({
     marginBottom: theme.spacing(4)
   },
   button: {
+    minWidth: 200,
+    // color: '#fcfcfc',
+    // backgroundColor: fade(theme.palette.common.black, 0.15),
+    // '&:hover': {
+    //   backgroundColor: fade(theme.palette.common.black, 0.05)
+    // },
     marginTop: theme.spacing(8)
+    // backgroundColor: '#f3aa4e',
+    // contrastText: '#ffffff'
   }
 });
 
-function ProductHowItWorks(props) {
+function IntroHowItWorks(props) {
   const { classes } = props;
 
   return (
@@ -74,7 +82,8 @@ function ProductHowItWorks(props) {
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                  Take a quick inventory of food items in your kitchen. Enter
+                  them into your Virtual Pantry List.
                 </Typography>
               </div>
             </Grid>
@@ -83,8 +92,8 @@ function ProductHowItWorks(props) {
                 <div className={classes.number}>2.</div>
                 <img src={StepTwoImage} alt="foods" className={classes.image} />
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited
-                  quantities, so be quick.
+                  Select the ingredients out of your Pantry List that sound
+                  appetizing.
                 </Typography>
               </div>
             </Grid>
@@ -97,20 +106,22 @@ function ProductHowItWorks(props) {
                   className={classes.image}
                 />
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                  Hit Search to let our Pantry Chef offer you some tasty recipes
+                  that just might hit the spot!
+                  {/* {'New offers every week. New experiences, new surprises. '}
+                  {'Your Sundays will no longer be alike.'} */}
                 </Typography>
               </div>
             </Grid>
           </Grid>
         </div>
         <Button
-          color="primary"
+          color="#f3aa4e"
           size="medium"
           variant="contained"
           className={classes.button}
           component="a"
-          href="/"
+          href="/search"
         >
           Fill Your Pantry
         </Button>
@@ -119,8 +130,8 @@ function ProductHowItWorks(props) {
   );
 }
 
-ProductHowItWorks.propTypes = {
+IntroHowItWorks.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ProductHowItWorks);
+export default withStyles(styles)(IntroHowItWorks);

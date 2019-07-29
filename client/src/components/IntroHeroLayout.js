@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import IconButton from '@material-ui/core/IconButton';
 import ArrowIcon from '@material-ui/icons/ArrowDropDownCircle';
 
 const styles = theme => ({
@@ -62,9 +61,7 @@ function ProductHeroLayout(props) {
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
         <div className={classes.arrowDown}>
-          <IconButton aria-label="down arrow" color="inherit">
-            <ArrowIcon />
-          </IconButton>
+          <ArrowIcon href="" />
         </div>
       </Container>
     </section>

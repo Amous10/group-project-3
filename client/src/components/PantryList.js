@@ -11,6 +11,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import API from '../services/API';
+import './List.css';
+
 const styles = {
   done: {
     color: '#94d162',
@@ -147,6 +149,7 @@ class PantryList extends React.Component {
 
     return (
       // className={xs-{this.props.grid[0]}}
+
       <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
           Your Pantry

@@ -4,11 +4,3 @@ body {
   font-family: sans-serif;
   background-image: url('../src/img/theone.jpg');
 }
-
-/* body {
-  background: url('../../img/image.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: bisque;
-} */
