@@ -57,11 +57,11 @@ const styles = theme => ({
   }
 });
 
-function IntroHowItWorks(props) {
+const IntroHowItWorks = React.forwardRef((props, ref) => {
   const { classes } = props;
 
   return (
-    <section className={classes.root}>
+    <section ref={ref} className={classes.root}>
       <Container className={classes.container}>
         <Typography
           variant="h4"
@@ -128,7 +128,7 @@ function IntroHowItWorks(props) {
       </Container>
     </section>
   );
-}
+});
 
 IntroHowItWorks.propTypes = {
   classes: PropTypes.object.isRequired

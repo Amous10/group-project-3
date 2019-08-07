@@ -36,10 +36,13 @@ const styles = theme => ({
 });
 
 function IntroHero(props) {
-  const { classes } = props;
+  const { classes, scrollToContent } = props;
 
   return (
-    <IntroHeroLayout backgroundClassName={classes.background}>
+    <IntroHeroLayout
+      scrollToContent={scrollToContent}
+      backgroundClassName={classes.background}
+    >
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="" />
       <Typography color="inherit" align="center" variant="h4" marked="center">
@@ -53,16 +56,20 @@ function IntroHero(props) {
       >
         Let Pantry Chef help you whip something up!
       </Typography>
-      <Button
-        color="primary"
-        size="medium"
-        variant="contained"
-        className={classes.button}
-        component="a"
-        href="/login"
-      >
-        Sign In
-      </Button>
+      {!props.loggedIn ? (
+        <Button
+          color="primary"
+          size="medium"
+          variant="contained"
+          className={classes.button}
+          component="a"
+          href="/signup"
+        >
+          Sign Up
+        </Button>
+      ) : (
+        <div>Welcome Back, {props.userName}!</div>
+      )}
       <Typography variant="body2" color="#fffff" className={classes.more}>
         Discover the experience
       </Typography>

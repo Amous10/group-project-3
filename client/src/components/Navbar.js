@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import logo from '../img/logo.png';
 import '../App.css';
 import axios from 'axios';
@@ -124,7 +124,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Navbar({ ...props }) {
+// export default function Navbar({ ...props }) {
+function Navbar({ ...props }) {
   const logout = event => {
     event.preventDefault();
     console.log('logging out');
@@ -179,19 +180,16 @@ export default function Navbar({ ...props }) {
       ) {
         if (event.target.value.trim() !== '') {
           props.searchRecipes(event.target.value.trim());
+          // console.log(props.location.pathname);
+          if (props.location.pathname !== '/search') {
+            props.history.push('/search');
+          }
+          // .then(() => this.props.history.push('/'));
           event.target.value = '';
-          //TODO REDIRECT
-          // redirect to home search
-          if (props.history) {
-            console.log('props.history: ', props.history);
-            props.history.push({
-              pathname: '/search'
-            });
-          } else console.log('NO props.history: ', props.history);
         } else {
           event.target.value = 'Peach Cobbler';
         }
-     } else {
+      } else {
         event.target.value = 'Blackberry Cobbler';
       }
     }
@@ -417,3 +415,5 @@ export default function Navbar({ ...props }) {
     </div>
   );
 }
+
+export default withRouter(Navbar);

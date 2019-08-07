@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import ArrowIcon from '@material-ui/icons/ArrowDropDownCircle';
 
@@ -48,11 +49,12 @@ const styles = theme => ({
     height: 50,
     position: 'absolute',
     bottom: theme.spacing(4)
-  }
+  },
+  button: {}
 });
 
 function ProductHeroLayout(props) {
-  const { backgroundClassName, children, classes } = props;
+  const { backgroundClassName, children, classes, scrollToContent } = props;
 
   return (
     <section className={classes.root}>
@@ -61,7 +63,9 @@ function ProductHeroLayout(props) {
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
         <div className={classes.arrowDown}>
-          <ArrowIcon href="" />
+          <Button className={classes.button} onClick={scrollToContent}>
+            <ArrowIcon href="" />
+          </Button>
         </div>
       </Container>
     </section>
