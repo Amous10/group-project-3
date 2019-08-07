@@ -197,8 +197,17 @@ class App extends Component {
           />
 
           <Switch>
-            <Route exact path="/" component={Intro} />
-
+            {/* <Route exact path="/" component={Intro} /> */}
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <Intro
+                  userName={this.state.username}
+                  loggedIn={this.state.loggedIn}
+                />
+              )}
+            />
             <Route
               exact
               path="/search"

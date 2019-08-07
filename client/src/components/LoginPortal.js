@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -70,13 +71,10 @@ function LoginPortal({ ...props }) {
             username: response.data.username
           });
           //TODO: REDIRECT
-          if (typeof window !== 'undefined') {
-            window.location.href = '/search/';
-          }
-          // redirect to home search
-          // props.history.push({
-          //   pathname: '/search/'
-          // });
+          // if (typeof window !== 'undefined') {
+          //   window.location.href = '/search/';
+          // }
+          props.history.push('/search');
         } else if (response.status === 401) {
           console.log('login error: 401 (Unauthorized)');
         } else {
@@ -163,4 +161,4 @@ function LoginPortal({ ...props }) {
   );
 }
 
-export default LoginPortal;
+export default withRouter(LoginPortal);

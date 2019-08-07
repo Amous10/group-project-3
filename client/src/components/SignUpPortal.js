@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
@@ -69,9 +70,11 @@ function SignUpPortal({ ...props }) {
             //   pathname: '/login/'
             // });
             //TODO: REDIRECT
-            if (typeof window !== 'undefined') {
-              window.location.href = '/login/';
-            }
+            // if (typeof window !== 'undefined') {
+            //   window.location.href = '/login/';
+            // }
+
+            props.history.push('/login');
           }
         } else {
           console.log('username already taken');
@@ -152,4 +155,4 @@ function SignUpPortal({ ...props }) {
   );
 }
 
-export default SignUpPortal;
+export default withRouter(SignUpPortal);
