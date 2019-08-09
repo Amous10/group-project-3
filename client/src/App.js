@@ -17,6 +17,7 @@ import LoginPortal from './components/LoginPortal.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
+import AmyGrid from './components/pages/AmyGrid';
 import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
@@ -228,6 +229,23 @@ class App extends Component {
 
             <Route
               exact
+              path="/grid"
+              render={props => (
+                <AmyGrid
+                  {...props}
+                  searchRecipes={this.searchRecipes}
+                  location={this.props.location}
+                  loading={this.state.loading}
+                  userid={this.state.userid}
+                  edamamresult={this.state.edamamresult}
+                  pantryItems={this.state.pantryItems}
+                  setPantryState={this.setPantryState}
+                  toggleDeletePantryState={this.toggleDeletePantryState}
+                />
+              )}
+            />
+            <Route
+              exact
               path="/login"
               render={props => (
                 // <LoginForm
@@ -270,7 +288,16 @@ class App extends Component {
             <Route
               exact
               path="/api/recipesdetail/:id"
-              component={RecipeDetails}
+              render={props => (
+                <RecipeDetails
+                  {...props}
+                  userid={this.state.userid}
+                  groceryItems={this.state.groceryItems}
+                  setGroceryState={this.setGroceryState}
+                  toggleDeleteGroceryState={this.toggleDeleteGroceryState}
+                />
+              )}
+              // component={RecipeDetails}
             />
             <Route exact path="/homedetail/:id" component={RecipeDetails} />
             <Route component={NoMatch} />

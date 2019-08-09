@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import ArrowIcon from '@material-ui/icons/ArrowDropDownCircle';
+import ArrowDown from '../img/downArrow.png';
 
 const styles = theme => ({
   root: {
@@ -13,17 +13,32 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     [theme.breakpoints.up('sm')]: {
-      height: '80vh',
+      height: '91vh',
       minHeight: 500,
       maxHeight: 1300
     }
   },
   container: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(14),
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(10),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(16),
+      marginBottom: theme.spacing(16)
+      // backgroundColor: 'purple'
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(7),
+      marginBottom: theme.spacing(8)
+      // backgroundColor: 'red'
+    },
+    [theme.breakpoints.down('501')]: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(12)
+      // backgroundColor: 'red'
+    }
   },
   backdrop: {
     position: 'absolute',
@@ -45,15 +60,18 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     zIndex: -2
   },
-  arrowDown: {
-    height: 50,
-    position: 'absolute',
-    bottom: theme.spacing(4)
+  button: {
+    width: '100%',
+    [theme.breakpoints.down('501')]: {
+      width: '70%'
+    }
   },
-  button: {}
+  arrowDown: {
+    marginTop: '100px'
+  }
 });
 
-function ProductHeroLayout(props) {
+function IntroHeroLayout(props) {
   const { backgroundClassName, children, classes, scrollToContent } = props;
 
   return (
@@ -64,7 +82,8 @@ function ProductHeroLayout(props) {
         <div className={clsx(classes.background, backgroundClassName)} />
         <div className={classes.arrowDown}>
           <Button className={classes.button} onClick={scrollToContent}>
-            <ArrowIcon href="" />
+            {/* <ArrowIcon className={} href="" /> */}
+            <img src={ArrowDown} style={{ width: '20%' }} />
           </Button>
         </div>
       </Container>
@@ -72,10 +91,10 @@ function ProductHeroLayout(props) {
   );
 }
 
-ProductHeroLayout.propTypes = {
+IntroHeroLayout.propTypes = {
   backgroundClassName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ProductHeroLayout);
+export default withStyles(styles)(IntroHeroLayout);
