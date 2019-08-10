@@ -14,8 +14,11 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    fontSize: '.8rem'
+  },
   card: {
-    fontSize: '15px',
+    fontSize: '.8rem',
     maxWidth: 270,
     maxHeight: 400,
     marginTop: 10,
@@ -31,8 +34,6 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: 'auto',
     cursor: 'pointer',
     '&:hover': {
-      // transition: 0.2,
-      // scale: '110%'
       transform: 'scale(1.1)'
     }
   },
@@ -41,8 +42,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#a6c844'
   },
   cardheader: {
-    fontSize: '15px',
-    height: '30%',
+    // fontSize: '.8rem',
+    height: '33%',
+    // lineHeight: '1.2rem',
     // maxHeight: '80px',
     backgroundColor: '#e1e2e1',
     // backgroundImage:
@@ -52,8 +54,6 @@ const useStyles = makeStyles(theme => ({
   },
   cardfooter: {
     backgroundColor: '#f5f5f5',
-    // backgroundImage:
-    //   'linear-gradient(180deg, rgba(230,233,240,0.50) 100%, rgba(238,241,245,1.0) 100%)',
     height: '15%'
   },
   iconheart: {
@@ -86,7 +86,7 @@ export default function RecipeCard({ recipe, ...props }) {
   return (
     <Card className={classes.card}>
       <CardHeader
-        style={{ fontSize: '1rem' }}
+        variant="caption"
         className={classes.cardheader}
         title={recipe.label}
         avatar={
@@ -120,7 +120,7 @@ export default function RecipeCard({ recipe, ...props }) {
       </Tooltip>
 
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="caption" color="textSecondary" component="p">
           Serves: {recipe.yield} | Calories:{' '}
           {Number(recipe.calories).toFixed(0)}
         </Typography>

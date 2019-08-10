@@ -7,6 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
 import backgroundImage from '../../img/bg6.jpg';
+import Hidden from '@material-ui/core/Hidden';
 
 const theme = createMuiTheme({
   palette: {
@@ -115,18 +116,20 @@ class Home extends Component {
         {/* <div> */}
         {/* <CircularIndeterminate /> */}
         <Grid className={styles.grid} container item xs={12} justify="center">
-          <Grid item xs={3}>
-            <MuiThemeProvider theme={theme}>
-              <PantryList
-                searchRecipes={this.props.searchRecipes}
-                pantryItems={this.props.pantryItems}
-                setPantryState={this.props.setPantryState}
-                toggleDeletePantryState={this.props.toggleDeletePantryState}
-                userid={this.props.userid}
-              />
-            </MuiThemeProvider>
+          <Grid item xs={3} justify="center">
+            <Hidden xsDown>
+              <MuiThemeProvider theme={theme}>
+                <PantryList
+                  searchRecipes={this.props.searchRecipes}
+                  pantryItems={this.props.pantryItems}
+                  setPantryState={this.props.setPantryState}
+                  toggleDeletePantryState={this.props.toggleDeletePantryState}
+                  userid={this.props.userid}
+                />
+              </MuiThemeProvider>
+            </Hidden>
           </Grid>
-          <Grid item xs={9} className="grid" style={{ maxWidth: '69%' }}>
+          <Grid item xs={8} className="grid">
             <Grid item xs={12}>
               {' '}
               <RecipeCardWrapper

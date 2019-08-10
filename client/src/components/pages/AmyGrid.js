@@ -129,7 +129,7 @@ class AmyGrid extends Component {
               </MuiThemeProvider>
             </Hidden>
           </Grid>
-          <Grid item xs={9} className="grid">
+          <Grid item xs={8} className="grid">
             <Grid item xs={12} justify="center">
               {' '}
               <RecipeCardWrapper
