@@ -142,7 +142,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
           </Grid>
         </div>
         <Button
-          color="secondary"
+          color="primary"
           contrastText="#ffffff"
           size="medium"
           variant="contained"
