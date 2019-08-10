@@ -254,8 +254,9 @@ function Navbar({ ...props }) {
             <IconButton aria-label="new recipe search" color="inherit">
               <NewSearchIcon />
             </IconButton>
-            <Link to={'/search/'} className="btn btn-link text-primary">
-              <span className="text-primary">New Search</span>
+
+            <Link to={'/pantry/'} className="btn btn-link text-primary">
+              <span className="text-primary">Pantry Search</span>
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
@@ -280,7 +281,7 @@ function Navbar({ ...props }) {
             >
               <AccountCircle />
             </IconButton>
-            <span className="btn btn-link text-primary">Profile</span>
+            <span className="btn btn-link text-primary">Logout?</span>
           </MenuItem>
         </div>
       ) : (
@@ -290,7 +291,7 @@ function Navbar({ ...props }) {
               <NewSearchIcon />
             </IconButton>
             <Link to={'/search/'} className="btn btn-link text-primary">
-              <span className="text-primary">New Search</span>
+              <span className="text-primary">Pantry Search</span>
             </Link>
           </MenuItem>
           <MenuItem onClick={handleProfileMenuOpen}>
@@ -302,7 +303,7 @@ function Navbar({ ...props }) {
             >
               <AccountCircle />
             </IconButton>
-            <span className="btn btn-link text-primary">Profile</span>
+            <span className="btn btn-link text-primary">Login?</span>
           </MenuItem>
         </div>
       )}
