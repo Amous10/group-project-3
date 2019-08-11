@@ -21,6 +21,8 @@ import AmyGrid from './components/pages/AmyGrid';
 import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
+import Pantry from './components/pages/Pantry';
+import Shopping from './components/pages/Shopping';
 
 class App extends Component {
   getChildContext() {}
@@ -226,7 +228,23 @@ class App extends Component {
                 />
               )}
             />
-
+            <Route
+              exact
+              path="/pantry"
+              render={props => (
+                <Pantry
+                  {...props}
+                  searchRecipes={this.searchRecipes}
+                  location={this.props.location}
+                  loading={this.state.loading}
+                  userid={this.state.userid}
+                  edamamresult={this.state.edamamresult}
+                  pantryItems={this.state.pantryItems}
+                  setPantryState={this.setPantryState}
+                  toggleDeletePantryState={this.toggleDeletePantryState}
+                />
+              )}
+            />
             <Route
               exact
               path="/grid"
@@ -277,6 +295,19 @@ class App extends Component {
               path="/api/recipes"
               render={props => (
                 <SavedRecipes
+                  {...props}
+                  userid={this.state.userid}
+                  groceryItems={this.state.groceryItems}
+                  setGroceryState={this.setGroceryState}
+                  toggleDeleteGroceryState={this.toggleDeleteGroceryState}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/shopping"
+              render={props => (
+                <Shopping
                   {...props}
                   userid={this.state.userid}
                   groceryItems={this.state.groceryItems}

@@ -30,14 +30,13 @@ const styles = {
     alignItems: 'center',
     marginBottom: '10px'
   },
-  main: {
-    position: 'relative',
-    marginTop: 50,
-    marginLeft: 50,
-    width: '100%',
+  mainShopping: {
+    // position: 'absolute',
+    marginTop: '50px',
+    // marginLeft: 'auto',
+    // width: '100%',
     minHeight: '700px',
     maxWidth: '340px',
-    // backgroundColor: '#deebdd',
     backgroundColor: '#fcf8c7',
     borderStyle: 'solid',
     borderWidth: 0.5,
@@ -141,7 +140,7 @@ class ShoppingList extends React.Component {
     const { groceryItems } = this.props;
 
     return (
-      <div id="main" style={styles.main}>
+      <div id="mainShopping" style={styles.mainShopping}>
         <Typography variant="h5" style={styles.title}>
           Shopping List
         </Typography>
