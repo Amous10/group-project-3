@@ -7,15 +7,19 @@ import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
-import backgroundImage from '../../img/cherries.jpg';
+import backgroundImage from '../../img/cherries2.jpg';
 import '../List.css';
 
 const styles = {
   bgimage: {
+    position: 'relative',
+    maxWidth: '100%',
+    height: 'auto',
     backgroundImage: `url(${backgroundImage})`,
-    backgroundColor: `rgba(255,255,255, 0.5)`,
+    // backgroundColor: `rgba(255,255,255, 0.5)`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    zIndex: 1000
   },
   grid: {
     display: 'flex',
@@ -70,8 +74,9 @@ class SavedRecipes extends Component {
       <div style={styles.bgimage}>
         <React.Fragment>
           <SavedRecipesHero title={'Your Faves!'} />
-          <Grid className={styles.grid} container item xs={12}>
-            <Grid container item xs={8} sm={10} md={9}>
+          <Grid className={styles.grid} container item xs={12} justify="center">
+            {/* <Grid container item xs={12} sm={10} md={9}> */}
+            <Grid item xs={10} justify="center">
               <Grid
                 className={styles.grid}
                 container
@@ -103,16 +108,16 @@ class SavedRecipes extends Component {
                 </RecipeCardWrapper>
               </Grid>
             </Grid>
-            <Grid item md={3} justify="center">
-              <Hidden smDown>
+            <Hidden smDown>
+              <Grid item md={3} justify="center">
                 <ShoppingList
                   groceryItems={this.props.groceryItems}
                   setGroceryState={this.props.setGroceryState}
                   toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
                   userid={this.props.userid}
                 />
-              </Hidden>
-            </Grid>
+              </Grid>
+            </Hidden>
           </Grid>
         </React.Fragment>
       </div>

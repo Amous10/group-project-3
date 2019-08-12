@@ -33,7 +33,7 @@ const styles = {
   mainShopping: {
     // position: 'absolute',
     marginTop: '50px',
-    // marginLeft: 'auto',
+    marginRight: '10px',
     // width: '100%',
     minHeight: '700px',
     maxWidth: '340px',

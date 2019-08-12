@@ -123,7 +123,7 @@ class Home extends Component {
               </MuiThemeProvider>
             </Grid>
           </Hidden>
-          <Grid item xs={8} justify="center">
+          <Grid item xs={10} justify="center">
             <Grid item xs={12}>
               {' '}
               <RecipeCardWrapper
