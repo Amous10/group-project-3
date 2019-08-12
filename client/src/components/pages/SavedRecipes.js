@@ -75,8 +75,8 @@ class SavedRecipes extends Component {
         <React.Fragment>
           <SavedRecipesHero title={'Your Faves!'} />
           <Grid className={styles.grid} container item xs={12} justify="center">
-            {/* <Grid container item xs={12} sm={10} md={9}> */}
-            <Grid item xs={10} justify="center">
+            <Grid container item xs={12} sm={8}>
+              {/* <Grid item xs={12} justify="center"> */}
               <Grid
                 className={styles.grid}
                 container
@@ -108,8 +108,8 @@ class SavedRecipes extends Component {
                 </RecipeCardWrapper>
               </Grid>
             </Grid>
-            <Hidden smDown>
-              <Grid item md={3} justify="center">
+            <Hidden xsDown>
+              <Grid item sm={4} justify="center">
                 <ShoppingList
                   groceryItems={this.props.groceryItems}
                   setGroceryState={this.props.setGroceryState}

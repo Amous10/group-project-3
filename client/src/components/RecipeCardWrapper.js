@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    margin: 50,
+    margin: '30px 0 0 0',
     [theme.breakpoints.down('xs')]: {
       // marginLeft: '100px'
       minWidth: 333
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
   item: {
     [theme.breakpoints.down('xs')]: {
-      marginLeft: '30px',
+      marginLeft: 110,
       minWidth: 333
       // backgroundColor: 'red'
     }

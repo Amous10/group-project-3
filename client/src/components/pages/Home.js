@@ -110,8 +110,8 @@ class Home extends Component {
         {/* <div> */}
         {/* <CircularIndeterminate /> */}
         <Grid className={styles.grid} container item xs={12} justify="center">
-          <Hidden xsDown>
-            <Grid item xs={3} justify="center">
+          <Hidden smDown>
+            <Grid item sm={4} justify="center">
               <MuiThemeProvider theme={theme}>
                 <PantryList
                   searchRecipes={this.props.searchRecipes}
@@ -123,7 +123,7 @@ class Home extends Component {
               </MuiThemeProvider>
             </Grid>
           </Hidden>
-          <Grid item xs={10} justify="center">
+          <Grid item xs={12} sm={8} justify="center">
             <Grid item xs={12}>
               {' '}
               <RecipeCardWrapper

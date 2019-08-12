@@ -34,7 +34,7 @@ const styles = {
   mainPantry: {
     // position: 'absolute',
     marginTop: 50,
-    // marginLeft: 50,
+    marginLeft: 40,
     minHeight: '700px',
     // margin: 10,
     // width: '100%',
