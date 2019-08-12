@@ -98,7 +98,7 @@ class SavedRecipes extends Component {
                         redirectTo={`/api/recipesdetail/${result._id}`}
                         goBackText="Back to your recipes"
                         link="/api/recipesdetail/"
-                        home="/api/recipes"
+                        home="/saved"
                         handleRecipeDelete={this.deleteRecipe}
                         leftButton={'View'}
                         rightButton={'Delete'}

@@ -88,7 +88,7 @@ class Home extends Component {
             const indexofRecipeToRemove = this.props.edamamresult.indexOf(
               recipeToRemove
             );
-            console.log('indext to remove', indexofRecipeToRemove);
+            console.log('index to remove', indexofRecipeToRemove);
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
