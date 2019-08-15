@@ -13,28 +13,65 @@ const styles = theme => ({
   root: {
     display: 'flex',
     backgroundColor: 'white',
-    // backgroundColor: theme.palette.secondary.light,
     overflow: 'hidden'
   },
   container: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(15),
-    position: 'relative',
+    marginTop: theme.spacing(12),
+    marginBottom: theme.spacing(18),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('lg')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(15)
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(15)
+    }
+    // [theme.breakpoints.down('380')]: {
+    //   marginTop: theme.spacing(6)
+    // }
   },
   item: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing(0, 5)
+    padding: theme.spacing(0, 2),
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 20,
+      padding: theme.spacing(0, 1)
+    },
+    [theme.breakpoints.down('380')]: {
+      marginTop: 2
+      // padding: theme.spacing(0, 0)
+    }
   },
   title: {
-    marginBottom: theme.spacing(14)
+    marginBottom: theme.spacing(8),
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 35,
+      marginTop: theme.spacing(1),
+      padding: theme.spacing(1, 1),
+      marginBottom: theme.spacing(0)
+    },
+    [theme.breakpoints.down('380')]: {
+      fontSize: 30,
+      marginTop: theme.spacing(1),
+      padding: theme.spacing(4)
+    }
+  },
+  p: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 20
+    },
+    [theme.breakpoints.down('380')]: {
+      fontSize: 18
+    }
   },
   number: {
     fontSize: 24,
+    marginTop: theme.spacing(4),
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.secondary.main,
     fontWeight: theme.typography.fontWeightMedium
@@ -42,18 +79,21 @@ const styles = theme => ({
   image: {
     height: 55,
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4)
+    marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      height: 0,
+      marginTop: theme.spacing(0),
+      marginBottom: theme.spacing(0)
+    }
   },
   button: {
     minWidth: 200,
-    // color: '#ffffff',
-    // backgroundColor: fade(theme.palette.common.black, 0.15),
-    // '&:hover': {
-    //   backgroundColor: fade(theme.palette.common.black, 0.05)
-    // },
-    marginTop: theme.spacing(8)
-    // backgroundColor: '#f3aa4e',
-    // contrastText: '#ffffff'
+    marginTop: theme.spacing(13),
+    [theme.breakpoints.down('sm')]: {
+      width: '40%',
+      fontSize: 18,
+      marginTop: theme.spacing(10)
+    }
   }
 });
 
@@ -81,7 +121,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
                   alt="pantry"
                   className={classes.image}
                 />
-                <Typography variant="h5" align="center">
+                <Typography className={classes.p} variant="h5" align="center">
                   Take a quick inventory of food items in your kitchen. Enter
                   them into your Virtual Pantry List.
                 </Typography>
@@ -91,7 +131,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
                 <img src={StepTwoImage} alt="foods" className={classes.image} />
-                <Typography variant="h5" align="center">
+                <Typography className={classes.p} variant="h5" align="center">
                   Select the ingredients out of your Pantry List that sound
                   appetizing.
                 </Typography>
@@ -105,11 +145,9 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
                   alt="favorites"
                   className={classes.image}
                 />
-                <Typography variant="h5" align="center">
+                <Typography className={classes.p} variant="h5" align="center">
                   Hit Search to let our Pantry Chef offer you some tasty recipes
                   that just might hit the spot!
-                  {/* {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'} */}
                 </Typography>
               </div>
             </Grid>
