@@ -13,7 +13,6 @@ const styles = theme => ({
   root: {
     display: 'flex',
     backgroundColor: 'white',
-    // backgroundColor: theme.palette.secondary.light,
     overflow: 'hidden'
   },
   container: {
@@ -22,16 +21,32 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'red',
+      marginTop: theme.spacing(8),
+      marginBottom: theme.spacing(15)
+    }
   },
   item: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing(0, 5)
+    padding: theme.spacing(0, 2),
+    [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'green',
+      marginTop: 20
+    }
   },
   title: {
-    marginBottom: theme.spacing(14)
+    marginBottom: theme.spacing(8),
+    [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'green',
+      fontSize: 35,
+      marginTop: 10,
+      padding: theme.spacing(1, 1),
+      marginBottom: theme.spacing(1)
+    }
   },
   number: {
     fontSize: 24,
@@ -42,18 +57,29 @@ const styles = theme => ({
   image: {
     height: 55,
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4)
+    marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'green',
+      height: 0,
+      marginTop: theme.spacing(0),
+      marginBottom: theme.spacing(0)
+    }
   },
   button: {
     minWidth: 200,
-    // color: '#ffffff',
-    // backgroundColor: fade(theme.palette.common.black, 0.15),
-    // '&:hover': {
-    //   backgroundColor: fade(theme.palette.common.black, 0.05)
-    // },
-    marginTop: theme.spacing(8)
-    // backgroundColor: '#f3aa4e',
-    // contrastText: '#ffffff'
+    marginTop: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'red',
+      width: '40%',
+      fontSize: 18,
+      marginTop: theme.spacing(6)
+    }
+  },
+  p: {
+    [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'green',
+      fontSize: 20
+    }
   }
 });
 
@@ -81,7 +107,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
                   alt="pantry"
                   className={classes.image}
                 />
-                <Typography variant="h5" align="center">
+                <Typography className={classes.p} variant="h5" align="center">
                   Take a quick inventory of food items in your kitchen. Enter
                   them into your Virtual Pantry List.
                 </Typography>
@@ -91,7 +117,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
                 <img src={StepTwoImage} alt="foods" className={classes.image} />
-                <Typography variant="h5" align="center">
+                <Typography className={classes.p} variant="h5" align="center">
                   Select the ingredients out of your Pantry List that sound
                   appetizing.
                 </Typography>
@@ -105,7 +131,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
                   alt="favorites"
                   className={classes.image}
                 />
-                <Typography variant="h5" align="center">
+                <Typography className={classes.p} variant="h5" align="center">
                   Hit Search to let our Pantry Chef offer you some tasty recipes
                   that just might hit the spot!
                   {/* {'New offers every week. New experiences, new surprises. '}
@@ -117,6 +143,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
         </div>
         <Button
           color="primary"
+          contrastText="#ffffff"
           size="medium"
           variant="contained"
           className={classes.button}

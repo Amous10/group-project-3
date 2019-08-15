@@ -6,20 +6,16 @@ import SavedRecipesHero from '../SavedRecipesHero';
 import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import backgroundImage from '../../img/cherries2.jpg';
+import backgroundImage from '../../img/cherries.jpg';
 import '../List.css';
+import { Hidden } from '@material-ui/core';
 
 const styles = {
   bgimage: {
-    position: 'relative',
-    maxWidth: '100%',
-    height: 'auto',
     backgroundImage: `url(${backgroundImage})`,
-    // backgroundColor: `rgba(255,255,255, 0.5)`,
+    backgroundColor: `rgba(255,255,255, 0.5)`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    zIndex: 1000
+    backgroundSize: 'cover'
   },
   grid: {
     display: 'flex',
@@ -28,7 +24,7 @@ const styles = {
   }
 };
 
-class SavedRecipes extends Component {
+class Shopping extends Component {
   state = {
     result: []
   };
@@ -73,51 +69,46 @@ class SavedRecipes extends Component {
     return (
       <div style={styles.bgimage}>
         <React.Fragment>
-          <SavedRecipesHero title={'Your Faves!'} />
+          {/* <SavedRecipesHero title={'Your Faves!'} /> */}
           <Grid className={styles.grid} container item xs={12} justify="center">
-            <Grid container item xs={12} sm={8}>
-              {/* <Grid item xs={12} justify="center"> */}
-              <Grid
-                className={styles.grid}
-                container
-                item
-                xs={12}
-                justify="center"
-              >
-                <RecipeCardWrapper
-                  count={this.state.result.length}
-                  key={this.state.result._id}
-                  message={this.state.result === 0 ? 'No saved recipes!' : null}
-                >
-                  {this.state.result.map(result => {
-                    return (
-                      <RecipeCard
-                        key={result._id}
-                        recipe={result}
-                        history={this.props.history}
-                        redirectTo={`/api/recipesdetail/${result._id}`}
-                        goBackText="Back to your recipes"
-                        link="/api/recipesdetail/"
-                        home="/saved"
-                        handleRecipeDelete={this.deleteRecipe}
-                        leftButton={'View'}
-                        rightButton={'Delete'}
-                      />
-                    );
-                  })}
-                </RecipeCardWrapper>
-              </Grid>
-            </Grid>
-            <Hidden xsDown>
-              <Grid item sm={4} justify="center">
-                <ShoppingList
-                  groceryItems={this.props.groceryItems}
-                  setGroceryState={this.props.setGroceryState}
-                  toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
-                  userid={this.props.userid}
-                />
+            <Hidden xsUp>
+              <Grid item xs={8}>
+                <Grid>
+                  <RecipeCardWrapper
+                    count={this.state.result.length}
+                    key={this.state.result._id}
+                    message={
+                      this.state.result === 0 ? 'No saved recipes!' : null
+                    }
+                  >
+                    {this.state.result.map(result => {
+                      return (
+                        <RecipeCard
+                          key={result._id}
+                          recipe={result}
+                          history={this.props.history}
+                          redirectTo={`/api/recipesdetail/${result._id}`}
+                          goBackText="Back to your recipes"
+                          link="/api/recipesdetail/"
+                          home="/api/recipes"
+                          handleRecipeDelete={this.deleteRecipe}
+                          leftButton={'View'}
+                          rightButton={'Delete'}
+                        />
+                      );
+                    })}
+                  </RecipeCardWrapper>
+                </Grid>
               </Grid>
             </Hidden>
+            <Grid item xs={8} justify="center" id="mainShopping">
+              <ShoppingList
+                groceryItems={this.props.groceryItems}
+                setGroceryState={this.props.setGroceryState}
+                toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
+                userid={this.props.userid}
+              />
+            </Grid>
           </Grid>
         </React.Fragment>
       </div>
@@ -125,4 +116,4 @@ class SavedRecipes extends Component {
   }
 }
 
-export default SavedRecipes;
+export default Shopping;

@@ -1,42 +1,58 @@
 @media only screen and (max-width: 1220px) {
-  #main {
-    max-width: 280px !important;
+  #mainPantry,
+  #mainShopping {
+    max-width: 360px !important;
     /* background-color: red !important; */
   }
 }
 @media only screen and (max-width: 980px) {
-  #main {
-    max-width: 265px !important;
+  #mainPantry,
+  #mainShopping {
+    max-width: 360px !important;
   }
 }
-@media only screen and (max-width: 940px) {
-  #main {
-    max-width: 225px !important;
+/* @media only screen and (max-width: 960px) {
+  #mainShopping {
+    max-width: 333px !important;
+  }
+} */
+
+@media only screen and (max-width: 960px) {
+  #mainPantry,
+  #mainShopping {
+    max-width: 340px !important;
   }
 }
 @media only screen and (max-width: 780px) {
-  #main {
+  #mainPantry,
+  #mainShopping {
     max-width: 200px !important;
   }
 }
 @media only screen and (max-width: 680px) {
-  #main {
+  #mainPantry,
+  #mainShopping {
     max-width: 185px !important;
   }
 }
 @media only screen and (max-width: 600px) {
-  #main {
-    max-width: 1px !important;
+  #mainPantry,
+  #mainShopping {
+    max-width: 350px !important;
+
     /* background-color: green; */
-    display: none;
+    /* display: none; */
   }
+  /* .item {
+    margin-left: 100px;
+  } */
   .grid {
     /* float: right; */
     position: absolute;
     top: 1;
     left: 1;
     background-image: url('../img/CurvyLines.png');
-    /* background-color: green; */
+    background-color: green;
     /* width: 100%; */
     /* background-color: aqua; */
   }

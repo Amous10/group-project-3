@@ -41,7 +41,7 @@ const styles = {
   }
 };
 
-class Home extends Component {
+class Pantry extends Component {
   componentDidMount() {
     const user = {
       userId: this.props.userid
@@ -88,7 +88,7 @@ class Home extends Component {
             const indexofRecipeToRemove = this.props.edamamresult.indexOf(
               recipeToRemove
             );
-            console.log('index to remove', indexofRecipeToRemove);
+            console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
@@ -110,54 +110,55 @@ class Home extends Component {
         {/* <div> */}
         {/* <CircularIndeterminate /> */}
         <Grid className={styles.grid} container item xs={12} justify="center">
-          <Hidden smDown>
-            <Grid item sm={4} justify="center">
-              <MuiThemeProvider theme={theme}>
-                <PantryList
-                  searchRecipes={this.props.searchRecipes}
-                  pantryItems={this.props.pantryItems}
-                  setPantryState={this.props.setPantryState}
-                  toggleDeletePantryState={this.props.toggleDeletePantryState}
-                  userid={this.props.userid}
-                />
-              </MuiThemeProvider>
+          <Grid item xs={8} justify="center" id="mainPantry">
+            <MuiThemeProvider theme={theme}>
+              <PantryList
+                {...this.props}
+                searchRecipes={this.props.searchRecipes}
+                pantryItems={this.props.pantryItems}
+                setPantryState={this.props.setPantryState}
+                toggleDeletePantryState={this.props.toggleDeletePantryState}
+                userid={this.props.userid}
+              />
+            </MuiThemeProvider>
+          </Grid>
+          <Hidden xsUp>
+            <Grid item xs={8} className="grid">
+              <Grid item xs={12}>
+                {' '}
+                <RecipeCardWrapper
+                  count={this.props.edamamresult.length}
+                  title={'Results'}
+                  message={
+                    this.props.edamamresult === 0
+                      ? 'Enter your ingredients to search for recipes'
+                      : null
+                  }
+                >
+                  {this.props.edamamresult.map(edamamresult => {
+                    return (
+                      <RecipeCard
+                        key={edamamresult.recipe.uri}
+                        edamamresult={edamamresult}
+                        goBackText="Back to recipes"
+                        recipe={edamamresult.recipe}
+                        history={this.props.history}
+                        redirectTo="/homedetail/2"
+                        handleRecipeSave={this.saveRecipe}
+                        leftButton={'View'}
+                        rightButton={'Save'}
+                        onMouseOver={this.onToggleOpen}
+                        onMouseOut={this.onToggleOpen}
+                      />
+                    );
+                  })}
+                </RecipeCardWrapper>
+              </Grid>
             </Grid>
           </Hidden>
-          <Grid item xs={12} sm={8} justify="center">
-            <Grid item xs={12}>
-              {' '}
-              <RecipeCardWrapper
-                count={this.props.edamamresult.length}
-                title={'Results'}
-                message={
-                  this.props.edamamresult === 0
-                    ? 'Enter your ingredients to search for recipes'
-                    : null
-                }
-              >
-                {this.props.edamamresult.map(edamamresult => {
-                  return (
-                    <RecipeCard
-                      key={edamamresult.recipe.uri}
-                      edamamresult={edamamresult}
-                      goBackText="Back to recipes"
-                      recipe={edamamresult.recipe}
-                      history={this.props.history}
-                      redirectTo="/homedetail/2"
-                      handleRecipeSave={this.saveRecipe}
-                      leftButton={'View'}
-                      rightButton={'Save'}
-                      onMouseOver={this.onToggleOpen}
-                      onMouseOut={this.onToggleOpen}
-                    />
-                  );
-                })}
-              </RecipeCardWrapper>
-            </Grid>
-          </Grid>
         </Grid>
       </div>
     );
   }
 }
-export default Home;
+export default Pantry;

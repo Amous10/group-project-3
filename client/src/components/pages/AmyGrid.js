@@ -6,8 +6,8 @@ import PantryList from '../PantryList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
-import backgroundImage from '../../img/bg6.jpg';
 import Hidden from '@material-ui/core/Hidden';
+import backgroundImage from '../../img/bg6.jpg';
 
 const theme = createMuiTheme({
   palette: {
@@ -39,9 +39,15 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between'
   }
+  // grid: {
+  //   // display: 'none',
+  //   // [theme.breakpoints.down('xs')]: {
+  //   //   display: 'none'
+  //   // }
+  // }
 };
 
-class Home extends Component {
+class AmyGrid extends Component {
   componentDidMount() {
     const user = {
       userId: this.props.userid
@@ -88,7 +94,7 @@ class Home extends Component {
             const indexofRecipeToRemove = this.props.edamamresult.indexOf(
               recipeToRemove
             );
-            console.log('index to remove', indexofRecipeToRemove);
+            console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
@@ -110,8 +116,8 @@ class Home extends Component {
         {/* <div> */}
         {/* <CircularIndeterminate /> */}
         <Grid className={styles.grid} container item xs={12} justify="center">
-          <Hidden smDown>
-            <Grid item sm={4} justify="center">
+          <Grid item xs={3} justify="center">
+            <Hidden xsDown>
               <MuiThemeProvider theme={theme}>
                 <PantryList
                   searchRecipes={this.props.searchRecipes}
@@ -121,10 +127,10 @@ class Home extends Component {
                   userid={this.props.userid}
                 />
               </MuiThemeProvider>
-            </Grid>
-          </Hidden>
-          <Grid item xs={12} sm={8} justify="center">
-            <Grid item xs={12}>
+            </Hidden>
+          </Grid>
+          <Grid item xs={8} className="grid">
+            <Grid item xs={12} justify="center">
               {' '}
               <RecipeCardWrapper
                 count={this.props.edamamresult.length}
@@ -160,4 +166,4 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+export default AmyGrid;

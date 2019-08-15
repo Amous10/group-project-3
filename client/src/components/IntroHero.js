@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
-    marginTop: theme.spacing(8)
+    marginTop: theme.spacing(4)
     // color: '#fcfcfc',
     // backgroundColor: fade(theme.palette.common.white, 0.85),
     // '&:hover': {
@@ -32,6 +32,10 @@ const styles = theme => ({
   },
   more: {
     marginTop: theme.spacing(2)
+  },
+  welcome: {
+    color: '#f3aa4e',
+    fontSize: 20
   }
 });
 
@@ -68,17 +72,18 @@ function IntroHero(props) {
           Sign Up
         </Button>
       ) : (
-        <div>Welcome Back, {props.userName}!</div>
+        <div className={classes.welcome}>Welcome Back, {props.userName}!</div>
       )}
-      <Typography variant="body2" color="#fffff" className={classes.more}>
-        Discover the experience
+      <Typography variant="body1" color="#fffff" className={classes.more}>
+        Discover the experience...
       </Typography>
     </IntroHeroLayout>
   );
 }
 
 IntroHero.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  scrollToContent: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(IntroHero);
