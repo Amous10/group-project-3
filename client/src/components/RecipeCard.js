@@ -179,6 +179,7 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Tooltip from '@material-ui/core/Tooltip';
+import WrapTooltip from './WrapTooltip';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -209,16 +210,16 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#a6c844'
   },
   cardheader: {
-    // fontSize: '.8rem',
     height: '33%',
-    // lineHeight: '1.2rem',
-    // maxHeight: '80px',
-    backgroundColor: '#e1e2e1',
-    // backgroundImage:
-    // 'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(183,219,190,0.50) 45%)',
-    // 'linear-gradient(2deg, rgba(222,235,221,0.50) 0%, rgba(192,207,149,0.50) 65%)',
-    backgroundBlendMode: 'lighten'
+    backgroundColor: '#f5f5f5',
+    backgroundBlendMode: 'lighten',
+    textAlign: 'center',
+    overflow: 'hidden',
+    position: 'relative',
+    lineHeight: '1.3em',
+    paddingTop: '2em'
   },
+
   cardfooter: {
     backgroundColor: '#f5f5f5',
     height: '15%'
@@ -252,16 +253,17 @@ export default function RecipeCard({ recipe, ...props }) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader
-        variant="caption"
-        className={classes.cardheader}
-        title={recipe.label}
-        avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            {recipe.source.charAt(0)}
-          </Avatar>
-        }
-      />
+      <WrapTooltip text={recipe.label} className={classes.cardheader}>
+        <CardHeader
+          className={classes.cardheader}
+          title={recipe.label}
+          avatar={
+            <Avatar aria-label="Recipe" className={classes.avatar}>
+              {recipe.source.charAt(0)}
+            </Avatar>
+          }
+        />
+      </WrapTooltip>
       <Tooltip title="View Recipe" placement="top">
         <CardMedia
           onMouseOver={props.onToggleOpen}

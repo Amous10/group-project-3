@@ -52,3 +52,6 @@ a.text-second:visited {
 #top-filler {
   margin-bottom: auto;
 }
+.App.MuiTypography.body2 {
+  font-size: 0.5rem;
+}
