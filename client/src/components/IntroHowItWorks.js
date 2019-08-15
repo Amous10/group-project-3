@@ -16,14 +16,20 @@ const styles = theme => ({
     overflow: 'hidden'
   },
   container: {
-    marginTop: theme.spacing(12),
-    marginBottom: theme.spacing(18),
+    marginTop: theme.spacing(25),
+    marginBottom: theme.spacing(20),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     [theme.breakpoints.down('lg')]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(15)
+      marginTop: theme.spacing(22),
+      marginBottom: theme.spacing(20),
+      backgroundColor: 'pink'
+    },
+    [theme.breakpoints.down('1441')]: {
+      marginTop: theme.spacing(8),
+      marginBottom: theme.spacing(15),
+      backgroundColor: 'green'
     },
     [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(6),

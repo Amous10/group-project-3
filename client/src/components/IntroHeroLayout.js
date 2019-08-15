@@ -63,9 +63,9 @@ const styles = theme => ({
   },
   arrowDown: {
     marginTop: 100,
-    [theme.breakpoints.down('380')]: {
-      marginTop: 80,
-      marginBottom: 40
+    [theme.breakpoints.down('501')]: {
+      marginTop: 60,
+      marginBottom: 60
     }
   }
 });
