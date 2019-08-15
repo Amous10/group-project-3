@@ -13,7 +13,10 @@ import FormFeedback from './form/FormFeedback';
 const useStyles = makeStyles(theme => ({
   main: {
     marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(6)
+    marginBottom: theme.spacing(6),
+    [theme.breakpoints.down('sm')]: {
+      width: '80%'
+    }
   },
   form: {
     marginTop: theme.spacing(6)
