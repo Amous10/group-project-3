@@ -267,7 +267,7 @@ function Navbar({ ...props }) {
                 <SavedIcon />
               </Badge>
             </IconButton>
-            <Link to={'/api/recipes'} className="btn btn-link text-primary">
+            <Link to={'saved'} className="btn btn-link text-primary">
               <span className="texct-primary">Saved Recipes</span>
             </Link>
           </MenuItem>
@@ -362,7 +362,7 @@ function Navbar({ ...props }) {
                   <span className="text-second">New Search</span>
                 </Button>
               </Link>
-              <Link to={'/api/recipes'} className="btn btn-link text-second">
+              <Link to={'/saved'} className="btn btn-link text-second">
                 <Button>
                   <span className="text-second">Saved Recipes</span>
                 </Button>

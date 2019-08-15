@@ -256,7 +256,7 @@ class App extends Component {
             <Route exact path="/signup2" render={() => <Signup />} />
             <Route
               exact
-              path="/api/recipes"
+              path="/saved"
               render={props => (
                 <SavedRecipes
                   {...props}
