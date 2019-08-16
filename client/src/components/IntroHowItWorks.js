@@ -160,6 +160,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
           </Grid>
         </div>
         <Button
+          id="buttonToPantry"
           color="primary"
           size="medium"
           variant="contained"

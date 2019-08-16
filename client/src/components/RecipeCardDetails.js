@@ -6,7 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import backgroundImage from '../img/platefruitveg.jpg';
+import backgroundImage from '../img/Ingredients2.jpg';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Tooltip from '@material-ui/core/Tooltip';
 import CardActions from '@material-ui/core/CardActions';
@@ -135,16 +135,7 @@ export default function RecipeCardDetails({ recipe, ...props }) {
               className={classes.sourcelink}
             >
               Full recipe at:
-              {/* <a
-                href={recipe.url}
-                target="_blank"
-                className={classes.sourcelink}
-              >
-                {recipe.source}
-              </a> */}
               <Button
-                // color="primary"
-                // variant="contained"
                 size="small"
                 className={`${classes.button} ${classes.sourcelink}`}
                 component="a"

@@ -38,12 +38,6 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between'
   }
-  // grid: {
-  //   // display: 'none',
-  //   // [theme.breakpoints.down('xs')]: {
-  //   //   display: 'none'
-  //   // }
-  // }
 };
 
 class Home extends Component {
@@ -93,7 +87,7 @@ class Home extends Component {
             const indexofRecipeToRemove = this.props.edamamresult.indexOf(
               recipeToRemove
             );
-            console.log('indext to remove', indexofRecipeToRemove);
+            console.log('index to remove', indexofRecipeToRemove);
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
@@ -112,8 +106,6 @@ class Home extends Component {
     // else
     return (
       <div style={styles.bgimage}>
-        {/* <div> */}
-        {/* <CircularIndeterminate /> */}
         <Grid className={styles.grid} container item xs={12} justify="center">
           <Grid item xs={3}>
             <MuiThemeProvider theme={theme}>

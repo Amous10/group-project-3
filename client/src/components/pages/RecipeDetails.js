@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RecipeCardDetails from '../RecipeCardDetails';
 import Grid from '@material-ui/core/Grid';
-import backgroundImage from '../../img/platefruitveg.jpg';
+import backgroundImage from '../../img/Ingredientslt.jpg';
 import Button from '@material-ui/core/Button';
 import { fade } from '@material-ui/core/styles';
 
