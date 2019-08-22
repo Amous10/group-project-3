@@ -7,6 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
 import backgroundImage from '../../img/bg6.jpg';
+import Hidden from '@material-ui/core/Hidden';
 
 const theme = createMuiTheme({
   palette: {

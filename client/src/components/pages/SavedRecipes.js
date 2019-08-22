@@ -6,32 +6,25 @@ import SavedRecipesHero from '../SavedRecipesHero';
 import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import backgroundImage from '../../img/cherries.jpg';
+import Hidden from '@material-ui/core/Hidden';
+import backgroundImage from '../../img/cherries2.jpg';
 import '../List.css';
-// const theme = createMuiTheme({
-//   palette: {
-//     primary: {
-//       // light: will be calculated from palette.primary.main,
-//       main: '#a6c844'
-//       // dark: will be calculated from palette.primary.main,
-//       // contrastText: will be calculated to contrast with palette.primary.main
-//     },
-//     secondary: {
-//       light: '#b4b2ae',
-//       main: '#8b8e91',
-//       // dark: will be calculated from palette.secondary.main,
-//       contrastText: '#f3aa4e'
-//     }
-//     // error: will use the default color
-//   }
-// });
 
 const styles = {
   bgimage: {
+    position: 'relative',
+    maxWidth: '100%',
+    height: 'auto',
     backgroundImage: `url(${backgroundImage})`,
-    backgroundColor: `rgba(255,255,255, 0.5)`,
+    // backgroundColor: `rgba(255,255,255, 0.5)`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    zIndex: 1000
+  },
+  grid: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 };
 
@@ -81,19 +74,15 @@ class SavedRecipes extends Component {
       <div style={styles.bgimage}>
         <React.Fragment>
           <SavedRecipesHero title={'Your Faves!'} />
-          <Grid
-            className="home-recipes"
-            container
-            item
-            xs={12}
-            // justify="center"
-          >
-            <Grid item xs={9} className="left-grid" style={{ maxWidth: '69%' }}>
-              <RecipeCardWrapper
-                style={{ maxWidth: '69%' }}
-                count={this.state.result.length}
-                key={this.state.result._id}
-                message={this.state.result === 0 ? 'No saved recipes!' : null}
+          <Grid className={styles.grid} container item xs={12} justify="center">
+            <Grid container item xs={12} sm={8}>
+              {/* <Grid item xs={12} justify="center"> */}
+              <Grid
+                className={styles.grid}
+                container
+                item
+                xs={12}
+                justify="center"
               >
                 {this.state.result.map(result => {
                   return (
@@ -121,6 +110,16 @@ class SavedRecipes extends Component {
                 userid={this.props.userid}
               />
             </Grid>
+            <Hidden xsDown>
+              <Grid item sm={4} justify="center">
+                <ShoppingList
+                  groceryItems={this.props.groceryItems}
+                  setGroceryState={this.props.setGroceryState}
+                  toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
+                  userid={this.props.userid}
+                />
+              </Grid>
+            </Hidden>
           </Grid>
         </React.Fragment>
       </div>

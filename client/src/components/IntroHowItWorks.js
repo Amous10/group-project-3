@@ -162,6 +162,7 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
         <Button
           id="buttonToPantry"
           color="primary"
+          contrastText="#ffffff"
           size="medium"
           variant="contained"
           className={classes.button}

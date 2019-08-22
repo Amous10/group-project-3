@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(6),
     marginBottom: theme.spacing(6),
     [theme.breakpoints.down('sm')]: {
+      // backgroundColor: 'red',
       width: '80%'
     }
   },
