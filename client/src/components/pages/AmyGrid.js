@@ -6,8 +6,8 @@ import PantryList from '../PantryList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularIndeterminate from '../CircularIndeterminate';
 import Grid from '@material-ui/core/Grid';
-import backgroundImage from '../../img/bg6.jpg';
 import Hidden from '@material-ui/core/Hidden';
+import backgroundImage from '../../img/bg6.jpg';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,11 +28,6 @@ const theme = createMuiTheme({
 });
 
 const styles = {
-  root: {
-    margin: 'auto',
-    backgroundColor: 'pink'
-  },
-
   bgimage: {
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: `rgba(255,255,255, 0.5)`,
@@ -44,9 +39,15 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between'
   }
+  // grid: {
+  //   // display: 'none',
+  //   // [theme.breakpoints.down('xs')]: {
+  //   //   display: 'none'
+  //   // }
+  // }
 };
 
-class Home extends Component {
+class AmyGrid extends Component {
   componentDidMount() {
     const user = {
       userId: this.props.userid
@@ -93,7 +94,7 @@ class Home extends Component {
             const indexofRecipeToRemove = this.props.edamamresult.indexOf(
               recipeToRemove
             );
-            console.log('index to remove', indexofRecipeToRemove);
+            console.log('indext to remove', indexofRecipeToRemove);
             // then delete that one item
             this.props.edamamresult.splice(indexofRecipeToRemove, 1);
             // update the state
@@ -112,9 +113,11 @@ class Home extends Component {
     // else
     return (
       <div style={styles.bgimage}>
+        {/* <div> */}
+        {/* <CircularIndeterminate /> */}
         <Grid className={styles.grid} container item xs={12} justify="center">
-          <Hidden smDown>
-            <Grid item sm={4}>
+          <Grid item xs={3} justify="center">
+            <Hidden xsDown>
               <MuiThemeProvider theme={theme}>
                 <PantryList
                   searchRecipes={this.props.searchRecipes}
@@ -122,45 +125,45 @@ class Home extends Component {
                   setPantryState={this.props.setPantryState}
                   toggleDeletePantryState={this.props.toggleDeletePantryState}
                   userid={this.props.userid}
-                  // displayPantry={this.props.edamamresults.length === 0 ? 'isHidden' : 'show'}
-                  // showPantry={this.props.displayPantry && <PantryList />}
-                  // hidePantry={!this.props.displayPantry}
                 />
               </MuiThemeProvider>
+            </Hidden>
+          </Grid>
+          <Grid item xs={8} className="grid">
+            <Grid item xs={12} justify="center">
+              {' '}
+              <RecipeCardWrapper
+                count={this.props.edamamresult.length}
+                title={'Results'}
+                message={
+                  this.props.edamamresult === 0
+                    ? 'Enter your ingredients to search for recipes'
+                    : null
+                }
+              >
+                {this.props.edamamresult.map(edamamresult => {
+                  return (
+                    <RecipeCard
+                      key={edamamresult.recipe.uri}
+                      edamamresult={edamamresult}
+                      goBackText="Back to recipes"
+                      recipe={edamamresult.recipe}
+                      history={this.props.history}
+                      redirectTo="/homedetail/2"
+                      handleRecipeSave={this.saveRecipe}
+                      leftButton={'View'}
+                      rightButton={'Save'}
+                      onMouseOver={this.onToggleOpen}
+                      onMouseOut={this.onToggleOpen}
+                    />
+                  );
+                })}
+              </RecipeCardWrapper>
             </Grid>
-          </Hidden>
-          <Grid item xs={12} md={8} className={styles.grid}>
-            <RecipeCardWrapper
-              count={this.props.edamamresult.length}
-              title={'Results'}
-              message={
-                this.props.edamamresult === 0
-                  ? 'Enter your ingredients to search for recipes'
-                  : null
-              }
-            >
-              {this.props.edamamresult.map(edamamresult => {
-                return (
-                  <RecipeCard
-                    key={edamamresult.recipe.uri}
-                    edamamresult={edamamresult}
-                    goBackText="Back to recipes"
-                    recipe={edamamresult.recipe}
-                    history={this.props.history}
-                    redirectTo="/homedetail/2"
-                    handleRecipeSave={this.saveRecipe}
-                    leftButton={'View'}
-                    rightButton={'Save'}
-                    onMouseOver={this.onToggleOpen}
-                    onMouseOut={this.onToggleOpen}
-                  />
-                );
-              })}
-            </RecipeCardWrapper>
           </Grid>
         </Grid>
       </div>
     );
   }
 }
-export default Home;
+export default AmyGrid;

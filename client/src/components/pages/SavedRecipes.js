@@ -6,25 +6,16 @@ import SavedRecipesHero from '../SavedRecipesHero';
 import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import backgroundImage from '../../img/cherries2.jpg';
+import backgroundImage from '../../img/cherries.jpg';
 import '../List.css';
+import Hidden from '@material-ui/core/Hidden';
 
 const styles = {
   bgimage: {
-    position: 'relative',
-    maxWidth: '100%',
-    height: 'auto',
     backgroundImage: `url(${backgroundImage})`,
-    // backgroundColor: `rgba(255,255,255, 0.5)`,
+    backgroundColor: `rgba(255,255,255, 0.5)`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    zIndex: 1000
-  },
-  grid: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    backgroundSize: 'cover'
   }
 };
 
@@ -74,15 +65,18 @@ class SavedRecipes extends Component {
       <div style={styles.bgimage}>
         <React.Fragment>
           <SavedRecipesHero title={'Your Faves!'} />
-          <Grid className={styles.grid} container item xs={12} justify="center">
-            <Grid container item xs={12} sm={8}>
-              {/* <Grid item xs={12} justify="center"> */}
-              <Grid
-                className={styles.grid}
-                container
-                item
-                xs={12}
-                justify="center"
+          <Grid
+            className="home-recipes"
+            container
+            item
+            xs={12}
+            // justify="center"
+          >
+            <Grid item xs={12} md={8} className={styles.grid}>
+              <RecipeCardWrapper
+                count={this.state.result.length}
+                key={this.state.result._id}
+                message={this.state.result === 0 ? 'No saved recipes!' : null}
               >
                 {this.state.result.map(result => {
                   return (
@@ -102,16 +96,8 @@ class SavedRecipes extends Component {
                 })}
               </RecipeCardWrapper>
             </Grid>
-            <Grid item xs={3}>
-              <ShoppingList
-                groceryItems={this.props.groceryItems}
-                setGroceryState={this.props.setGroceryState}
-                toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
-                userid={this.props.userid}
-              />
-            </Grid>
-            <Hidden xsDown>
-              <Grid item sm={4} justify="center">
+            <Hidden smDown>
+              <Grid item sm={4}>
                 <ShoppingList
                   groceryItems={this.props.groceryItems}
                   setGroceryState={this.props.setGroceryState}
