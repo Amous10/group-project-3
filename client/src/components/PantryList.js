@@ -31,13 +31,11 @@ const styles = {
     alignItems: 'center',
     marginBottom: '10px'
   },
-  mainPantry: {
-    // position: 'absolute',
-    marginTop: 50,
-    marginLeft: 40,
-    minHeight: '700px',
+  main: {
     // margin: 10,
-    // width: '100%',
+    marginTop: 40,
+    width: '100%',
+    minHeight: '700px',
     maxWidth: '340px',
     // backgroundColor: '#deebdd',
     backgroundColor: 'whitesmoke',
@@ -85,10 +83,6 @@ class PantryList extends React.Component {
     newPantryItem: ''
   };
 
-  // redirectToResults = () => {
-  //   this.props.history.push(`/search`);
-  // };
-
   savePantry = obj => {
     const newSavedPantry = {
       userId: this.props.userid,
@@ -126,7 +120,6 @@ class PantryList extends React.Component {
     }
   };
   selectedFoods = () => {
-    // if ((this.props.location = '/search')) {
     let { pantryItems } = this.props;
 
     let query = pantryItems
@@ -135,7 +128,6 @@ class PantryList extends React.Component {
       .toString();
 
     this.props.searchRecipes(query);
-    // }
   };
 
   deleteItem = item => {
@@ -159,7 +151,7 @@ class PantryList extends React.Component {
     const { pantryItems } = this.props;
 
     return (
-      <div id="mainPantry" style={styles.mainPantry}>
+      <div id="main" style={styles.main}>
         <Typography variant="h5" style={styles.title}>
           Your Pantry
         </Typography>
@@ -209,13 +201,7 @@ class PantryList extends React.Component {
             </FormGroup>
           </Card>
         )}
-        <Button
-          onClick={this.selectedFoods}
-          //  onClick={this.redirectToResults}
-        >
-          {' '}
-          Search
-        </Button>
+        <Button onClick={this.selectedFoods}>Search</Button>
       </div>
     );
   }

@@ -16,17 +16,28 @@ const styles = theme => ({
     overflow: 'hidden'
   },
   container: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(15),
-    position: 'relative',
+    marginTop: theme.spacing(25),
+    marginBottom: theme.spacing(20),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    [theme.breakpoints.down('sm')]: {
-      // backgroundColor: 'red',
+    [theme.breakpoints.down('lg')]: {
+      marginTop: theme.spacing(22),
+      marginBottom: theme.spacing(20)
+      // backgroundColor: 'pink'
+    },
+    [theme.breakpoints.down('1441')]: {
       marginTop: theme.spacing(8),
       marginBottom: theme.spacing(15)
+      // backgroundColor: 'green'
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(15)
     }
+    // [theme.breakpoints.down('380')]: {
+    //   marginTop: theme.spacing(6)
+    // }
   },
   item: {
     display: 'flex',
@@ -34,22 +45,39 @@ const styles = theme => ({
     alignItems: 'center',
     padding: theme.spacing(0, 2),
     [theme.breakpoints.down('sm')]: {
-      // backgroundColor: 'green',
-      marginTop: 20
+      marginTop: 20,
+      padding: theme.spacing(0, 1)
+    },
+    [theme.breakpoints.down('380')]: {
+      marginTop: 2
+      // padding: theme.spacing(0, 0)
     }
   },
   title: {
     marginBottom: theme.spacing(8),
     [theme.breakpoints.down('sm')]: {
-      // backgroundColor: 'green',
       fontSize: 35,
-      marginTop: 10,
+      marginTop: theme.spacing(1),
       padding: theme.spacing(1, 1),
-      marginBottom: theme.spacing(1)
+      marginBottom: theme.spacing(0)
+    },
+    [theme.breakpoints.down('380')]: {
+      fontSize: 30,
+      marginTop: theme.spacing(1),
+      padding: theme.spacing(4)
+    }
+  },
+  p: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 20
+    },
+    [theme.breakpoints.down('380')]: {
+      fontSize: 18
     }
   },
   number: {
     fontSize: 24,
+    marginTop: theme.spacing(4),
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.secondary.main,
     fontWeight: theme.typography.fontWeightMedium
@@ -59,7 +87,6 @@ const styles = theme => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
     [theme.breakpoints.down('sm')]: {
-      // backgroundColor: 'green',
       height: 0,
       marginTop: theme.spacing(0),
       marginBottom: theme.spacing(0)
@@ -67,18 +94,11 @@ const styles = theme => ({
   },
   button: {
     minWidth: 200,
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(13),
     [theme.breakpoints.down('sm')]: {
-      // backgroundColor: 'red',
       width: '40%',
       fontSize: 18,
-      marginTop: theme.spacing(6)
-    }
-  },
-  p: {
-    [theme.breakpoints.down('sm')]: {
-      // backgroundColor: 'green',
-      fontSize: 20
+      marginTop: theme.spacing(10)
     }
   }
 });
@@ -134,14 +154,13 @@ const IntroHowItWorks = React.forwardRef((props, ref) => {
                 <Typography className={classes.p} variant="h5" align="center">
                   Hit Search to let our Pantry Chef offer you some tasty recipes
                   that just might hit the spot!
-                  {/* {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'} */}
                 </Typography>
               </div>
             </Grid>
           </Grid>
         </div>
         <Button
+          id="buttonToPantry"
           color="primary"
           contrastText="#ffffff"
           size="medium"

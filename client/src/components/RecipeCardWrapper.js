@@ -6,19 +6,9 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    // border: '2px solid #a6c844'
     width: '100%',
-    margin: '30px 0 0 0',
-    [theme.breakpoints.down('xs')]: {
-      // marginLeft: '100px'
-      minWidth: 333
-    }
-  },
-  item: {
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: 110,
-      minWidth: 333
-      // backgroundColor: 'red'
-    }
+    margin: 30
   }
 }));
 
@@ -29,14 +19,12 @@ const RecipeCardWrapper = props => {
 
   return (
     <Grid container className={classes.root} spacing={2}>
-      {props.message}
       {props.children.map((value, i) => (
         <Grid
-          className={classes.item}
-          // justifyContent="center"
+          align-items-xs-center
           xs={12}
           sm={6}
-          md={4}
+          md={3}
           lg={3}
           key={value.key}
           item

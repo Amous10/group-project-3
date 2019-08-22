@@ -268,7 +268,8 @@ function Navbar({ ...props }) {
                 <SavedIcon />
               </Badge>
             </IconButton>
-            <Link to={'/saved'} className="btn btn-link text-primary">
+            <Link to={'/saved/'} className="btn btn-link text-primary">
+              {/* <Link to={'saved'} className="btn btn-link text-primary"> */}
               <span className="texct-primary">Saved Recipes</span>
             </Link>
           </MenuItem>

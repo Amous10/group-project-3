@@ -1,11 +1,3 @@
-/* font-family: 'Oxygen', sans-serif;
-font-family: 'Satisfy', cursive;
-font-family: 'Prata', serif;
-font-family: 'Gentium Basic', serif; 
-font-family: 'Julius Sans One', sans-serif;
-font-family: 'Sintony', sans-serif;
-*/
-
 .App {
   text-align: center;
   font-family: 'Sintony', sans-serif;
@@ -35,12 +27,6 @@ font-family: 'Sintony', sans-serif;
   font-size: large;
 }
 
-/* .App-hover {
-  text-decoration: 'none';
-  text-emphasis: none;
-  color: '#7cd417d0';
-} */
-
 #main {
   position: absolute;
 }
@@ -51,17 +37,6 @@ font-family: 'Sintony', sans-serif;
   padding-right: 0.4rem;
   width: 100%;
 }
-/* .MuiGrid-container {
-  width: 70%;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-} */
-
-/* html {
-  background-image: './img/theone.jpg';
-} */
-
 .text-second {
   font-size: 20px;
   color: #ffffff;
@@ -76,4 +51,7 @@ a.text-second:visited {
 }
 #top-filler {
   margin-bottom: auto;
+}
+.App.MuiTypography.body2 {
+  font-size: 0.5rem;
 }

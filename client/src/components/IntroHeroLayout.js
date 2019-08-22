@@ -19,25 +19,20 @@ const styles = theme => ({
     }
   },
   container: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(10),
+    // marginTop: theme.spacing(5),
+    // marginBottom: theme.spacing(10),
+    // position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(16),
-      marginBottom: theme.spacing(16)
-      // backgroundColor: 'purple'
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(7),
-      marginBottom: theme.spacing(8)
-      // backgroundColor: 'red'
+    //960 === 'sm'
+    [theme.breakpoints.down('960')]: {
+      marginTop: theme.spacing(0),
+      marginBottom: theme.spacing(0)
     },
     [theme.breakpoints.down('501')]: {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(12)
-      // backgroundColor: 'red'
+      marginTop: theme.spacing(0),
+      marginBottom: theme.spacing(8)
     }
   },
   backdrop: {
@@ -67,7 +62,11 @@ const styles = theme => ({
     }
   },
   arrowDown: {
-    marginTop: '100px'
+    marginTop: 100,
+    [theme.breakpoints.down('501')]: {
+      marginTop: 60,
+      marginBottom: 60
+    }
   }
 });
 

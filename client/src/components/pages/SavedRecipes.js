@@ -84,29 +84,31 @@ class SavedRecipes extends Component {
                 xs={12}
                 justify="center"
               >
-                <RecipeCardWrapper
-                  count={this.state.result.length}
-                  key={this.state.result._id}
-                  message={this.state.result === 0 ? 'No saved recipes!' : null}
-                >
-                  {this.state.result.map(result => {
-                    return (
-                      <RecipeCard
-                        key={result._id}
-                        recipe={result}
-                        history={this.props.history}
-                        redirectTo={`/api/recipesdetail/${result._id}`}
-                        goBackText="Back to your recipes"
-                        link="/api/recipesdetail/"
-                        home="/saved"
-                        handleRecipeDelete={this.deleteRecipe}
-                        leftButton={'View'}
-                        rightButton={'Delete'}
-                      />
-                    );
-                  })}
-                </RecipeCardWrapper>
-              </Grid>
+                {this.state.result.map(result => {
+                  return (
+                    <RecipeCard
+                      key={result._id}
+                      recipe={result}
+                      history={this.props.history}
+                      redirectTo={`/api/recipesdetail/${result._id}`}
+                      goBackText="Back to your recipes"
+                      link="/api/recipesdetail/"
+                      home="/saved"
+                      handleRecipeDelete={this.deleteRecipe}
+                      leftButton={'View'}
+                      rightButton={'Delete'}
+                    />
+                  );
+                })}
+              </RecipeCardWrapper>
+            </Grid>
+            <Grid item xs={3}>
+              <ShoppingList
+                groceryItems={this.props.groceryItems}
+                setGroceryState={this.props.setGroceryState}
+                toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
+                userid={this.props.userid}
+              />
             </Grid>
             <Hidden xsDown>
               <Grid item sm={4} justify="center">

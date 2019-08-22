@@ -17,12 +17,9 @@ import LoginPortal from './components/LoginPortal.js';
 import Navbar from './components/Navbar.js';
 import Intro from './components/pages/Intro';
 import Home from './components/pages/Home';
-import AmyGrid from './components/pages/AmyGrid';
 import SavedRecipes from './components/pages/SavedRecipes';
 import NoMatch from './components/pages/NoMatch';
 import RecipeDetails from './components/pages/RecipeDetails';
-import Pantry from './components/pages/Pantry';
-import Shopping from './components/pages/Shopping';
 
 class App extends Component {
   getChildContext() {}
@@ -38,6 +35,7 @@ class App extends Component {
       loading: false,
       pantryItems: [],
       groceryItems: []
+      // isHidden: true
     };
 
     this.getUser = this.getUser.bind(this);
@@ -186,6 +184,12 @@ class App extends Component {
     });
   }
 
+  // toggleHidden() {
+  //   this.setState({
+  //     isHidden: !this.state.isHidden
+  //   });
+  // }
+
   render() {
     console.log('APP STATE', this.state);
     return (
@@ -225,43 +229,11 @@ class App extends Component {
                   pantryItems={this.state.pantryItems}
                   setPantryState={this.setPantryState}
                   toggleDeletePantryState={this.toggleDeletePantryState}
+                  // displayPantry={!this.state.isHidden}
                 />
               )}
             />
-            <Route
-              exact
-              path="/pantry"
-              render={props => (
-                <Pantry
-                  {...props}
-                  searchRecipes={this.searchRecipes}
-                  location={this.props.location}
-                  loading={this.state.loading}
-                  userid={this.state.userid}
-                  edamamresult={this.state.edamamresult}
-                  pantryItems={this.state.pantryItems}
-                  setPantryState={this.setPantryState}
-                  toggleDeletePantryState={this.toggleDeletePantryState}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/grid"
-              render={props => (
-                <AmyGrid
-                  {...props}
-                  searchRecipes={this.searchRecipes}
-                  location={this.props.location}
-                  loading={this.state.loading}
-                  userid={this.state.userid}
-                  edamamresult={this.state.edamamresult}
-                  pantryItems={this.state.pantryItems}
-                  setPantryState={this.setPantryState}
-                  toggleDeletePantryState={this.toggleDeletePantryState}
-                />
-              )}
-            />
+
             <Route
               exact
               path="/login"
@@ -305,30 +277,8 @@ class App extends Component {
             />
             <Route
               exact
-              path="/shopping"
-              render={props => (
-                <Shopping
-                  {...props}
-                  userid={this.state.userid}
-                  groceryItems={this.state.groceryItems}
-                  setGroceryState={this.setGroceryState}
-                  toggleDeleteGroceryState={this.toggleDeleteGroceryState}
-                />
-              )}
-            />
-            <Route
-              exact
               path="/api/recipesdetail/:id"
-              render={props => (
-                <RecipeDetails
-                  {...props}
-                  userid={this.state.userid}
-                  groceryItems={this.state.groceryItems}
-                  setGroceryState={this.setGroceryState}
-                  toggleDeleteGroceryState={this.toggleDeleteGroceryState}
-                />
-              )}
-              // component={RecipeDetails}
+              component={RecipeDetails}
             />
             <Route exact path="/homedetail/:id" component={RecipeDetails} />
             <Route component={NoMatch} />
