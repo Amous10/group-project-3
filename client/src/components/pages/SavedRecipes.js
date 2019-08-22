@@ -6,7 +6,7 @@ import SavedRecipesHero from '../SavedRecipesHero';
 import Grid from '@material-ui/core/Grid';
 import ShoppingList from '../ShoppingList';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import backgroundImage from '../../img/cherries.jpg';
+import backgroundImage from '../../img/cherries2.jpg';
 import '../List.css';
 import Hidden from '@material-ui/core/Hidden';
 
