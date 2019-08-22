@@ -115,6 +115,9 @@ class Home extends Component {
                 setPantryState={this.props.setPantryState}
                 toggleDeletePantryState={this.props.toggleDeletePantryState}
                 userid={this.props.userid}
+                // displayPantry={this.props.edamamresults.length === 0 ? 'isHidden' : 'show'}
+                // showPantry={this.props.displayPantry && <PantryList />}
+                // hidePantry={!this.props.displayPantry}
               />
             </MuiThemeProvider>
           </Grid>

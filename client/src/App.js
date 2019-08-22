@@ -35,6 +35,7 @@ class App extends Component {
       loading: false,
       pantryItems: [],
       groceryItems: []
+      // isHidden: true
     };
 
     this.getUser = this.getUser.bind(this);
@@ -183,6 +184,12 @@ class App extends Component {
     });
   }
 
+  // toggleHidden() {
+  //   this.setState({
+  //     isHidden: !this.state.isHidden
+  //   });
+  // }
+
   render() {
     console.log('APP STATE', this.state);
     return (
@@ -222,6 +229,7 @@ class App extends Component {
                   pantryItems={this.state.pantryItems}
                   setPantryState={this.setPantryState}
                   toggleDeletePantryState={this.toggleDeletePantryState}
+                  // displayPantry={!this.state.isHidden}
                 />
               )}
             />
