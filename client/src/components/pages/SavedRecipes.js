@@ -72,7 +72,7 @@ class SavedRecipes extends Component {
             xs={12}
             // justify="center"
           >
-            <Grid item xs={12} md={8} className={styles.grid}>
+            <Grid item xs={12} md={9} className={styles.grid}>
               <RecipeCardWrapper
                 count={this.state.result.length}
                 key={this.state.result._id}
@@ -97,7 +97,7 @@ class SavedRecipes extends Component {
               </RecipeCardWrapper>
             </Grid>
             <Hidden smDown>
-              <Grid item sm={4}>
+              <Grid item sm={3}>
                 <ShoppingList
                   groceryItems={this.props.groceryItems}
                   setGroceryState={this.props.setGroceryState}

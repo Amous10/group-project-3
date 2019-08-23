@@ -130,7 +130,6 @@ class Home extends Component {
             </Grid>
           </Hidden>
           <Grid item xs={12} md={8} className={styles.grid}>
-            {/* <Grid item xs={11} className="grid"> */}{' '}
             <RecipeCardWrapper
               count={this.props.edamamresult.length}
               title={'Results'}
@@ -158,7 +157,6 @@ class Home extends Component {
                 );
               })}
             </RecipeCardWrapper>
-            {/* </Grid> */}
           </Grid>
         </Grid>
       </div>

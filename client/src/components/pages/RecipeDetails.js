@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import backgroundImage from '../../img/Ingredientslt.jpg';
 import Button from '@material-ui/core/Button';
 import { fade } from '@material-ui/core/styles';
-import ShoppingList from '../ShoppingList';
 
 const styles = {
   bgimage: {
@@ -26,15 +25,6 @@ const styles = {
     // opacity: 0.9,
     margin: 40
   }
-
-  // recipeDetail: {
-  //   te
-  //   /* media queries */
-  //   @media (max-width: '600px') {
-  //     textAlign: center;
-  //   }
-
-  // }
 };
 
 class RecipeDetails extends Component {
@@ -61,11 +51,10 @@ class RecipeDetails extends Component {
 
     return (
       <div style={styles.bgimage}>
-        <React.Fragment>
-          {/* <Navbar /> */}
-          {/* <img style={styles.bgimage} src={backgroundImage} alt="" /> */}
+        {/* <Navbar /> */}
+        {/* <img style={styles.bgimage} src={backgroundImage} alt="" /> */}
 
-          {/* <h5
+        {/* <h5
           style={{
             color: 'rgb(129, 150, 69)',
             textAlign: 'center',
@@ -74,39 +63,28 @@ class RecipeDetails extends Component {
           onClick={() => this.props.history.goBack()}
         > */}
 
-          <Button
-            style={styles.button}
-            variant="contained"
-            color="rgb(129, 150, 69)"
-            className={styles.button}
-            onClick={() => this.props.history.goBack()}
-          >
-            ← {goBackText}
-          </Button>
+        <Button
+          style={styles.button}
+          variant="contained"
+          color="rgb(129, 150, 69)"
+          className={styles.button}
+          onClick={() => this.props.history.goBack()}
+        >
+          ← {goBackText}
+        </Button>
 
-          {/* <Button>← {goBackText}</Button> */}
-          {/* </h5> */}
+        {/* <Button>← {goBackText}</Button> */}
+        {/* </h5> */}
 
-          <Grid container item xs={12} justify="center">
-            <Grid item xs={10} sm={5} md={6} className="recipedetail">
-              <RecipeCardDetails
-                key={recipe.uri}
-                recipe={recipe}
-                handleRecipeSave={this.saveRecipe}
-                leftButton={'View'}
-                rightButton={'Delete'}
-              />
-            </Grid>
-            <Grid item xs={0} sm={5} md={4}>
-              <ShoppingList
-                groceryItems={this.props.groceryItems}
-                setGroceryState={this.props.setGroceryState}
-                toggleDeleteGroceryState={this.props.toggleDeleteGroceryState}
-                userid={this.props.userid}
-              />
-            </Grid>
-          </Grid>
-        </React.Fragment>
+        <Grid container item xs={12} justify="center">
+          <RecipeCardDetails
+            key={recipe.uri}
+            recipe={recipe}
+            handleRecipeSave={this.saveRecipe}
+            leftButton={'View'}
+            rightButton={'Delete'}
+          />
+        </Grid>
       </div>
     );
   }
