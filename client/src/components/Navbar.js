@@ -255,7 +255,7 @@ function Navbar({ ...props }) {
               <NewSearchIcon />
             </IconButton>
 
-            <Link to={'/pantry/'} className="btn btn-link text-primary">
+            <Link to={'/search/'} className="btn btn-link text-primary">
               <span className="text-primary">Pantry Search</span>
             </Link>
           </MenuItem>
